@@ -5,14 +5,14 @@ import java.util.ArrayList;
 public class Recipe {
 	private String name = "";
 	private ArrayList<Ingredient> ingredients;
-	private int totalCarb = 0;
-	private int totalProtein = 0;
-	private int totalFat = 0;
-	private int dietRatio = 0;
+	private double totalCarb = 0;
+	private double totalProtein = 0;
+	private double totalFat = 0;
+	private double dietRatio = 0;
 	private ArrayList<String> instructions;
 	private int totalCalories = 0;
 
-	public Recipe(String name, int calories, int carb, int protein, int fat, int ratio) {
+	public Recipe(String name, int calories, double carb, double protein, double fat, double ratio) {
 		this.ingredients = new ArrayList<Ingredient>();
 		this.instructions = new ArrayList<String>();
 		this.name = name;
@@ -31,27 +31,27 @@ public class Recipe {
 		this.name = name;
 	}
 
-	public void setTotalCarb(int totalCarb) {
+	public void setTotalCarb(double totalCarb) {
 		this.totalCarb = totalCarb;
 	}
 
-	public int getTotalCarb() {
+	public double getTotalCarb() {
 		return this.totalCarb;
 	}
 
-	public void setTotalFat(int totalFat) {
+	public void setTotalFat(double totalFat) {
 		this.totalFat = totalFat;
 	}
 
-	public int getTotalFat() {
+	public double getTotalFat() {
 		return this.totalFat;
 	}
 
-	public void setTotalProtein(int totalProtein) {
+	public void setTotalProtein(double totalProtein) {
 		this.totalProtein = totalProtein;
 	}
 
-	public int getTotalProtein() {
+	public double getTotalProtein() {
 		return this.totalProtein;
 	}
 
@@ -71,11 +71,11 @@ public class Recipe {
 		return this.instructions;
 	}
 
-	public void setDietRatio(int dietRatio) {
+	public void setDietRatio(double dietRatio) {
 		this.dietRatio = dietRatio;
 	}
 
-	public int getDietRatio() {
+	public double getDietRatio() {
 		return this.dietRatio;
 	}
 	

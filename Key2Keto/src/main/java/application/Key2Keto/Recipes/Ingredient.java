@@ -10,6 +10,6 @@ public class Ingredient {
 	}
 	
 	public String toString() {
-		return this.name + " " + this.serveSize;
+		return this.serveSize+ " "+this.name;
 	}
 }
