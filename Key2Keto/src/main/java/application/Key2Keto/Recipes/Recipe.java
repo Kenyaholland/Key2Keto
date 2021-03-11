@@ -11,8 +11,9 @@ public class Recipe {
 	private double dietRatio = 0;
 	private ArrayList<String> instructions;
 	private int totalCalories = 0;
+	private String type = "";
 
-	public Recipe(String name, int calories, double carb, double protein, double fat, double ratio) {
+	public Recipe(String type, String name, int calories, double carb, double protein, double fat, double ratio) {
 		this.ingredients = new ArrayList<Ingredient>();
 		this.instructions = new ArrayList<String>();
 		this.name = name;
@@ -21,6 +22,7 @@ public class Recipe {
 		this.totalFat = fat;
 		this.totalProtein = protein;
 		this.totalCalories = calories;
+		this.type = type;
 	}
 
 	public String getName() {
@@ -55,6 +57,12 @@ public class Recipe {
 		return this.totalProtein;
 	}
 
+	public String getType() {
+		return this.type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
 	public void addIngredient(Ingredient ing) {
 		this.ingredients.add(ing);
 	}
