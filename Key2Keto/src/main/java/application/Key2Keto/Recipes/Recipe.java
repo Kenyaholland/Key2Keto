@@ -91,9 +91,9 @@ public class Recipe {
 		String listOfIngredients="";
 		for(int i = 0; i<this.ingredients.size();i++) {
 			if(i == this.ingredients.size()-1) {
-				listOfIngredients.concat((i+1)+". "+this.ingredients.get(i));
+				listOfIngredients = listOfIngredients.concat((i+1)+". "+this.ingredients.get(i));
 			}else {
-				listOfIngredients.concat((i+1)+". "+this.ingredients.get(i)+"/n");
+				listOfIngredients = listOfIngredients.concat((i+1)+". "+this.ingredients.get(i)+"/n");
 			}
 		}
 		return listOfIngredients;
@@ -103,19 +103,18 @@ public class Recipe {
 		String listOfInstructions="";
 		for(int i = 0; i<this.instructions.size();i++) {
 			if(i == this.instructions.size()-1) {
-				listOfInstructions.concat((i+1)+". "+this.instructions.get(i));
+				listOfInstructions = listOfInstructions.concat((i+1)+". "+this.instructions.get(i));
 			}else {
-				listOfInstructions.concat((i+1)+". "+this.instructions.get(i)+"/n");
+				listOfInstructions = listOfInstructions.concat((i+1)+". "+this.instructions.get(i)+"\n");
 			}
 		}
-		
 		return listOfInstructions;
 	}
 	public String toString() {
 
-		return this.name+"/n"+"Total Calories: " +this.totalCalories+"/nTotal Carbs: "+ this.totalCarb+"/n"
-				+ "Total Protein: "+this.totalProtein+"/nTotal Fats: "+this.totalFat+"/n"
-				+ "Ingredients: "+ this.listedIngredients()+"/nInstructions: "+this.listedInstructions()+"/n"
+		return this.name+"\nTotal Calories: " +this.totalCalories+"\nTotal Carbs: "+ this.totalCarb+"\n"
+				+ "Total Protein: "+this.totalProtein+"\nTotal Fats: "+this.totalFat+"\n"
+				+ "Ingredients: "+ this.listedIngredients()+"\nInstructions: "+this.listedInstructions()+"\n"
 				+ "Diet Ratio: "+ this.dietRatio;
 	}
 }

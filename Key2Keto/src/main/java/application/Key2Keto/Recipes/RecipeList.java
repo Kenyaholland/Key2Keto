@@ -22,7 +22,36 @@ public class RecipeList {
 	public Recipe singleRecipe() {
 		return this.recipeList.get(0);
 	}
-	//list of entrees
-	//list of breakfast
-	//list of snacks
+	public int setListSize() {
+		return this.recipeList.size();
+	}
+
+	public ArrayList<Recipe> entreeRecipes(){
+		ArrayList<Recipe> temp = new ArrayList<Recipe>();
+		for(int i=0;i<this.recipeList.size();i++) {
+			if(this.recipeList.get(i).getType().contentEquals("Entrees")) {
+				temp.add(this.recipeList.get(i));
+			}
+		}
+		return temp;
+	}
+	public ArrayList<Recipe> breakfastRecipes(){
+		ArrayList<Recipe> temp = new ArrayList<Recipe>();
+		for(int i=0;i<this.recipeList.size();i++) {
+			if(this.recipeList.get(i).getType().contentEquals("Breakfast")) {
+				temp.add(this.recipeList.get(i));
+			}
+		}
+		return temp;
+	}
+	
+	public ArrayList<Recipe> snackRecipes(){
+		ArrayList<Recipe> temp = new ArrayList<Recipe>();
+		for(int i=0;i<this.recipeList.size();i++) {
+			if(this.recipeList.get(i).getType().contentEquals("Snacks")) {
+				temp.add(this.recipeList.get(i));
+			}
+		}
+		return temp;
+	}
 }

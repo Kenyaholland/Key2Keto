@@ -26,11 +26,8 @@ public class RecipeFileReader {
 			String type = "";
 			String meas = "";
 			String token = "";
-			//sc.useDelimiter(",");
 			while(sc.hasNextLine()) {
-				//System.out.println(sc.nextLine());
 				strScan = new Scanner(sc.nextLine());
-				//System.out.println(strScan.nextLine());
 				strScan.useDelimiter(",");
 				type = strScan.next();
 				recName = strScan.next();
@@ -40,24 +37,19 @@ public class RecipeFileReader {
 				pro= strScan.next();
 				carb= strScan.next();
 				Recipe recipe = new Recipe(type,recName, Integer.parseInt(cal), Double.parseDouble(carb), 
-						Double.parseDouble(pro), Double.parseDouble(fat), Double.parseDouble(ratio));
-				//System.out.println(recipe.toString());
-				
+						Double.parseDouble(pro), Double.parseDouble(fat), Double.parseDouble(ratio));	
 				while(!(token=strScan.next()).equals("Directions")) {
-					//System.out.println("In first "+ token+ " "+ ing);
 					ing = strScan.next();
-					System.out.println("In first "+ token+ " "+ ing);
+					//System.out.println("In first "+ token+ " "+ ing);
 					Ingredient ingredient = new Ingredient(ing, token);
 					recipe.addIngredient(ingredient);
 				}
-				System.out.println(recipe.getIngredient().toString());
 				while(strScan.hasNext()) {
 					ins = strScan.next();
-					System.out.println(ins);
+					//System.out.println(ins);
 					recipe.addInstruction(ins);
 				}
 				recipeList.addRecipe(recipe);
-			//	System.out.println(recipeList.getRecipeList().get(0).toString());
 			}
 		}catch(Exception e) {
 			e.printStackTrace();

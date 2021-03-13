@@ -6,19 +6,17 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import application.Key2Keto.Dashboard.*;
+import application.Key2Keto.Recipes.RecipeView;
 
-/**
- * JavaFX App
- */
 public class App extends Application {
-
+	
     @Override
     public void start(Stage stage) {
-        var javaVersion = SystemInfo.javaVersion();
-        var javafxVersion = SystemInfo.javafxVersion();
-
-        var label = new Label("Hello, JavaFX " + javafxVersion + ", running on Java " + javaVersion + ".");
-        var scene = new Scene(new StackPane(label), 640, 480);
+    	StackPane mainContent = new StackPane();
+    	RecipeView recipeView = new RecipeView("./src/main/java/application/Key2Keto/Recipes/ModifiedKeto.txt");
+    	
+    	mainContent.getChildren().add(recipeView);
+        Scene scene = new Scene(mainContent, 700, 700);
         stage.setScene(scene);
         stage.show();
     }
