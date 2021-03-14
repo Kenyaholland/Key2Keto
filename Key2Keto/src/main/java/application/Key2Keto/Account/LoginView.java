@@ -6,39 +6,96 @@ import javafx.scene.layout.VBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Button;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 
 public class LoginView extends Pane
 {
-	//two text boxes and labels for username and password
-	Label usernameLabel = new Label("Username:");
-	Label passwordLabel = new Label("Password:");
+	//Section for the app title/logo
+	Label titleOrLogo;
 	
-	TextField usernameTextField = new TextField();
-	TextField passwordTextField = new TextField();
+	//two text boxes and labels for username and password
+	Label usernameLabel;
+	Label passwordLabel;
+	
+	TextField usernameTextField;
+	TextField passwordTextField;
 	
 	//one button for signing in, one button for creating account
-	Button signInButton = new Button("Sign in");
-	Button createAccountButton = new Button("Create Account");
+	Button signInButton;
+	Button createAccountButton;
 	
 	//need a label for creating account button
-	Label noAccountLabel = new Label("Don't have an account? Create one here:");
+	Label noAccountLabel;
 	
 	//now some HBoxes
-	HBox usernameRow = new HBox();
-	HBox passwordRow = new HBox();
-	HBox createAccountRow = new HBox();
+	HBox titleOrLogoRow;
+	HBox usernameRow;
+	HBox passwordRow;
+	HBox signInButtonRow;
+	HBox createAccountRow;
 	
 	//and a VBox to contain them all
-	VBox loginRows = new VBox();
+	VBox loginRows;
 	
 	public LoginView()
 	{
+		instantiateVariables();
+		stylizeElements();
+		
+		addAllElementsToChildren();
+	}
+	
+	private void instantiateVariables()
+	{
+		titleOrLogo = new Label("Key2Keto");
+		
+		usernameLabel = new Label("Username:");
+		passwordLabel = new Label("Password:");
+		
+		usernameTextField = new TextField();
+		passwordTextField = new TextField();
+		
+		signInButton = new Button("Sign in");
+		createAccountButton = new Button("Create Account");
+		
+		noAccountLabel = new Label("Don't have an account? Create one here:");
+		
+		usernameRow = new HBox();
+		titleOrLogoRow = new HBox();
+		passwordRow = new HBox();
+		signInButtonRow = new HBox();
+		createAccountRow = new HBox();
+		
+		loginRows = new VBox();
+	}
+	
+	private void stylizeElements()
+	{
+		titleOrLogoRow.setAlignment(Pos.CENTER);
+		titleOrLogoRow.setMinWidth(500);
+		titleOrLogoRow.setMargin(titleOrLogo, new Insets(40, 0, 40, 0));
+		
+		usernameRow.setMargin(usernameLabel, new Insets(10, 20, 10, 20));
+		passwordRow.setMargin(passwordLabel, new Insets(10, 20, 10, 20));
+		
+		signInButtonRow.setAlignment(Pos.CENTER);
+		signInButtonRow.setMargin(signInButton, new Insets(10, 0, 10, 0));
+		
+		createAccountRow.setAlignment(Pos.CENTER);
+		createAccountRow.setMargin(createAccountButton, new Insets(30, 20, 30, 20));
+	}
+	
+	private void addAllElementsToChildren() //helper function for readability
+	{
+		titleOrLogoRow.getChildren().add(titleOrLogo);
 		usernameRow.getChildren().addAll(usernameLabel, usernameTextField);
 		passwordRow.getChildren().addAll(passwordLabel, passwordTextField);
+		signInButtonRow.getChildren().add(signInButton);
 		
 		createAccountRow.getChildren().addAll(noAccountLabel, createAccountButton);
 		
-		loginRows.getChildren().addAll(usernameRow, passwordRow, signInButton, createAccountRow);
+		loginRows.getChildren().addAll(titleOrLogoRow, usernameRow, passwordRow, signInButtonRow, createAccountRow);
 		
 		this.getChildren().add(loginRows);
 	}
