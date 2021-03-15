@@ -57,8 +57,8 @@ public class LoginView extends Pane
 		passwordTextField = new TextField();
 		
 		signInButton = new Button("Sign in");
-		createAccountButton = new Button("Create Account");
 		
+		createAccountButton = new Button("Create Account");
 		noAccountLabel = new Label("Don't have an account? Create one here:");
 		
 		usernameRow = new HBox();
@@ -77,7 +77,9 @@ public class LoginView extends Pane
 		titleOrLogoRow.setMargin(titleOrLogo, new Insets(40, 0, 40, 0));
 		
 		usernameRow.setMargin(usernameLabel, new Insets(10, 20, 10, 20));
+		usernameRow.setMargin(usernameTextField, new Insets(10, 20, 10, 20));
 		passwordRow.setMargin(passwordLabel, new Insets(10, 20, 10, 20));
+		passwordRow.setMargin(passwordTextField, new Insets(10, 20, 10, 20));
 		
 		signInButtonRow.setAlignment(Pos.CENTER);
 		signInButtonRow.setMargin(signInButton, new Insets(10, 0, 10, 0));
