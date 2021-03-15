@@ -16,7 +16,7 @@ public class App extends Application {
     	RecipeView recipeView = new RecipeView("./src/main/java/application/Key2Keto/Recipes/ModifiedKeto.txt");
     	
     	mainContent.getChildren().add(recipeView);
-        Scene scene = new Scene(mainContent, 700, 700);
+        Scene scene = new Scene(mainContent, 750, 600);
         stage.setScene(scene);
         stage.show();
     }

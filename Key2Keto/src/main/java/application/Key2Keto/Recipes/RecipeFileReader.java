@@ -11,7 +11,7 @@ public class RecipeFileReader {
 	Scanner sc;
 	Scanner strScan;
 	public RecipeFileReader(String fileName) {
-		recipeList = new RecipeList();
+		this.recipeList = new RecipeList();
 		try {
 			File file = new File(fileName);
 			sc = new Scanner(file);
@@ -40,16 +40,14 @@ public class RecipeFileReader {
 						Double.parseDouble(pro), Double.parseDouble(fat), Double.parseDouble(ratio));	
 				while(!(token=strScan.next()).equals("Directions")) {
 					ing = strScan.next();
-					//System.out.println("In first "+ token+ " "+ ing);
 					Ingredient ingredient = new Ingredient(ing, token);
 					recipe.addIngredient(ingredient);
 				}
 				while(strScan.hasNext()) {
 					ins = strScan.next();
-					//System.out.println(ins);
 					recipe.addInstruction(ins);
 				}
-				recipeList.addRecipe(recipe);
+				this.recipeList.addRecipe(recipe);
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
