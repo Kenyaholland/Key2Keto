@@ -130,7 +130,7 @@ public class AccountCreationView extends Pane
 		accountCreationRows = new VBox();
 	}
 	
-	public void stylizeElements()
+	private void stylizeElements()
 	{
 		titleRow.setAlignment(Pos.CENTER);
 		titleRow.setMinWidth(500);
@@ -176,7 +176,7 @@ public class AccountCreationView extends Pane
 		dietTypeRow.setMargin(dietTypeChooser, new Insets(10, 10, 10, 10));
 	}
 	
-	public void addAllElementsToChildren()
+	private void addAllElementsToChildren()
 	{
 		titleRow.getChildren().add(createAccountLabel);
 		
