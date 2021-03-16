@@ -10,6 +10,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -28,11 +29,11 @@ public class AccountCreationView extends Pane
 	TextField newUsernameTextField;
 	
 	Label newPasswordLabel;
-	TextField newPasswordTextField;
+	PasswordField newPasswordTextField;
 	
 	//typically on many account creation forms
 	Label confirmPasswordLabel;
-	TextField confirmPasswordTextField;
+	PasswordField confirmPasswordTextField;
 	
 	//now for personal details
 	Label personalDetailsDivider;
@@ -88,10 +89,10 @@ public class AccountCreationView extends Pane
 		newUsernameTextField = new TextField();
 		
 		newPasswordLabel = new Label("Password:");
-		newPasswordTextField = new TextField();
+		newPasswordTextField = new PasswordField();
 		
 		confirmPasswordLabel = new Label("Confirm Password:");
-		confirmPasswordTextField = new TextField();
+		confirmPasswordTextField = new PasswordField();
 		
 		personalDetailsDivider = new Label("Personal Details");
 		
@@ -166,6 +167,8 @@ public class AccountCreationView extends Pane
 		heightRow.setMargin(heightLabel, new Insets(10, 10, 10, 10));
 		heightRow.setMargin(heightTextField, new Insets(10, 10, 10, 10));
 		
+		heightTextField.setPromptText("e.g. 5'11\"");
+		
 		weightRow.setMargin(weightLabel, new Insets(10, 10, 10, 10));
 		weightRow.setMargin(weightTextField, new Insets(10, 10, 10, 10));
 		
@@ -201,5 +204,62 @@ public class AccountCreationView extends Pane
 												 personalDetailsDividerRow, sexRow, heightRow, weightRow, ageRow, dietTypeRow, createAccountButtonRow);
 		
 		this.getChildren().add(accountCreationRows);
+	}
+	
+	private boolean checkFormProperlyFilled()
+	{
+		//testing if text fields are empty
+		if(newUsernameTextField.getText().equals(""))
+		{
+			return false;
+		}
+		
+		else if(newPasswordTextField.getText().equals(""))
+		{
+			return false;
+		}
+		
+		else if(confirmPasswordTextField.getText().equals(""))
+		{
+			return false;
+		}
+		
+		//then confirm password
+		else if(!confirmPasswordTextField.getText().equals(newPasswordTextField.getText())) //not equal to each other
+		{
+			return false;
+		}
+		
+		//now personal details
+		else if(sexChooser.getSelectionModel().isEmpty())
+		{
+			return false;
+		}
+		
+		else if(heightTextField.getText().equals(""))
+		{
+			return false;
+		}
+		
+		else if(weightTextField.getText().equals(""))
+		{
+			return false;
+		}
+		
+		else if(ageTextField.getText().equals(""))
+		{
+			return false;
+		}
+		
+		else if(dietTypeChooser.getSelectionModel().isEmpty())
+		{
+			return false;
+		}
+		
+		//if none of the above are true, form is filled correctly
+		else
+		{
+			return true;
+		}
 	}
 }
