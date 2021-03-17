@@ -99,16 +99,16 @@ public class RecipeView extends Pane {
 	}
 	
 	private void setStyles() {
-		this.categoryTabs.setPrefSize(600, 30);
-		this.categoryTabs.setSpacing(5);
+		this.categoryTabs.setPrefSize(600, 50);
+		this.categoryTabs.setSpacing(10);
 		this.recipeTitleLabel.setFont(new Font("Arial", 30));
-		this.sundayButton.setPrefSize(75, 20);
-		this.mondayButton.setPrefSize(75, 20);
-		this.tuesdayButton.setPrefSize(75, 20);
-		this.wednesdayButton.setPrefSize(75, 20);
-		this.thursdayButton.setPrefSize(75, 20);
-		this.fridayButton.setPrefSize(75, 20);
-		this.saturdayButton.setPrefSize(75, 20);
+		this.sundayButton.setPrefSize(130, 45);
+		this.mondayButton.setPrefSize(130, 45);
+		this.tuesdayButton.setPrefSize(130, 45);
+		this.wednesdayButton.setPrefSize(130, 45);
+		this.thursdayButton.setPrefSize(130, 45);
+		this.fridayButton.setPrefSize(130, 45);
+		this.saturdayButton.setPrefSize(130, 45);
 		this.daysOfWeek.setPrefSize(600, 440);
 		setButtonColor();
 	}
