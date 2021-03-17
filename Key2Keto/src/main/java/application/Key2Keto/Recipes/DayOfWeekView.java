@@ -23,6 +23,7 @@ public class DayOfWeekView extends Pane { //intanstate method, stylize method, a
 	private boolean flag = false;
 	private boolean lunchFlag = false;
 	private boolean dinnerFlag = false;
+	private int numEntree = 0;
 	private VBox wholeView;
 	private VBox selectedRecipes;
 	
@@ -119,45 +120,61 @@ public class DayOfWeekView extends Pane { //intanstate method, stylize method, a
 		
 		addRecipeButton.setOnAction(new EventHandler<ActionEvent>() {
 		    @Override public void handle(ActionEvent e) {
-		  //  	addRecipe();
+		    	String selected = "";
+		    	if(DayOfWeekView.this.comboBox.getValue() == null) {
+		    		System.out.println("No String Entered");
+		    	}else {
+		    		selected = DayOfWeekView.this.comboBox.getValue().toString();
+		    	}
+		    	System.out.println(selected);
+		    	addRecipe(selected);
 		        System.out.println("Added Recipe");
 		    }
 		});		
 	}
-	
-	private void addRecipe() {
-		boolean contentMatch = false;
-		for(int i =0; i<this.recipeList.getRecipeList().size();i++) {
-			if(comboBox.getValue().toString().contentEquals(this.recipeList.getRecipeList().get(i).getName())) {
-				if(this.daysRecipes.get(i).getType().contentEquals(this.recipeList.getRecipeList().get(i).getType()) && !this.daysRecipes.get(i).getType().contentEquals("Entrees")) {
-					contentMatch = true;
-				}else {
-					if(lunchFlag = false) {
-						lunchFlag = true;
-						this.daysRecipes.add(this.recipeList.getRecipeList().get(i));
-					}else {
-						dinnerFlag = true;
-						this.daysRecipes.add(this.recipeList.getRecipeList().get(i));
+
+	private void addRecipe(String selected) {
+		Recipe temp;
+		int recflag = 0;
+		for (int i = 0; i < this.recipeList.getRecipeList().size(); i++) {
+			if (selected.contentEquals(this.recipeList.getRecipeList().get(i).getName())) {
+				temp = this.recipeList.getRecipeList().get(i);
+				for(int j =0; j<this.daysRecipes.size();j++) {
+					if(this.daysRecipes.get(j).getType().contentEquals(temp.getType()) && !temp.getType().contentEquals("Entrees") ) {
+							recflag = 1;
+							break;	
+					}
+					else if(this.daysRecipes.get(j).getType().contentEquals(temp.getType()) && temp.getType().contentEquals("Entrees") ) {
+						if(numEntree > 1) {
+							recflag = 1;
+							break;
+						}
 					}
 				}
-			}else {
-				this.daysRecipes.add(this.recipeList.getRecipeList().get(i));
+				if(recflag == 0) {
+					this.daysRecipes.add(temp);
+					numEntree++;
+				}
+				recflag = 0;
 			}
 		}
 		disPlayViewsRecipes();
 	}
-	
-	private void disPlayViewsRecipes() {
 
+	private void disPlayViewsRecipes() {
+		System.out.println("DaysRecipes: " + this.daysRecipes.size());
+		int count = 0;
 		for(int i = 0; i < this.daysRecipes.size();i++) {
 			if(this.daysRecipes.get(i).getType().contentEquals("Breakfast")) {
 				this.breakfastRecipeName.setText(this.daysRecipes.get(i).getName());
 			}else if(this.daysRecipes.get(i).getType().contentEquals("Snacks")) {
 				this.snackRecipeName.setText(this.daysRecipes.get(i).getName());
-			}else if(this.daysRecipes.get(i).getType().contentEquals("Entrees") && lunchFlag == true) {
+			}else if(this.daysRecipes.get(i).getType().contentEquals("Entrees") && count == 0) {
 				this.lunchRecipeName.setText(this.daysRecipes.get(i).getName());
-			}else {
+				count = 1;
+			}else if(this.daysRecipes.get(i).getType().contentEquals("Entrees")) {
 				this.dinnerRecipeName.setText(this.daysRecipes.get(i).getName());
+				count = 0;
 			}
 		}
 		this.breakfastRecipeName.setVisible(true);
@@ -187,9 +204,19 @@ public class DayOfWeekView extends Pane { //intanstate method, stylize method, a
 
 	private void styleVariables() {
 		this.wholeView.setBackground(new Background(new BackgroundFill(Color.LIGHTGOLDENRODYELLOW, CornerRadii.EMPTY, Insets.EMPTY)));
-		this.wholeView.setPrefSize(550, 440);
+		this.wholeView.setPrefSize(970, 500);
+		this.wholeView.setMargin(categorySelection, new Insets(0, 10, 0, 10));
+		this.wholeView.setMargin(addRecipeDropdown, new Insets(0, 10, 0, 10));
+		this.wholeView.setMargin(selectedRecipes, new Insets(0, 10, 0, 10));
+		//this.categorySelection.setSpacing(5);
+		this.categorySelection.setPrefSize(960, 75);
+		this.categorySelection.setBackground(new Background(new BackgroundFill(Color.LIGHTGOLDENRODYELLOW, CornerRadii.EMPTY, Insets.EMPTY)));
+		this.categorySelection.setMargin(overViewButton, new Insets(5, 5, 5, 5));
+		this.categorySelection.setMargin(breakfastButton, new Insets(5, 5, 5, 5));
+		this.categorySelection.setMargin(entreesButton, new Insets(5, 5, 5, 5));
+		this.categorySelection.setMargin(snacksButton, new Insets(5, 5, 5, 5));
+
 	}
-	
 	private void setDefaultVisibilities() {
 		if(this.daysRecipes.size()>0) {
 			this.breakfastRecipeName.setVisible(true);

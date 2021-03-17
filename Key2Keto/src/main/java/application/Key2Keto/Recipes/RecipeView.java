@@ -16,7 +16,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
-public class RecipeView extends Pane{
+public class RecipeView extends Pane {
 	private RecipeFileReader recipeFileReader;
 	private Label recipeTitleLabel;
 	private VBox view = new VBox();
@@ -38,13 +38,13 @@ public class RecipeView extends Pane{
 		this.recipeTitleLabel = new Label("RECIPES");
 		setStyles();
 		
-		this.setWidth(500);
+		this.setWidth(1000);
 		this.setHeight(500);
 		view.setPrefHeight(500);
-		view.setPrefWidth(600);
+		view.setPrefWidth(970);
 
 		categoryTabs.getChildren().addAll(sundayButton, mondayButton, tuesdayButton, wednesdayButton, thursdayButton, fridayButton, saturdayButton);
-		view.getChildren().addAll(recipeTitleLabel,categoryTabs,daysOfWeek);
+		view.getChildren().addAll(categoryTabs,daysOfWeek);
 		daysOfWeek.getChildren().addAll(days[0],days[1],days[2],days[3],days[4],days[5],days[6]);
 		this.getChildren().add(view);
 		sundayButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -100,6 +100,7 @@ public class RecipeView extends Pane{
 	
 	private void setStyles() {
 		this.categoryTabs.setPrefSize(600, 30);
+		this.categoryTabs.setSpacing(5);
 		this.recipeTitleLabel.setFont(new Font("Arial", 30));
 		this.sundayButton.setPrefSize(75, 20);
 		this.mondayButton.setPrefSize(75, 20);
@@ -143,7 +144,7 @@ public class RecipeView extends Pane{
 		
 		for(int i = 0; i < 7; i++) {
 			temp[i].setBackground(new Background(new BackgroundFill(Color.LIGHTBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
-			temp[i].setPadding(new Insets(4, 4, 4, 4));
+			//temp[i].setspa .se(new Insets(4, 4, 4, 4));
 		}
 	}
 	
