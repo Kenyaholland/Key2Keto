@@ -255,17 +255,20 @@ public class DayOfWeekView extends Pane { //intanstate method, stylize method, a
 		this.breakfastInfo.setMargin(this.deleteBreakfastButton, new Insets(15, 5, 10, 5));
 		this.deleteBreakfastButton.setPrefSize(75, 40);
 		
-		this.lunchRecipeName.setPrefSize(300, 65);
+		this.lunchRecipeName.setPrefSize(350, 65);
+		this.lunchRecipeName.setFont(Font.font(16));
 		this.lunchInfo.setMargin(this.lunchRecipeName, new Insets(10, 5, 10, 5));
 		this.lunchInfo.setMargin(this.deleteLunchButton, new Insets(15, 5, 10, 5));
 		this.deleteLunchButton.setPrefSize(75, 40);
 		
-		this.dinnerRecipeName.setPrefSize(300, 65);
+		this.dinnerRecipeName.setPrefSize(350, 65);
+		this.dinnerRecipeName.setFont(Font.font(16));
 		this.dinnerInfo.setMargin(this.dinnerRecipeName, new Insets(10, 5, 10, 5));
 		this.dinnerInfo.setMargin(this.deleteDinnerButton, new Insets(15, 5, 10, 5));
 		this.deleteDinnerButton.setPrefSize(75, 40);
 		
-		this.snackRecipeName.setPrefSize(300, 65);
+		this.snackRecipeName.setPrefSize(350, 65);
+		this.snackRecipeName.setFont(Font.font(16));
 		this.snackInfo.setMargin(this.snackRecipeName, new Insets(10, 5, 10, 5));
 		this.snackInfo.setMargin(this.deleteSnackButton, new Insets(15, 5, 10, 5));
 		this.deleteSnackButton.setPrefSize(75, 40);

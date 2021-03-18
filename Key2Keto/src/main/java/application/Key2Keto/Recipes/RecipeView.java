@@ -19,7 +19,7 @@ import javafx.scene.text.FontWeight;
 
 public class RecipeView extends Pane {
 	private RecipeFileReader recipeFileReader;
-	private Label recipeTitleLabel;
+	//private Label recipeTitleLabel;
 	private VBox view = new VBox();
 	private HBox categoryTabs = new HBox();
 	private Button sundayButton = new Button("SUNDAY");
@@ -30,13 +30,13 @@ public class RecipeView extends Pane {
 	private Button fridayButton = new Button("FRIDAY");
 	private Button saturdayButton = new Button("SATURDAY");
 	private StackPane daysOfWeek = new StackPane();
-	private int recipeListLength = 0;
+	//private int recipeListLength = 0;
 	private DayOfWeekView days[] = new DayOfWeekView[7];
 	
 	public RecipeView(String file){
 		this.recipeFileReader = new RecipeFileReader(file);
 		populateDaysOfWeek();
-		this.recipeTitleLabel = new Label("RECIPES");
+	//	this.recipeTitleLabel = new Label("RECIPES");
 		setStyles();
 		
 		this.setWidth(1000);
@@ -102,7 +102,7 @@ public class RecipeView extends Pane {
 	private void setStyles() {
 		this.categoryTabs.setPrefSize(600, 50);
 		this.categoryTabs.setSpacing(10);
-		this.recipeTitleLabel.setFont(new Font("Arial", 30));
+	//	this.recipeTitleLabel.setFont(new Font("Arial", 30));
 		this.sundayButton.setPrefSize(130, 45);
 		this.sundayButton.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 14));
 		this.mondayButton.setPrefSize(130, 45);
