@@ -101,4 +101,32 @@ public class LoginView extends Pane
 		
 		this.getChildren().add(loginRows);
 	}
+	
+	private boolean checkFormProperlyFilled()
+	{
+		if(usernameTextField.getText().equals(""))
+		{
+			return false;
+		}
+		
+		else if(passwordTextField.getText().equals(""))
+		{
+			return false;
+		}
+		
+		else
+		{
+			return true;
+		}
+	}
+	
+	public Button getSignInButton()
+	{
+		return signInButton;
+	}
+	
+	public Button getCreateAccountButton()
+	{
+		return createAccountButton;
+	}
 }
