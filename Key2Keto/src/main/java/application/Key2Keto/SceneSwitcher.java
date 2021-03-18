@@ -6,6 +6,7 @@ import application.Key2Keto.Recipes.RecipeView;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class SceneSwitcher extends Pane{
@@ -36,13 +37,11 @@ public class SceneSwitcher extends Pane{
         return creationScene;
 	}
 	
-	public Scene RecipeViewScene() {
-		StackPane recipeViewPane = new StackPane();
-		RecipeView recipeView = new RecipeView("./src/main/java/application/Key2Keto/Recipes/ModifiedKeto.txt");
-    	
-    	recipeViewPane.getChildren().add(recipeView);
-        Scene creationScene = new Scene(recipeViewPane, 750, 600);
+	public Scene MainViewScene() {
+    	MainView mainView = new MainView(this.stage);
+    	VBox view = mainView.getView();
+        Scene mainViewScene = new Scene(view, 1000, 750);
         
-        return creationScene;
+        return mainViewScene;
 	}
 }

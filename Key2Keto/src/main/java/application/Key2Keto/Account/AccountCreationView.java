@@ -124,7 +124,7 @@ public class AccountCreationView extends Pane
 		dietTypeChooser = new ComboBox(FXCollections.observableArrayList(diets));
 		
 		createAccountButton = new Button("Create Account");
-		createAccountButton.setOnAction(e -> stage.setScene(switcher.RecipeViewScene()));
+		createAccountButton.setOnAction(e -> stage.setScene(switcher.MainViewScene()));
 		
 		titleRow = new HBox();
 		accountDetailsDividerRow = new HBox();
