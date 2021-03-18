@@ -59,4 +59,22 @@ class AccountTest
 		assertEquals("Modified", sut.getDietType());
 	}
 
+	@Test
+	void canCreateEmptyAccountTest()
+	{
+		Account sut = new Account();
+		
+		assertEquals("", sut.getUsername());
+		assertEquals("", sut.getPassword());
+		
+		assertEquals("", sut.getFirstName());
+		assertEquals("", sut.getLastName());
+		
+		assertEquals("", sut.getSex());
+		assertEquals("", sut.getHeight());
+		assertEquals(0, sut.getWeight());
+		assertEquals(0, sut.getAge());
+		
+		assertEquals("", sut.getDietType());
+	}
 }
