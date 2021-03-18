@@ -67,6 +67,7 @@ public class LoginView extends Pane
 		passwordTextField = new TextField();
 		
 		signInButton = new Button("Sign in");
+		signInButton.setOnAction(e -> stage.setScene(switcher.MainViewScene()));
 		
 		createAccountButton = new Button("Create Account");
 		createAccountButton.setOnAction(e -> stage.setScene(switcher.AccountCreationScene()));
