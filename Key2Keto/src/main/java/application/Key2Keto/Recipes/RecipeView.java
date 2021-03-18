@@ -15,6 +15,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 
 public class RecipeView extends Pane {
 	private RecipeFileReader recipeFileReader;
@@ -103,12 +104,19 @@ public class RecipeView extends Pane {
 		this.categoryTabs.setSpacing(10);
 		this.recipeTitleLabel.setFont(new Font("Arial", 30));
 		this.sundayButton.setPrefSize(130, 45);
+		this.sundayButton.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 14));
 		this.mondayButton.setPrefSize(130, 45);
+		this.mondayButton.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 14));
 		this.tuesdayButton.setPrefSize(130, 45);
+		this.tuesdayButton.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 14));
 		this.wednesdayButton.setPrefSize(130, 45);
+		this.wednesdayButton.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 14));
 		this.thursdayButton.setPrefSize(130, 45);
+		this.thursdayButton.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 14));
 		this.fridayButton.setPrefSize(130, 45);
+		this.fridayButton.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 14));
 		this.saturdayButton.setPrefSize(130, 45);
+		this.saturdayButton.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 14));
 		this.daysOfWeek.setPrefSize(600, 440);
 		setButtonColor();
 	}

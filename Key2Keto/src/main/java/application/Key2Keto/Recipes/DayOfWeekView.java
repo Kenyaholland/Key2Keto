@@ -16,6 +16,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 
 public class DayOfWeekView extends Pane { //intanstate method, stylize method, add children method. need to be private.
 	private String name;
@@ -79,18 +81,21 @@ public class DayOfWeekView extends Pane { //intanstate method, stylize method, a
 		breakfastButton.setOnAction(new EventHandler<ActionEvent>() {
 		    @Override public void handle(ActionEvent e) {
 		    	populateComboBox(0);
+		    	DayOfWeekView.this.comboBox.setPromptText("--- Select a Recipe ---");
 		        System.out.println("Accepted Breakfast");
 		    }
 		});
 		entreesButton.setOnAction(new EventHandler<ActionEvent>() {
 		    @Override public void handle(ActionEvent e) {
 		    	populateComboBox(1);
+		    	DayOfWeekView.this.comboBox.setPromptText("--- Select a Recipe ---");
 		        System.out.println("Accepted Entrees");
 		    }
 		});
 		snacksButton.setOnAction(new EventHandler<ActionEvent>() {
 		    @Override public void handle(ActionEvent e) {
 		    	populateComboBox(2);
+		    	DayOfWeekView.this.comboBox.setPromptText("--- Select a Recipe ---");
 		        System.out.println("Accepted Snacks");
 		    }
 		});
@@ -209,6 +214,7 @@ public class DayOfWeekView extends Pane { //intanstate method, stylize method, a
 	}
 
 	private void styleVariables() {
+		//wholeView styling
 		this.wholeView.setBackground(new Background(new BackgroundFill(Color.LIGHTGOLDENRODYELLOW, CornerRadii.EMPTY, Insets.EMPTY)));
 		this.wholeView.setPrefSize(970, 500);
 		this.wholeView.setMargin(categorySelection, new Insets(0, 10, 0, 10));
@@ -224,22 +230,27 @@ public class DayOfWeekView extends Pane { //intanstate method, stylize method, a
 		this.categorySelection.setMargin(snacksButton, new Insets(10, 5, 10, 5));
 		
 		this.overViewButton.setPrefSize(125, 50);
+		this.overViewButton.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 14));
 		this.breakfastButton.setPrefSize(125, 50);
+		this.breakfastButton.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 14));
 		this.entreesButton.setPrefSize(125, 50);
+		this.entreesButton.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 14));
 		this.snacksButton.setPrefSize(125, 50);
+		this.snacksButton.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 14));
 		
 		this.selectedRecipes.setPrefSize(480, 385);
 		this.selectedRecipes.setBackground(new Background(new BackgroundFill(Color.LIGHTSLATEGREY, CornerRadii.EMPTY, Insets.EMPTY)));
-		this.breakfastInfo.setPrefSize(470, 75);
+		this.breakfastInfo.setPrefSize(500, 75);
 		this.breakfastInfo.setBackground(new Background(new BackgroundFill(Color.LIGHTSEAGREEN, CornerRadii.EMPTY, Insets.EMPTY)));
-		this.lunchInfo.setPrefSize(470, 75);
+		this.lunchInfo.setPrefSize(500, 75);
 		this.lunchInfo.setBackground(new Background(new BackgroundFill(Color.LIGHTCORAL, CornerRadii.EMPTY, Insets.EMPTY)));
-		this.dinnerInfo.setPrefSize(470, 75);
+		this.dinnerInfo.setPrefSize(500, 75);
 		this.dinnerInfo.setBackground(new Background(new BackgroundFill(Color.LIGHTSALMON, CornerRadii.EMPTY, Insets.EMPTY)));
-		this.snackInfo.setPrefSize(470, 75);
+		this.snackInfo.setPrefSize(500, 75);
 		this.snackInfo.setBackground(new Background(new BackgroundFill(Color.LIGHTPINK, CornerRadii.EMPTY, Insets.EMPTY)));
 		
-		this.breakfastRecipeName.setPrefSize(300, 65);
+		this.breakfastRecipeName.setPrefSize(350, 65);
+		this.breakfastRecipeName.setFont(Font.font(16));
 		this.breakfastInfo.setMargin(this.breakfastRecipeName, new Insets(10, 5, 10, 5));
 		this.breakfastInfo.setMargin(this.deleteBreakfastButton, new Insets(15, 5, 10, 5));
 		this.deleteBreakfastButton.setPrefSize(75, 40);
@@ -263,7 +274,11 @@ public class DayOfWeekView extends Pane { //intanstate method, stylize method, a
 		this.addRecipeDropdown.setAlignment(Pos.CENTER);
 		this.addRecipeDropdown.setMargin(this.comboBox, new Insets(5, 5, 5, 5));
 		this.addRecipeDropdown.setMargin(this.addRecipeButton, new Insets(5, 5, 5, 5));
+		
 		this.comboBox.setPrefSize(400, 35);
+		this.comboBox.setPromptText("--- Select a Recipe ---");
+		this.comboBox.setEditable(true);
+		this.comboBox.getEditor().setFont(Font.font("Verdana", FontWeight.NORMAL, 14));
 		this.addRecipeButton.setPrefSize(75, 35);
 	}
 	private void setDefaultVisibilities() {
