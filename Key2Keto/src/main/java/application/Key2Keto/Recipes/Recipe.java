@@ -96,7 +96,7 @@ public class Recipe {
 			if(i == this.ingredients.size()-1) {
 				listOfIngredients = listOfIngredients.concat((i+1)+". "+this.ingredients.get(i));
 			}else {
-				listOfIngredients = listOfIngredients.concat((i+1)+". "+this.ingredients.get(i)+"/n");
+				listOfIngredients = listOfIngredients.concat((i+1)+". "+this.ingredients.get(i)+"\n");
 			}
 		}
 		return listOfIngredients;

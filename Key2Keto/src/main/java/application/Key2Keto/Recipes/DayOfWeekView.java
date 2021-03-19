@@ -2,8 +2,6 @@ package application.Key2Keto.Recipes;
 
 import java.util.ArrayList;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -11,6 +9,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
@@ -21,7 +20,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
-public class DayOfWeekView extends Pane { //intanstate method, stylize method, add children method. need to be private.
+public class DayOfWeekView extends Pane {
 	private String name;
 	private RecipeList recipeList;
 	private ArrayList<Recipe> daysRecipes;
@@ -46,10 +45,9 @@ public class DayOfWeekView extends Pane { //intanstate method, stylize method, a
 	private Label lunchRecipeName;
 	private Label dinnerRecipeName;
 	private Label snackRecipeName;
-
+	private Label daysRecipesLabel;
 	//ComboBox variables
-	private ComboBox comboBox;
-	//private Button viewSelectedRecipe;
+	private ComboBox<String> comboBox;
 	private Button addRecipeButton;
 	
 	//category Buttons
@@ -110,23 +108,25 @@ public class DayOfWeekView extends Pane { //intanstate method, stylize method, a
 		
 		deleteBreakfastButton.setOnAction(new EventHandler<ActionEvent>() {
 		    @Override public void handle(ActionEvent e) {
-		    	int num = 0;
 		    	clearRecipe(0);
 		        System.out.println("Accepted Delete Breakfast");
 		    }
 		});
+		
 		deleteLunchButton.setOnAction(new EventHandler<ActionEvent>() {
 		    @Override public void handle(ActionEvent e) {
 		    	clearRecipe(1);
 		        System.out.println("Accepted Delete Lunch");
 		    }
 		});
+		
 		deleteDinnerButton.setOnAction(new EventHandler<ActionEvent>() {
 		    @Override public void handle(ActionEvent e) {
 		    	clearRecipe(2);
 		        System.out.println("Accepted Delete Dinner");
 		    }
 		});
+		
 		deleteSnackButton.setOnAction(new EventHandler<ActionEvent>() {
 		    @Override public void handle(ActionEvent e) {
 		    	clearRecipe(3);
@@ -146,16 +146,19 @@ public class DayOfWeekView extends Pane { //intanstate method, stylize method, a
 		        System.out.println("Added Recipe");
 		    }
 		});
+		
 		this.comboBox.setOnAction(e-> {
 			DayOfWeekView.this.recipeDetails.getChildren().clear();
-			RecipeDetailView recipeDetail;
 			String recipe = "";
 			if(this.comboBox.getValue() != null) {
 				recipe = this.comboBox.getValue().toString();
 				for(int i =0; i<DayOfWeekView.this.recipeList.getRecipeList().size();i++ ) {
 					if(recipe.contentEquals(DayOfWeekView.this.recipeList.getRecipeList().get(i).getName())) {
+						ScrollPane scrollPane = new ScrollPane();
+						scrollPane.setPrefWidth(500);
 						DayOfWeekView.this.recipeDetailView = new RecipeDetailView(DayOfWeekView.this.recipeList.getRecipeList().get(i));
-						DayOfWeekView.this.recipeDetails.getChildren().add(this.recipeDetailView);
+						scrollPane.setContent(DayOfWeekView.this.recipeDetailView);
+						DayOfWeekView.this.recipeDetails.getChildren().add(scrollPane);
 					}
 				}
 				
@@ -184,7 +187,7 @@ public class DayOfWeekView extends Pane { //intanstate method, stylize method, a
 		
 		for(int i = 0; i < 4; i++) {
 			if(num == i) {
-				temp[i].setBackground(new Background(new BackgroundFill(Color.LIGHTGOLDENRODYELLOW, CornerRadii.EMPTY, Insets.EMPTY)));
+				temp[i].setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
 			}else {
 				temp[i].setBackground(new Background(new BackgroundFill(Color.LIGHTBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
 			}
@@ -194,7 +197,7 @@ public class DayOfWeekView extends Pane { //intanstate method, stylize method, a
 	private void addRecipe(String selected) {
 		Recipe temp;
 		int recflag = 0;
-
+		
 		for (int i = 0; i < this.recipeList.getRecipeList().size(); i++) {
 			if (selected.contentEquals(this.recipeList.getRecipeList().get(i).getName())) {
 				temp = this.recipeList.getRecipeList().get(i);
@@ -224,8 +227,8 @@ public class DayOfWeekView extends Pane { //intanstate method, stylize method, a
 	}
 
 	private void disPlayViewsRecipes() {
-		System.out.println("DaysRecipes: " + this.daysRecipes.size());
 		int count = 0;
+		
 		for(int i = 0; i < this.daysRecipes.size();i++) {
 			if(this.daysRecipes.get(i).getType().contentEquals("Breakfast")) {
 				this.breakfastRecipeName.setText(this.daysRecipes.get(i).getName());
@@ -257,8 +260,8 @@ public class DayOfWeekView extends Pane { //intanstate method, stylize method, a
 				this.lunchInfo.getChildren().addAll(this.lunchRecipeName, this.deleteLunchButton);
 				this.dinnerInfo.getChildren().addAll(this.dinnerRecipeName, this.deleteDinnerButton);
 				this.snackInfo.getChildren().addAll(this.snackRecipeName, this.deleteSnackButton);
-				this.selectedRecipes.getChildren().addAll(this.breakfastInfo,this.lunchInfo, this.dinnerInfo, this.snackInfo);
-
+				this.selectedRecipes.getChildren().addAll(this.daysRecipesLabel, this.breakfastInfo,this.lunchInfo, this.dinnerInfo, this.snackInfo);
+		//adding selected recipes and recipe details
 				this.bottomRecipeInfo.getChildren().addAll(this.selectedRecipes, this.recipeDetails);
 		//adding ComboBox and Add button to addRecipeDropDown section
 				this.addRecipeDropdown.getChildren().addAll(this.comboBox,this.addRecipeButton);
@@ -271,20 +274,20 @@ public class DayOfWeekView extends Pane { //intanstate method, stylize method, a
 
 	private void styleVariables() {
 		//wholeView styling
-		this.wholeView.setBackground(new Background(new BackgroundFill(Color.LIGHTGOLDENRODYELLOW, CornerRadii.EMPTY, Insets.EMPTY)));
-		this.wholeView.setPrefSize(970, 500);
-		this.wholeView.setMargin(categorySelection, new Insets(0, 10, 0, 10));
-		this.wholeView.setMargin(addRecipeDropdown, new Insets(0, 10, 0, 10));
-		this.wholeView.setMargin(selectedRecipes, new Insets(0, 10, 0, 10));
+		this.wholeView.setBackground(new Background(new BackgroundFill(Color.LIGHTSLATEGRAY, CornerRadii.EMPTY, Insets.EMPTY)));
+		this.wholeView.setPrefSize(980, 500);
+		//this.wholeView.setMargin(categorySelection, new Insets(0, 0, 0, 0));
+		//this.wholeView.setMargin(addRecipeDropdown, new Insets(0, 0, 0, 0));
+		VBox.setMargin(selectedRecipes, new Insets(0, 10, 0, 10));
 		
 		//this.categorySelection
-		this.categorySelection.setPrefSize(960, 75);
+		this.categorySelection.setPrefSize(980, 75);
 		this.categorySelection.setAlignment(Pos.CENTER);
 		this.categorySelection.setBackground(new Background(new BackgroundFill(Color.LIGHTSKYBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
-		this.categorySelection.setMargin(overViewButton, new Insets(10, 5, 10, 0));
-		this.categorySelection.setMargin(breakfastButton, new Insets(10, 5, 10, 5));
-		this.categorySelection.setMargin(entreesButton, new Insets(10, 5, 10, 5));
-		this.categorySelection.setMargin(snacksButton, new Insets(10, 5, 10, 5));
+		HBox.setMargin(overViewButton, new Insets(10, 5, 10, 0));
+		HBox.setMargin(breakfastButton, new Insets(10, 5, 10, 5));
+		HBox.setMargin(entreesButton, new Insets(10, 5, 10, 5));
+		HBox.setMargin(snacksButton, new Insets(10, 5, 10, 5));
 		
 		this.overViewButton.setPrefSize(125, 50);
 		this.overViewButton.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 14));
@@ -297,49 +300,60 @@ public class DayOfWeekView extends Pane { //intanstate method, stylize method, a
 		
 		this.selectedRecipes.setPrefSize(480, 385);
 		this.selectedRecipes.setBackground(new Background(new BackgroundFill(Color.LIGHTSLATEGREY, CornerRadii.EMPTY, Insets.EMPTY)));
+		this.selectedRecipes.setAlignment(Pos.CENTER);
+		
+		this.daysRecipesLabel.setPrefSize(500, 75);
+		this.daysRecipesLabel.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
+		this.daysRecipesLabel.setAlignment(Pos.CENTER);
+		this.daysRecipesLabel.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 14));
+		
 		this.breakfastInfo.setPrefSize(500, 75);
-		this.breakfastInfo.setBackground(new Background(new BackgroundFill(Color.LIGHTSEAGREEN, CornerRadii.EMPTY, Insets.EMPTY)));
+		HBox.setMargin(this.breakfastRecipeName, new Insets(10, 5, 10, 5));
+		HBox.setMargin(this.deleteBreakfastButton, new Insets(15, 5, 10, 5));
+		this.breakfastInfo.setBackground(new Background(new BackgroundFill(Color.LIGHTSKYBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
+		
 		this.lunchInfo.setPrefSize(500, 75);
-		this.lunchInfo.setBackground(new Background(new BackgroundFill(Color.LIGHTCORAL, CornerRadii.EMPTY, Insets.EMPTY)));
+		this.lunchInfo.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
+		HBox.setMargin(this.lunchRecipeName, new Insets(10, 5, 10, 5));
+		HBox.setMargin(this.deleteLunchButton, new Insets(15, 5, 10, 5));
+		
 		this.dinnerInfo.setPrefSize(500, 75);
-		this.dinnerInfo.setBackground(new Background(new BackgroundFill(Color.LIGHTSALMON, CornerRadii.EMPTY, Insets.EMPTY)));
+		this.dinnerInfo.setBackground(new Background(new BackgroundFill(Color.LIGHTSKYBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
+		HBox.setMargin(this.dinnerRecipeName, new Insets(10, 5, 10, 5));
+		HBox.setMargin(this.deleteDinnerButton, new Insets(15, 5, 10, 5));
+		
 		this.snackInfo.setPrefSize(500, 75);
-		this.snackInfo.setBackground(new Background(new BackgroundFill(Color.LIGHTPINK, CornerRadii.EMPTY, Insets.EMPTY)));
+		this.snackInfo.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
+		HBox.setMargin(this.snackRecipeName, new Insets(10, 5, 10, 5));
+		HBox.setMargin(this.deleteSnackButton, new Insets(15, 5, 10, 5));
 		
 		this.breakfastRecipeName.setPrefSize(350, 65);
 		this.breakfastRecipeName.setFont(Font.font(16));
-		this.breakfastInfo.setMargin(this.breakfastRecipeName, new Insets(10, 5, 10, 5));
-		this.breakfastInfo.setMargin(this.deleteBreakfastButton, new Insets(15, 5, 10, 5));
 		this.deleteBreakfastButton.setPrefSize(75, 40);
 		this.deleteBreakfastButton.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 12));
 		
 		this.lunchRecipeName.setPrefSize(350, 65);
 		this.lunchRecipeName.setFont(Font.font(16));
-		this.lunchInfo.setMargin(this.lunchRecipeName, new Insets(10, 5, 10, 5));
-		this.lunchInfo.setMargin(this.deleteLunchButton, new Insets(15, 5, 10, 5));
 		this.deleteLunchButton.setPrefSize(75, 40);
 		this.deleteLunchButton.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 12));
 		
 		this.dinnerRecipeName.setPrefSize(350, 65);
 		this.dinnerRecipeName.setFont(Font.font(16));
-		this.dinnerInfo.setMargin(this.dinnerRecipeName, new Insets(10, 5, 10, 5));
-		this.dinnerInfo.setMargin(this.deleteDinnerButton, new Insets(15, 5, 10, 5));
 		this.deleteDinnerButton.setPrefSize(75, 40);
 		this.deleteDinnerButton.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 12));
 		
 		this.snackRecipeName.setPrefSize(350, 65);
 		this.snackRecipeName.setFont(Font.font(16));
-		this.snackInfo.setMargin(this.snackRecipeName, new Insets(10, 5, 10, 5));
-		this.snackInfo.setMargin(this.deleteSnackButton, new Insets(15, 5, 10, 5));
 		this.deleteSnackButton.setPrefSize(75, 40);
 		this.deleteSnackButton.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 12));
 		
-		this.addRecipeDropdown.setPrefSize(475, 35);
+		this.addRecipeDropdown.setBackground(new Background(new BackgroundFill(Color.LIGHTSKYBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
+		this.addRecipeDropdown.setPrefSize(980, 35);
 		this.addRecipeDropdown.setAlignment(Pos.CENTER);
-		this.addRecipeDropdown.setMargin(this.comboBox, new Insets(5, 5, 5, 5));
-		this.addRecipeDropdown.setMargin(this.addRecipeButton, new Insets(5, 5, 5, 5));
+		HBox.setMargin(this.comboBox, new Insets(5, 5, 5, 5));
+		HBox.setMargin(this.addRecipeButton, new Insets(5, 5, 5, 5));
 		
-		this.comboBox.setPrefSize(400, 35);
+		this.comboBox.setPrefSize(420, 35);
 		this.comboBox.setPromptText("--- Select a Recipe ---");
 		this.comboBox.setEditable(true);
 		this.comboBox.getEditor().setFont(Font.font("Verdana", FontWeight.NORMAL, 12));
@@ -385,7 +399,8 @@ public class DayOfWeekView extends Pane { //intanstate method, stylize method, a
 		this.lunchRecipeName= new Label("No Lunch Chosen");
 		this.dinnerRecipeName= new Label("No Dinner Chosen");
 		this.snackRecipeName= new Label("No Snack Chosen");
-		this.comboBox = new ComboBox();
+		this.daysRecipesLabel = new Label("CHOSEN RECIPES");
+		this.comboBox = new ComboBox<String>();
 		this.overViewButton = new Button("OVERVIEW");
 		this.breakfastButton = new Button("BREAKFAST");
 		this.entreesButton = new Button("ENTREES");
@@ -395,7 +410,6 @@ public class DayOfWeekView extends Pane { //intanstate method, stylize method, a
 		this.deleteLunchButton = new Button("DELETE");	
 		this.deleteDinnerButton = new Button("DELETE");
 		this.deleteSnackButton = new Button("DELETE");
-		this.viewSelectedRecipe = new Button("VIEW RECIPE");
 		setButtonColor();
 	}
 
@@ -440,7 +454,7 @@ public class DayOfWeekView extends Pane { //intanstate method, stylize method, a
 					this.daysRecipes.remove(i);
 				}
 			}
-			this.breakfastRecipeName.setText("No Breakfast Selected");
+			this.breakfastRecipeName.setText("No Breakfast Chosen");
 			break;
 			
 		case 1:{
@@ -450,7 +464,7 @@ public class DayOfWeekView extends Pane { //intanstate method, stylize method, a
 					lunchFlag = false;
 				}
 			}
-			this.lunchRecipeName.setText("No Lunch Selected");
+			this.lunchRecipeName.setText("No Lunch Chosen");
 			break;
 		}
 		case 2:
@@ -460,7 +474,7 @@ public class DayOfWeekView extends Pane { //intanstate method, stylize method, a
 					dinnerFlag = false;
 				}
 			}
-			this.dinnerRecipeName.setText("No Dinner Selected");
+			this.dinnerRecipeName.setText("No Dinner Chosen");
 			break;
 		case 3:
 			for(int i=0; i< this.daysRecipes.size();i++) {
@@ -468,7 +482,7 @@ public class DayOfWeekView extends Pane { //intanstate method, stylize method, a
 					this.daysRecipes.remove(i);
 				}
 			}
-			this.snackRecipeName.setText("No Snack Selected");
+			this.snackRecipeName.setText("No Snack Chosen");
 			break;
 		default:
 			System.out.println("Something is wrong here");

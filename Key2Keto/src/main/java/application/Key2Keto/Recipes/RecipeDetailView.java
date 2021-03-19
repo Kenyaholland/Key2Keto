@@ -1,6 +1,7 @@
 package application.Key2Keto.Recipes;
 
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Background;
@@ -23,6 +24,8 @@ public class RecipeDetailView extends Pane {
 	private Label ingredientsLabel;
 	private Label totalCaloriesLabel;
 	private Label instructionsLabel;
+	private Label insTitle;
+	private Label ingTitle;
 	private VBox vbox;
 	private HBox hbox;
 	private VBox upper;
@@ -49,44 +52,68 @@ public class RecipeDetailView extends Pane {
 		this.fatLabel = new Label("Total Fat: " + String.valueOf(this.recipe.getTotalFat()));
 		this.ratioLabel = new Label(String.valueOf("Recipe Ratio: "+ this.recipe.getDietRatio()+"/1"));
 		this.totalCaloriesLabel = new Label("Total Calories: "+String.valueOf(this.recipe.getTotalCalories()));
-		this.ingredientsLabel = new Label("Ingredinets\n" +this.recipe.listedIngredients());
+		this.ingTitle = new Label("Ingredients");
+		this.ingredientsLabel = new Label(this.recipe.listedIngredients());
 		this.ingredientsLabel.setWrapText(true);
-		this.instructionsLabel = new Label("Instructions\n" +this.recipe.listedInstructions());
+		this.insTitle = new Label("Instructions");
+		this.instructionsLabel = new Label(this.recipe.listedInstructions());
 		this.instructionsLabel.setWrapText(true);
+		this.instructionsLabel.setFont(Font.font("Verdana", FontWeight.NORMAL, 12));
 	}
 	
 	
 	public void stylingOfVariables() {
-		this.vbox.setPrefSize(490, 500);
-		this.vbox.setBackground(new Background(new BackgroundFill(Color.PINK, CornerRadii.EMPTY, Insets.EMPTY)));
-		this.hbox.setPrefSize(485, 250);
+		this.setPrefWidth(480);
+		this.vbox.setPrefSize(480, 500);
+		this.vbox.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
+		this.hbox.setPrefSize(480, 125);
 		this.hbox.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
 		
-		this.nameLabel.setPrefWidth(375);
+		this.nameLabel.setPrefWidth(350);
+		this.nameLabel.setWrapText(true);
 		this.nameLabel.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 14));
 		this.nameLabel.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
 		
-		this.carbLabel.setPrefWidth(250);
-		this.totalCaloriesLabel.setPrefWidth(250);
-		this.proteinLabel.setPrefWidth(250);
-		this.ratioLabel.setPrefWidth(250);
-		this.fatLabel.setPrefWidth(250);
-		//this.imageButton.setPrefSize(100, 100);
-		this.imageButton.setBackground(new Background(new BackgroundFill(Color.BLUE, CornerRadii.EMPTY, Insets.EMPTY)));
-		this.upper.setMargin(nameLabel, new Insets(0, 5, 0, 5));
-		this.upper.setMargin(carbLabel, new Insets(0, 5, 0, 5));
-		this.upper.setMargin(proteinLabel, new Insets(0, 5, 0, 5));
-		this.upper.setMargin(fatLabel, new Insets(0, 5, 0, 5));
-		this.upper.setMargin(ratioLabel, new Insets(0, 5, 0, 5));
-		this.upper.setMargin(totalCaloriesLabel, new Insets(0, 5, 0, 5));
-		this.lower.setMargin(ingredientsLabel, new Insets(0, 5, 0, 5));
-		this.lower.setMargin(instructionsLabel, new Insets(0, 5, 0, 5));
+		this.carbLabel.setPrefWidth(400);
+		this.carbLabel.setFont(Font.font("Verdana", FontWeight.NORMAL, 12));
+		
+		this.totalCaloriesLabel.setPrefWidth(400);
+		this.totalCaloriesLabel.setFont(Font.font("Verdana", FontWeight.NORMAL, 12));
+		
+		this.proteinLabel.setPrefWidth(400);
+		this.proteinLabel.setFont(Font.font("Verdana", FontWeight.NORMAL, 12));
+		
+		this.ratioLabel.setPrefWidth(400);
+		this.ratioLabel.setFont(Font.font("Verdana", FontWeight.NORMAL, 12));
+		
+		this.fatLabel.setPrefWidth(400);
+		this.fatLabel.setFont(Font.font("Verdana", FontWeight.NORMAL, 12));
+		
+		this.ingTitle.setPrefWidth(400);
+		this.ingTitle.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 14));
+		this.insTitle.setPrefWidth(400);
+		this.insTitle.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 14));
+		
+		this.imageButton.setPrefSize(130,130);
+		this.imageButton.setAlignment(Pos.CENTER);
+		this.imageButton.setBackground(new Background(new BackgroundFill(Color.LIGHTBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
+		
+		this.upper.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
+		this.upper.setPrefWidth(350);
+		VBox.setMargin(nameLabel, new Insets(0, 0, 0, 0));
+		VBox.setMargin(carbLabel, new Insets(0, 0, 0, 20));
+		VBox.setMargin(proteinLabel, new Insets(0, 0, 0, 20));
+		VBox.setMargin(fatLabel, new Insets(0, 0, 0, 20));
+		VBox.setMargin(ratioLabel, new Insets(0, 0, 0, 20));
+		VBox.setMargin(totalCaloriesLabel, new Insets(0, 0, 0, 20));
+		VBox.setMargin(ingredientsLabel, new Insets(0, 0, 0, 20));
+		VBox.setMargin(instructionsLabel, new Insets(0, 0, 0, 20));
 	}
 	
 	public void populateChildren() {
 		this.upper.getChildren().addAll(nameLabel,ratioLabel,totalCaloriesLabel,carbLabel,proteinLabel,fatLabel);
 		this.hbox.getChildren().addAll(this.upper,this.imageButton);
-		this.lower.getChildren().addAll(ingredientsLabel,instructionsLabel);
-		this.vbox.getChildren().addAll(upper,lower);
+		this.lower.getChildren().addAll(ingTitle,ingredientsLabel,insTitle,instructionsLabel);
+		this.vbox.getChildren().addAll(this.hbox,lower);
 	}
 }

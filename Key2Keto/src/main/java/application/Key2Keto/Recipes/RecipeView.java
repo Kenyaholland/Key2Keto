@@ -101,25 +101,25 @@ public class RecipeView extends Pane {
 	}
 	
 	private void setStyles() {
-		this.setWidth(1000);
+		this.setWidth(980);
 		this.setHeight(500);
 		view.setPrefHeight(500);
-		view.setPrefWidth(970);
+		view.setPrefWidth(980);
 		this.categoryTabs.setPrefSize(600, 50);
-		this.categoryTabs.setSpacing(10);
-		this.sundayButton.setPrefSize(130, 45);
+		this.categoryTabs.setSpacing(12);
+		this.sundayButton.setPrefSize(129, 45);
 		this.sundayButton.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 14));
-		this.mondayButton.setPrefSize(130, 45);
+		this.mondayButton.setPrefSize(129, 45);
 		this.mondayButton.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 14));
-		this.tuesdayButton.setPrefSize(130, 45);
+		this.tuesdayButton.setPrefSize(129, 45);
 		this.tuesdayButton.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 14));
-		this.wednesdayButton.setPrefSize(130, 45);
+		this.wednesdayButton.setPrefSize(129, 45);
 		this.wednesdayButton.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 14));
-		this.thursdayButton.setPrefSize(130, 45);
+		this.thursdayButton.setPrefSize(129, 45);
 		this.thursdayButton.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 14));
-		this.fridayButton.setPrefSize(130, 45);
+		this.fridayButton.setPrefSize(129, 45);
 		this.fridayButton.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 14));
-		this.saturdayButton.setPrefSize(130, 45);
+		this.saturdayButton.setPrefSize(129, 45);
 		this.saturdayButton.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 14));
 		this.daysOfWeek.setPrefSize(600, 440);
 		setButtonColor();
@@ -138,7 +138,7 @@ public class RecipeView extends Pane {
 		
 		for(int i = 0; i < 7; i++) {
 			if(num == i) {
-				temp[i].setBackground(new Background(new BackgroundFill(Color.LIGHTGOLDENRODYELLOW, CornerRadii.EMPTY, Insets.EMPTY)));
+				temp[i].setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
 			}else {
 				temp[i].setBackground(new Background(new BackgroundFill(Color.LIGHTBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
 			}
