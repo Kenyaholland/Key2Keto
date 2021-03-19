@@ -9,6 +9,7 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -16,10 +17,15 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import application.Key2Keto.SceneSwitcher;
 import javafx.collections.FXCollections;
 
 public class AccountCreationView extends Pane
 {
+	//For switching scenes
+	Stage stage;
+	SceneSwitcher switcher;
+  
 	Account newlyCreatedAccount;
 	
 	Label createAccountLabel;
@@ -39,7 +45,7 @@ public class AccountCreationView extends Pane
 	
 	//now for personal details
 	Label personalDetailsDivider;
-	
+
 	Label firstNameLabel;
 	TextField firstNameTextField;
 	
@@ -70,8 +76,10 @@ public class AccountCreationView extends Pane
 	HBox newPasswordRow;
 	HBox confirmPasswordRow;
 	HBox personalDetailsDividerRow;
+
 	HBox firstNameRow;
 	HBox lastNameRow;
+
 	HBox sexRow;
 	HBox heightRow;
 	HBox weightRow;
@@ -81,8 +89,11 @@ public class AccountCreationView extends Pane
 	
 	VBox accountCreationRows;
 	
-	public AccountCreationView()
+	public AccountCreationView(Stage stage)
 	{
+		this.stage = stage;
+		this.switcher = new SceneSwitcher(stage);
+
 		instantiateVariables();
 		stylizeElements();
 		
@@ -130,6 +141,7 @@ public class AccountCreationView extends Pane
 		dietTypeChooser = new ComboBox(FXCollections.observableArrayList(diets));
 		
 		createAccountButton = new Button("Create Account");
+		createAccountButton.setOnAction(e -> stage.setScene(switcher.MainViewScene()));
 		
 		titleRow = new HBox();
 		accountDetailsDividerRow = new HBox();
@@ -137,6 +149,7 @@ public class AccountCreationView extends Pane
 		newPasswordRow = new HBox();
 		confirmPasswordRow = new HBox();
 		personalDetailsDividerRow = new HBox();
+    
 		firstNameRow = new HBox();
 		lastNameRow = new HBox();
 		sexRow = new HBox();

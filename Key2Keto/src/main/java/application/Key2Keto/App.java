@@ -18,6 +18,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import application.Key2Keto.Dashboard.*;
+import application.Key2Keto.Account.*;
+import application.Key2Keto.Recipes.*;
 import application.Key2Keto.Recipes.RecipeView;
 
 public class App extends Application {
@@ -34,7 +36,9 @@ public class App extends Application {
     	private Label label = new Label("IM IN FRONT");
     @Override
     public void start(Stage stage) {
-
+    	SceneSwitcher switcher = new SceneSwitcher(stage);
+    
+    	stage.setScene(switcher.LoginScene());
     	Label title = new Label("KEY2KETO");
     	title.setFont(new Font(75));
     	
