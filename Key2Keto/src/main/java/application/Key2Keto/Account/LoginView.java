@@ -1,6 +1,14 @@
 package application.Key2Keto.Account;
 
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Button;
+import application.Key2Keto.SceneSwitcher;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.Label;
@@ -11,6 +19,10 @@ import javafx.geometry.Pos;
 
 public class LoginView extends Pane
 {
+	//For switching scenes
+	Stage stage;
+	SceneSwitcher switcher;
+
 	//Section for the app title/logo
 	Label titleOrLogo;
 	
@@ -38,8 +50,11 @@ public class LoginView extends Pane
 	//and a VBox to contain them all
 	VBox loginRows;
 	
-	public LoginView()
+	public LoginView(Stage stage)
 	{
+		this.stage = stage;
+		this.switcher = new SceneSwitcher(stage);
+
 		instantiateVariables();
 		stylizeElements();
 		
@@ -57,8 +72,11 @@ public class LoginView extends Pane
 		passwordTextField = new TextField();
 		
 		signInButton = new Button("Sign in");
+		signInButton.setOnAction(e -> stage.setScene(switcher.MainViewScene()));
 		
 		createAccountButton = new Button("Create Account");
+		createAccountButton.setOnAction(e -> stage.setScene(switcher.AccountCreationScene()));
+
 		noAccountLabel = new Label("Don't have an account? Create one here:");
 		
 		usernameRow = new HBox();

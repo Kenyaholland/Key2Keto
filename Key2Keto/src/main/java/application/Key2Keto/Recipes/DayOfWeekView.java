@@ -156,9 +156,11 @@ public class DayOfWeekView extends Pane {
 					if(recipe.contentEquals(DayOfWeekView.this.recipeList.getRecipeList().get(i).getName())) {
 						ScrollPane scrollPane = new ScrollPane();
 						scrollPane.setPrefWidth(500);
+						scrollPane.setMaxHeight(375);
 						DayOfWeekView.this.recipeDetailView = new RecipeDetailView(DayOfWeekView.this.recipeList.getRecipeList().get(i));
 						scrollPane.setContent(DayOfWeekView.this.recipeDetailView);
 						DayOfWeekView.this.recipeDetails.getChildren().add(scrollPane);
+						VBox.setMargin(scrollPane, new Insets(10,0,0,10));
 					}
 				}
 				
