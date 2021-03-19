@@ -87,13 +87,16 @@ public class Recipe {
 		return this.dietRatio;
 	}
 	
+	public int getTotalCalories() {
+		return this.totalCalories;
+	}
 	public String listedIngredients() {
 		String listOfIngredients="";
 		for(int i = 0; i<this.ingredients.size();i++) {
 			if(i == this.ingredients.size()-1) {
 				listOfIngredients = listOfIngredients.concat((i+1)+". "+this.ingredients.get(i));
 			}else {
-				listOfIngredients = listOfIngredients.concat((i+1)+". "+this.ingredients.get(i)+"/n");
+				listOfIngredients = listOfIngredients.concat((i+1)+". "+this.ingredients.get(i)+"\n");
 			}
 		}
 		return listOfIngredients;

@@ -79,11 +79,11 @@ public class MainView extends Pane{
 	private void StylizeElements(){
 		title.setFont(new Font(75));
 		view.setPrefSize(1000, 750);
-		view.setMargin(labels, new Insets(0, 15, 0, 15));
-		view.setMargin(this.mainContent, new Insets(5, 15, 5, 15));
-		view.setMargin(title, new Insets(5, 15, 5, 15));
-		view.setBackground(new Background(new BackgroundFill(Color.LIGHTCORAL, CornerRadii.EMPTY, Insets.EMPTY)));
-		labels.setBackground(new Background(new BackgroundFill(Color.LIGHTGREEN, CornerRadii.EMPTY, Insets.EMPTY)));
+		view.setMargin(labels, new Insets(0, 10, 0, 10));
+		view.setMargin(this.mainContent, new Insets(5, 10, 5, 10));
+		view.setMargin(title, new Insets(5, 10, 5, 10));
+		view.setBackground(new Background(new BackgroundFill(Color.LIGHTSLATEGRAY, CornerRadii.EMPTY, Insets.EMPTY)));
+		labels.setBackground(new Background(new BackgroundFill(Color.LIGHTSKYBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
 		labels.setPrefSize(1000, 75);
 	}
 	
