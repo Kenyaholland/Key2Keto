@@ -9,6 +9,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Button;
 import application.Key2Keto.SceneSwitcher;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Button;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 
@@ -17,7 +22,7 @@ public class LoginView extends Pane
 	//For switching scenes
 	Stage stage;
 	SceneSwitcher switcher;
-	
+
 	//Section for the app title/logo
 	Label titleOrLogo;
 	
@@ -49,7 +54,7 @@ public class LoginView extends Pane
 	{
 		this.stage = stage;
 		this.switcher = new SceneSwitcher(stage);
-		
+
 		instantiateVariables();
 		stylizeElements();
 		
@@ -71,7 +76,7 @@ public class LoginView extends Pane
 		
 		createAccountButton = new Button("Create Account");
 		createAccountButton.setOnAction(e -> stage.setScene(switcher.AccountCreationScene()));
-		
+
 		noAccountLabel = new Label("Don't have an account? Create one here:");
 		
 		usernameRow = new HBox();
@@ -113,5 +118,33 @@ public class LoginView extends Pane
 		loginRows.getChildren().addAll(titleOrLogoRow, usernameRow, passwordRow, signInButtonRow, createAccountRow);
 		
 		this.getChildren().add(loginRows);
+	}
+	
+	private boolean checkFormProperlyFilled()
+	{
+		if(usernameTextField.getText().equals(""))
+		{
+			return false;
+		}
+		
+		else if(passwordTextField.getText().equals(""))
+		{
+			return false;
+		}
+		
+		else
+		{
+			return true;
+		}
+	}
+	
+	public Button getSignInButton()
+	{
+		return signInButton;
+	}
+	
+	public Button getCreateAccountButton()
+	{
+		return createAccountButton;
 	}
 }

@@ -22,10 +22,11 @@ import javafx.collections.FXCollections;
 
 public class AccountCreationView extends Pane
 {
-	
 	//For switching scenes
 	Stage stage;
 	SceneSwitcher switcher;
+  
+	Account newlyCreatedAccount;
 	
 	Label createAccountLabel;
 	
@@ -44,6 +45,12 @@ public class AccountCreationView extends Pane
 	
 	//now for personal details
 	Label personalDetailsDivider;
+
+	Label firstNameLabel;
+	TextField firstNameTextField;
+	
+	Label lastNameLabel;
+	TextField lastNameTextField;
 	
 	//haha
 	Label sexLabel;
@@ -69,6 +76,10 @@ public class AccountCreationView extends Pane
 	HBox newPasswordRow;
 	HBox confirmPasswordRow;
 	HBox personalDetailsDividerRow;
+
+	HBox firstNameRow;
+	HBox lastNameRow;
+
 	HBox sexRow;
 	HBox heightRow;
 	HBox weightRow;
@@ -82,7 +93,7 @@ public class AccountCreationView extends Pane
 	{
 		this.stage = stage;
 		this.switcher = new SceneSwitcher(stage);
-		
+
 		instantiateVariables();
 		stylizeElements();
 		
@@ -105,6 +116,12 @@ public class AccountCreationView extends Pane
 		confirmPasswordTextField = new PasswordField();
 		
 		personalDetailsDivider = new Label("Personal Details");
+		
+		firstNameLabel = new Label("First Name:");
+		firstNameTextField = new TextField();
+		
+		lastNameLabel = new Label("Last Name:");
+		lastNameTextField = new TextField();
 		
 		sexLabel = new Label("Sex:");
 		String sexes[] = {"Male", "Female"};
@@ -132,6 +149,9 @@ public class AccountCreationView extends Pane
 		newPasswordRow = new HBox();
 		confirmPasswordRow = new HBox();
 		personalDetailsDividerRow = new HBox();
+    
+		firstNameRow = new HBox();
+		lastNameRow = new HBox();
 		sexRow = new HBox();
 		heightRow = new HBox();
 		weightRow = new HBox();
@@ -172,6 +192,12 @@ public class AccountCreationView extends Pane
 		personalDetailsDividerRow.setAlignment(Pos.CENTER);
 		personalDetailsDividerRow.setMargin(personalDetailsDivider, new Insets(10, 0, 10, 0));
 		
+		firstNameRow.setMargin(firstNameLabel, new Insets(20, 10, 10, 10));
+		firstNameRow.setMargin(firstNameTextField, new Insets(20, 10, 10,10));
+		
+		lastNameRow.setMargin(lastNameLabel, new Insets(10, 10, 10, 10));
+		lastNameRow.setMargin(lastNameTextField, new Insets(10, 10, 10, 10));
+		
 		sexRow.setMargin(sexLabel, new Insets(10, 10, 10, 10));
 		sexRow.setMargin(sexChooser, new Insets(10, 10, 10, 10));
 		
@@ -203,6 +229,9 @@ public class AccountCreationView extends Pane
 		
 		personalDetailsDividerRow.getChildren().add(personalDetailsDivider);
 		
+		firstNameRow.getChildren().addAll(firstNameLabel, firstNameTextField);
+		lastNameRow.getChildren().addAll(lastNameLabel, lastNameTextField);
+		
 		sexRow.getChildren().addAll(sexLabel, sexChooser);
 		heightRow.getChildren().addAll(heightLabel, heightTextField);
 		weightRow.getChildren().addAll(weightLabel, weightTextField);
@@ -212,7 +241,8 @@ public class AccountCreationView extends Pane
 		createAccountButtonRow.getChildren().add(createAccountButton);
 		
 		accountCreationRows.getChildren().addAll(titleRow, accountDetailsDividerRow, newUsernameRow, newPasswordRow, confirmPasswordRow, 
-												 personalDetailsDividerRow, sexRow, heightRow, weightRow, ageRow, dietTypeRow, createAccountButtonRow);
+												 personalDetailsDividerRow, firstNameRow, lastNameRow, sexRow, heightRow, weightRow, ageRow, dietTypeRow, 
+												 createAccountButtonRow);
 		
 		this.getChildren().add(accountCreationRows);
 	}
@@ -241,6 +271,16 @@ public class AccountCreationView extends Pane
 			return false;
 		}
 		
+		else if(firstNameTextField.getText().equals(""))
+		{
+			return false;
+		}
+		
+		else if(lastNameTextField.getText().equals(""))
+		{
+			return false;
+		}
+		
 		//now personal details
 		else if(sexChooser.getSelectionModel().isEmpty())
 		{
@@ -252,12 +292,27 @@ public class AccountCreationView extends Pane
 			return false;
 		}
 		
+		else if(!heightTextField.getText().matches("^([0-9]*'([0-9]|(1[0-1])\"))|([0-9]*')$"))
+		{
+			return false;
+		}
+		
 		else if(weightTextField.getText().equals(""))
 		{
 			return false;
 		}
 		
+		else if(!weightTextField.getText().matches("^[0-9]*$"))
+		{
+			return false;
+		}
+		
 		else if(ageTextField.getText().equals(""))
+		{
+			return false;
+		}
+		
+		else if(!ageTextField.getText().matches("^[0-9]*$"))
 		{
 			return false;
 		}
@@ -272,5 +327,11 @@ public class AccountCreationView extends Pane
 		{
 			return true;
 		}
+	}
+	
+	//for setting on action in pane containing this pane
+	public Button getCreateAccountButton()
+	{
+		return createAccountButton;
 	}
 }
