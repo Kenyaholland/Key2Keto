@@ -2,6 +2,8 @@ package application.Key2Keto.Recipes;
 
 import java.util.ArrayList;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -23,13 +25,15 @@ public class DayOfWeekView extends Pane { //intanstate method, stylize method, a
 	private String name;
 	private RecipeList recipeList;
 	private ArrayList<Recipe> daysRecipes;
+	private RecipeDetailView recipeDetailView;
 	private boolean flag = false;
 	private boolean lunchFlag = false;
 	private boolean dinnerFlag = false;
 	private int numEntree = 0;
 	private VBox wholeView;
 	private VBox selectedRecipes;
-	
+	private VBox recipeDetails;
+	private HBox bottomRecipeInfo;
 	private HBox categorySelection;
 	private HBox breakfastInfo;
 	private HBox lunchInfo;
@@ -42,10 +46,10 @@ public class DayOfWeekView extends Pane { //intanstate method, stylize method, a
 	private Label lunchRecipeName;
 	private Label dinnerRecipeName;
 	private Label snackRecipeName;
-	
+	//private Label tester = new Label("This is a Test");
 	//ComboBox variables
 	private ComboBox comboBox;
-	private Button viewSelectedRecipe;
+	//private Button viewSelectedRecipe;
 	private Button addRecipeButton;
 	
 	//category Buttons
@@ -75,6 +79,7 @@ public class DayOfWeekView extends Pane { //intanstate method, stylize method, a
 		    	disPlayViewsRecipes();
 		    	DayOfWeekView.this.comboBox.setVisible(false);
 		    	DayOfWeekView.this.addRecipeButton.setVisible(false);
+		    	setButtonCLickedColor(0);
 		        System.out.println("Accepted Overview");
 		    }
 		});
@@ -82,6 +87,7 @@ public class DayOfWeekView extends Pane { //intanstate method, stylize method, a
 		    @Override public void handle(ActionEvent e) {
 		    	populateComboBox(0);
 		    	DayOfWeekView.this.comboBox.setPromptText("--- Select a Recipe ---");
+		    	setButtonCLickedColor(1);
 		        System.out.println("Accepted Breakfast");
 		    }
 		});
@@ -89,6 +95,7 @@ public class DayOfWeekView extends Pane { //intanstate method, stylize method, a
 		    @Override public void handle(ActionEvent e) {
 		    	populateComboBox(1);
 		    	DayOfWeekView.this.comboBox.setPromptText("--- Select a Recipe ---");
+		    	setButtonCLickedColor(2);
 		        System.out.println("Accepted Entrees");
 		    }
 		});
@@ -96,6 +103,7 @@ public class DayOfWeekView extends Pane { //intanstate method, stylize method, a
 		    @Override public void handle(ActionEvent e) {
 		    	populateComboBox(2);
 		    	DayOfWeekView.this.comboBox.setPromptText("--- Select a Recipe ---");
+		    	setButtonCLickedColor(3);
 		        System.out.println("Accepted Snacks");
 		    }
 		});
@@ -137,7 +145,50 @@ public class DayOfWeekView extends Pane { //intanstate method, stylize method, a
 		    	addRecipe(selected);
 		        System.out.println("Added Recipe");
 		    }
-		});		
+		});
+		this.comboBox.setOnAction(e-> {
+			DayOfWeekView.this.recipeDetails.getChildren().clear();
+			RecipeDetailView recipeDetail;
+			String recipe = "";
+			if(this.comboBox.getValue() != null) {
+				recipe = this.comboBox.getValue().toString();
+				for(int i =0; i<DayOfWeekView.this.recipeList.getRecipeList().size();i++ ) {
+					if(recipe.contentEquals(DayOfWeekView.this.recipeList.getRecipeList().get(i).getName())) {
+						DayOfWeekView.this.recipeDetailView = new RecipeDetailView(DayOfWeekView.this.recipeList.getRecipeList().get(i));
+						DayOfWeekView.this.recipeDetails.getChildren().add(this.recipeDetailView);
+					}
+				}
+				
+			}
+		});
+	}
+	
+	private void setButtonColor() {
+		Button temp[] = new Button[4];
+		temp[0] = this.overViewButton;
+		temp[1] = this.breakfastButton;
+		temp[2] = this.entreesButton;
+		temp[3] = this.snacksButton;
+
+		
+		for(int i = 0; i < 4; i++) {
+			temp[i].setBackground(new Background(new BackgroundFill(Color.LIGHTBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
+		}
+	}
+	private void setButtonCLickedColor(int num) {
+		Button temp[] = new Button[4];
+		temp[0] = this.overViewButton;
+		temp[1] = this.breakfastButton;
+		temp[2] = this.entreesButton;
+		temp[3] = this.snacksButton;
+		
+		for(int i = 0; i < 4; i++) {
+			if(num == i) {
+				temp[i].setBackground(new Background(new BackgroundFill(Color.LIGHTGOLDENRODYELLOW, CornerRadii.EMPTY, Insets.EMPTY)));
+			}else {
+				temp[i].setBackground(new Background(new BackgroundFill(Color.LIGHTBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
+			}
+		}
 	}
 
 	private void addRecipe(String selected) {
@@ -192,7 +243,10 @@ public class DayOfWeekView extends Pane { //intanstate method, stylize method, a
 		this.lunchRecipeName.setVisible(true);
 		this.dinnerRecipeName.setVisible(true);
 		this.snackRecipeName.setVisible(true);
-
+		this.deleteBreakfastButton.setVisible(true);
+		this.deleteLunchButton.setVisible(true);
+		this.deleteDinnerButton.setVisible(true);
+		this.deleteSnackButton.setVisible(true);
 	}
 
 	private void populateChildren() {
@@ -204,10 +258,12 @@ public class DayOfWeekView extends Pane { //intanstate method, stylize method, a
 				this.dinnerInfo.getChildren().addAll(this.dinnerRecipeName, this.deleteDinnerButton);
 				this.snackInfo.getChildren().addAll(this.snackRecipeName, this.deleteSnackButton);
 				this.selectedRecipes.getChildren().addAll(this.breakfastInfo,this.lunchInfo, this.dinnerInfo, this.snackInfo);
+
+				this.bottomRecipeInfo.getChildren().addAll(this.selectedRecipes, this.recipeDetails);
 		//adding ComboBox and Add button to addRecipeDropDown section
 				this.addRecipeDropdown.getChildren().addAll(this.comboBox,this.addRecipeButton);
 		//add all components to the view		
-				this.wholeView.getChildren().addAll(this.categorySelection, this.addRecipeDropdown,this.selectedRecipes);
+				this.wholeView.getChildren().addAll(this.categorySelection, this.addRecipeDropdown,this.bottomRecipeInfo);
 		//add the view to the class
 				this.getChildren().add(wholeView);
 		
@@ -220,7 +276,8 @@ public class DayOfWeekView extends Pane { //intanstate method, stylize method, a
 		this.wholeView.setMargin(categorySelection, new Insets(0, 10, 0, 10));
 		this.wholeView.setMargin(addRecipeDropdown, new Insets(0, 10, 0, 10));
 		this.wholeView.setMargin(selectedRecipes, new Insets(0, 10, 0, 10));
-		//this.categorySelection.setSpacing(5);
+		
+		//this.categorySelection
 		this.categorySelection.setPrefSize(960, 75);
 		this.categorySelection.setAlignment(Pos.CENTER);
 		this.categorySelection.setBackground(new Background(new BackgroundFill(Color.LIGHTSKYBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
@@ -254,24 +311,28 @@ public class DayOfWeekView extends Pane { //intanstate method, stylize method, a
 		this.breakfastInfo.setMargin(this.breakfastRecipeName, new Insets(10, 5, 10, 5));
 		this.breakfastInfo.setMargin(this.deleteBreakfastButton, new Insets(15, 5, 10, 5));
 		this.deleteBreakfastButton.setPrefSize(75, 40);
+		this.deleteBreakfastButton.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 12));
 		
 		this.lunchRecipeName.setPrefSize(350, 65);
 		this.lunchRecipeName.setFont(Font.font(16));
 		this.lunchInfo.setMargin(this.lunchRecipeName, new Insets(10, 5, 10, 5));
 		this.lunchInfo.setMargin(this.deleteLunchButton, new Insets(15, 5, 10, 5));
 		this.deleteLunchButton.setPrefSize(75, 40);
+		this.deleteLunchButton.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 12));
 		
 		this.dinnerRecipeName.setPrefSize(350, 65);
 		this.dinnerRecipeName.setFont(Font.font(16));
 		this.dinnerInfo.setMargin(this.dinnerRecipeName, new Insets(10, 5, 10, 5));
 		this.dinnerInfo.setMargin(this.deleteDinnerButton, new Insets(15, 5, 10, 5));
 		this.deleteDinnerButton.setPrefSize(75, 40);
+		this.deleteDinnerButton.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 12));
 		
 		this.snackRecipeName.setPrefSize(350, 65);
 		this.snackRecipeName.setFont(Font.font(16));
 		this.snackInfo.setMargin(this.snackRecipeName, new Insets(10, 5, 10, 5));
 		this.snackInfo.setMargin(this.deleteSnackButton, new Insets(15, 5, 10, 5));
 		this.deleteSnackButton.setPrefSize(75, 40);
+		this.deleteSnackButton.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 12));
 		
 		this.addRecipeDropdown.setPrefSize(475, 35);
 		this.addRecipeDropdown.setAlignment(Pos.CENTER);
@@ -281,9 +342,13 @@ public class DayOfWeekView extends Pane { //intanstate method, stylize method, a
 		this.comboBox.setPrefSize(400, 35);
 		this.comboBox.setPromptText("--- Select a Recipe ---");
 		this.comboBox.setEditable(true);
-		this.comboBox.getEditor().setFont(Font.font("Verdana", FontWeight.NORMAL, 14));
+		this.comboBox.getEditor().setFont(Font.font("Verdana", FontWeight.NORMAL, 12));
 		this.addRecipeButton.setPrefSize(75, 35);
+		this.addRecipeButton.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 12));
+		
+		this.bottomRecipeInfo.setPrefSize(490, 400);
 	}
+	
 	private void setDefaultVisibilities() {
 		if(this.daysRecipes.size()>0) {
 			this.breakfastRecipeName.setVisible(true);
@@ -292,9 +357,13 @@ public class DayOfWeekView extends Pane { //intanstate method, stylize method, a
 			this.snackRecipeName.setVisible(true);
 		}else {
 			this.breakfastRecipeName.setVisible(false);
+			this.deleteBreakfastButton.setVisible(false);
 			this.lunchRecipeName.setVisible(false);
+			this.deleteLunchButton.setVisible(false);
 			this.dinnerRecipeName.setVisible(false);
+			this.deleteDinnerButton.setVisible(false);
 			this.snackRecipeName.setVisible(false);
+			this.deleteSnackButton.setVisible(false);
 		}
 		this.comboBox.setVisible(false);
 		this.addRecipeButton.setVisible(false);
@@ -304,6 +373,8 @@ public class DayOfWeekView extends Pane { //intanstate method, stylize method, a
 	private void initializeVariables() {
 		this.wholeView = new VBox();
 		this.selectedRecipes = new VBox();
+		this.recipeDetails = new VBox();
+		this.bottomRecipeInfo = new HBox();
 		this.categorySelection = new HBox();
 		this.breakfastInfo = new HBox();
 		this.lunchInfo = new HBox();
@@ -325,6 +396,7 @@ public class DayOfWeekView extends Pane { //intanstate method, stylize method, a
 		this.deleteDinnerButton = new Button("DELETE");
 		this.deleteSnackButton = new Button("DELETE");
 		this.viewSelectedRecipe = new Button("VIEW RECIPE");
+		setButtonColor();
 	}
 
 	protected void populateComboBox(int num) {
@@ -403,4 +475,3 @@ public class DayOfWeekView extends Pane { //intanstate method, stylize method, a
 		}
 	}
 }
-
