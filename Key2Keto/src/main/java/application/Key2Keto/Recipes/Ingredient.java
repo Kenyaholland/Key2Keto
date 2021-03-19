@@ -9,6 +9,22 @@ public class Ingredient {
 		this.serveSize = serveSize;
 	}
 	
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	public String getName() {
+		return this.name;
+	}
+	
+	public void setServingSize(String serveSize) {
+		this.serveSize = serveSize;
+	}
+	
+	public String getServingSize() {
+		return this.serveSize;
+	}
+	
 	public String toString() {
 		return this.serveSize+ " "+this.name;
 	}
