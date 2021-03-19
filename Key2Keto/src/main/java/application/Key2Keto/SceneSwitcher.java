@@ -2,7 +2,7 @@ package application.Key2Keto;
 
 import application.Key2Keto.Account.AccountCreationView;
 import application.Key2Keto.Account.LoginView;
-import application.Key2Keto.Recipes.RecipeView;
+//import application.Key2Keto.Recipes.RecipeView;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
@@ -22,7 +22,7 @@ public class SceneSwitcher extends Pane{
     	LoginView loginView = new LoginView(this.stage);
     	
     	loginPane.getChildren().add(loginView);
-        Scene loginScene = new Scene(loginPane, 750, 600);
+        Scene loginScene = new Scene(loginPane);
 
         return loginScene;
 	}
@@ -32,7 +32,7 @@ public class SceneSwitcher extends Pane{
     	AccountCreationView creationView = new AccountCreationView(this.stage);
     	
     	creationPane.getChildren().add(creationView);
-        Scene creationScene = new Scene(creationPane, 750, 600);
+        Scene creationScene = new Scene(creationPane);
         
         return creationScene;
 	}
@@ -40,7 +40,7 @@ public class SceneSwitcher extends Pane{
 	public Scene MainViewScene() {
     	MainView mainView = new MainView(this.stage);
     	VBox view = mainView.getView();
-        Scene mainViewScene = new Scene(view, 1000, 750);
+        Scene mainViewScene = new Scene(view);
         
         return mainViewScene;
 	}

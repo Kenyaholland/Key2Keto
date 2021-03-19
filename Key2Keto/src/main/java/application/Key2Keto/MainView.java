@@ -17,6 +17,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import application.Key2Keto.Account.AccountView;
 import application.Key2Keto.Dashboard.*;
 import application.Key2Keto.Recipes.RecipeView;
 
@@ -28,12 +29,14 @@ public class MainView extends Pane{
     VBox view;
 	HBox labels;
 	private Button dash;
-	Button account;
+	private Button account;
 	Button shopping;
 	private Button recipes;
 	Button logout;
 	private StackPane mainContent;
 	private RecipeView recipeView;
+	private AccountView accountView;
+	private DashboardView dashboardView;
 	private Pane other;
 	private Label label;
 	Label title;
@@ -50,13 +53,19 @@ public class MainView extends Pane{
 	
 		this.recipes.setOnAction(new EventHandler<ActionEvent>() {
 		    @Override public void handle(ActionEvent e) {
-		    	stackOrder();
+		    	stackOrder(0);
 		    }
 		});
 		
 		this.dash.setOnAction(new EventHandler<ActionEvent>() {
 		    @Override public void handle(ActionEvent e) {
-		    	stackOrder2();
+		    	stackOrder(1);
+		    }
+		});
+		
+		this.account.setOnAction(new EventHandler<ActionEvent>() {
+		    @Override public void handle(ActionEvent e) {
+		    	stackOrder(2);
 		    }
 		});
 }
@@ -71,6 +80,8 @@ public class MainView extends Pane{
 		logout = new Button("LOG OUT");
 		mainContent = new StackPane();
 		recipeView = new RecipeView("./src/main/java/application/Key2Keto/Recipes/ModifiedKeto.txt");
+		accountView = new AccountView();  /*TODO NEEDS ADJUSTED */
+		dashboardView = new DashboardView();
 		other = new Pane();
 		label = new Label("IM IN FRONT");
 		title = new Label("KEY2KETO");
@@ -79,9 +90,9 @@ public class MainView extends Pane{
 	private void StylizeElements(){
 		title.setFont(new Font(75));
 		view.setPrefSize(1000, 750);
-		view.setMargin(labels, new Insets(0, 10, 0, 10));
-		view.setMargin(this.mainContent, new Insets(5, 10, 5, 10));
-		view.setMargin(title, new Insets(5, 10, 5, 10));
+		VBox.setMargin(labels, new Insets(0, 10, 0, 10));
+		VBox.setMargin(this.mainContent, new Insets(5, 10, 5, 10));
+		VBox.setMargin(title, new Insets(5, 10, 5, 10));
 		view.setBackground(new Background(new BackgroundFill(Color.LIGHTSLATEGRAY, CornerRadii.EMPTY, Insets.EMPTY)));
 		labels.setBackground(new Background(new BackgroundFill(Color.LIGHTSKYBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
 		labels.setPrefSize(1000, 75);
@@ -91,11 +102,53 @@ public class MainView extends Pane{
 		labels.getChildren().addAll(dash,account,shopping,recipes,logout);
 		view.getChildren().addAll(title,labels, mainContent);
 		other.getChildren().add(label);
-		this.mainContent.getChildren().addAll(recipeView, other);
+		this.mainContent.getChildren().addAll(recipeView,accountView, dashboardView);
 		this.mainContent.setVisible(false);
 	}
 
-	public void stackOrder(){
+	public void stackOrder(int num){
+		switch(num) {
+			case 0:
+			//add panes as they are developed
+				this.mainContent.setVisible(true);
+				this.recipeView.setViewOrder(-1);
+				this.dashboardView.setViewOrder(0);
+				this.accountView.setViewOrder(0);
+			
+				this.dashboardView.setVisible(false);
+				this.accountView.setVisible(false);
+				this.recipeView.setVisible(true);
+				break;
+			case 1:
+				//add panes as they are developed
+				this.mainContent.setVisible(true);
+				this.recipeView.setViewOrder(0);
+				this.dashboardView.setViewOrder(-1);
+				this.accountView.setViewOrder(0);
+			
+				this.dashboardView.setVisible(true);
+				this.accountView.setVisible(false);
+				this.recipeView.setVisible(false);
+				break;
+			case 2:
+				//add panes as they are developed
+				this.mainContent.setVisible(true);
+				this.recipeView.setViewOrder(0);
+				this.dashboardView.setViewOrder(0);
+				this.accountView.setViewOrder(-1);
+			
+				this.dashboardView.setVisible(false);
+				this.accountView.setVisible(true);
+				this.recipeView.setVisible(false);
+				break;
+			case 3:
+				/*TODO add panes as they are developed*/
+			case 4:
+				/*TODO add panes as they are developed*/
+			default:
+				System.out.println("You should not get here");
+		}
+		
 		this.mainContent.setVisible(true);
 		this.recipeView.setViewOrder(-1);
 		this.other.setViewOrder(0);
