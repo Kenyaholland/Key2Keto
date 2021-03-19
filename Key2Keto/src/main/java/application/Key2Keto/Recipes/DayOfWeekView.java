@@ -46,7 +46,7 @@ public class DayOfWeekView extends Pane { //intanstate method, stylize method, a
 	private Label lunchRecipeName;
 	private Label dinnerRecipeName;
 	private Label snackRecipeName;
-	//private Label tester = new Label("This is a Test");
+
 	//ComboBox variables
 	private ComboBox comboBox;
 	//private Button viewSelectedRecipe;
