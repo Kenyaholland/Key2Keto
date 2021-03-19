@@ -1,9 +1,14 @@
 package application.Key2Keto.Account;
 
+import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderStroke;
 import javafx.scene.layout.BorderStrokeStyle;
@@ -11,10 +16,12 @@ import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.stage.Stage;
 
 public class AccountView extends Pane
 {
@@ -65,6 +72,17 @@ public class AccountView extends Pane
 	
 	VBox myAccountRows;
 	
+	Stage variableChangerWindow;
+	Pane changerPane;
+	Scene changerScene;
+	Label newVariableLabel;
+	TextField newVariableTextField;
+	ComboBox newVariableComboBox;
+	Button confirmVariableChangeButton;
+	HBox newVariableRow;
+	HBox confirmButtonRow;
+	VBox changerRows;
+	
 	public AccountView(Account currentAccount)
 	{
 		this.currentAccount = currentAccount;
@@ -73,10 +91,11 @@ public class AccountView extends Pane
 		stylizeElements();
 		
 		addAllElementsToChildren();
+		setOnActionForAllButtons();
 	}
 	
 	private void instantiateVariables()
-	{
+	{	
 		myAccountLabel = new Label("My Account");
 		viewTitleRow = new HBox();
 		
@@ -121,6 +140,17 @@ public class AccountView extends Pane
 		dietTypeRow = new HBox();
 		
 		myAccountRows = new VBox();
+		
+		variableChangerWindow = new Stage();
+		changerPane = new Pane();
+		changerScene = new Scene(changerPane);
+		newVariableLabel = new Label(); //the text of this will be set by each individual edit button
+		newVariableTextField = new TextField();
+		newVariableComboBox = new ComboBox();
+		confirmVariableChangeButton = new Button("Confirm");
+		newVariableRow = new HBox();
+		confirmButtonRow = new HBox();
+		changerRows = new VBox();
 	}
 	
 	private void stylizeElements()
@@ -206,6 +236,21 @@ public class AccountView extends Pane
 		currentDietTypeLabel.setFont(Font.font("Verdana", 12));
 		dietTypeRow.setMargin(changeDietTypeButton, new Insets(20, 10, 20, 10));
 		changeDietTypeButton.setFont(Font.font("Verdana", 12));
+		
+		//now to stylize the popup window for changing variables
+		newVariableLabel.setMinWidth(90);
+		newVariableRow.setMargin(newVariableLabel, new Insets(20, 10, 10, 10));
+		newVariableRow.setMargin(newVariableTextField, new Insets(20, 10, 10, 10));
+		newVariableRow.setMargin(newVariableComboBox, new Insets(20, 10, 10, 10));
+		newVariableRow.setAlignment(Pos.CENTER);
+		
+		newVariableTextField.setMinWidth(150);
+		newVariableComboBox.setMinWidth(150);
+		
+		confirmButtonRow.setMargin(confirmVariableChangeButton, new Insets(10, 10, 20, 10));
+		confirmButtonRow.setAlignment(Pos.CENTER);
+		
+		changerRows.setAlignment(Pos.CENTER);
 	}
 	
 	private void addAllElementsToChildren()
@@ -226,5 +271,390 @@ public class AccountView extends Pane
 		myAccountRows.getChildren().addAll(viewTitleRow, usernameRow, passwordRow, nameRow, sexRow, heightRow, weightRow, ageRow, dietTypeRow);
 		
 		this.getChildren().add(myAccountRows);
+		
+		newVariableRow.getChildren().addAll(newVariableLabel, newVariableTextField);
+		confirmButtonRow.getChildren().add(confirmVariableChangeButton);
+		
+		changerRows.getChildren().addAll(newVariableRow, confirmButtonRow);
+		
+		changerPane.getChildren().add(changerRows);
+	}
+	
+	private void setOnActionForAllButtons()
+	{
+		changeUsernameButton.setOnAction(e -> 
+		{
+			variableChangerWindow.setTitle("Change Username");
+			
+			newVariableRow.getChildren().clear();
+			changerRows.getChildren().clear();
+			newVariableLabel.setText("New Username:");
+			newVariableTextField.setText("");
+			newVariableTextField.setPromptText("");
+			
+			newVariableRow.getChildren().addAll(newVariableLabel, newVariableTextField);
+			changerRows.getChildren().addAll(newVariableRow, confirmButtonRow);
+			
+			variableChangerWindow.setScene(changerScene);
+			
+			variableChangerWindow.show();
+			
+			setConfirmButtonAction("Username");
+		});
+		
+		changePasswordButton.setOnAction(e -> 
+		{
+			variableChangerWindow.setTitle("Change Password");
+			
+			newVariableRow.getChildren().clear();
+			changerRows.getChildren().clear();
+			newVariableLabel.setText("New Password:");
+			newVariableTextField.setText("");
+			newVariableTextField.setPromptText("");
+			
+			newVariableRow.getChildren().addAll(newVariableLabel, newVariableTextField);
+			changerRows.getChildren().addAll(newVariableRow, confirmButtonRow);
+			
+			variableChangerWindow.setScene(changerScene);
+			
+			variableChangerWindow.show();
+			
+			setConfirmButtonAction("Password");
+		});
+		
+		changeNameButton.setOnAction(e -> 
+		{
+			variableChangerWindow.setTitle("Change Name");
+			
+			newVariableRow.getChildren().clear();
+			changerRows.getChildren().clear();
+			newVariableLabel.setText("New Name:");
+			newVariableTextField.setText("");
+			newVariableTextField.setPromptText("e.g. John Smith");
+			
+			newVariableRow.getChildren().addAll(newVariableLabel, newVariableTextField);
+			changerRows.getChildren().addAll(newVariableRow, confirmButtonRow);
+			
+			confirmVariableChangeButton.requestFocus();
+			
+			variableChangerWindow.setScene(changerScene);
+			
+			variableChangerWindow.show();
+			
+			setConfirmButtonAction("Name");
+		});
+		
+		changeSexButton.setOnAction(e -> 
+		{
+			variableChangerWindow.setTitle("Change Sex");
+			
+			newVariableRow.getChildren().clear();
+			changerRows.getChildren().clear();
+			newVariableLabel.setText("New Sex:");
+			
+			String[] sexes = {"Male", "Female"};	
+			newVariableComboBox.setItems(FXCollections.observableArrayList(sexes));
+			
+			newVariableRow.getChildren().addAll(newVariableLabel, newVariableComboBox);
+			changerRows.getChildren().addAll(newVariableRow, confirmButtonRow);
+			
+			variableChangerWindow.setScene(changerScene);
+			
+			variableChangerWindow.show();
+			
+			setConfirmButtonAction("Sex");
+		});
+		
+		changeHeightButton.setOnAction(e -> 
+		{
+			variableChangerWindow.setTitle("Change Height");
+			
+			newVariableRow.getChildren().clear();
+			changerRows.getChildren().clear();
+			newVariableLabel.setText("New Height:");
+			newVariableTextField.setText("");
+			newVariableTextField.setPromptText("e.g. 5'11\"");
+			
+			newVariableRow.getChildren().addAll(newVariableLabel, newVariableTextField);
+			changerRows.getChildren().addAll(newVariableRow, confirmButtonRow);
+			
+			confirmVariableChangeButton.requestFocus();
+			
+			variableChangerWindow.setScene(changerScene);
+			
+			variableChangerWindow.show();
+			
+			setConfirmButtonAction("Height");
+		});
+		
+		changeWeightButton.setOnAction(e -> 
+		{
+			variableChangerWindow.setTitle("Change Weight");
+			
+			newVariableRow.getChildren().clear();
+			changerRows.getChildren().clear();
+			newVariableLabel.setText("New Weight:");
+			newVariableTextField.setText("");
+			newVariableTextField.setPromptText("in pounds");
+			
+			newVariableRow.getChildren().addAll(newVariableLabel, newVariableTextField);
+			changerRows.getChildren().addAll(newVariableRow, confirmButtonRow);
+			
+			confirmVariableChangeButton.requestFocus();
+			
+			variableChangerWindow.setScene(changerScene);
+			
+			variableChangerWindow.show();
+			
+			setConfirmButtonAction("Weight");
+		});
+		
+		changeAgeButton.setOnAction(e -> 
+		{
+			variableChangerWindow.setTitle("Change Age");
+			
+			newVariableRow.getChildren().clear();
+			changerRows.getChildren().clear();
+			newVariableLabel.setText("New Age:");
+			newVariableTextField.setText("");
+			newVariableTextField.setPromptText("in years");
+			
+			newVariableRow.getChildren().addAll(newVariableLabel, newVariableTextField);
+			changerRows.getChildren().addAll(newVariableRow, confirmButtonRow);
+			
+			confirmVariableChangeButton.requestFocus();
+			
+			variableChangerWindow.setScene(changerScene);
+			
+			variableChangerWindow.show();
+			
+			setConfirmButtonAction("Age");
+		});
+		
+		changeDietTypeButton.setOnAction(e -> 
+		{
+			variableChangerWindow.setTitle("Change Diet Type");
+			
+			newVariableRow.getChildren().clear();
+			changerRows.getChildren().clear();
+			newVariableLabel.setText("New Diet Type:");
+			
+			String diets[] = {"Classic Keto", "Light Keto", "Modified Keto"};
+			newVariableComboBox.setItems(FXCollections.observableArrayList(diets));
+			
+			newVariableRow.getChildren().addAll(newVariableLabel, newVariableComboBox);
+			changerRows.getChildren().addAll(newVariableRow, confirmButtonRow);
+			
+			variableChangerWindow.setScene(changerScene);
+			
+			variableChangerWindow.show();
+			
+			setConfirmButtonAction("DietType");
+		});
+	}
+	
+	private void setConfirmButtonAction(String variableToBeChanged)
+	{
+		switch(variableToBeChanged)
+		{
+			case "Username":
+				confirmVariableChangeButton.setOnAction(e ->
+				{
+					if(checkNewVariableIsValid(variableToBeChanged))
+					{
+						currentAccount.setUsername(newVariableTextField.getText());
+						currentUsernameLabel.setText(newVariableTextField.getText());
+					}
+				});
+				
+				break;
+			case "Password":
+				confirmVariableChangeButton.setOnAction(e ->
+				{
+					if(checkNewVariableIsValid(variableToBeChanged))
+					{
+						currentAccount.setPassword(newVariableTextField.getText());
+					}
+				});
+				
+				break;
+			case "Name":
+				confirmVariableChangeButton.setOnAction(e ->
+				{
+					if(checkNewVariableIsValid(variableToBeChanged))
+					{
+						String[] nameSplit = newVariableTextField.getText().split("\\s+");
+						
+						currentAccount.setFirstName(nameSplit[0]);
+						currentAccount.setLastName(nameSplit[1]);
+					}
+				});
+				
+				break;
+			case "Sex":
+				confirmVariableChangeButton.setOnAction(e ->
+				{
+					if(checkNewVariableIsValid(variableToBeChanged))
+					{
+						currentAccount.setSex(newVariableComboBox.getSelectionModel().getSelectedItem().toString());
+					}
+				});
+				
+				break;
+			case "Height":
+				confirmVariableChangeButton.setOnAction(e ->
+				{
+					if(checkNewVariableIsValid(variableToBeChanged))
+					{
+						currentAccount.setHeight(newVariableTextField.getText());
+					}
+				});
+				
+				break;
+			case "Weight":
+				confirmVariableChangeButton.setOnAction(e ->
+				{
+					if(checkNewVariableIsValid(variableToBeChanged))
+					{
+						currentAccount.setWeight(Integer.parseInt(newVariableTextField.getText()));
+					}
+				});
+				
+				break;
+			case "Age":
+				confirmVariableChangeButton.setOnAction(e ->
+				{
+					if(checkNewVariableIsValid(variableToBeChanged))
+					{
+						currentAccount.setAge(Integer.parseInt(newVariableTextField.getText()));
+					}
+				});
+				
+				break;
+			case "DietType":
+				confirmVariableChangeButton.setOnAction(e ->
+				{
+					if(checkNewVariableIsValid(variableToBeChanged))
+					{
+						currentAccount.setSex(newVariableComboBox.getSelectionModel().getSelectedItem().toString());
+					}
+				});
+				
+				break;
+			default:
+				break;
+		}
+	}
+	
+	private boolean checkNewVariableIsValid(String variableToBeChanged)
+	{
+		switch(variableToBeChanged)
+		{
+			case "Username":
+				if(newVariableTextField.getText().equals(""))
+				{
+					return false;
+				}
+				
+				else
+				{
+					return true;
+				}
+				
+			case "Password":
+				if(newVariableTextField.getText().equals(""))
+				{
+					return false;
+				}
+				
+				else
+				{
+					return true;
+				}
+
+			case "Name":
+				if(!newVariableTextField.getText().matches("^[A-Za-z]* [A-Za-z]$"))
+				{
+					return false;
+				}
+				
+				else
+				{
+					return true;
+				}
+
+			case "Sex":
+				if(newVariableComboBox.getSelectionModel().isEmpty())
+				{
+					return false;
+				}
+				
+				else
+				{
+					return true;
+				}
+
+			case "Height":
+				if(newVariableTextField.getText().equals(""))
+				{
+					return false;
+				}
+				
+				else if(!newVariableTextField.getText().matches("^([0-9]*'([0-9]|(1[0-1])\\\"))|([0-9]*')$"))
+				{
+					return false;
+				}
+				
+				else
+				{
+					return true;
+				}
+				
+			case "Weight":
+				if(newVariableTextField.getText().equals(""))
+				{
+					return false;
+				}
+				
+				else if(!newVariableTextField.getText().matches("^[0-9]*$"))
+				{
+					return false;
+				}
+				
+				else
+				{
+					return true;
+				}
+
+			case "Age":
+				if(newVariableTextField.getText().equals(""))
+				{
+					return false;
+				}
+				
+				else if(!newVariableTextField.getText().matches("^[0-9]*$"))
+				{
+					return false;
+				}
+				
+				else
+				{
+					return true;
+				}
+
+			case "DietType":
+				if(newVariableComboBox.getSelectionModel().isEmpty())
+				{
+					return false;
+				}
+				
+				else
+				{
+					return true;
+				}
+
+			default:
+				return false;
+		}
 	}
 }
