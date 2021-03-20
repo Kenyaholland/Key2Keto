@@ -474,6 +474,7 @@ public class AccountView extends Pane
 					if(checkNewVariableIsValid(variableToBeChanged))
 					{
 						currentAccount.setPassword(newVariableTextField.getText());
+						currentPasswordLabel.setText(newVariableTextField.getText());
 					}
 				});
 				
@@ -487,6 +488,7 @@ public class AccountView extends Pane
 						
 						currentAccount.setFirstName(nameSplit[0]);
 						currentAccount.setLastName(nameSplit[1]);
+						currentNameLabel.setText(nameSplit[0] + " " + nameSplit[1]);
 					}
 				});
 				
@@ -497,6 +499,7 @@ public class AccountView extends Pane
 					if(checkNewVariableIsValid(variableToBeChanged))
 					{
 						currentAccount.setSex(newVariableComboBox.getSelectionModel().getSelectedItem().toString());
+						currentSexLabel.setText(newVariableComboBox.getSelectionModel().getSelectedItem().toString());
 					}
 				});
 				
@@ -507,6 +510,7 @@ public class AccountView extends Pane
 					if(checkNewVariableIsValid(variableToBeChanged))
 					{
 						currentAccount.setHeight(newVariableTextField.getText());
+						currentHeightLabel.setText(newVariableTextField.getText());
 					}
 				});
 				
@@ -517,6 +521,7 @@ public class AccountView extends Pane
 					if(checkNewVariableIsValid(variableToBeChanged))
 					{
 						currentAccount.setWeight(Integer.parseInt(newVariableTextField.getText()));
+						currentWeightLabel.setText(newVariableTextField.getText() + " lbs");
 					}
 				});
 				
@@ -527,6 +532,7 @@ public class AccountView extends Pane
 					if(checkNewVariableIsValid(variableToBeChanged))
 					{
 						currentAccount.setAge(Integer.parseInt(newVariableTextField.getText()));
+						currentAgeLabel.setText(newVariableTextField.getText());
 					}
 				});
 				
@@ -537,6 +543,7 @@ public class AccountView extends Pane
 					if(checkNewVariableIsValid(variableToBeChanged))
 					{
 						currentAccount.setSex(newVariableComboBox.getSelectionModel().getSelectedItem().toString());
+						currentDietTypeLabel.setText(newVariableComboBox.getSelectionModel().getSelectedItem().toString());
 					}
 				});
 				
@@ -573,7 +580,7 @@ public class AccountView extends Pane
 				}
 
 			case "Name":
-				if(!newVariableTextField.getText().matches("^[A-Za-z]* [A-Za-z]$"))
+				if(!newVariableTextField.getText().matches("^[A-Za-z]+\s[A-Za-z]+$"))
 				{
 					return false;
 				}
@@ -600,7 +607,7 @@ public class AccountView extends Pane
 					return false;
 				}
 				
-				else if(!newVariableTextField.getText().matches("^([0-9]*'([0-9]|(1[0-1])\\\"))|([0-9]*')$"))
+				else if(!newVariableTextField.getText().matches("^([0-9]*'([0-9]\"|(1[0-1])\"))|([0-9]*')$"))
 				{
 					return false;
 				}
