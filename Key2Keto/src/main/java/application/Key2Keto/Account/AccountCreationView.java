@@ -292,7 +292,7 @@ public class AccountCreationView extends Pane
 			return false;
 		}
 		
-		else if(!heightTextField.getText().matches("^([0-9]*'([0-9]|(1[0-1])\"))|([0-9]*')$"))
+		else if(!heightTextField.getText().matches("^([0-9]*'([0-9]\"|(1[0-1])\"))|([0-9]*')$"))
 		{
 			return false;
 		}
