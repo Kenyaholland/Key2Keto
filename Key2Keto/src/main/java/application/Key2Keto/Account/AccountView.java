@@ -601,7 +601,7 @@ public class AccountView extends Pane
 				}
 
 			case "Name":
-				if(!newVariableTextField.getText().matches("^[A-Za-z]+\s[A-Za-z]+$"))
+				if(!newVariableTextField.getText().matches("^[A-Za-z]+\\s[A-Za-z]+$"))
 				{
 					return false;
 				}
