@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -16,7 +17,9 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
+import application.Key2Keto.Account.Account;
 import application.Key2Keto.Account.AccountView;
 import application.Key2Keto.Dashboard.*;
 import application.Key2Keto.Recipes.RecipeView;
@@ -80,7 +83,7 @@ public class MainView extends Pane{
 		logout = new Button("LOG OUT");
 		mainContent = new StackPane();
 		recipeView = new RecipeView("./src/main/java/application/Key2Keto/Recipes/ModifiedKeto.txt");
-		accountView = new AccountView();  /*TODO NEEDS ADJUSTED */
+		accountView = new AccountView(new Account());  /*TODO NEEDS ADJUSTED */
 		dashboardView = new DashboardView();
 		other = new Pane();
 		label = new Label("IM IN FRONT");
@@ -96,6 +99,24 @@ public class MainView extends Pane{
 		view.setBackground(new Background(new BackgroundFill(Color.LIGHTSLATEGRAY, CornerRadii.EMPTY, Insets.EMPTY)));
 		labels.setBackground(new Background(new BackgroundFill(Color.LIGHTSKYBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
 		labels.setPrefSize(1000, 75);
+		labels.setSpacing(12);
+		labels.setAlignment(Pos.CENTER);
+		dash.setPrefSize(129, 45);
+		dash.setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, CornerRadii.EMPTY, Insets.EMPTY)));
+		dash.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 14));
+		account.setPrefSize(129, 45);
+		account.setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, CornerRadii.EMPTY, Insets.EMPTY)));
+		account.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 14));
+		shopping.setPrefSize(129, 45);
+		shopping.setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, CornerRadii.EMPTY, Insets.EMPTY)));
+		shopping.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 14));
+		recipes.setPrefSize(129, 45);
+		recipes.setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, CornerRadii.EMPTY, Insets.EMPTY)));
+		recipes.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 14));
+		logout.setPrefSize(129, 45);
+		logout.setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, CornerRadii.EMPTY, Insets.EMPTY)));
+		logout.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 14));
+		view.setAlignment(Pos.CENTER);
 	}
 	
 	private void AddAllElementsToChildren(){
