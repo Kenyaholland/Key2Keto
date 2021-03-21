@@ -9,6 +9,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderStroke;
 import javafx.scene.layout.BorderStrokeStyle;
@@ -96,47 +98,47 @@ public class AccountView extends Pane
 	
 	private void instantiateVariables()
 	{	
-		myAccountLabel = new Label("My Account");
+		myAccountLabel = new Label("ACCOUNT DETAILS");
 		viewTitleRow = new HBox();
 		
 		usernameDisplayLabel = new Label("Username:");
 		currentUsernameLabel = new Label(currentAccount.getUsername());
-		changeUsernameButton = new Button("Edit");
+		changeUsernameButton = new Button("EDIT");
 		usernameRow = new HBox();
 		
 		passwordDisplayLabel = new Label("Password:");
 		currentPasswordLabel = new Label(currentAccount.getPassword());
-		changePasswordButton = new Button("Edit");
+		changePasswordButton = new Button("EDIT");
 		passwordRow = new HBox();
 		
 		nameDisplayLabel = new Label("Name:");
 		currentNameLabel = new Label(currentAccount.getFirstName() + " " + currentAccount.getLastName());
-		changeNameButton = new Button("Edit");
+		changeNameButton = new Button("EDIT");
 		nameRow = new HBox();
 		
 		sexDisplayLabel = new Label("Sex:");
 		currentSexLabel = new Label(currentAccount.getSex());
-		changeSexButton = new Button("Edit");
+		changeSexButton = new Button("EDIT");
 		sexRow = new HBox();
 		
 		heightDisplayLabel = new Label("Height:");
 		currentHeightLabel = new Label(currentAccount.getHeight());
-		changeHeightButton = new Button("Edit");
+		changeHeightButton = new Button("EDIT");
 		heightRow = new HBox();
 		
 		weightDisplayLabel = new Label("Weight:");
 		currentWeightLabel = new Label(String.valueOf(currentAccount.getWeight()) + " lbs");
-		changeWeightButton = new Button("Edit");
+		changeWeightButton = new Button("EDIT");
 		weightRow = new HBox();
 		
 		ageDisplayLabel = new Label("Age:");
 		currentAgeLabel = new Label(String.valueOf(currentAccount.getAge()));
-		changeAgeButton = new Button("Edit");
+		changeAgeButton = new Button("EDIT");
 		ageRow = new HBox();
 		
 		dietTypeDisplayLabel = new Label("Diet Type:");
 		currentDietTypeLabel = new Label(currentAccount.getDietType() + " Keto");
-		changeDietTypeButton = new Button("Edit");
+		changeDietTypeButton = new Button("EDIT");
 		dietTypeRow = new HBox();
 		
 		myAccountRows = new VBox();
@@ -154,88 +156,107 @@ public class AccountView extends Pane
 	}
 	
 	private void stylizeElements()
-	{
+	{	
 		myAccountLabel.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 18));
 		
 		viewTitleRow.setAlignment(Pos.CENTER);
-		viewTitleRow.setMinWidth(500);
+		viewTitleRow.setMinWidth(980);
 		viewTitleRow.setMargin(myAccountLabel, new Insets(40, 0, 40, 0));
 		
 		viewTitleRow.setBorder(new Border(new BorderStroke(Color.BLACK, Color.BLACK, Color.BLACK, Color.BLACK,
 				   										   BorderStrokeStyle.NONE, BorderStrokeStyle.NONE, BorderStrokeStyle.SOLID, BorderStrokeStyle.NONE, 
 				   										   CornerRadii.EMPTY, new BorderWidths(2), Insets.EMPTY)));
+		viewTitleRow.setBackground(new Background(new BackgroundFill(Color.LIGHTSLATEGRAY, CornerRadii.EMPTY, Insets.EMPTY)));
 		
 		usernameRow.setMargin(usernameDisplayLabel, new Insets(20, 10, 10, 10));
-		usernameDisplayLabel.setMinWidth(75);
-		usernameDisplayLabel.setFont(Font.font("Verdana", 12));
+		usernameDisplayLabel.setMinWidth(100);
+		usernameDisplayLabel.setFont(Font.font("Verdana", 14));
 		usernameRow.setMargin(currentUsernameLabel, new Insets(20, 10, 10, 10));
-		currentUsernameLabel.setMinWidth(102);
-		currentUsernameLabel.setFont(Font.font("Verdana", 12));
+		currentUsernameLabel.setMinWidth(127);
+		currentUsernameLabel.setFont(Font.font("Verdana", 14));
 		usernameRow.setMargin(changeUsernameButton, new Insets(20, 10, 10, 10));
-		changeUsernameButton.setFont(Font.font("Verdana", 12));
+		changeUsernameButton.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 12));
+		usernameRow.setAlignment(Pos.CENTER);
+		usernameRow.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
 		
 		passwordRow.setMargin(passwordDisplayLabel, new Insets(20, 10, 10, 10));
-		passwordDisplayLabel.setMinWidth(75);
-		passwordDisplayLabel.setFont(Font.font("Verdana", 12));
+		passwordDisplayLabel.setMinWidth(100);
+		passwordDisplayLabel.setFont(Font.font("Verdana", 14));
 		passwordRow.setMargin(currentPasswordLabel, new Insets(20, 10, 10, 10));
-		currentPasswordLabel.setMinWidth(102);
-		currentPasswordLabel.setFont(Font.font("Verdana", 12));
+		currentPasswordLabel.setMinWidth(127);
+		currentPasswordLabel.setFont(Font.font("Verdana", 14));
 		passwordRow.setMargin(changePasswordButton, new Insets(20, 10, 10, 10));
-		changePasswordButton.setFont(Font.font("Verdana", 12));
+		changePasswordButton.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 12));
+		passwordRow.setAlignment(Pos.CENTER);
+		passwordRow.setBackground(new Background(new BackgroundFill(Color.LIGHTSKYBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
 		
 		nameRow.setMargin(nameDisplayLabel, new Insets(20, 10, 10, 10));
-		nameDisplayLabel.setMinWidth(75);
-		nameDisplayLabel.setFont(Font.font("Verdana", 12));
+		nameDisplayLabel.setMinWidth(100);
+		nameDisplayLabel.setFont(Font.font("Verdana", 14));
 		nameRow.setMargin(currentNameLabel, new Insets(20, 10, 10, 10));
-		currentNameLabel.setMinWidth(102);
-		currentNameLabel.setFont(Font.font("Verdana", 12));
+		currentNameLabel.setMinWidth(127);
+		currentNameLabel.setFont(Font.font("Verdana", 14));
 		nameRow.setMargin(changeNameButton, new Insets(20, 10, 10, 10));
-		changeNameButton.setFont(Font.font("Verdana", 12));
+		changeNameButton.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 12));
+		nameRow.setAlignment(Pos.CENTER);
+		nameRow.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
 		
 		sexRow.setMargin(sexDisplayLabel, new Insets(20, 10, 10, 10));
-		sexDisplayLabel.setMinWidth(75);
-		sexDisplayLabel.setFont(Font.font("Verdana", 12));
+		sexDisplayLabel.setMinWidth(100);
+		sexDisplayLabel.setFont(Font.font("Verdana", 14));
 		sexRow.setMargin(currentSexLabel, new Insets(20, 10, 10, 10));
-		currentSexLabel.setMinWidth(102);
-		currentSexLabel.setFont(Font.font("Verdana", 12));
+		currentSexLabel.setMinWidth(127);
+		currentSexLabel.setFont(Font.font("Verdana", 14));
 		sexRow.setMargin(changeSexButton, new Insets(20, 10, 10, 10));
-		changeSexButton.setFont(Font.font("Verdana", 12));
+		changeSexButton.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 12));
+		sexRow.setAlignment(Pos.CENTER);
+		sexRow.setBackground(new Background(new BackgroundFill(Color.LIGHTSKYBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
 		
 		heightRow.setMargin(heightDisplayLabel, new Insets(20, 10, 10, 10));
-		heightDisplayLabel.setMinWidth(75);
-		heightDisplayLabel.setFont(Font.font("Verdana", 12));
+		heightDisplayLabel.setMinWidth(100);
+		heightDisplayLabel.setFont(Font.font("Verdana", 14));
 		heightRow.setMargin(currentHeightLabel, new Insets(20, 10, 10, 10));
-		currentHeightLabel.setMinWidth(102);
-		currentHeightLabel.setFont(Font.font("Verdana", 12));
+		currentHeightLabel.setMinWidth(127);
+		currentHeightLabel.setFont(Font.font("Verdana", 14));
 		heightRow.setMargin(changeHeightButton, new Insets(20, 10, 10, 10));
-		changeHeightButton.setFont(Font.font("Verdana", 12));
+		changeHeightButton.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 12));
+		heightRow.setAlignment(Pos.CENTER);
+		heightRow.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
 		
 		weightRow.setMargin(weightDisplayLabel, new Insets(20, 10, 10, 10));
-		weightDisplayLabel.setMinWidth(75);
-		weightDisplayLabel.setFont(Font.font("Verdana", 12));
+		weightDisplayLabel.setMinWidth(100);
+		weightDisplayLabel.setFont(Font.font("Verdana", 14));
 		weightRow.setMargin(currentWeightLabel, new Insets(20, 10, 10, 10));
-		currentWeightLabel.setMinWidth(102);
-		currentWeightLabel.setFont(Font.font("Verdana", 12));
+		currentWeightLabel.setMinWidth(127);
+		currentWeightLabel.setFont(Font.font("Verdana", 14));
 		weightRow.setMargin(changeWeightButton, new Insets(20, 10, 10, 10));
-		changeWeightButton.setFont(Font.font("Verdana", 12));
+		changeWeightButton.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 12));
+		weightRow.setAlignment(Pos.CENTER);
+		weightRow.setBackground(new Background(new BackgroundFill(Color.LIGHTSKYBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
 		
 		ageRow.setMargin(ageDisplayLabel, new Insets(20, 10, 10, 10));
-		ageDisplayLabel.setMinWidth(75);
-		ageDisplayLabel.setFont(Font.font("Verdana", 12));
+		ageDisplayLabel.setMinWidth(100);
+		ageDisplayLabel.setFont(Font.font("Verdana", 14));
 		ageRow.setMargin(currentAgeLabel, new Insets(20, 10, 10, 10));
-		currentAgeLabel.setMinWidth(102);
-		currentAgeLabel.setFont(Font.font("Verdana", 12));
+		currentAgeLabel.setMinWidth(127);
+		currentAgeLabel.setFont(Font.font("Verdana", 14));
 		ageRow.setMargin(changeAgeButton, new Insets(20, 10, 10, 10));
-		changeAgeButton.setFont(Font.font("Verdana", 12));
+		changeAgeButton.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 12));
+		ageRow.setAlignment(Pos.CENTER);
+		ageRow.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
 		
 		dietTypeRow.setMargin(dietTypeDisplayLabel, new Insets(20, 10, 20, 10));
-		dietTypeDisplayLabel.setMinWidth(75);
-		dietTypeDisplayLabel.setFont(Font.font("Verdana", 12));
+		dietTypeDisplayLabel.setMinWidth(100);
+		dietTypeDisplayLabel.setFont(Font.font("Verdana", 14));
 		dietTypeRow.setMargin(currentDietTypeLabel, new Insets(20, 10, 20, 10));
-		currentDietTypeLabel.setMinWidth(102);
-		currentDietTypeLabel.setFont(Font.font("Verdana", 12));
+		currentDietTypeLabel.setMinWidth(127);
+		currentDietTypeLabel.setFont(Font.font("Verdana", 14));
 		dietTypeRow.setMargin(changeDietTypeButton, new Insets(20, 10, 20, 10));
-		changeDietTypeButton.setFont(Font.font("Verdana", 12));
+		changeDietTypeButton.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 12));
+		dietTypeRow.setAlignment(Pos.CENTER);
+		dietTypeRow.setBackground(new Background(new BackgroundFill(Color.LIGHTSKYBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
+		
+		myAccountRows.setMargin(myAccountRows, new Insets(0, 0, 0, 250));
 		
 		//now to stylize the popup window for changing variables
 		newVariableLabel.setMinWidth(90);

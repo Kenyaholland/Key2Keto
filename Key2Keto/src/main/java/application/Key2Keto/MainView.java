@@ -83,7 +83,7 @@ public class MainView extends Pane{
 		logout = new Button("LOG OUT");
 		mainContent = new StackPane();
 		recipeView = new RecipeView("./src/main/java/application/Key2Keto/Recipes/ModifiedKeto.txt");
-		accountView = new AccountView(new Account());  /*TODO NEEDS ADJUSTED */
+		accountView = new AccountView(new Account("dummyUsername", "dummyPassword", "First", "Last", "Male", "6'1\"", 150, 24, "Classic"));  /*TODO NEEDS ADJUSTED */
 		dashboardView = new DashboardView();
 		other = new Pane();
 		label = new Label("IM IN FRONT");
@@ -170,11 +170,11 @@ public class MainView extends Pane{
 				System.out.println("You should not get here");
 		}
 		
-		this.mainContent.setVisible(true);
-		this.recipeView.setViewOrder(-1);
-		this.other.setViewOrder(0);
-		this.other.setVisible(false);
-		this.recipeView.setVisible(true);
+		//this.mainContent.setVisible(true);
+		//this.recipeView.setViewOrder(-1);
+		//this.other.setViewOrder(0);
+		//this.other.setVisible(false);
+		//this.recipeView.setVisible(true);
 		
 	}
 	
