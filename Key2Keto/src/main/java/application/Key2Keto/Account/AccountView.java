@@ -701,4 +701,27 @@ public class AccountView extends Pane
 		
 		return buttonsToReturn;
 	}
+	
+	protected TextField getNewVariableTextFieldForTests()
+	{
+		return newVariableTextField;
+	}
+	
+	protected Button getConfirmVariableChangeButtonForTests()
+	{
+		return confirmVariableChangeButton;
+	}
+	
+	protected ArrayList<Label> getCurrentVariableLabelsForTests()
+	{
+		ArrayList<Label> labelsToReturn = new ArrayList<Label>();
+		
+		labelsToReturn.addAll(new ArrayList<Label>
+		(
+			Arrays.asList(currentUsernameLabel, currentPasswordLabel, currentNameLabel, currentSexLabel,
+						  currentHeightLabel, currentWeightLabel, currentAgeLabel, currentDietTypeLabel)
+		));
+		
+		return labelsToReturn;
+	}
 }

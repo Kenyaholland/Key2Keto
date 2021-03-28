@@ -26,8 +26,13 @@ public class AccountViewTest extends ApplicationTest
 	}
 	
 	@Test
-	public void test()
+	public void validUsernameInputGoesThroughTest()
 	{
 		clickOn(accountView.getButtonsForTests().get(0));
+		clickOn(accountView.getNewVariableTextFieldForTests());
+		write("newusername123");
+		clickOn(accountView.getConfirmVariableChangeButtonForTests());
+		
+		assertEquals("newusername123", accountView.getCurrentVariableLabelsForTests().get(0).getText());
 	}
 }
