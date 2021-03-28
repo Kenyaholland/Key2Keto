@@ -1,5 +1,8 @@
 package application.Key2Keto.Account;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -684,5 +687,18 @@ public class AccountView extends Pane
 			default:
 				return false;
 		}
+	}
+	
+	protected ArrayList<Button> getButtonsForTests()
+	{
+		ArrayList<Button> buttonsToReturn = new ArrayList<Button>();
+		
+		buttonsToReturn.addAll(new ArrayList<Button>
+		(
+			Arrays.asList(changeUsernameButton, changePasswordButton, changeNameButton, changeSexButton,
+							   changeHeightButton, changeWeightButton, changeAgeButton, changeDietTypeButton)
+		));
+		
+		return buttonsToReturn;
 	}
 }
