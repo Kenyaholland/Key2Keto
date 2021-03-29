@@ -1,6 +1,7 @@
 package application.Key2Keto.Recipes;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -168,6 +169,14 @@ public class DayOfWeekView extends Pane {
 		});
 	}
 	
+	public String getName() {
+		return this.name;
+	}
+	
+	public RecipeDetailView getDetailView() {
+		return this.recipeDetailView;
+	}
+		
 	private void setButtonColor() {
 		Button temp[] = new Button[4];
 		temp[0] = this.overViewButton;
@@ -180,6 +189,7 @@ public class DayOfWeekView extends Pane {
 			temp[i].setBackground(new Background(new BackgroundFill(Color.LIGHTBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
 		}
 	}
+	
 	private void setButtonCLickedColor(int num) {
 		Button temp[] = new Button[4];
 		temp[0] = this.overViewButton;
@@ -489,5 +499,26 @@ public class DayOfWeekView extends Pane {
 		default:
 			System.out.println("Something is wrong here");
 		}
+	}
+	
+// Methods needed for testing purposes
+	protected ComboBox<String> getComboBoxForTest() {
+		return this.comboBox;
+	}
+	
+	protected ArrayList<Button> getButtonsToTest(){
+		ArrayList<Button> buttonsToTest = new ArrayList<Button>();
+		buttonsToTest.addAll(new ArrayList<Button>(Arrays.asList(this.breakfastButton, this.entreesButton, this.snacksButton, this.deleteBreakfastButton,
+				this.deleteLunchButton, this.deleteDinnerButton,this.deleteSnackButton, this.addRecipeButton)));
+		
+		return buttonsToTest;
+	}
+	
+	protected ArrayList<Label> getLabels(){
+		ArrayList<Label> labelsToTest = new ArrayList<Label>();
+		labelsToTest.addAll(new ArrayList<Label>(Arrays.asList(this.breakfastRecipeName, this.lunchRecipeName, this.dinnerRecipeName,
+				this.snackRecipeName)));
+		
+		return labelsToTest;
 	}
 }

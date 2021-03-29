@@ -1,5 +1,8 @@
 package application.Key2Keto.Recipes;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -115,5 +118,13 @@ public class RecipeDetailView extends Pane {
 		this.hbox.getChildren().addAll(this.upper,this.imageButton);
 		this.lower.getChildren().addAll(ingTitle,ingredientsLabel,insTitle,instructionsLabel);
 		this.vbox.getChildren().addAll(this.hbox,lower);
+	}
+	
+	protected ArrayList<Label> getDetailLabels(){
+		ArrayList<Label> labelsToTest = new ArrayList<Label>();
+		labelsToTest.addAll(new ArrayList<Label>(Arrays.asList(this.nameLabel, this.ratioLabel, this.totalCaloriesLabel,
+				this.carbLabel, this.proteinLabel, this.fatLabel)));
+		
+		return labelsToTest;
 	}
 }
