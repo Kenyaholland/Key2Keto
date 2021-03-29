@@ -689,6 +689,7 @@ public class AccountView extends Pane
 		}
 	}
 	
+	//methods after this point are only for unit tests
 	protected ArrayList<Button> getButtonsForTests()
 	{
 		ArrayList<Button> buttonsToReturn = new ArrayList<Button>();
@@ -705,6 +706,11 @@ public class AccountView extends Pane
 	protected TextField getNewVariableTextFieldForTests()
 	{
 		return newVariableTextField;
+	}
+	
+	protected ComboBox getNewVariableComboBoxForTests()
+	{
+		return newVariableComboBox;
 	}
 	
 	protected Button getConfirmVariableChangeButtonForTests()
