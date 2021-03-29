@@ -168,7 +168,6 @@ public class RecipeView extends Pane {
 		days[4] = new DayOfWeekView(this.recipeFileReader.getRecipeList(),"Thursday");
 		days[5] = new DayOfWeekView(this.recipeFileReader.getRecipeList(),"Friday");
 		days[6] = new DayOfWeekView(this.recipeFileReader.getRecipeList(),"Saturday");
-		
 	}
 	
 	protected void setDayStack(int num) {
