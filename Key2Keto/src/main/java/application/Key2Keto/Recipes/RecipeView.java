@@ -1,5 +1,8 @@
 package application.Key2Keto.Recipes;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -28,6 +31,7 @@ public class RecipeView extends Pane {
 	private Button saturdayButton = new Button("SATURDAY");
 	private StackPane daysOfWeek = new StackPane();
 	private DayOfWeekView days[] = new DayOfWeekView[7];
+	private DayOfWeekView testDay;
 	
 	public RecipeView(String file){
 		this.recipeFileReader = new RecipeFileReader(file);
@@ -168,16 +172,35 @@ public class RecipeView extends Pane {
 		days[4] = new DayOfWeekView(this.recipeFileReader.getRecipeList(),"Thursday");
 		days[5] = new DayOfWeekView(this.recipeFileReader.getRecipeList(),"Friday");
 		days[6] = new DayOfWeekView(this.recipeFileReader.getRecipeList(),"Saturday");
-		
 	}
 	
 	protected void setDayStack(int num) {
 		for(int i = 0; i < 7; i++) {
 			if(num == i) {
 				days[i].setViewOrder(-1);
+				setViewForTest(days[i]);
 			}else {
 				days[i].setViewOrder(0);
 			}
 		}
 	}
+	
+	protected ArrayList<Button> getButtonsToTest(){
+		ArrayList<Button> buttonsToTest = new ArrayList<Button>();
+		
+		buttonsToTest.addAll(new ArrayList<Button>(Arrays.asList(this.sundayButton, this.mondayButton, this.tuesdayButton,
+				this.wednesdayButton, this.thursdayButton, this.fridayButton, this.saturdayButton)));
+		
+		return buttonsToTest;
+	}
+	
+	protected DayOfWeekView getViewForTest(){		
+		return this.testDay;
+	}
+	
+	protected void setViewForTest(DayOfWeekView day) {
+		this.testDay = day;
+	}
+	
+	
 }
