@@ -1,5 +1,8 @@
 package application.Key2Keto.Account;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -684,5 +687,47 @@ public class AccountView extends Pane
 			default:
 				return false;
 		}
+	}
+	
+	//methods after this point are only for unit tests
+	protected ArrayList<Button> getButtonsForTests()
+	{
+		ArrayList<Button> buttonsToReturn = new ArrayList<Button>();
+		
+		buttonsToReturn.addAll(new ArrayList<Button>
+		(
+			Arrays.asList(changeUsernameButton, changePasswordButton, changeNameButton, changeSexButton,
+							   changeHeightButton, changeWeightButton, changeAgeButton, changeDietTypeButton)
+		));
+		
+		return buttonsToReturn;
+	}
+	
+	protected TextField getNewVariableTextFieldForTests()
+	{
+		return newVariableTextField;
+	}
+	
+	protected ComboBox getNewVariableComboBoxForTests()
+	{
+		return newVariableComboBox;
+	}
+	
+	protected Button getConfirmVariableChangeButtonForTests()
+	{
+		return confirmVariableChangeButton;
+	}
+	
+	protected ArrayList<Label> getCurrentVariableLabelsForTests()
+	{
+		ArrayList<Label> labelsToReturn = new ArrayList<Label>();
+		
+		labelsToReturn.addAll(new ArrayList<Label>
+		(
+			Arrays.asList(currentUsernameLabel, currentPasswordLabel, currentNameLabel, currentSexLabel,
+						  currentHeightLabel, currentWeightLabel, currentAgeLabel, currentDietTypeLabel)
+		));
+		
+		return labelsToReturn;
 	}
 }
