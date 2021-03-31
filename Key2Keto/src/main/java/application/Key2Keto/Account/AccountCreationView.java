@@ -141,7 +141,18 @@ public class AccountCreationView extends Pane
 		dietTypeChooser = new ComboBox(FXCollections.observableArrayList(diets));
 		
 		createAccountButton = new Button("Create Account");
-		createAccountButton.setOnAction(e -> stage.setScene(switcher.MainViewScene()));
+		createAccountButton.setOnAction(e -> 
+		{
+			if(checkFormProperlyFilled())
+			{
+				newlyCreatedAccount = new Account(newUsernameTextField.getText(), newPasswordTextField.getText(), firstNameTextField.getText(),
+												  lastNameTextField.getText(), sexChooser.getValue().toString(), heightTextField.getText(),
+												  Integer.parseInt(weightTextField.getText()), Integer.parseInt(ageTextField.getText()), 
+												  dietTypeChooser.getValue().toString());
+				
+				stage.setScene(switcher.MainViewScene());
+			}
+		});
 		
 		titleRow = new HBox();
 		accountDetailsDividerRow = new HBox();
@@ -333,5 +344,10 @@ public class AccountCreationView extends Pane
 	public Button getCreateAccountButton()
 	{
 		return createAccountButton;
+	}
+	
+	public Account getNewlyCreatedAccount()
+	{
+		return newlyCreatedAccount;
 	}
 }
