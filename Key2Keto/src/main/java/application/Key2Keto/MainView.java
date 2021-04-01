@@ -23,6 +23,7 @@ import application.Key2Keto.Account.Account;
 import application.Key2Keto.Account.AccountView;
 import application.Key2Keto.Dashboard.*;
 import application.Key2Keto.Recipes.RecipeView;
+import application.Key2Keto.Tracker.TrackerView;
 
 public class MainView extends Pane{
 
@@ -33,12 +34,14 @@ public class MainView extends Pane{
 	HBox labels;
 	private Button dash;
 	private Button account;
+	private Button tracker;
 	Button shopping;
 	private Button recipes;
 	Button logout;
 	private StackPane mainContent;
 	private RecipeView recipeView;
 	private AccountView accountView;
+	private TrackerView trackerView;
 	private DashboardView dashboardView;
 	private Pane other;
 	private Label label;
@@ -71,6 +74,12 @@ public class MainView extends Pane{
 		    	stackOrder(2);
 		    }
 		});
+		
+		this.tracker.setOnAction(new EventHandler<ActionEvent>() {
+		    @Override public void handle(ActionEvent e) {
+		    	stackOrder(3);
+		    }
+		});
 }
 	
 	private void InitializeVariables(){
@@ -78,12 +87,14 @@ public class MainView extends Pane{
 		labels = new HBox();
 		dash = new Button("DASHBOARD");
 		account = new Button("MY ACCOUNT");
+		tracker = new Button("TRACKER");
 		shopping = new Button("SHOPPING");
 		recipes = new Button("RECIPES");
 		logout = new Button("LOG OUT");
 		mainContent = new StackPane();
 		recipeView = new RecipeView("./src/main/java/application/Key2Keto/Recipes/ModifiedKeto.txt");
 		accountView = new AccountView(new Account("dummyUsername", "dummyPassword", "First", "Last", "Male", "6'1\"", 150, 24, "Classic"));  /*TODO NEEDS ADJUSTED */
+		trackerView = new TrackerView();
 		dashboardView = new DashboardView();
 		other = new Pane();
 		label = new Label("IM IN FRONT");
@@ -107,6 +118,9 @@ public class MainView extends Pane{
 		account.setPrefSize(129, 45);
 		account.setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, CornerRadii.EMPTY, Insets.EMPTY)));
 		account.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 14));
+		tracker.setPrefSize(129, 45);
+		tracker.setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, CornerRadii.EMPTY, Insets.EMPTY)));
+		tracker.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 14));
 		shopping.setPrefSize(129, 45);
 		shopping.setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, CornerRadii.EMPTY, Insets.EMPTY)));
 		shopping.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 14));
@@ -120,50 +134,62 @@ public class MainView extends Pane{
 	}
 	
 	private void AddAllElementsToChildren(){
-		labels.getChildren().addAll(dash,account,shopping,recipes,logout);
+		labels.getChildren().addAll(dash,account,tracker,shopping,recipes,logout);
 		view.getChildren().addAll(title,labels, mainContent);
 		other.getChildren().add(label);
-		this.mainContent.getChildren().addAll(recipeView,accountView, dashboardView);
+		this.mainContent.getChildren().addAll(recipeView,accountView, dashboardView, trackerView);
 		this.mainContent.setVisible(false);
 	}
 
 	public void stackOrder(int num){
 		switch(num) {
-			case 0:
-			//add panes as they are developed
+			case 0: //Switch to Recipe tab
 				this.mainContent.setVisible(true);
 				this.recipeView.setViewOrder(-1);
 				this.dashboardView.setViewOrder(0);
 				this.accountView.setViewOrder(0);
+				this.trackerView.setViewOrder(0);
 			
 				this.dashboardView.setVisible(false);
 				this.accountView.setVisible(false);
 				this.recipeView.setVisible(true);
+				this.trackerView.setVisible(false);
 				break;
-			case 1:
-				//add panes as they are developed
+			case 1: //Switch to Dashboard tab
 				this.mainContent.setVisible(true);
 				this.recipeView.setViewOrder(0);
 				this.dashboardView.setViewOrder(-1);
 				this.accountView.setViewOrder(0);
+				this.trackerView.setViewOrder(0);
 			
 				this.dashboardView.setVisible(true);
 				this.accountView.setVisible(false);
 				this.recipeView.setVisible(false);
+				this.trackerView.setVisible(false);
 				break;
-			case 2:
-				//add panes as they are developed
+			case 2: //Switch to Account tab
 				this.mainContent.setVisible(true);
 				this.recipeView.setViewOrder(0);
 				this.dashboardView.setViewOrder(0);
 				this.accountView.setViewOrder(-1);
+				this.trackerView.setViewOrder(0);
 			
 				this.dashboardView.setVisible(false);
 				this.accountView.setVisible(true);
 				this.recipeView.setVisible(false);
+				this.trackerView.setVisible(false);
 				break;
-			case 3:
-				/*TODO add panes as they are developed*/
+			case 3: //Switch to tracker tab
+				this.mainContent.setVisible(true);
+				this.recipeView.setViewOrder(0);
+				this.dashboardView.setViewOrder(0);
+				this.accountView.setViewOrder(0);
+				this.trackerView.setViewOrder(-1);
+			
+				this.dashboardView.setVisible(false);
+				this.accountView.setVisible(false);
+				this.recipeView.setVisible(false);
+				this.trackerView.setVisible(true);
 			case 4:
 				/*TODO add panes as they are developed*/
 			default:
