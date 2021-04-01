@@ -2,34 +2,64 @@ package application.Key2Keto.Dashboard;
 
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import application.Key2Keto.Account.Account;
 import javafx.geometry.Pos;
 //import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
-public class DashboardView extends Pane
-{
-	private VBox view = new VBox();
-	Label description = new Label("The Dashboard will be the home for the user's information such as: \n\t"
-			+ " - Their basic information like Name and chosen diet type.\n\t"
-			+ " - Total Water Consumption.\n\t"
-			+ " - Calculations of the marcos for the day and week based off of the selected recipes.\n\t"
-			+ " - The daily and weekly goals the user has set up");
+public class DashboardView extends Pane {
+	private Dashboard dashboard;
+	private VBox view;
+	private VBox recipeInformationBox;
+	private VBox goalInformationBox;
+	private HBox upperHalf;
+	private HBox lowerHalf;
 	
-	public DashboardView()
-	{
-		this.view.getChildren().add(description);
-		this.getChildren().add(view);
-		this.setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, null, null)));
-		description.setWrapText(true);
-		description.setFont(Font.font("Verdana", FontWeight.BOLD, 18));
-		view.setPrefSize(980, 490);
-		view.setAlignment(Pos.CENTER);
-		description.setPrefSize(900, 200);
+	Label userName;
+	Label dietType;
+	Label breakfastRecipe;
+	Label lunchRecipe;
+	Label dinnerRecipe;
+	Label snackRecipe;
+	Label weeklyGoalsLabel;
+	
+	public DashboardView() {
+		this.dashboard = new Dashboard(new Account("username123", "password123", "John", "McLastname", "Male", "5'9\"", 190, 24, "Classic"));
+		populateSleepChart();
+		populateWaterChart();
+		initializeVariables();
+		populateChildren();
+		stylizeVariables();
+		this.getChildren().add(view);		
+	}
+	
+	private void initializeVariables() {
 		
 	}
+	
+	private void populateChildren() {
+		
+	}
+	
+	private void populateSleepChart() {
+		
+	}
+	
+	private void populateWaterChart() {
+		
+	}
+	
+	private void stylizeVariables() {
+		this.setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, null, null)));
+		this.view.setPrefSize(980, 500);
+	}
 }
+/*
+	UserAccount Tracker day. getwater or getsleep for each chart.
+*/

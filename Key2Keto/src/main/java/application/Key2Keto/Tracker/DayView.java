@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.ScatterChart;
 import javafx.scene.chart.XYChart;
@@ -44,7 +45,7 @@ public class DayView extends Pane{
         xaxis.setLabel("Day of Week");  
         yaxis.setLabel("Hours of Sleep");  
             
-        ScatterChart sleepChart = new ScatterChart(xaxis,yaxis);  
+        LineChart sleepChart = new LineChart(xaxis,yaxis);  
         sleepChart.setTitle("Sleep Overview");  
              
         XYChart.Series series = new XYChart.Series();   
