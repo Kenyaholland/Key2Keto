@@ -501,6 +501,10 @@ public class DayOfWeekView extends Pane {
 		}
 	}
 	
+	public ArrayList<Recipe> getSelectedRecipes(){
+		return this.daysRecipes;
+	}
+
 // Methods needed for testing purposes
 	protected ComboBox<String> getComboBoxForTest() {
 		return this.comboBox;

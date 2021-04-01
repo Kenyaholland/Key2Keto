@@ -185,6 +185,11 @@ public class RecipeView extends Pane {
 		}
 	}
 	
+	public DayOfWeekView[] getdays() {
+		return this.days;
+	}
+
+	
 	protected ArrayList<Button> getButtonsToTest(){
 		ArrayList<Button> buttonsToTest = new ArrayList<Button>();
 		

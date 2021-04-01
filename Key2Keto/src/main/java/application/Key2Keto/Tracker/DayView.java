@@ -40,28 +40,28 @@ public class DayView extends Pane{
 	public DayView(String day){
 		initializeVariables();
 		
-		NumberAxis xaxis = new NumberAxis(1,7,1);  
-        NumberAxis yaxis = new NumberAxis(1,24,1);  
-        xaxis.setLabel("Day of Week");  
-        yaxis.setLabel("Hours of Sleep");  
-            
-        LineChart sleepChart = new LineChart(xaxis,yaxis);  
-        sleepChart.setTitle("Sleep Overview");  
-             
-        XYChart.Series series = new XYChart.Series();   
-        series.getData().add(new XYChart.Data(1,6));  
-        series.getData().add(new XYChart.Data(2,10));  
-        series.getData().add(new XYChart.Data(3,7));  
-        series.getData().add(new XYChart.Data(4,8));  
-        series.getData().add(new XYChart.Data(5,8));  
-        series.getData().add(new XYChart.Data(6,8));  
-        series.getData().add(new XYChart.Data(7,6));  
- 
-        sleepChart.getData().add(series);  
+//		NumberAxis xaxis = new NumberAxis(1,7,1);  
+//        NumberAxis yaxis = new NumberAxis(1,24,1);  
+//        xaxis.setLabel("Day of Week");  
+//        yaxis.setLabel("Hours of Sleep");  
+//            
+//        LineChart sleepChart = new LineChart(xaxis,yaxis);  
+//        sleepChart.setTitle("Sleep Overview");  
+//             
+//        XYChart.Series series = new XYChart.Series();   
+//        series.getData().add(new XYChart.Data(1,6));  
+//        series.getData().add(new XYChart.Data(2,10));  
+//        series.getData().add(new XYChart.Data(3,7));  
+//        series.getData().add(new XYChart.Data(4,8));  
+//        series.getData().add(new XYChart.Data(5,8));  
+//        series.getData().add(new XYChart.Data(6,8));  
+//        series.getData().add(new XYChart.Data(7,6));  
+// 
+//        sleepChart.getData().add(series);  
 		
 		sleepContent.getChildren().addAll(sleepLabel, sleepTextField, sleepButton);
 		waterContent.getChildren().addAll(waterLabel, waterTextField, waterButton);
-		wholeView.getChildren().addAll(sleepContent, waterContent, sleepChart);
+		wholeView.getChildren().addAll(sleepContent, waterContent/*, sleepChart*/);
 		this.getChildren().add(wholeView);
 	}
 	
