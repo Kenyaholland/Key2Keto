@@ -17,6 +17,10 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import application.Key2Keto.SceneSwitcher;
 import javafx.collections.FXCollections;
 
@@ -349,5 +353,27 @@ public class AccountCreationView extends Pane
 	public Account getNewlyCreatedAccount()
 	{
 		return newlyCreatedAccount;
+	}
+	
+	//these two are for junit
+	protected ArrayList<TextField> getAccountDetailTextFields()
+	{
+		ArrayList<TextField> textFieldsToReturn = new ArrayList<TextField>
+		(
+			Arrays.asList(newUsernameTextField, newPasswordTextField, confirmPasswordTextField, firstNameTextField, lastNameTextField,
+						  heightTextField, weightTextField, ageTextField)
+		);
+		
+		return textFieldsToReturn;
+	}
+	
+	protected ArrayList<ComboBox> getAccountDetailComboBoxes()
+	{
+		ArrayList<ComboBox> comboBoxesToReturn = new ArrayList<ComboBox>
+		(
+			Arrays.asList(sexChooser, dietTypeChooser)
+		);
+		
+		return comboBoxesToReturn;
 	}
 }
