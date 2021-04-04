@@ -3,6 +3,7 @@ package application.Key2Keto.Recipes;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import application.Key2Keto.Account.Account;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -20,6 +21,7 @@ import javafx.scene.text.FontWeight;
 
 public class RecipeView extends Pane {
 	private RecipeFileReader recipeFileReader;
+	//private Account userAccount;
 	private VBox view = new VBox();
 	private HBox categoryTabs = new HBox();
 	private Button sundayButton = new Button("SUNDAY");
@@ -33,7 +35,10 @@ public class RecipeView extends Pane {
 	private DayOfWeekView days[] = new DayOfWeekView[7];
 	private DayOfWeekView testDay;
 	
+	//public RecipeView(Account userAccount){
 	public RecipeView(String file){
+		//this.userAccount = userAccount;
+		//String file = "./src/main/java/application/Key2Keto/Recipes/"+this.userAccount.getDietType()+"Keto.txt";
 		this.recipeFileReader = new RecipeFileReader(file);
 		populateDaysOfWeek();
 		populateChildren();
@@ -184,6 +189,11 @@ public class RecipeView extends Pane {
 			}
 		}
 	}
+	
+	public DayOfWeekView[] getdays() {
+		return this.days;
+	}
+
 	
 	protected ArrayList<Button> getButtonsToTest(){
 		ArrayList<Button> buttonsToTest = new ArrayList<Button>();

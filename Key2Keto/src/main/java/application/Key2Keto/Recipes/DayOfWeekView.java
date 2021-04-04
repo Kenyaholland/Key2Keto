@@ -3,6 +3,7 @@ package application.Key2Keto.Recipes;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import application.Key2Keto.Account.Account;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -501,6 +502,10 @@ public class DayOfWeekView extends Pane {
 		}
 	}
 	
+	public ArrayList<Recipe> getSelectedRecipes(){
+		return this.daysRecipes;
+	}
+
 // Methods needed for testing purposes
 	protected ComboBox<String> getComboBoxForTest() {
 		return this.comboBox;
