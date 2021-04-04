@@ -55,30 +55,32 @@ public class DayView extends Pane{
 		this.dayOfWeek = day;
 		
 		initializeVariables();
+		StylizeComponents();
 		
-        sleepField.getStyleClass().add(Spinner.STYLE_CLASS_SPLIT_ARROWS_HORIZONTAL);
-        waterField.getStyleClass().add(Spinner.STYLE_CLASS_SPLIT_ARROWS_HORIZONTAL);
+		this.sleepField.getStyleClass().add(Spinner.STYLE_CLASS_SPLIT_ARROWS_HORIZONTAL);
+		this.waterField.getStyleClass().add(Spinner.STYLE_CLASS_SPLIT_ARROWS_HORIZONTAL);
 		
-		sleepContent.getChildren().addAll(sleepLabel, sleepField, sleepButton);
-		waterContent.getChildren().addAll(waterLabel, waterField, waterButton);
-		goalsContent.getChildren().addAll(goalsLabel, goalsTextField, addGoalsButton);
-		wholeView.getChildren().addAll(sleepContent, waterContent, goalsContent);
+		this.sleepContent.getChildren().addAll(this.sleepLabel, this.sleepField, this.sleepButton);
+		this.waterContent.getChildren().addAll(this.waterLabel, this.waterField, this.waterButton);
+		this.goalsContent.getChildren().addAll(this.goalsLabel, this.goalsTextField, this.addGoalsButton);
+		this.wholeView.getChildren().addAll(this.sleepContent, this.waterContent, this.goalsContent);
 		this.getChildren().add(wholeView);
 	}
 	
 	private void initializeVariables() {
-		tracker = new Tracker(this.dayOfWeek);
-		popUp = new ConfirmPopUp();
+		this.tracker = new Tracker(this.dayOfWeek);
+		this.popUp = new ConfirmPopUp();
 		
-		wholeView = new VBox();
-		sleepContent = new VBox();
-		waterContent = new VBox();
-		goalsContent = new VBox();
+		this.wholeView = new VBox();
+		this.sleepContent = new VBox();
+		this.waterContent = new VBox();
+		this.goalsContent = new VBox();
 		
-		sleepLabel = new Label("How many hours of sleep did you have today?");
-		sleepField = new Spinner<Double>(0, 24, 0, 0.5);
-		sleepButton = new Button("Save");
-		sleepButton.setOnAction(new EventHandler<ActionEvent>() {
+		this.sleepLabel = new Label("How many hours of sleep did you have today?");
+		this.sleepField = new Spinner<Double>(0, 24, 0, 0.5);
+		this.sleepField.setEditable(true);
+		this.sleepButton = new Button("Save");
+		this.sleepButton.setOnAction(new EventHandler<ActionEvent>() {
 		    @Override public void handle(ActionEvent e) {
 		    	if(sleepField.getValue() != null) {
 		    		tracker.setHoursOfSleep(Double.valueOf(sleepField.getValue()));
@@ -88,10 +90,11 @@ public class DayView extends Pane{
 		    }
 		});
 		
-		waterLabel = new Label("How many ounces of water did you drink today?");
-		waterField = new Spinner<Double>(0, 128, 0, 1.0);
-		waterButton = new Button("Save");
-		waterButton.setOnAction(new EventHandler<ActionEvent>() {
+		this.waterLabel = new Label("How many ounces of water did you drink today?");
+		this.waterField = new Spinner<Double>(0, 128, 0, 1.0);
+		this.waterField.setEditable(true);
+		this.waterButton = new Button("Save");
+		this.waterButton.setOnAction(new EventHandler<ActionEvent>() {
 		    @Override public void handle(ActionEvent e) {
 		    	if(waterField.getValue() != null) {
 		    		tracker.setWaterIntake(Double.valueOf(waterField.getValue()));	
@@ -101,10 +104,10 @@ public class DayView extends Pane{
 		    }
 		});
 		
-		goalsTextField = new TextField();
-		goalsLabel = new Label("Add your own personalized goals here");
-		addGoalsButton = new Button("Add");
-		addGoalsButton.setOnAction(new EventHandler<ActionEvent>() {
+		this.goalsTextField = new TextField();
+		this.goalsLabel = new Label("Add your own personalized goals here:");
+		this.addGoalsButton = new Button("Add");
+		this.addGoalsButton.setOnAction(new EventHandler<ActionEvent>() {
 		    @Override public void handle(ActionEvent e) {
 		    	if(!goalsTextField.getText().isEmpty()) {
 		    		tracker.addGoal(goalsTextField.getText());
@@ -114,5 +117,32 @@ public class DayView extends Pane{
 		    	}
 		    }
 		});
+	}
+	
+	private void StylizeComponents() {
+		
+		this.sleepContent.setSpacing(10);
+		this.waterContent.setSpacing(10);
+		this.goalsContent.setSpacing(10);
+		
+		this.sleepContent.setPadding(new Insets(15,20, 10,10));
+		this.waterContent.setPadding(new Insets(15,20, 10,10));
+		this.goalsContent.setPadding(new Insets(15,20, 10,10));
+		
+		this.sleepLabel.setPrefSize(400, 30);
+		this.sleepLabel.setFont(Font.font("Verdana", FontWeight.BOLD, 14));
+		this.waterLabel.setPrefSize(400, 30);
+		this.waterLabel.setFont(Font.font("Verdana", FontWeight.BOLD, 14));
+		this.goalsLabel.setPrefSize(400, 30);
+		this.goalsLabel.setFont(Font.font("Verdana", FontWeight.BOLD, 14));
+		
+		this.sleepButton.setPrefSize(125, 30);
+		this.sleepButton.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 12));
+		
+		this.waterButton.setPrefSize(125, 30);
+		this.waterButton.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 12));
+		
+		this.addGoalsButton.setPrefSize(125, 30);
+		this.addGoalsButton.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 12));
 	}
 }

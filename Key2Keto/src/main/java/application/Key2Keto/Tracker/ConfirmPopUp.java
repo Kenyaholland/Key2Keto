@@ -16,7 +16,7 @@ public class ConfirmPopUp {
 		popUp.initModality(Modality.APPLICATION_MODAL);
 		popUp.setTitle("Confirmation");
 		
-		Label confirmationLabel = new Label("The information you inputted was saved!");
+		Label confirmationLabel = new Label("The information you entered was saved!");
 		Button closeButton = new Button("Close");
 		closeButton.setOnAction(e -> popUp.close());
 		
