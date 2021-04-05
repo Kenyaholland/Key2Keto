@@ -47,27 +47,4 @@ public class Dashboard {
 		}
 		return temp;
 	}
-	
-	public double getDaysSleep() {
-		double total = 0.0;
-		/*for(int i = 0; i < this.userAccount.TRACKERINFORMATION.size();i++){
-			if(this.currentDayOfWeek.contentEquals(this.userAccount.TRACKERINFORMATION.get(i).getDayOfWeek()){
-				total+=this.userAccount.TRACKERINFORMATION.get(i).getHoursOfSleep();
-			}
-		}*/
-		
-		return total;
-	}
-	
-	public double getDaysWater() {
-		double water = 0.0;
-		/*for(int i = 0; i < this.userAccount.TRACKERINFORMATION.size();i++){	
-			if(this.currentDayOfWeek.contentEquals(this.userAccount.TRACKERINFORMATION.get(i).getDayOfWeek()){
-				water+=this.userAccount.TRACKERINFORMATION.get(i).getWaterIntake();
-			}
-		}*/
-		
-		return water;
-	}
-	
 }
