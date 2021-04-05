@@ -2,13 +2,17 @@ package application.Key2Keto.Account;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.Test;
+
+import application.Key2Keto.Recipes.Recipe;
 
 class AccountTest
 {
 
 	@Test
-	void accessorTest()
+	public void accessorTest()
 	{
 		//username, password, sex, height, weight, age, diet type
 		Account sut = new Account("username123", "password123", "John", "McLastname", "Male", "5'9\"", 190, 24, "Classic");
@@ -25,10 +29,11 @@ class AccountTest
 		assertEquals(24, sut.getAge());
 		
 		assertEquals("Classic", sut.getDietType());
+		assertEquals("Sunday", sut.getTrackers().get(0).getDayOfWeek());
 	}
 	
 	@Test
-	void mutatorTest()
+	public void mutatorTest()
 	{
 		Account sut = new Account("", "", "", "", "", "", 0, 0, "");
 		
@@ -57,10 +62,13 @@ class AccountTest
 		assertEquals(28, sut.getAge());
 		
 		assertEquals("Modified", sut.getDietType());
+		
+		sut.addRecipe(new Recipe("", "", 0, 0.0, 0.0, 0.0, 0.0), 0);
+		assertEquals("", sut.getChosenRecipes().get(0).get(0).getName());
 	}
 
 	@Test
-	void canCreateEmptyAccountTest()
+	public void canCreateEmptyAccountTest()
 	{
 		Account sut = new Account();
 		

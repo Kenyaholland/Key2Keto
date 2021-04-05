@@ -1,5 +1,11 @@
 package application.Key2Keto.Account;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
+import application.Key2Keto.Recipes.Recipe;
+import application.Key2Keto.Tracker.Tracker;
+
 public class Account
 {
 	private String username;
@@ -14,6 +20,9 @@ public class Account
 	private int age;
 	
 	private String dietType;
+	
+	private ArrayList<Tracker> dayTrackers; //hours of sleep, water intake, goals for each day of the week
+	private ArrayList<ArrayList<Recipe>> chosenRecipes; //2d array of chosen recipes; e.g. [0][1] = sunday's second recipe
 	
 	public Account()
 	{
@@ -46,6 +55,17 @@ public class Account
 		this.age = age;
 		
 		this.dietType = dietType;
+		
+		dayTrackers = new ArrayList<Tracker>
+		(
+			Arrays.asList(new Tracker("Sunday"), new Tracker("Monday"), new Tracker("Tuesday"), new Tracker("Wednesday"),
+					      new Tracker("Thursday"), new Tracker("Friday"), new Tracker("Saturday"))
+		);
+		
+		chosenRecipes = new ArrayList<ArrayList<Recipe>>(
+			Arrays.asList(new ArrayList<Recipe>(), new ArrayList<Recipe>(), new ArrayList<Recipe>(), new ArrayList<Recipe>(),
+						  new ArrayList<Recipe>(), new ArrayList<Recipe>(), new ArrayList<Recipe>())
+		);
 	}
 	
 	public String getUsername()
@@ -136,5 +156,25 @@ public class Account
 	public void setDietType(String dietType)
 	{
 		this.dietType = dietType;
+	}
+	
+	public ArrayList<Tracker> getTrackers()
+	{
+		return this.dayTrackers;
+	}
+	
+	public ArrayList<ArrayList<Recipe>> getChosenRecipes()
+	{
+		return this.chosenRecipes;
+	}
+	
+	public void addRecipe(Recipe newRecipe, int day)
+	{
+		this.chosenRecipes.get(day).add(newRecipe);
+	}
+	
+	public void removeRecipe(Recipe recipeToRemove, int day)
+	{
+		this.chosenRecipes.get(day).remove(this.chosenRecipes.get(day).indexOf(recipeToRemove));
 	}
 }
