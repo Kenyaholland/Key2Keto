@@ -72,7 +72,14 @@ public class LoginView extends Pane
 		passwordTextField = new TextField();
 		
 		signInButton = new Button("Sign in");
-		signInButton.setOnAction(e -> stage.setScene(switcher.MainViewScene()));
+		signInButton.setOnAction(e -> 
+		{
+			if(checkFormProperlyFilled())
+			{
+				stage.setScene(switcher.MainViewScene());
+			}
+			
+		});
 		
 		createAccountButton = new Button("Create Account");
 		createAccountButton.setOnAction(e -> stage.setScene(switcher.AccountCreationScene()));
@@ -146,5 +153,16 @@ public class LoginView extends Pane
 	public Button getCreateAccountButton()
 	{
 		return createAccountButton;
+	}
+	
+	//these are for junit
+	protected TextField getUsernameTextField()
+	{
+		return usernameTextField;
+	}
+	
+	protected TextField getPasswordTextField()
+	{
+		return passwordTextField;
 	}
 }
