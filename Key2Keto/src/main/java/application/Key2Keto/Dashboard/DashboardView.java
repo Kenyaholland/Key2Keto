@@ -51,16 +51,15 @@ public class DashboardView extends Pane {
 	private CheckBox secondGoal;
 	private CheckBox thirdGoal;
 	
-	public DashboardView() {
-	//public DashboardView(Account user) {
-		//this.dashboard = new Dashboard(user);
-		this.dashboard = new Dashboard(new Account("username123", "password123", "John", "McLastname", "Male", "5'9\"", 190, 24, "Classic"));
+	public DashboardView(Account user) {
+		this.dashboard = new Dashboard(user);
 		populateSleepChart();
 		populateWaterChart();
 		initializeVariables();
 		populateChildren();
 		stylizeVariables();
-		this.getChildren().add(view);		
+		this.getChildren().add(view);
+		populateDaysRecipes();
 	}
 	
 	private void initializeVariables() {
@@ -69,14 +68,13 @@ public class DashboardView extends Pane {
 		this.goalInformationBox= new VBox();
 		this.upperHalf = new HBox();
 		this.lowerHalf = new HBox();
-		
 		this.userName = new Label(this.dashboard.getUserAccount().getFirstName()+" "+this.dashboard.getUserAccount().getLastName()+"'s Key2Keto Overview");
 		this.dietType = new Label("Selected Diet Type: "+this.dashboard.getUserAccount().getDietType());
 		this.todaysRecipeTitle = new Label("TODAY'S RECIPES");
-		this.breakfastRecipe= new Label("Chosen Breakfast: XXXXX XXXXXX XXXXX XXX XX XXXX"); //need the Account for the days
-		this.lunchRecipe= new Label("Chosen Lunch: XX XXXX XXXXXXX XXXX XXXXXXXX");
-		this.dinnerRecipe= new Label("Chosen Dinner: XX XXXXXX XXX XXXX XXXX XXXXXX");
-		this.snackRecipe= new Label("Chosen Snack: XXX XXXXXXX XXX XXXXXXXXXXXX");
+		this.breakfastRecipe= new Label("Chosen Breakfast: Nothing Chosen");
+		this.lunchRecipe= new Label("Chosen Lunch: Nothing Chosen");
+		this.dinnerRecipe= new Label("Chosen Dinner: Nothing Chosen");
+		this.snackRecipe= new Label("Chosen Snack: Nothing Chosen");
 		this.weeklyGoalsLabel= new Label("GOALS FOR THE WEEK");
 		this.firstGoal = new CheckBox("Have an average of 8 hours of sleep a day for the week.");
 		this.secondGoal = new CheckBox("Drink 100 ounces of water each day for the week.");
@@ -90,6 +88,18 @@ public class DashboardView extends Pane {
 		this.upperHalf.getChildren().addAll(this.recipeInformationBox, this.goalInformationBox);
 		this.lowerHalf.getChildren().addAll(this.waterChart, this.sleepChart);
 		this.view.getChildren().addAll(this.userName, this.upperHalf, this.lowerHalf);
+	}
+	
+	private void populateDaysRecipes(){
+		System.out.println("this got read");
+		if(this.dashboard.getUserAccount().getChosenRecipes().get(this.dashboard.getCurrentDayInt()).size()>0) {
+			System.out.println("Size is greater than one.");
+			this.breakfastRecipe.setText("Chosen Breakfast: "+ this.dashboard.getUserAccount().getChosenRecipes()
+					.get(this.dashboard.getCurrentDayInt()).get(0))/*getBreakfastRecipe().getName())*/;
+		//	this.lunchRecipe.setText("Chosen Lunch: "+ this.dashboard.getLunchRecipe().getName());
+		//	this.dinnerRecipe.setText("Chosen Dinner: "+ this.dashboard.getDinnerRecipe().getName());
+		//	this.snackRecipe.setText("Chosen Snack: "+ this.dashboard.getSnackRecipe().getName());
+		}
 	}
 	
 	private void populateSleepChart() {

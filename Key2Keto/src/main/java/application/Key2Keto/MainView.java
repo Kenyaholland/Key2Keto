@@ -29,7 +29,7 @@ public class MainView extends Pane{
 
 	Stage stage;
 	SceneSwitcher switcher;
-	
+	Account user;
     VBox view;
 	HBox labels;
 	private Button dash;
@@ -48,8 +48,9 @@ public class MainView extends Pane{
 	Label title;
 	
 	
-	public MainView(Stage stage) {
+	public MainView(Stage stage, Account user) {
 		this.stage = stage;
+		this.user = user;
 		this.switcher = new SceneSwitcher(stage);
 		
 		InitializeVariables();
@@ -65,7 +66,9 @@ public class MainView extends Pane{
 		
 		this.dash.setOnAction(new EventHandler<ActionEvent>() {
 		    @Override public void handle(ActionEvent e) {
+		    	//MainView.this.dashboardView = new DashboardView(MainView.this.user);
 		    	stackOrder(1);
+		    	
 		    }
 		});
 		
@@ -92,10 +95,10 @@ public class MainView extends Pane{
 		recipes = new Button("RECIPES");
 		logout = new Button("LOG OUT");
 		mainContent = new StackPane();
-		recipeView = new RecipeView("./src/main/java/application/Key2Keto/Recipes/ModifiedKeto.txt");
-		accountView = new AccountView(new Account("dummyUsername", "dummyPassword", "First", "Last", "Male", "6'1\"", 150, 24, "Classic"));  /*TODO NEEDS ADJUSTED */
+		recipeView = new RecipeView(this.user);
+		accountView = new AccountView(this.user);  /*TODO NEEDS ADJUSTED */
 		trackerView = new TrackerView();
-		dashboardView = new DashboardView();
+		dashboardView = new DashboardView(this.user);
 		other = new Pane();
 		label = new Label("IM IN FRONT");
 		title = new Label("KEY2KETO");

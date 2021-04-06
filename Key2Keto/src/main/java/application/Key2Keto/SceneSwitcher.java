@@ -1,5 +1,6 @@
 package application.Key2Keto;
 
+import application.Key2Keto.Account.Account;
 import application.Key2Keto.Account.AccountCreationView;
 import application.Key2Keto.Account.LoginView;
 //import application.Key2Keto.Recipes.RecipeView;
@@ -12,7 +13,7 @@ import javafx.stage.Stage;
 public class SceneSwitcher extends Pane{
 	
 	Stage stage;
-	
+	Account user;
 	public SceneSwitcher(Stage stage) {
 		this.stage = stage;
 	}
@@ -37,8 +38,8 @@ public class SceneSwitcher extends Pane{
         return creationScene;
 	}
 	
-	public Scene MainViewScene() {
-    	MainView mainView = new MainView(this.stage);
+	public Scene MainViewScene(Account account) {
+    	MainView mainView = new MainView(this.stage, account);
     	VBox view = mainView.getView();
         Scene mainViewScene = new Scene(view);
         

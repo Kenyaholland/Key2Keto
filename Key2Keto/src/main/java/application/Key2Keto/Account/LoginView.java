@@ -76,7 +76,7 @@ public class LoginView extends Pane
 		{
 			if(checkFormProperlyFilled())
 			{
-				stage.setScene(switcher.MainViewScene());
+			//	stage.setScene(switcher.MainViewScene());
 			}
 			
 		});

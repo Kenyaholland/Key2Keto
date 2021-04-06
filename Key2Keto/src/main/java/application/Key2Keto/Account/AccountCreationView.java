@@ -154,7 +154,8 @@ public class AccountCreationView extends Pane
 												  Integer.parseInt(weightTextField.getText()), Integer.parseInt(ageTextField.getText()), 
 												  dietTypeChooser.getValue().toString());
 				
-				stage.setScene(switcher.MainViewScene());
+				stage.setScene(switcher.MainViewScene(newlyCreatedAccount));
+				System.out.println("Recipe Type: "+ newlyCreatedAccount.getDietType());
 			}
 		});
 		
