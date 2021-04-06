@@ -83,10 +83,15 @@ public class AccountView extends Pane
 	Label newVariableLabel;
 	TextField newVariableTextField;
 	ComboBox newVariableComboBox;
+	Button cancelVariableChangeButton;
 	Button confirmVariableChangeButton;
 	HBox newVariableRow;
 	HBox confirmButtonRow;
 	VBox changerRows;
+	
+	HBox errorRow;
+	String errorMessage;
+	Label errorLabel;
 	
 	public AccountView(Account currentAccount)
 	{
@@ -152,10 +157,14 @@ public class AccountView extends Pane
 		newVariableLabel = new Label(); //the text of this will be set by each individual edit button
 		newVariableTextField = new TextField();
 		newVariableComboBox = new ComboBox();
+		cancelVariableChangeButton = new Button("Cancel");
 		confirmVariableChangeButton = new Button("Confirm");
 		newVariableRow = new HBox();
 		confirmButtonRow = new HBox();
 		changerRows = new VBox();
+		
+		errorRow = new HBox();
+		errorLabel = new Label();
 	}
 	
 	private void stylizeElements()
@@ -262,16 +271,28 @@ public class AccountView extends Pane
 		myAccountRows.setMargin(myAccountRows, new Insets(0, 0, 0, 250));
 		
 		//now to stylize the popup window for changing variables
-		newVariableLabel.setMinWidth(90);
+		newVariableLabel.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 12));
+		newVariableLabel.setMinWidth(125);
+		newVariableTextField.setFont(Font.font("Verdana", 12));
 		newVariableRow.setMargin(newVariableLabel, new Insets(20, 10, 10, 10));
 		newVariableRow.setMargin(newVariableTextField, new Insets(20, 10, 10, 10));
 		newVariableRow.setMargin(newVariableComboBox, new Insets(20, 10, 10, 10));
 		newVariableRow.setAlignment(Pos.CENTER);
 		
+		errorLabel.setTextFill(Color.RED);
+		errorRow.setMargin(errorLabel, new Insets(0, 10, 0, 10));
+		errorLabel.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 12));
+		errorRow.setMinWidth(360);
+		errorLabel.setVisible(false);
+		errorRow.setAlignment(Pos.CENTER);
+		
 		newVariableTextField.setMinWidth(150);
 		newVariableComboBox.setMinWidth(150);
 		
-		confirmButtonRow.setMargin(confirmVariableChangeButton, new Insets(10, 10, 20, 10));
+		confirmButtonRow.setMargin(confirmVariableChangeButton, new Insets(10, 5, 20, 5));
+		confirmButtonRow.setMargin(cancelVariableChangeButton, new Insets(10, 5, 20, 5));
+		cancelVariableChangeButton.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 12));
+		confirmVariableChangeButton.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 12));
 		confirmButtonRow.setAlignment(Pos.CENTER);
 		
 		changerRows.setAlignment(Pos.CENTER);
@@ -297,9 +318,11 @@ public class AccountView extends Pane
 		this.getChildren().add(myAccountRows);
 		
 		newVariableRow.getChildren().addAll(newVariableLabel, newVariableTextField);
-		confirmButtonRow.getChildren().add(confirmVariableChangeButton);
+		confirmButtonRow.getChildren().addAll(cancelVariableChangeButton, confirmVariableChangeButton);
 		
-		changerRows.getChildren().addAll(newVariableRow, confirmButtonRow);
+		errorRow.getChildren().add(errorLabel);
+		
+		changerRows.getChildren().addAll(newVariableRow, errorRow, confirmButtonRow);
 		
 		changerPane.getChildren().add(changerRows);
 	}
@@ -317,7 +340,7 @@ public class AccountView extends Pane
 			newVariableTextField.setPromptText("");
 			
 			newVariableRow.getChildren().addAll(newVariableLabel, newVariableTextField);
-			changerRows.getChildren().addAll(newVariableRow, confirmButtonRow);
+			changerRows.getChildren().addAll(newVariableRow, errorRow, confirmButtonRow);
 			
 			variableChangerWindow.setScene(changerScene);
 			
@@ -337,7 +360,7 @@ public class AccountView extends Pane
 			newVariableTextField.setPromptText("");
 			
 			newVariableRow.getChildren().addAll(newVariableLabel, newVariableTextField);
-			changerRows.getChildren().addAll(newVariableRow, confirmButtonRow);
+			changerRows.getChildren().addAll(newVariableRow, errorRow, confirmButtonRow);
 			
 			variableChangerWindow.setScene(changerScene);
 			
@@ -357,7 +380,7 @@ public class AccountView extends Pane
 			newVariableTextField.setPromptText("e.g. John Smith");
 			
 			newVariableRow.getChildren().addAll(newVariableLabel, newVariableTextField);
-			changerRows.getChildren().addAll(newVariableRow, confirmButtonRow);
+			changerRows.getChildren().addAll(newVariableRow, errorRow, confirmButtonRow);
 			
 			confirmVariableChangeButton.requestFocus();
 			
@@ -380,7 +403,7 @@ public class AccountView extends Pane
 			newVariableComboBox.setItems(FXCollections.observableArrayList(sexes));
 			
 			newVariableRow.getChildren().addAll(newVariableLabel, newVariableComboBox);
-			changerRows.getChildren().addAll(newVariableRow, confirmButtonRow);
+			changerRows.getChildren().addAll(newVariableRow, errorRow, confirmButtonRow);
 			
 			variableChangerWindow.setScene(changerScene);
 			
@@ -400,7 +423,7 @@ public class AccountView extends Pane
 			newVariableTextField.setPromptText("e.g. 5'11\"");
 			
 			newVariableRow.getChildren().addAll(newVariableLabel, newVariableTextField);
-			changerRows.getChildren().addAll(newVariableRow, confirmButtonRow);
+			changerRows.getChildren().addAll(newVariableRow, errorRow, confirmButtonRow);
 			
 			confirmVariableChangeButton.requestFocus();
 			
@@ -422,7 +445,7 @@ public class AccountView extends Pane
 			newVariableTextField.setPromptText("in pounds");
 			
 			newVariableRow.getChildren().addAll(newVariableLabel, newVariableTextField);
-			changerRows.getChildren().addAll(newVariableRow, confirmButtonRow);
+			changerRows.getChildren().addAll(newVariableRow, errorRow, confirmButtonRow);
 			
 			confirmVariableChangeButton.requestFocus();
 			
@@ -444,7 +467,7 @@ public class AccountView extends Pane
 			newVariableTextField.setPromptText("in years");
 			
 			newVariableRow.getChildren().addAll(newVariableLabel, newVariableTextField);
-			changerRows.getChildren().addAll(newVariableRow, confirmButtonRow);
+			changerRows.getChildren().addAll(newVariableRow, errorRow, confirmButtonRow);
 			
 			confirmVariableChangeButton.requestFocus();
 			
@@ -467,13 +490,19 @@ public class AccountView extends Pane
 			newVariableComboBox.setItems(FXCollections.observableArrayList(diets));
 			
 			newVariableRow.getChildren().addAll(newVariableLabel, newVariableComboBox);
-			changerRows.getChildren().addAll(newVariableRow, confirmButtonRow);
+			changerRows.getChildren().addAll(newVariableRow, errorRow, confirmButtonRow);
 			
 			variableChangerWindow.setScene(changerScene);
 			
 			variableChangerWindow.show();
 			
 			setConfirmButtonAction("DietType");
+		});
+		
+		cancelVariableChangeButton.setOnAction(e ->
+		{
+			errorLabel.setVisible(false);
+			variableChangerWindow.close();
 		});
 	}
 	
@@ -488,6 +517,14 @@ public class AccountView extends Pane
 					{
 						currentAccount.setUsername(newVariableTextField.getText());
 						currentUsernameLabel.setText(newVariableTextField.getText());
+						errorLabel.setVisible(false);
+						variableChangerWindow.close();
+					}
+					
+					else
+					{
+						errorLabel.setText(errorMessage);
+						errorLabel.setVisible(true);
 					}
 				});
 				
@@ -499,6 +536,14 @@ public class AccountView extends Pane
 					{
 						currentAccount.setPassword(newVariableTextField.getText());
 						currentPasswordLabel.setText(newVariableTextField.getText());
+						errorLabel.setVisible(false);
+						variableChangerWindow.close();
+					}
+					
+					else
+					{
+						errorLabel.setText(errorMessage);
+						errorLabel.setVisible(true);
 					}
 				});
 				
@@ -513,6 +558,14 @@ public class AccountView extends Pane
 						currentAccount.setFirstName(nameSplit[0]);
 						currentAccount.setLastName(nameSplit[1]);
 						currentNameLabel.setText(nameSplit[0] + " " + nameSplit[1]);
+						errorLabel.setVisible(false);
+						variableChangerWindow.close();
+					}
+					
+					else
+					{
+						errorLabel.setText(errorMessage);
+						errorLabel.setVisible(true);
 					}
 				});
 				
@@ -524,6 +577,14 @@ public class AccountView extends Pane
 					{
 						currentAccount.setSex(newVariableComboBox.getSelectionModel().getSelectedItem().toString());
 						currentSexLabel.setText(newVariableComboBox.getSelectionModel().getSelectedItem().toString());
+						errorLabel.setVisible(false);
+						variableChangerWindow.close();
+					}
+					
+					else
+					{
+						errorLabel.setText(errorMessage);
+						errorLabel.setVisible(true);
 					}
 				});
 				
@@ -535,6 +596,14 @@ public class AccountView extends Pane
 					{
 						currentAccount.setHeight(newVariableTextField.getText());
 						currentHeightLabel.setText(newVariableTextField.getText());
+						errorLabel.setVisible(false);
+						variableChangerWindow.close();
+					}
+					
+					else
+					{
+						errorLabel.setText(errorMessage);
+						errorLabel.setVisible(true);
 					}
 				});
 				
@@ -546,6 +615,14 @@ public class AccountView extends Pane
 					{
 						currentAccount.setWeight(Integer.parseInt(newVariableTextField.getText()));
 						currentWeightLabel.setText(newVariableTextField.getText() + " lbs");
+						errorLabel.setVisible(false);
+						variableChangerWindow.close();
+					}
+					
+					else
+					{
+						errorLabel.setText(errorMessage);
+						errorLabel.setVisible(true);
 					}
 				});
 				
@@ -557,6 +634,14 @@ public class AccountView extends Pane
 					{
 						currentAccount.setAge(Integer.parseInt(newVariableTextField.getText()));
 						currentAgeLabel.setText(newVariableTextField.getText());
+						errorLabel.setVisible(false);
+						variableChangerWindow.close();
+					}
+					
+					else
+					{
+						errorLabel.setText(errorMessage);
+						errorLabel.setVisible(true);
 					}
 				});
 				
@@ -568,6 +653,14 @@ public class AccountView extends Pane
 					{
 						currentAccount.setSex(newVariableComboBox.getSelectionModel().getSelectedItem().toString());
 						currentDietTypeLabel.setText(newVariableComboBox.getSelectionModel().getSelectedItem().toString());
+						errorLabel.setVisible(false);
+						variableChangerWindow.close();
+					}
+					
+					else
+					{
+						errorLabel.setText(errorMessage);
+						errorLabel.setVisible(true);
 					}
 				});
 				
@@ -584,6 +677,7 @@ public class AccountView extends Pane
 			case "Username":
 				if(newVariableTextField.getText().equals(""))
 				{
+					errorMessage = "Username field must not be empty";
 					return false;
 				}
 				
@@ -595,6 +689,7 @@ public class AccountView extends Pane
 			case "Password":
 				if(newVariableTextField.getText().equals(""))
 				{
+					errorMessage = "Password field must not be empty";
 					return false;
 				}
 				
@@ -604,8 +699,15 @@ public class AccountView extends Pane
 				}
 
 			case "Name":
-				if(!newVariableTextField.getText().matches("^[A-Za-z]+\\s[A-Za-z]+$"))
+				if(newVariableTextField.getText().equals(""))
 				{
+					errorMessage = "Name field must not be empty";
+					return false;
+				}
+				
+				else if(!newVariableTextField.getText().matches("^[A-Za-z]+\\s[A-Za-z]+$"))
+				{
+					errorMessage = "Name must be two words containing only letters";
 					return false;
 				}
 				
@@ -617,6 +719,7 @@ public class AccountView extends Pane
 			case "Sex":
 				if(newVariableComboBox.getSelectionModel().isEmpty())
 				{
+					errorMessage = "A sex must be chosen";
 					return false;
 				}
 				
@@ -628,11 +731,13 @@ public class AccountView extends Pane
 			case "Height":
 				if(newVariableTextField.getText().equals(""))
 				{
+					errorMessage = "Height field must not be empty";
 					return false;
 				}
 				
 				else if(!newVariableTextField.getText().matches("^([0-9]*'([0-9]\"|(1[0-1])\"))|([0-9]*')$"))
 				{
+					errorMessage = "Height must be expressed in the form ft'in\" or ft'";
 					return false;
 				}
 				
@@ -644,11 +749,13 @@ public class AccountView extends Pane
 			case "Weight":
 				if(newVariableTextField.getText().equals(""))
 				{
+					errorMessage = "Weight field must not be empty";
 					return false;
 				}
 				
 				else if(!newVariableTextField.getText().matches("^[0-9]*$"))
 				{
+					errorMessage = "Weight must only contain digits";
 					return false;
 				}
 				
@@ -660,11 +767,13 @@ public class AccountView extends Pane
 			case "Age":
 				if(newVariableTextField.getText().equals(""))
 				{
+					errorMessage = "Age field must not be empty";
 					return false;
 				}
 				
 				else if(!newVariableTextField.getText().matches("^[0-9]*$"))
 				{
+					errorMessage = "Age must only contain digits";
 					return false;
 				}
 				
@@ -676,6 +785,7 @@ public class AccountView extends Pane
 			case "DietType":
 				if(newVariableComboBox.getSelectionModel().isEmpty())
 				{
+					errorMessage = "A diet type must be chosen";
 					return false;
 				}
 				
