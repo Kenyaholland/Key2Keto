@@ -41,6 +41,7 @@ public class SceneSwitcher extends Pane{
     	MainView mainView = new MainView();
     	VBox view = mainView.getView();
         Scene mainViewScene = new Scene(view);
+        stage.setTitle("Key2Keto");
         
         return mainViewScene;
 	}
