@@ -3,10 +3,10 @@ package application.Key2Keto.Tracker;
 import java.util.ArrayList;
 
 public class Tracker {
-	String dayOfWeek;
-	double hoursOfSleep;
-	double waterIntake;
-	ArrayList<String> goals;
+	public String dayOfWeek;
+	public ArrayList<String> goals;
+	private double hoursOfSleep;
+	private double waterIntake;
 	
 	public Tracker(String dayOfWeek){
 		this.dayOfWeek = dayOfWeek;
@@ -39,7 +39,7 @@ public class Tracker {
 		this.goals.add(goal);
 	}
 	
-	public ArrayList getGoals() {
+	public ArrayList<String> getGoals() {
 		return this.goals;
 	}
 }
