@@ -13,6 +13,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import application.Key2Keto.MainView;
 import application.Key2Keto.Account.Account;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -33,7 +34,7 @@ public class DashboardView extends Pane {
 	private VBox goalInformationBox;
 	private HBox upperHalf;
 	private HBox lowerHalf;
-	
+	private MainView mainView;
 	private Label userName;
 	private Label dietType;
 	private Label breakfastRecipe;
@@ -91,14 +92,36 @@ public class DashboardView extends Pane {
 	}
 	
 	private void populateDaysRecipes(){
-		System.out.println("this got read");
 		if(this.dashboard.getUserAccount().getChosenRecipes().get(this.dashboard.getCurrentDayInt()).size()>0) {
-			System.out.println("Size is greater than one.");
-			this.breakfastRecipe.setText("Chosen Breakfast: "+ this.dashboard.getUserAccount().getChosenRecipes()
-					.get(this.dashboard.getCurrentDayInt()).get(0))/*getBreakfastRecipe().getName())*/;
-		//	this.lunchRecipe.setText("Chosen Lunch: "+ this.dashboard.getLunchRecipe().getName());
-		//	this.dinnerRecipe.setText("Chosen Dinner: "+ this.dashboard.getDinnerRecipe().getName());
-		//	this.snackRecipe.setText("Chosen Snack: "+ this.dashboard.getSnackRecipe().getName());
+			if(this.dashboard.getUserAccount().getChosenRecipes().get(this.dashboard.getCurrentDayInt()).get(0)!=null) {
+				this.breakfastRecipe.setText("Chosen Breakfast: "+ this.dashboard.getUserAccount().getChosenRecipes()
+					.get(this.dashboard.getCurrentDayInt()).get(0).getName());
+			}else {
+				this.breakfastRecipe.setText("Chosen Breakfast: Nothing Chosen");
+			}
+			
+			if(this.dashboard.getUserAccount().getChosenRecipes().get(this.dashboard.getCurrentDayInt()).get(1)!=null) {
+				this.lunchRecipe.setText("Chosen Lunch: "+ this.dashboard.getUserAccount().getChosenRecipes()
+						.get(this.dashboard.getCurrentDayInt()).get(1).getName());
+			}else {
+				this.lunchRecipe.setText("Chosen Lunch: Nothing Chosen");
+			}
+			
+			if(this.dashboard.getUserAccount().getChosenRecipes().get(this.dashboard.getCurrentDayInt()).get(2)!=null) {
+				this.dinnerRecipe.setText("Chosen Dinner: "+ this.dashboard.getUserAccount().getChosenRecipes()
+					.get(this.dashboard.getCurrentDayInt()).get(2).getName());
+			}else {
+				this.dinnerRecipe.setText("Chosen Dinner: Nothing Chosen");
+			}
+			
+			if(this.dashboard.getUserAccount().getChosenRecipes().get(this.dashboard.getCurrentDayInt()).get(3)!=null) {
+				this.snackRecipe.setText("Chosen Snack: "+ this.dashboard.getUserAccount().getChosenRecipes()
+					.get(this.dashboard.getCurrentDayInt()).get(3).getName());
+			}else {
+				this.dinnerRecipe.setText("Chosen Snack: Nothing Chosen");
+			}
+			
+			
 		}
 	}
 	
@@ -113,13 +136,13 @@ public class DashboardView extends Pane {
              
         XYChart.Series<String, Number> series = new XYChart.Series<String, Number>();
         series.setName("Weekly Hours of Sleep");
-        series.getData().add(new Data<String, Number>("Sunday",6));  
-        series.getData().add(new Data<String, Number>("Monday",10));  
-        series.getData().add(new Data<String, Number>("Tuesday",7));  
-        series.getData().add(new Data<String, Number>("Wednesday",8));  
-        series.getData().add(new Data<String, Number>("Thursday",8));  
-        series.getData().add(new Data<String, Number>("Friday",8));  
-        series.getData().add(new Data<String, Number>("Saturday",6));
+        series.getData().add(new Data<String, Number>("Sunday",this.dashboard.getUserAccount().getTrackers().get(0).getHoursOfSleep()));  
+        series.getData().add(new Data<String, Number>("Monday",this.dashboard.getUserAccount().getTrackers().get(1).getHoursOfSleep()));  
+        series.getData().add(new Data<String, Number>("Tuesday",this.dashboard.getUserAccount().getTrackers().get(2).getHoursOfSleep()));  
+        series.getData().add(new Data<String, Number>("Wednesday",this.dashboard.getUserAccount().getTrackers().get(3).getHoursOfSleep()));  
+        series.getData().add(new Data<String, Number>("Thursday",this.dashboard.getUserAccount().getTrackers().get(4).getHoursOfSleep()));  
+        series.getData().add(new Data<String, Number>("Friday",this.dashboard.getUserAccount().getTrackers().get(5).getHoursOfSleep()));  
+        series.getData().add(new Data<String, Number>("Saturday",this.dashboard.getUserAccount().getTrackers().get(6).getHoursOfSleep()));
  
         this.sleepChart.getData().add(series);
         this.sleepChart.setLegendVisible(false);
@@ -137,13 +160,13 @@ public class DashboardView extends Pane {
              
         XYChart.Series<String, Number> series = new Series<String, Number>();
         series.setName("Daily Ounces of Water Consumed");
-        series.getData().add(new Data<String, Number>("Sunday",46));  
-        series.getData().add(new Data<String, Number>("Monday",100));  
-        series.getData().add(new Data<String, Number>("Tuesday",97));  
-        series.getData().add(new Data<String, Number>("Wedday",78));  
-        series.getData().add(new Data<String, Number>("Thursday",58));  
-        series.getData().add(new Data<String, Number>("Friday",48));  
-        series.getData().add(new Data<String, Number>("Saturday",96));  
+        series.getData().add(new Data<String, Number>("Sunday",this.dashboard.getUserAccount().getTrackers().get(0).getWaterIntake()));  
+        series.getData().add(new Data<String, Number>("Monday",this.dashboard.getUserAccount().getTrackers().get(1).getWaterIntake()));  
+        series.getData().add(new Data<String, Number>("Tuesday",this.dashboard.getUserAccount().getTrackers().get(2).getWaterIntake()));  
+        series.getData().add(new Data<String, Number>("Wedday",this.dashboard.getUserAccount().getTrackers().get(3).getWaterIntake()));  
+        series.getData().add(new Data<String, Number>("Thursday",this.dashboard.getUserAccount().getTrackers().get(4).getWaterIntake()));  
+        series.getData().add(new Data<String, Number>("Friday",this.dashboard.getUserAccount().getTrackers().get(5).getWaterIntake()));  
+        series.getData().add(new Data<String, Number>("Saturday",this.dashboard.getUserAccount().getTrackers().get(6).getWaterIntake()));  
  
         this.waterChart.getData().add(series);
         this.waterChart.setLegendVisible(false);
@@ -207,6 +230,3 @@ public class DashboardView extends Pane {
 		this.thirdGoal.setFont(Font.font("Verdana", FontWeight.NORMAL, 14));
 	}
 }
-/*
-	UserAccount Tracker day. getwater or getsleep for each chart.
-*/

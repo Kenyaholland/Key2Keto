@@ -118,6 +118,7 @@ public class RecipeView extends Pane {
 	private void setStyles() {
 		this.setWidth(980);
 		this.setHeight(500);
+		this.setBackground(new Background(new BackgroundFill(Color.LIGHTSLATEGREY, CornerRadii.EMPTY, Insets.EMPTY)));
 		view.setPrefHeight(500);
 		view.setPrefWidth(980);
 		this.categoryTabs.setPrefSize(600, 50);

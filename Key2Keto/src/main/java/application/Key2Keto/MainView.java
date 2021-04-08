@@ -47,7 +47,6 @@ public class MainView extends Pane{
 	private Label label;
 	Label title;
 	
-	
 	public MainView(Stage stage, Account user) {
 		this.stage = stage;
 		this.user = user;
@@ -66,9 +65,8 @@ public class MainView extends Pane{
 		
 		this.dash.setOnAction(new EventHandler<ActionEvent>() {
 		    @Override public void handle(ActionEvent e) {
-		    	//MainView.this.dashboardView = new DashboardView(MainView.this.user);
+		    //	MainView.this.dashboardView = null;
 		    	stackOrder(1);
-		    	
 		    }
 		});
 		
@@ -84,6 +82,9 @@ public class MainView extends Pane{
 		    }
 		});
 }
+	public Account getAccount() {
+		return this.user;
+	}
 	
 	private void InitializeVariables(){
 	    view = new VBox();
@@ -148,27 +149,32 @@ public class MainView extends Pane{
 		switch(num) {
 			case 0: //Switch to Recipe tab
 				this.mainContent.setVisible(true);
-				this.recipeView.setViewOrder(-1);
-				this.dashboardView.setViewOrder(0);
-				this.accountView.setViewOrder(0);
-				this.trackerView.setViewOrder(0);
-			
 				this.dashboardView.setVisible(false);
 				this.accountView.setVisible(false);
 				this.recipeView.setVisible(true);
 				this.trackerView.setVisible(false);
+				this.mainContent.setVisible(true);
+				
+				this.recipeView.setViewOrder(-1);
+				this.dashboardView.setViewOrder(0);
+				this.accountView.setViewOrder(0);
+				this.trackerView.setViewOrder(0);
 				break;
 			case 1: //Switch to Dashboard tab
 				this.mainContent.setVisible(true);
+				this.dashboardView.setVisible(true);
+				this.accountView.setVisible(false);
+				this.recipeView.setVisible(false);
+				this.trackerView.setVisible(false);
+				
+				this.mainContent.getChildren().remove(2);
+				this.dashboardView = new DashboardView(this.user);
+				this.mainContent.getChildren().add(2,dashboardView);
 				this.recipeView.setViewOrder(0);
 				this.dashboardView.setViewOrder(-1);
 				this.accountView.setViewOrder(0);
 				this.trackerView.setViewOrder(0);
 			
-				this.dashboardView.setVisible(true);
-				this.accountView.setVisible(false);
-				this.recipeView.setVisible(false);
-				this.trackerView.setVisible(false);
 				break;
 			case 2: //Switch to Account tab
 				this.mainContent.setVisible(true);
@@ -182,6 +188,7 @@ public class MainView extends Pane{
 				this.recipeView.setVisible(false);
 				this.trackerView.setVisible(false);
 				break;
+				
 			case 3: //Switch to tracker tab
 				this.mainContent.setVisible(true);
 				this.recipeView.setViewOrder(0);
@@ -193,6 +200,8 @@ public class MainView extends Pane{
 				this.accountView.setVisible(false);
 				this.recipeView.setVisible(false);
 				this.trackerView.setVisible(true);
+				break;
+				
 			case 4:
 				/*TODO add panes as they are developed*/
 			default:

@@ -8,7 +8,7 @@ public class App extends Application {
     @Override
     public void start(Stage stage) {
     	SceneSwitcher switcher = new SceneSwitcher(stage);
-    
+   
     	stage.setScene(switcher.LoginScene());
         stage.show();
     }
