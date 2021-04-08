@@ -5,7 +5,6 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Background;
@@ -18,7 +17,10 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-import javafx.stage.Stage;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import application.Key2Keto.Account.Account;
 import application.Key2Keto.Account.AccountView;
 import application.Key2Keto.Dashboard.*;
@@ -26,18 +28,16 @@ import application.Key2Keto.Recipes.RecipeView;
 import application.Key2Keto.Tracker.TrackerView;
 
 public class MainView extends Pane{
-
-	Stage stage;
-	SceneSwitcher switcher;
 	Account user;
-    VBox view;
+  
+  VBox view;
 	HBox labels;
 	private Button dash;
 	private Button account;
 	private Button tracker;
-	Button shopping;
+	private Button shopping;
 	private Button recipes;
-	Button logout;
+	private Button logout;
 	private StackPane mainContent;
 	private RecipeView recipeView;
 	private AccountView accountView;
@@ -46,11 +46,12 @@ public class MainView extends Pane{
 	private Pane other;
 	private Label label;
 	Label title;
+	String currentTab;
 	
-	public MainView(Stage stage, Account user) {
-		this.stage = stage;
+
+	public MainView(Account user) {
+
 		this.user = user;
-		this.switcher = new SceneSwitcher(stage);
 		
 		InitializeVariables();
 		StylizeElements();
@@ -60,6 +61,7 @@ public class MainView extends Pane{
 		this.recipes.setOnAction(new EventHandler<ActionEvent>() {
 		    @Override public void handle(ActionEvent e) {
 		    	stackOrder(0);
+		    	currentTab = "Recipe";
 		    }
 		});
 		
@@ -67,18 +69,35 @@ public class MainView extends Pane{
 		    @Override public void handle(ActionEvent e) {
 		    //	MainView.this.dashboardView = null;
 		    	stackOrder(1);
+		    	currentTab = "Dashboard";
 		    }
 		});
 		
 		this.account.setOnAction(new EventHandler<ActionEvent>() {
 		    @Override public void handle(ActionEvent e) {
 		    	stackOrder(2);
+		    	currentTab = "MyAccount";
 		    }
 		});
 		
 		this.tracker.setOnAction(new EventHandler<ActionEvent>() {
 		    @Override public void handle(ActionEvent e) {
 		    	stackOrder(3);
+		    	currentTab = "Tracker";
+		    }
+		});
+		
+		this.shopping.setOnAction(new EventHandler<ActionEvent>() {
+		    @Override public void handle(ActionEvent e) {
+		    	//stackOrder(4);
+		    	currentTab = "Shopping";
+		    }
+		});
+		
+		this.logout.setOnAction(new EventHandler<ActionEvent>() {
+		    @Override public void handle(ActionEvent e) {
+		    	//stackOrder(5);
+		    	currentTab = "Logout";
 		    }
 		});
 }
@@ -97,12 +116,13 @@ public class MainView extends Pane{
 		logout = new Button("LOG OUT");
 		mainContent = new StackPane();
 		recipeView = new RecipeView(this.user);
-		accountView = new AccountView(this.user);  /*TODO NEEDS ADJUSTED */
+		accountView = new AccountView(this.user);
 		trackerView = new TrackerView();
 		dashboardView = new DashboardView(this.user);
 		other = new Pane();
 		label = new Label("IM IN FRONT");
 		title = new Label("KEY2KETO");
+		currentTab = "";
 	}
 
 	private void StylizeElements(){
@@ -206,26 +226,23 @@ public class MainView extends Pane{
 				/*TODO add panes as they are developed*/
 			default:
 				System.out.println("You should not get here");
-		}
-		
-		//this.mainContent.setVisible(true);
-		//this.recipeView.setViewOrder(-1);
-		//this.other.setViewOrder(0);
-		//this.other.setVisible(false);
-		//this.recipeView.setVisible(true);
-		
-	}
-	
-	public void stackOrder2(){
-		this.mainContent.setVisible(true);
-		this.recipeView.setViewOrder(0);
-		this.other.setViewOrder(-1);
-		this.recipeView.setVisible(false);
-		this.other.setVisible(true);
-		
+		}	
 	}
 	
 	public VBox getView() {
 		return this.view;
+	}
+	
+	public String getCurrentTab() {
+		return this.currentTab;
+	}
+	
+	public ArrayList<Button> getButtonsToTest(){
+		ArrayList<Button> buttonsToTest = new ArrayList<Button>();
+		
+		buttonsToTest.addAll(new ArrayList<Button>(Arrays.asList(this.dash, this.account, this.tracker,
+							this.shopping, this.recipes, this.logout)));
+		
+		return buttonsToTest;
 	}
 }

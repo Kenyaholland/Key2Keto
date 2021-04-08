@@ -1,5 +1,8 @@
 package application.Key2Keto.Tracker;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import application.Key2Keto.Recipes.DayOfWeekView;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -85,7 +88,6 @@ public class DayView extends Pane{
 		    	if(sleepField.getValue() != null) {
 		    		tracker.setHoursOfSleep(Double.valueOf(sleepField.getValue()));
 		    		popUp.display();
-		    		System.out.println(tracker.getHoursOfSleep());
 		    	}
 		    }
 		});
@@ -99,7 +101,6 @@ public class DayView extends Pane{
 		    	if(waterField.getValue() != null) {
 		    		tracker.setWaterIntake(Double.valueOf(waterField.getValue()));	
 		    		popUp.display();
-		    		System.out.println(tracker.getWaterIntake());
 		    	}
 		    }
 		});
@@ -111,7 +112,6 @@ public class DayView extends Pane{
 		    @Override public void handle(ActionEvent e) {
 		    	if(!goalsTextField.getText().isEmpty()) {
 		    		tracker.addGoal(goalsTextField.getText());
-		    		System.out.println(tracker.getGoals());
 		    		goalsTextField.clear();
 		    		popUp.display();
 		    	}
@@ -144,5 +144,43 @@ public class DayView extends Pane{
 		
 		this.addGoalsButton.setPrefSize(125, 30);
 		this.addGoalsButton.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 12));
+	}
+	
+	public String getDayOfWeek() {
+		return this.dayOfWeek;
+	}
+	
+	/********* For testing purposes ***********/
+	
+	public Spinner<Double> getSleepSpinnerForTest() {
+		return this.sleepField;
+	}
+	
+	public Double getSleepSpinnerValueForTest() {
+		return Double.valueOf(this.sleepField.getValue());
+	}
+	
+	public Spinner<Double> getWaterSpinnerForTest() {
+		return this.waterField;
+	}
+	
+	public Double getWaterSpinnerValueForTest() {
+		return Double.valueOf(this.waterField.getValue());
+	}
+	
+	public TextField getAddGoalsFieldForTest() {
+		return this.goalsTextField;
+	}
+	
+	public String getGoalsFieldValueForTest() {
+		return this.tracker.getGoals().get(0);
+	}
+	
+	public ArrayList<Button> getSaveButtonsToTest(){
+		ArrayList<Button> buttonsToTest = new ArrayList<Button>();
+		
+		buttonsToTest.addAll(new ArrayList<Button>(Arrays.asList(this.sleepButton, this.waterButton, this.addGoalsButton)));
+		
+		return buttonsToTest;
 	}
 }

@@ -4,8 +4,12 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Button;
 import application.Key2Keto.SceneSwitcher;
@@ -31,7 +35,7 @@ public class LoginView extends Pane
 	Label passwordLabel;
 	
 	TextField usernameTextField;
-	TextField passwordTextField;
+	PasswordField passwordTextField;
 	
 	//one button for signing in, one button for creating account
 	Button signInButton;
@@ -46,6 +50,11 @@ public class LoginView extends Pane
 	HBox passwordRow;
 	HBox signInButtonRow;
 	HBox createAccountRow;
+	
+	//for showing errors upon invalid input
+	HBox errorRow;
+	String errorMessage;
+	Label errorLabel;
 	
 	//and a VBox to contain them all
 	VBox loginRows;
@@ -69,7 +78,7 @@ public class LoginView extends Pane
 		passwordLabel = new Label("Password:");
 		
 		usernameTextField = new TextField();
-		passwordTextField = new TextField();
+		passwordTextField = new PasswordField();
 		
 		signInButton = new Button("Sign in");
 		signInButton.setOnAction(e -> 
@@ -79,6 +88,11 @@ public class LoginView extends Pane
 			//	stage.setScene(switcher.MainViewScene());
 			}
 			
+			else
+			{
+				errorLabel.setText(errorMessage);
+				errorLabel.setVisible(true);
+			}
 		});
 		
 		createAccountButton = new Button("Create Account");
@@ -92,25 +106,46 @@ public class LoginView extends Pane
 		signInButtonRow = new HBox();
 		createAccountRow = new HBox();
 		
+		errorLabel = new Label();
+		errorRow = new HBox();
+		
 		loginRows = new VBox();
 	}
 	
 	private void stylizeElements()
 	{
+		stage.setTitle("Key2Keto - Sign In");
+		
 		titleOrLogoRow.setAlignment(Pos.CENTER);
 		titleOrLogoRow.setMinWidth(500);
 		titleOrLogoRow.setMargin(titleOrLogo, new Insets(40, 0, 40, 0));
+		titleOrLogo.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 18));
 		
 		usernameRow.setMargin(usernameLabel, new Insets(10, 20, 10, 20));
 		usernameRow.setMargin(usernameTextField, new Insets(10, 20, 10, 20));
+		usernameLabel.setMinWidth(113);
+		usernameLabel.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 12));
+		usernameTextField.setFont(Font.font("Verdana", 12));
+		
 		passwordRow.setMargin(passwordLabel, new Insets(10, 20, 10, 20));
 		passwordRow.setMargin(passwordTextField, new Insets(10, 20, 10, 20));
+		passwordLabel.setMinWidth(113);
+		passwordLabel.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 12));
+		passwordTextField.setFont(Font.font("Verdana", 12));
 		
 		signInButtonRow.setAlignment(Pos.CENTER);
 		signInButtonRow.setMargin(signInButton, new Insets(10, 0, 10, 0));
+		signInButton.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 12));
+		
+		errorLabel.setTextFill(Color.RED);
+		errorLabel.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 12));
+		errorLabel.setVisible(false);
+		errorRow.setAlignment(Pos.CENTER);
 		
 		createAccountRow.setAlignment(Pos.CENTER);
 		createAccountRow.setMargin(createAccountButton, new Insets(30, 20, 30, 20));
+		noAccountLabel.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 12));
+		createAccountButton.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 12));
 	}
 	
 	private void addAllElementsToChildren() //helper function for readability
@@ -122,7 +157,9 @@ public class LoginView extends Pane
 		
 		createAccountRow.getChildren().addAll(noAccountLabel, createAccountButton);
 		
-		loginRows.getChildren().addAll(titleOrLogoRow, usernameRow, passwordRow, signInButtonRow, createAccountRow);
+		errorRow.getChildren().add(errorLabel);
+		
+		loginRows.getChildren().addAll(titleOrLogoRow, usernameRow, passwordRow, errorRow, signInButtonRow, createAccountRow);
 		
 		this.getChildren().add(loginRows);
 	}
@@ -131,11 +168,13 @@ public class LoginView extends Pane
 	{
 		if(usernameTextField.getText().equals(""))
 		{
+			errorMessage = "Username field must not be empty";
 			return false;
 		}
 		
 		else if(passwordTextField.getText().equals(""))
 		{
+			errorMessage = "Password field must not be empty";
 			return false;
 		}
 		

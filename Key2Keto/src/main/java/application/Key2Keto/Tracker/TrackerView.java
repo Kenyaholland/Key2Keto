@@ -176,7 +176,7 @@ public class TrackerView extends Pane {
 		}
 	}
 	
-	protected ArrayList<Button> getButtonsToTest(){
+	public ArrayList<Button> getButtonsToTest(){
 		ArrayList<Button> buttonsToTest = new ArrayList<Button>();
 		
 		buttonsToTest.addAll(new ArrayList<Button>(Arrays.asList(this.sundayButton, this.mondayButton, this.tuesdayButton,
@@ -185,11 +185,11 @@ public class TrackerView extends Pane {
 		return buttonsToTest;
 	}
 	
-	protected DayView getViewForTest(){		
+	public DayView getViewForTest(){		
 		return this.testDay;
 	}
 	
-	protected void setViewForTest(DayView day) {
+	public void setViewForTest(DayView day) {
 		this.testDay = day;
 	}
 	
