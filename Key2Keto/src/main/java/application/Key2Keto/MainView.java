@@ -28,8 +28,9 @@ import application.Key2Keto.Recipes.RecipeView;
 import application.Key2Keto.Tracker.TrackerView;
 
 public class MainView extends Pane{
-	
-    VBox view;
+	Account user;
+  
+  VBox view;
 	HBox labels;
 	private Button dash;
 	private Button account;
@@ -47,8 +48,10 @@ public class MainView extends Pane{
 	Label title;
 	String currentTab;
 	
-	
-	public MainView() {
+
+	public MainView(Account user) {
+
+		this.user = user;
 		
 		InitializeVariables();
 		StylizeElements();
@@ -64,6 +67,7 @@ public class MainView extends Pane{
 		
 		this.dash.setOnAction(new EventHandler<ActionEvent>() {
 		    @Override public void handle(ActionEvent e) {
+		    //	MainView.this.dashboardView = null;
 		    	stackOrder(1);
 		    	currentTab = "Dashboard";
 		    }
@@ -97,6 +101,9 @@ public class MainView extends Pane{
 		    }
 		});
 }
+	public Account getAccount() {
+		return this.user;
+	}
 	
 	private void InitializeVariables(){
 	    view = new VBox();
@@ -108,10 +115,10 @@ public class MainView extends Pane{
 		recipes = new Button("RECIPES");
 		logout = new Button("LOG OUT");
 		mainContent = new StackPane();
-		recipeView = new RecipeView("./src/main/java/application/Key2Keto/Recipes/ModifiedKeto.txt");
-		accountView = new AccountView(new Account("dummyUsername", "dummyPassword", "First", "Last", "Male", "6'1\"", 150, 24, "Classic"));  /*TODO NEEDS ADJUSTED */
+		recipeView = new RecipeView(this.user);
+		accountView = new AccountView(this.user);
 		trackerView = new TrackerView();
-		dashboardView = new DashboardView();
+		dashboardView = new DashboardView(this.user);
 		other = new Pane();
 		label = new Label("IM IN FRONT");
 		title = new Label("KEY2KETO");
@@ -162,27 +169,32 @@ public class MainView extends Pane{
 		switch(num) {
 			case 0: //Switch to Recipe tab
 				this.mainContent.setVisible(true);
-				this.recipeView.setViewOrder(-1);
-				this.dashboardView.setViewOrder(0);
-				this.accountView.setViewOrder(0);
-				this.trackerView.setViewOrder(0);
-			
 				this.dashboardView.setVisible(false);
 				this.accountView.setVisible(false);
 				this.recipeView.setVisible(true);
 				this.trackerView.setVisible(false);
+				this.mainContent.setVisible(true);
+				
+				this.recipeView.setViewOrder(-1);
+				this.dashboardView.setViewOrder(0);
+				this.accountView.setViewOrder(0);
+				this.trackerView.setViewOrder(0);
 				break;
 			case 1: //Switch to Dashboard tab
 				this.mainContent.setVisible(true);
+				this.dashboardView.setVisible(true);
+				this.accountView.setVisible(false);
+				this.recipeView.setVisible(false);
+				this.trackerView.setVisible(false);
+				
+				this.mainContent.getChildren().remove(2);
+				this.dashboardView = new DashboardView(this.user);
+				this.mainContent.getChildren().add(2,dashboardView);
 				this.recipeView.setViewOrder(0);
 				this.dashboardView.setViewOrder(-1);
 				this.accountView.setViewOrder(0);
 				this.trackerView.setViewOrder(0);
 			
-				this.dashboardView.setVisible(true);
-				this.accountView.setVisible(false);
-				this.recipeView.setVisible(false);
-				this.trackerView.setVisible(false);
 				break;
 			case 2: //Switch to Account tab
 				this.mainContent.setVisible(true);
@@ -196,6 +208,7 @@ public class MainView extends Pane{
 				this.recipeView.setVisible(false);
 				this.trackerView.setVisible(false);
 				break;
+				
 			case 3: //Switch to tracker tab
 				this.mainContent.setVisible(true);
 				this.recipeView.setViewOrder(0);
@@ -207,27 +220,13 @@ public class MainView extends Pane{
 				this.accountView.setVisible(false);
 				this.recipeView.setVisible(false);
 				this.trackerView.setVisible(true);
-			case 4: //Switch to shopping tab
+				break;
+				
+			case 4:
 				/*TODO add panes as they are developed*/
 			default:
 				System.out.println("You should not get here");
-		}
-		
-		//this.mainContent.setVisible(true);
-		//this.recipeView.setViewOrder(-1);
-		//this.other.setViewOrder(0);
-		//this.other.setVisible(false);
-		//this.recipeView.setVisible(true);
-		
-	}
-	
-	public void stackOrder2(){
-		this.mainContent.setVisible(true);
-		this.recipeView.setViewOrder(0);
-		this.other.setViewOrder(-1);
-		this.recipeView.setVisible(false);
-		this.other.setVisible(true);
-		
+		}	
 	}
 	
 	public VBox getView() {

@@ -10,7 +10,7 @@ public class App extends Application {
     public void start(Stage stage) {
     	stage.getIcons().add(new Image(this.getClass().getResourceAsStream("ketoIcon.png")));
     	SceneSwitcher switcher = new SceneSwitcher(stage);
-    
+   
     	stage.setScene(switcher.LoginScene());
         stage.show();
     }

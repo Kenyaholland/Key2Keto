@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import org.testfx.framework.junit5.ApplicationTest;
 
+import application.Key2Keto.Account.Account;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -17,7 +18,7 @@ class RecipeViewTest extends ApplicationTest{
 	@Override
 	public void start(Stage stage) {
 		
-		recipeView = new RecipeView("./src/main/java/application/Key2Keto/Recipes/ModifiedKeto.txt");
+		recipeView = new RecipeView(new Account("dummyUsername", "dummyPassword", "First", "Last", "Male", "6'1\"", 150, 24, "Modified Keto"));
 		
 		Scene recipeScene = new Scene(recipeView);
 		stage.setScene(recipeScene);
