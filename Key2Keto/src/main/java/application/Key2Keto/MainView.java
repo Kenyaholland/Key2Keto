@@ -1,6 +1,5 @@
 package application.Key2Keto;
 
-import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -67,7 +66,6 @@ public class MainView extends Pane{
 		
 		this.dash.setOnAction(new EventHandler<ActionEvent>() {
 		    @Override public void handle(ActionEvent e) {
-		    //	MainView.this.dashboardView = null;
 		    	stackOrder(1);
 		    	currentTab = "Dashboard";
 		    }

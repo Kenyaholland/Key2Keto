@@ -3,15 +3,13 @@ package application.Key2Keto.Dashboard;
 import java.time.DayOfWeek;
 import java.time.format.TextStyle;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.Locale;
 
 import application.Key2Keto.Account.Account;
-import application.Key2Keto.Recipes.Recipe;
+
 
 public class Dashboard {
 	private Account userAccount;
-	private ArrayList<ArrayList<Recipe>> weeksRecipes;
 	private String currentDayOfWeek;
 	
 	public Dashboard(Account userAccount) {
@@ -55,50 +53,5 @@ public class Dashboard {
 				System.out.println("This does not exist.");
 		}
 		return day;
-	}
-	
-	public Recipe getBreakfastRecipe(){
-		Recipe recipe = null;
-		if(this.userAccount.getChosenRecipes().get(this.getCurrentDayInt()).size()>0) {
-			for(int i = 0; i<this.userAccount.getChosenRecipes().get(this.getCurrentDayInt()).size(); i++) {
-				if(this.userAccount.getChosenRecipes().get(this.getCurrentDayInt()).get(i).getName().contentEquals("Breakfast")) {
-					recipe = this.userAccount.getChosenRecipes().get(this.getCurrentDayInt()).get(i);
-				}
-			}
-		}
-		return recipe;
-	}
-	public Recipe getLunchRecipe(){
-		Recipe recipe = null;
-		if(this.userAccount.getChosenRecipes().get(this.getCurrentDayInt()).size()>0) {
-			for(int i = 0; i<this.userAccount.getChosenRecipes().get(this.getCurrentDayInt()).size(); i++) {
-				if(this.userAccount.getChosenRecipes().get(this.getCurrentDayInt()).get(i).getName().contentEquals("Entree")) {
-					recipe = this.userAccount.getChosenRecipes().get(this.getCurrentDayInt()).get(i);
-				}
-			}
-		}
-		return recipe;
-	}
-	public Recipe getDinnerRecipe(){
-		Recipe recipe = null;
-		if(this.userAccount.getChosenRecipes().get(this.getCurrentDayInt()).size()>0) {
-			for(int i = 0; i<this.userAccount.getChosenRecipes().get(this.getCurrentDayInt()).size(); i++) {
-				if(this.userAccount.getChosenRecipes().get(this.getCurrentDayInt()).get(i).getName().contentEquals("Entree")) {
-					recipe = this.userAccount.getChosenRecipes().get(this.getCurrentDayInt()).get(i+1);
-				}
-			}
-		}
-		return recipe;
-	}
-	public Recipe getSnackRecipe(){
-		Recipe recipe = null;
-		if(this.userAccount.getChosenRecipes().get(this.getCurrentDayInt()).size()>0) {
-			for(int i = 0; i<this.userAccount.getChosenRecipes().get(this.getCurrentDayInt()).size(); i++) {
-				if(this.userAccount.getChosenRecipes().get(this.getCurrentDayInt()).get(i).getName().contentEquals("Snacks")) {
-					recipe = this.userAccount.getChosenRecipes().get(this.getCurrentDayInt()).get(i);
-				}
-			}
-		}
-		return recipe;
 	}
 }

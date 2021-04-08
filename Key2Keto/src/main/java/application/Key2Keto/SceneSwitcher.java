@@ -3,7 +3,6 @@ package application.Key2Keto;
 import application.Key2Keto.Account.Account;
 import application.Key2Keto.Account.AccountCreationView;
 import application.Key2Keto.Account.LoginView;
-//import application.Key2Keto.Recipes.RecipeView;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
@@ -40,7 +39,7 @@ public class SceneSwitcher extends Pane{
 	
 
 	public Scene MainViewScene(Account account) {
-    	MainView mainView = new MainView(this.stage, account);
+    	MainView mainView = new MainView(account);
 
     	VBox view = mainView.getView();
         Scene mainViewScene = new Scene(view);

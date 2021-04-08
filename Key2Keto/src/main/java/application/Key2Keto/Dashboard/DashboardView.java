@@ -24,7 +24,6 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.chart.XYChart.Data;
 import javafx.scene.chart.XYChart.Series;
 import javafx.scene.control.CheckBox;
-//import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
 public class DashboardView extends Pane {
@@ -167,7 +166,7 @@ public class DashboardView extends Pane {
         series.getData().add(new Data<String, Number>("Thursday",this.dashboard.getUserAccount().getTrackers().get(4).getWaterIntake()));  
         series.getData().add(new Data<String, Number>("Friday",this.dashboard.getUserAccount().getTrackers().get(5).getWaterIntake()));  
         series.getData().add(new Data<String, Number>("Saturday",this.dashboard.getUserAccount().getTrackers().get(6).getWaterIntake()));  
- 
+
         this.waterChart.getData().add(series);
         this.waterChart.setLegendVisible(false);
         this.waterChart.setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, null, null)));
@@ -182,7 +181,6 @@ public class DashboardView extends Pane {
 		this.userName.setAlignment(Pos.CENTER);
 		this.userName.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 18));
 		this.userName.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
-		//VBox.setMargin(this.userName, new Insets(5, 0, 5, 0));
 		this.userName.setBorder(new Border(new BorderStroke(Color.BLACK, 
 	            null, null, null, BorderStrokeStyle.NONE, BorderStrokeStyle.NONE,BorderStrokeStyle.SOLID,
 	            BorderStrokeStyle.NONE, CornerRadii.EMPTY, new BorderWidths(3), null)));

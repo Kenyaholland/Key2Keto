@@ -36,7 +36,6 @@ public class RecipeView extends Pane {
 	private DayOfWeekView testDay;
 	
 	public RecipeView(Account userAccount){
-	//public RecipeView(String file){
 		this.userAccount = userAccount;
 		String file = "./src/main/java/application/Key2Keto/Recipes/"+getDietTypeString(this.userAccount.getDietType())+"Keto.txt";
 		this.recipeFileReader = new RecipeFileReader(file);
@@ -50,7 +49,6 @@ public class RecipeView extends Pane {
 		    	setButtonCLickedColor(0);
 		    	daysOfWeek.setVisible(true);
 		    	setDayStack(0);
-		       // System.out.println("Sunday Selected");
 		    }
 		});
 		mondayButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -58,7 +56,6 @@ public class RecipeView extends Pane {
 		    	setButtonCLickedColor(1);
 		    	daysOfWeek.setVisible(true);
 		    	setDayStack(1);
-		       // System.out.println("Monday Selected");
 		    }
 		});
 		tuesdayButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -66,7 +63,6 @@ public class RecipeView extends Pane {
 		    	setButtonCLickedColor(2);
 		    	daysOfWeek.setVisible(true);
 		    	setDayStack(2);
-		       // System.out.println("Tuesday Selected");
 		    }
 		});
 		wednesdayButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -74,7 +70,6 @@ public class RecipeView extends Pane {
 		    	setButtonCLickedColor(3);
 		    	daysOfWeek.setVisible(true);
 		    	setDayStack(3);
-		       // System.out.println("Wednesday Selected");
 		    }
 		});
 		thursdayButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -82,7 +77,6 @@ public class RecipeView extends Pane {
 		    	setButtonCLickedColor(4);
 		    	daysOfWeek.setVisible(true);
 		    	setDayStack(4);
-		     //   System.out.println("Thursday Selected");
 		    }
 		});
 		fridayButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -90,7 +84,6 @@ public class RecipeView extends Pane {
 		    	setButtonCLickedColor(5);
 		    	daysOfWeek.setVisible(true);
 		    	setDayStack(5);
-		     //   System.out.println("Friday Selected");
 		    }
 		});
 		saturdayButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -98,13 +91,11 @@ public class RecipeView extends Pane {
 		    	setButtonCLickedColor(6);
 		    	daysOfWeek.setVisible(true);
 		    	setDayStack(6);
-		      //  System.out.println("Saturday Selected");
 		    }
 		});
 	}
 	
 	private String getDietTypeString(String str) {
-		String temp = str;
 		String[] type = str.split(" ");
 		return type[0];
 	}
