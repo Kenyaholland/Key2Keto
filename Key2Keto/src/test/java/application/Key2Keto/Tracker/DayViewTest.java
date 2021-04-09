@@ -6,6 +6,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 import org.testfx.framework.junit5.ApplicationTest;
 
+import application.Key2Keto.Account.Account;
+
 public class DayViewTest extends ApplicationTest{
 	
 	DayView sut;
@@ -13,7 +15,7 @@ public class DayViewTest extends ApplicationTest{
 	@Override
 	public void start(Stage stage){
 		
-		sut = new DayView("");
+		sut = new DayView("", new Account("username123", "password123", "John", "McLastname", "Male", "5'9\"", 190, 24, "Classic"));
 		
 		Scene dayScene = new Scene(sut);
 		stage.setScene(dayScene);

@@ -1,5 +1,6 @@
 package application.Key2Keto.Tracker;
 
+import application.Key2Keto.Account.Account;
 import application.Key2Keto.Tracker.TrackerView;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -13,7 +14,7 @@ public class TrackerViewTest extends ApplicationTest{
 	@Override
 	public void start(Stage stage) {
 		
-		sut = new TrackerView();
+		sut = new TrackerView(new Account("username123", "password123", "John", "McLastname", "Male", "5'9\"", 190, 24, "Classic"));
 		
 		Scene trackerScene = new Scene(sut);
 		stage.setScene(trackerScene);
