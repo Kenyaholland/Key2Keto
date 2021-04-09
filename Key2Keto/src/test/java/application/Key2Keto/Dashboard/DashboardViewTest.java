@@ -4,7 +4,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-class DashboardViewTest {
+import org.testfx.framework.junit5.ApplicationTest;
+
+class DashboardViewTest extends ApplicationTest {
 
 	@Test
 	void test() {
