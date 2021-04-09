@@ -94,7 +94,6 @@ public class DayOfWeekView extends Pane {
 		    	DayOfWeekView.this.confirmationBox.setVisible(true);
 		    	DayOfWeekView.this.recipeDetails.setVisible(false);
 		    	setButtonCLickedColor(0);
-		   //     System.out.println("Accepted Overview");
 		    }
 		});
 		breakfastButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -105,7 +104,6 @@ public class DayOfWeekView extends Pane {
 		    	DayOfWeekView.this.confirmationBox.setViewOrder(0);
 		    	DayOfWeekView.this.confirmationBox.setVisible(false);
 		    	setButtonCLickedColor(1);
-		    //    System.out.println("Accepted Breakfast");
 		    }
 		});
 		entreesButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -116,7 +114,6 @@ public class DayOfWeekView extends Pane {
 		    	DayOfWeekView.this.confirmationBox.setViewOrder(0);
 		    	DayOfWeekView.this.confirmationBox.setVisible(false);
 		    	setButtonCLickedColor(2);
-		   //     System.out.println("Accepted Entrees");
 		    }
 		});
 		snacksButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -127,35 +124,30 @@ public class DayOfWeekView extends Pane {
 		    	DayOfWeekView.this.confirmationBox.setViewOrder(0);
 		    	DayOfWeekView.this.confirmationBox.setVisible(false);
 		    	setButtonCLickedColor(3);
-		   //     System.out.println("Accepted Snacks");
 		    }
 		});
 		
 		deleteBreakfastButton.setOnAction(new EventHandler<ActionEvent>() {
 		    @Override public void handle(ActionEvent e) {
 		    	clearRecipe(0);
-		    //    System.out.println("Accepted Delete Breakfast");
 		    }
 		});
 		
 		deleteLunchButton.setOnAction(new EventHandler<ActionEvent>() {
 		    @Override public void handle(ActionEvent e) {
 		    	clearRecipe(1);
-		    //    System.out.println("Accepted Delete Lunch");
 		    }
 		});
 		
 		deleteDinnerButton.setOnAction(new EventHandler<ActionEvent>() {
 		    @Override public void handle(ActionEvent e) {
 		    	clearRecipe(2);
-		   //     System.out.println("Accepted Delete Dinner");
 		    }
 		});
 		
 		deleteSnackButton.setOnAction(new EventHandler<ActionEvent>() {
 		    @Override public void handle(ActionEvent e) {
 		    	clearRecipe(3);
-		   //     System.out.println("Accepted Delete Snacks");
 		    }
 		});
 		
@@ -168,7 +160,6 @@ public class DayOfWeekView extends Pane {
 		    		selected = DayOfWeekView.this.comboBox.getValue().toString();
 		    	}
 		    	addRecipe(selected);
-		        System.out.println("Added Recipe");
 		    }
 		});
 		
@@ -185,19 +176,15 @@ public class DayOfWeekView extends Pane {
 		    	for(int i = 0; i<DayOfWeekView.this.daysRecipes.size(); i++) {
 		    		if(DayOfWeekView.this.daysRecipes.get(i).getName().contentEquals(DayOfWeekView.this.breakfastRecipeName.getText())) {
 		    			temp.add(0,DayOfWeekView.this.daysRecipes.get(i));
-		    			System.out.println("Breakfast Added");
 		    		}
 		    		if(DayOfWeekView.this.daysRecipes.get(i).getName().contentEquals(DayOfWeekView.this.lunchRecipeName.getText())) {
 		    			temp.add(1,DayOfWeekView.this.daysRecipes.get(i));
-		    			System.out.println("Lunch Added");
 		    		}
 		    		if(DayOfWeekView.this.daysRecipes.get(i).getName().contentEquals(DayOfWeekView.this.dinnerRecipeName.getText())) {
 		    			temp.add(2,DayOfWeekView.this.daysRecipes.get(i));
-		    			System.out.println("Dinner Added");
 		    		}
 		    		if(DayOfWeekView.this.daysRecipes.get(i).getName().contentEquals(DayOfWeekView.this.snackRecipeName.getText())) {
 		    			temp.add(3,DayOfWeekView.this.daysRecipes.get(i));
-		    			System.out.println("Snack Added");
 		    		}
 		    	}
 		    	DayOfWeekView.this.user.getChosenRecipes().get(day).add(temp.get(0));
@@ -304,13 +291,10 @@ public class DayOfWeekView extends Pane {
 			if (selected.contentEquals(this.recipeList.getRecipeList().get(i).getName())) {
 				temp = this.recipeList.getRecipeList().get(i);
 				for(int j =0; j<this.daysRecipes.size();j++) {
-				//for(int j = 0; j<this.user.getChosenRecipes().get(day).size();j++) {
-					//if(this.user.getChosenRecipes().get(day).get(j).getType().contentEquals(temp.getType()) && !temp.getType().contentEquals("Entrees") ) {
 					if(this.daysRecipes.get(j).getType().contentEquals(temp.getType()) && !temp.getType().contentEquals("Entrees") ) {
 							recflag = 1;
 							break;	
 					}
-					//else if(this.user.getChosenRecipes().get(day).get(j).getType().contentEquals(temp.getType()) && temp.getType().contentEquals("Entrees") ) {
 					else if(this.daysRecipes.get(j).getType().contentEquals(temp.getType()) && temp.getType().contentEquals("Entrees") ) {
 						if(numEntree > 1) {
 							recflag = 1;
@@ -319,14 +303,11 @@ public class DayOfWeekView extends Pane {
 					}
 				}
 				if(recflag == 0 && !temp.getType().contentEquals("Entrees")) {
-					//this.user.getChosenRecipes().get(day).add(temp);
 					this.daysRecipes.add(temp);
 				}
 				if(temp.getType().contentEquals("Entrees") && numEntree < 2 ) {
-					//this.user.getChosenRecipes().get(day).add(temp);
 					this.daysRecipes.add(temp);
 					numEntree++;
-					System.out.println(numEntree);
 				}
 			}
 		}
@@ -349,20 +330,6 @@ public class DayOfWeekView extends Pane {
 				count = 0;
 			}
 		}
-		
-//		for(int i = 0; i < this.user.getChosenRecipes().get(day).size();i++) {
-//			if(this.user.getChosenRecipes().get(day).get(i).getType().contentEquals("Breakfast")) {
-//				this.breakfastRecipeName.setText(this.user.getChosenRecipes().get(day).get(i).getName());
-//			}else if(this.user.getChosenRecipes().get(day).get(i).getType().contentEquals("Snacks")) {
-//				this.snackRecipeName.setText(this.user.getChosenRecipes().get(day).get(i).getName());
-//			}else if(this.user.getChosenRecipes().get(day).get(i).getType().contentEquals("Entrees") && count == 0) {
-//				this.lunchRecipeName.setText(this.user.getChosenRecipes().get(day).get(i).getName());
-//				count = 1;
-//			}else if(this.user.getChosenRecipes().get(day).get(i).getType().contentEquals("Entrees")) {
-//				this.dinnerRecipeName.setText(this.user.getChosenRecipes().get(day).get(i).getName());
-//				count = 0;
-//			}
-//		}
 		this.breakfastRecipeName.setVisible(true);
 		this.lunchRecipeName.setVisible(true);
 		this.dinnerRecipeName.setVisible(true);
@@ -484,6 +451,18 @@ public class DayOfWeekView extends Pane {
 		this.addRecipeButton.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 12));
 		
 		this.bottomRecipeInfo.setPrefSize(490, 400);
+		this.confirm.setPrefSize(490, 400);
+		this.confirm.setMargin(this.confirmationBox, new Insets(10, 10, 10, 10));
+		this.confirm.setAlignment(Pos.CENTER);
+		this.confirmLabel.setFont(Font.font("Verdana", FontWeight.NORMAL, 14));
+		this.confirmLabel.setPrefSize(480, 100);
+		this.confirmLabel.setWrapText(true);
+		this.confirmLabel.setAlignment(Pos.CENTER);
+		this.confirmationBox.setAlignment(Pos.CENTER);
+		this.confirmRecipeSelection.setPrefSize(100, 50);
+		this.confirmRecipeSelection.setFont(Font.font("Verdana", FontWeight.NORMAL, 14));
+		this.confirmRecipeSelection.setAlignment(Pos.CENTER);
+		
 	}
 	
 	private void setDefaultVisibilities() {
@@ -514,7 +493,8 @@ public class DayOfWeekView extends Pane {
 		this.recipeDetails = new VBox();
 		this.confirm = new StackPane();
 		this.confirmationBox = new VBox();
-		this.confirmLabel = new Label("Confirm the selected recipes?");
+		this.confirmLabel = new Label("Click Confirm to add the "
+				+ "Chosen Recipes to your Dashboard");
 		this.confirmRecipeSelection = new Button("CONFIRM");
 		this.bottomRecipeInfo = new HBox();
 		this.categorySelection = new HBox();
@@ -578,9 +558,7 @@ public class DayOfWeekView extends Pane {
 		switch(num) {
 		case 0:
 			for(int i=0; i< this.daysRecipes.size();i++) {
-			//for(int i=0; i< this.user.getChosenRecipes().get(day).size();i++) {	
 				if(this.breakfastRecipeName.getText().contentEquals(this.user.getChosenRecipes().get(day).get(i).getName())) {
-					//this.user.getChosenRecipes().get(day).remove(i);
 					this.daysRecipes.remove(i);
 				}
 			}
@@ -589,10 +567,7 @@ public class DayOfWeekView extends Pane {
 			
 		case 1:{
 			for(int i=0; i< this.daysRecipes.size();i++) {
-			//for(int i=0; i < this.user.getChosenRecipes().get(day).size();i++) {
 				if(this.lunchRecipeName.getText().contentEquals(this.daysRecipes.get(i).getName())) {
-				//if(this.lunchRecipeName.getText().contentEquals(this.user.getChosenRecipes().get(day).get(i).getName())) {
-					//this.user.getChosenRecipes().get(day).remove(i);
 					this.daysRecipes.remove(i);
 					lunchFlag = false;
 				}
@@ -602,10 +577,7 @@ public class DayOfWeekView extends Pane {
 		}
 		case 2:
 			for(int i=0; i< this.daysRecipes.size();i++) {
-			//for(int i=0; i< this.user.getChosenRecipes().get(day).size();i++) {
-				//if(this.dinnerRecipeName.getText().contentEquals(this.user.getChosenRecipes().get(day).get(i).getName())) {
 				if(this.dinnerRecipeName.getText().contentEquals(this.daysRecipes.get(i).getName())) {
-					//this.user.getChosenRecipes().get(day).remove(i);
 					this.daysRecipes.remove(i);
 					dinnerFlag = false;
 				}
@@ -614,10 +586,7 @@ public class DayOfWeekView extends Pane {
 			break;
 		case 3:
 			for(int i=0; i< this.daysRecipes.size();i++) {
-			//for(int i=0; i< this.user.getChosenRecipes().get(day).size();i++) {	
 				if(this.snackRecipeName.getText().contentEquals(this.daysRecipes.get(i).getName())) {
-				//if(this.snackRecipeName.getText().contentEquals(this.user.getChosenRecipes().get(day).get(i).getName())) {
-					//this.user.getChosenRecipes().get(day).remove(i);
 					this.daysRecipes.remove(i);
 				}
 			}
@@ -630,7 +599,6 @@ public class DayOfWeekView extends Pane {
 	
 	public ArrayList<Recipe> getSelectedRecipes(){
 		return this.daysRecipes;
-		//return this.user.getChosenRecipes().get(day);
 	}
 
 // Methods needed for testing purposes

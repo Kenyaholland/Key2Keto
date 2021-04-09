@@ -13,10 +13,14 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+
+import java.util.ArrayList;
+
 import application.Key2Keto.Account.Account;
 import application.Key2Keto.Tracker.TrackerView;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Group;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
@@ -42,15 +46,11 @@ public class DashboardView extends Pane {
 	private Label dinnerRecipe;
 	private Label snackRecipe;
 	private Label weeklyGoalsLabel;
-	private Label goalOne;
-	private Label goalTwo;
-	private Label goalThree;
+	private ArrayList<CheckBox> goalList;
 	private Label todaysRecipeTitle;
+	private Label goalLabel;
 	private LineChart<String, Number> waterChart;
 	private LineChart<String, Number> sleepChart;
-	private CheckBox firstGoal;
-	private CheckBox secondGoal;
-	private CheckBox thirdGoal;
 	
 	public DashboardView(Account user) {
 		this.dashboard = new Dashboard(user);
@@ -62,6 +62,7 @@ public class DashboardView extends Pane {
 		stylizeVariables();
 		this.getChildren().add(view);
 		populateDaysRecipes();
+		populateWeeksGoals();
 	}
 	
 	private void initializeVariables() {
@@ -77,30 +78,47 @@ public class DashboardView extends Pane {
 		this.lunchRecipe= new Label("Chosen Lunch: Nothing Chosen");
 		this.dinnerRecipe= new Label("Chosen Dinner: Nothing Chosen");
 		this.snackRecipe= new Label("Chosen Snack: Nothing Chosen");
-		this.weeklyGoalsLabel= new Label("GOALS FOR THE WEEK");
-		this.firstGoal = new CheckBox("Have an average of 8 hours of sleep a day for the week.");
-		this.secondGoal = new CheckBox("Drink 100 ounces of water each day for the week.");
-		this.thirdGoal = new CheckBox("Drink 128 ounces of water on Tuesday");
+		this.weeklyGoalsLabel= new Label("GOALS FOR THE DAY");
+		this.goalList = new ArrayList<CheckBox>();
+		this.goalLabel = new Label("You do not have any goals set for today! "
+				+ "\nClick the Tracker tab and set today's goals!");
 	}
 	
 	private void populateChildren() {
 		this.recipeInformationBox.getChildren().addAll(this.todaysRecipeTitle,this.dietType,
 				this.breakfastRecipe,this.lunchRecipe,this.dinnerRecipe,this.snackRecipe);
-		this.goalInformationBox.getChildren().addAll(this.weeklyGoalsLabel, this.firstGoal, this.secondGoal, this.thirdGoal);
+		this.goalInformationBox.getChildren().addAll(this.weeklyGoalsLabel, this.goalLabel);
 		this.upperHalf.getChildren().addAll(this.recipeInformationBox, this.goalInformationBox);
 		this.lowerHalf.getChildren().addAll(this.waterChart, this.sleepChart);
 		this.view.getChildren().addAll(this.userName, this.upperHalf, this.lowerHalf);
 	}
 	
 	private void populateDaysRecipes(){
-		System.out.println("this got read");
 		if(this.dashboard.getUserAccount().getChosenRecipes().get(this.dashboard.getCurrentDayInt()).size()>0) {
-			System.out.println("Size is greater than one.");
-			this.breakfastRecipe.setText("Chosen Breakfast: "+ this.dashboard.getUserAccount().getChosenRecipes()
-					.get(this.dashboard.getCurrentDayInt()).get(0))/*getBreakfastRecipe().getName())*/;
-		//	this.lunchRecipe.setText("Chosen Lunch: "+ this.dashboard.getLunchRecipe().getName());
-		//	this.dinnerRecipe.setText("Chosen Dinner: "+ this.dashboard.getDinnerRecipe().getName());
-		//	this.snackRecipe.setText("Chosen Snack: "+ this.dashboard.getSnackRecipe().getName());
+			if(this.dashboard.getUserAccount().getChosenRecipes().get(this.dashboard.getCurrentDayInt()).get(0) != null) {
+				this.breakfastRecipe.setText("Chosen Breakfast: "+ this.dashboard.getUserAccount().getChosenRecipes()
+						.get(this.dashboard.getCurrentDayInt()).get(0).getName());
+			}else {
+				this.breakfastRecipe.setText("Chosen Breakfast: Nothing Chosen");
+			}
+			if(this.dashboard.getUserAccount().getChosenRecipes().get(this.dashboard.getCurrentDayInt()).get(1) != null) {
+				this.lunchRecipe.setText("Chosen Lunch: "+this.dashboard.getUserAccount().getChosenRecipes()
+						.get(this.dashboard.getCurrentDayInt()).get(1).getName());
+			}else {
+				this.lunchRecipe.setText("Chosen Lunch: Nothing Chosen");
+			}
+			if(this.dashboard.getUserAccount().getChosenRecipes().get(this.dashboard.getCurrentDayInt()).get(2) != null) {
+				this.dinnerRecipe.setText("Chosen Dinner: "+this.dashboard.getUserAccount().getChosenRecipes()
+						.get(this.dashboard.getCurrentDayInt()).get(2).getName());
+			}else {
+				this.dinnerRecipe.setText("Chosen Dinner: Nothing Chosen");
+			}
+			if(this.dashboard.getUserAccount().getChosenRecipes().get(this.dashboard.getCurrentDayInt()).get(3) != null) {
+				this.snackRecipe.setText("Chosen Snack: "+this.dashboard.getUserAccount().getChosenRecipes()
+				.get(this.dashboard.getCurrentDayInt()).get(3).getName());
+			}else {
+				this.snackRecipe.setText("Chosen Snack: Nothing Chosen");
+			}
 		}
 	}
 	
@@ -152,6 +170,38 @@ public class DashboardView extends Pane {
         this.waterChart.setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, null, null)));
 	}
 	
+	private void populateWeeksGoals() {
+		
+		if(this.dashboard.getUserAccount().getTrackers().get(this.dashboard.getCurrentDayInt()).getGoals().size()>0) {
+			this.goalLabel.setVisible(false);
+			
+			for(int i = 0;i<this.goalList.size();i++) {
+				this.goalInformationBox.getChildren().remove(this.goalList.get(i));
+			}
+
+			for(int i =0; i<this.dashboard.getUserAccount().getTrackers().get(this.dashboard.getCurrentDayInt()).getGoals().size(); i ++) {
+				CheckBox box = new CheckBox();
+				box.setText(this.dashboard.getUserAccount().getTrackers().get(this.dashboard.getCurrentDayInt()).getGoals().get(i));
+				goalList.add(box);
+				VBox.setMargin(this.goalList.get(i), new Insets(0, 0, 0, 10));
+				this.goalList.get(i).setFont(Font.font("Verdana", FontWeight.NORMAL, 14));
+			}
+			
+			for(int i = 0;i<this.goalList.size();i++) {
+				this.goalInformationBox.getChildren().add(this.goalList.get(i));
+			}
+		}else {
+			this.goalLabel.setVisible(true);
+		}
+		adjustFontSize();
+	}
+	private void adjustFontSize() {
+		if(this.dashboard.getUserAccount().getTrackers().get(this.dashboard.getCurrentDayInt()).getGoals().size()>4) {
+			for(int i = 0;i<this.goalList.size();i++) {
+				this.goalList.get(i).setFont(Font.font("Verdana", FontWeight.NORMAL, 12));
+			}
+		}
+	}
 	private void stylizeVariables() {
 		this.view.setPrefSize(980, 500);
 		this.view.setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, null, null)));
@@ -195,19 +245,11 @@ public class DashboardView extends Pane {
 		
 		this.goalInformationBox.setPrefWidth(490);
 		VBox.setMargin(this.weeklyGoalsLabel, new Insets(5, 0, 5, 0));
-		VBox.setMargin(this.firstGoal, new Insets(0, 0, 0, 10));
-		VBox.setMargin(this.secondGoal, new Insets(0, 0, 0, 10));
-		VBox.setMargin(this.thirdGoal, new Insets(0, 0, 0, 10));
-		
+		this.goalLabel.setPrefWidth(490);
+		this.goalLabel.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 14));
+		this.goalLabel.setAlignment(Pos.CENTER);
 		this.upperHalf.setPrefSize(980, 155);
 		this.upperHalf.setBackground(new Background(new BackgroundFill(Color.LIGHTSKYBLUE, null, null)));
 		this.lowerHalf.setPrefSize(980, 315);
-		
-		this.firstGoal.setFont(Font.font("Verdana", FontWeight.NORMAL, 14));
-		this.secondGoal.setFont(Font.font("Verdana", FontWeight.NORMAL, 14));
-		this.thirdGoal.setFont(Font.font("Verdana", FontWeight.NORMAL, 14));
 	}
 }
-/*
-	UserAccount Tracker day. getwater or getsleep for each chart.
-*/
