@@ -3,6 +3,7 @@ package application.Key2Keto.Tracker;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import application.Key2Keto.Account.Account;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -31,8 +32,10 @@ public class TrackerView extends Pane {
 	private StackPane daysOfWeek = new StackPane();
 	private DayView days[] = new DayView[7];
 	private DayView testDay;
+	private Account user;
 	
-	public TrackerView(){
+	public TrackerView(Account user){
+		this.user = user;
 		populateDaysOfWeek();
 		populateChildren();
 		setStyles();
@@ -156,13 +159,13 @@ public class TrackerView extends Pane {
 	}
 	
 	private void populateDaysOfWeek() {
-		days[0] = new DayView("Sunday");
-		days[1] = new DayView("Monday");
-		days[2] = new DayView("Tuesday");
-		days[3] = new DayView("Wednesday");
-		days[4] = new DayView("Thursday");
-		days[5] = new DayView("Friday");
-		days[6] = new DayView("Saturday");
+		days[0] = new DayView("Sunday", this.user);
+		days[1] = new DayView("Monday", this.user);
+		days[2] = new DayView("Tuesday", this.user);
+		days[3] = new DayView("Wednesday", this.user);
+		days[4] = new DayView("Thursday", this.user);
+		days[5] = new DayView("Friday", this.user);
+		days[6] = new DayView("Saturday", this.user);
 	}
 	
 	protected void setDayStack(int num) {
@@ -176,7 +179,7 @@ public class TrackerView extends Pane {
 		}
 	}
 	
-	public ArrayList<Button> getButtonsToTest(){
+	protected ArrayList<Button> getButtonsToTest(){
 		ArrayList<Button> buttonsToTest = new ArrayList<Button>();
 		
 		buttonsToTest.addAll(new ArrayList<Button>(Arrays.asList(this.sundayButton, this.mondayButton, this.tuesdayButton,
@@ -185,11 +188,11 @@ public class TrackerView extends Pane {
 		return buttonsToTest;
 	}
 	
-	public DayView getViewForTest(){		
+	protected DayView getViewForTest(){		
 		return this.testDay;
 	}
 	
-	public void setViewForTest(DayView day) {
+	protected void setViewForTest(DayView day) {
 		this.testDay = day;
 	}
 	

@@ -242,6 +242,7 @@ public class DayOfWeekView extends Pane {
 				break;
 			case "Monday":
 				day = 1;
+				break;
 			case "Tuesday":
 				day = 2;
 				break;

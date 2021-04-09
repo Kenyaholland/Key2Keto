@@ -40,7 +40,7 @@ public class SceneSwitcher extends Pane{
 	
 
 	public Scene MainViewScene(Account account) {
-    	MainView mainView = new MainView(this.stage, account);
+    	MainView mainView = new MainView(account);
 
     	VBox view = mainView.getView();
         Scene mainViewScene = new Scene(view);

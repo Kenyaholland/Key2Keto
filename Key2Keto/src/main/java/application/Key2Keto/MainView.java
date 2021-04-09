@@ -117,7 +117,7 @@ public class MainView extends Pane{
 		mainContent = new StackPane();
 		recipeView = new RecipeView(this.user);
 		accountView = new AccountView(this.user);
-		trackerView = new TrackerView();
+		trackerView = new TrackerView(this.user);
 		dashboardView = new DashboardView(this.user);
 		other = new Pane();
 		label = new Label("IM IN FRONT");

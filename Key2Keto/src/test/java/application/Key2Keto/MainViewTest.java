@@ -7,13 +7,16 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 import org.testfx.framework.junit5.ApplicationTest;
 
+import application.Key2Keto.Account.Account;
+
 public class MainViewTest extends ApplicationTest{
 	MainView sut;
+	Account mockAcc = new Account();
 	
 	@Override
 	public void start(Stage stage) {
 		
-		sut = new MainView();
+		sut = new MainView(mockAcc);
 		
 		Scene mainScene = new Scene(sut.getView());
 		stage.setScene(mainScene);
