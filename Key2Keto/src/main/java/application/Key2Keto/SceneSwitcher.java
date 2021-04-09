@@ -3,7 +3,6 @@ package application.Key2Keto;
 import application.Key2Keto.Account.Account;
 import application.Key2Keto.Account.AccountCreationView;
 import application.Key2Keto.Account.LoginView;
-//import application.Key2Keto.Recipes.RecipeView;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
