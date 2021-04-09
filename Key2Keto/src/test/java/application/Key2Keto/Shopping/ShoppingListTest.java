@@ -17,11 +17,11 @@ import com.itextpdf.kernel.pdf.canvas.parser.listener.SimpleTextExtractionStrate
 import application.Key2Keto.Recipes.*;
 
 public class ShoppingListTest
-{
+{	
 	@Test
 	public void shoppingListBuildsCorrectlyTest()
 	{	
-		ShoppingList sut = new ShoppingList(new ArrayList<Recipe>()
+		ShoppingListForTests sut = new ShoppingListForTests(new ArrayList<Recipe>()
 		{{
 			add(new Recipe("recipetype1", "recipename1", 55, 20.0, 15.7, 12.3, 4.0));
 			add(new Recipe("recipetype2", "recipename2", 56, 18.3, 22.2, 33.2, 3.5));
@@ -47,7 +47,7 @@ public class ShoppingListTest
 	@Test
 	public void shoppingListFileIsCreatedTest()
 	{
-		ShoppingList sut = new ShoppingList(new ArrayList<Recipe>()
+		ShoppingListForTests sut = new ShoppingListForTests(new ArrayList<Recipe>()
 		{{
 			add(new Recipe("recipetype1", "recipename1", 55, 20.0, 15.7, 12.3, 4.0));
 			add(new Recipe("recipetype2", "recipename2", 56, 18.3, 22.2, 33.2, 3.5));
@@ -63,7 +63,7 @@ public class ShoppingListTest
 	{
 		PdfReader reader = null;
 		PdfDocument pdfDocument = null;
-		ShoppingList sut = new ShoppingList(new ArrayList<Recipe>()
+		ShoppingListForTests sut = new ShoppingListForTests(new ArrayList<Recipe>()
 		{{
 			add(new Recipe("typetotest", "nametotest", 23, 53.2, 55.3, 17.8, 1.5));
 		}});

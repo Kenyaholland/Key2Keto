@@ -5,17 +5,14 @@ import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document; 
 import com.itextpdf.layout.element.Paragraph;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 import application.Key2Keto.Recipes.Ingredient;
 import application.Key2Keto.Recipes.Recipe;
-import javafx.stage.FileChooser;
-import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 
-public class ShoppingList implements ShoppingListInterface
+public class ShoppingListForTests implements ShoppingListInterface
 {
 	private ArrayList<Recipe> recipes;
 	
@@ -25,9 +22,7 @@ public class ShoppingList implements ShoppingListInterface
 	private ArrayList<String> shoppingListRecipes;
 	private ArrayList<String> shoppingListIngredients;
 	
-	private Stage saveWindow;
-	
-	public ShoppingList(ArrayList<Recipe> recipes)
+	public ShoppingListForTests(ArrayList<Recipe> recipes)
 	{
 		this.recipes = new ArrayList<Recipe>(recipes);
 		currentRecipeInfo = "";
@@ -35,8 +30,6 @@ public class ShoppingList implements ShoppingListInterface
 		
 		shoppingListRecipes = new ArrayList<String>();
 		shoppingListIngredients = new ArrayList<String>();
-		
-		saveWindow = new Stage();
 		
 		generateStrings();
 	}
@@ -74,15 +67,9 @@ public class ShoppingList implements ShoppingListInterface
 		int currentIngredientIndex = 0;
 		Document shoppingListDocument = null;
 		
-		FileChooser fileChooser = new FileChooser();
-		fileChooser.setTitle("Save Shopping List");
-		fileChooser.getExtensionFilters().add(new ExtensionFilter("PDF Files", "*.pdf"));
-		
-		File pdfToSave = fileChooser.showSaveDialog(saveWindow);
-		
 		try
 		{
-			PdfWriter PDFWriter = new PdfWriter(pdfToSave);
+			PdfWriter PDFWriter = new PdfWriter("ShoppingList.pdf");
 			PdfDocument pdf = new PdfDocument(PDFWriter);
 			
 			shoppingListDocument = new Document(pdf);
@@ -116,3 +103,4 @@ public class ShoppingList implements ShoppingListInterface
 		}
 	}
 }
+
