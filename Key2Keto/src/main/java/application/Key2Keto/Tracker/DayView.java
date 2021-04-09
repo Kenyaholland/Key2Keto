@@ -3,6 +3,9 @@ package application.Key2Keto.Tracker;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+
+import application.Key2Keto.Account.Account;
+import application.Key2Keto.Recipes.DayOfWeekView;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -18,8 +21,10 @@ import javafx.scene.text.FontWeight;
 public class DayView extends Pane{
 	
 	Tracker tracker;
+	Account user;
 	ConfirmPopUp popUp;
-	String dayOfWeek;
+	int dayOfWeekInt;
+	String dayOfWeekString;
 	
 	Spinner<Double> sleepField;
 	Button sleepButton;
@@ -38,11 +43,10 @@ public class DayView extends Pane{
 	VBox goalsContent;
 	VBox wholeView;
 	
-	String[] styleClasses;
-
-	public DayView(String day){
-		
-		this.dayOfWeek = day;
+	public DayView(String day, Account user){
+		this.dayOfWeekString = day;
+		this.dayOfWeekInt = getIntFormOfDay(day);
+		this.user = user;
 		
 		initializeVariables();
 		StylizeComponents();
@@ -58,7 +62,7 @@ public class DayView extends Pane{
 	}
 	
 	private void initializeVariables() {
-		this.tracker = new Tracker(this.dayOfWeek);
+		this.tracker = new Tracker(this.dayOfWeekString);
 		this.popUp = new ConfirmPopUp();
 		
 		this.wholeView = new VBox();
@@ -74,6 +78,7 @@ public class DayView extends Pane{
 		    @Override public void handle(ActionEvent e) {
 		    	if(sleepField.getValue() != null) {
 		    		tracker.setHoursOfSleep(Double.valueOf(sleepField.getValue()));
+		    		DayView.this.user.getTrackers().get(dayOfWeekInt).setHoursOfSleep(Double.valueOf(sleepField.getValue()));
 		    		popUp.display();
 		    	}
 		    }
@@ -87,6 +92,7 @@ public class DayView extends Pane{
 		    @Override public void handle(ActionEvent e) {
 		    	if(waterField.getValue() != null) {
 		    		tracker.setWaterIntake(Double.valueOf(waterField.getValue()));	
+		    		DayView.this.user.getTrackers().get(dayOfWeekInt).setWaterIntake(Double.valueOf(waterField.getValue()));
 		    		popUp.display();
 		    	}
 		    }
@@ -99,6 +105,7 @@ public class DayView extends Pane{
 		    @Override public void handle(ActionEvent e) {
 		    	if(!goalsTextField.getText().isEmpty()) {
 		    		tracker.addGoal(goalsTextField.getText());
+		    		DayView.this.user.getTrackers().get(dayOfWeekInt).addGoal(goalsTextField.getText());
 		    		goalsTextField.clear();
 		    		popUp.display();
 		    	}
@@ -134,7 +141,37 @@ public class DayView extends Pane{
 	}
 	
 	public String getDayOfWeek() {
-		return this.dayOfWeek;
+		return this.dayOfWeekString;
+	}
+	
+	public int getIntFormOfDay(String dayName) {
+		int day = 0;
+		switch(dayName) {
+			case "Sunday":
+				day = 0;
+				break;
+			case "Monday":
+				day = 1;
+				break;
+			case "Tuesday":
+				day = 2;
+				break;
+			case "Wednesday":
+				day = 3;
+				break;
+			case "Thursday":
+				day = 4;
+				break;
+			case "Friday":
+				day = 5;
+				break;
+			case "Saturday":
+				day = 5;
+				break;
+			default:
+				System.out.println("This does not exist.");
+		}
+		return day;
 	}
 	
 	/********* For testing purposes ***********/

@@ -11,6 +11,7 @@ import application.Key2Keto.Account.Account;
 
 public class MainViewTest extends ApplicationTest{
 	MainView sut;
+	Account mockAcc = new Account();
 	
 	@Override
 	public void start(Stage stage) {
