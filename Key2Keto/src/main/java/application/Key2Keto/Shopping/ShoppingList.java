@@ -73,18 +73,19 @@ public class ShoppingList //implement an interface?
 			
 			shoppingListDocument = new Document(pdf);
 			
-			for(String recipeText : shoppingListRecipes)
+			for(int i = 0; i < shoppingListRecipes.size(); i++)
 			{
-				shoppingListDocument.add(new Paragraph(recipeText));
+				shoppingListDocument.add(new Paragraph(shoppingListRecipes.get(i)));
 				
-				for(int i = currentIngredientIndex; i < shoppingListIngredients.size(); i++)
-				{
-					if(shoppingListIngredients.get(i).equals(","))
+				for(int j = currentIngredientIndex; j < shoppingListIngredients.size(); j++)
+				{	
+					if(shoppingListIngredients.get(j).equals(","))
 					{
+						currentIngredientIndex++;
 						break; //comma reached; end of current recipe's list of ingredients
 					}
 					
-					shoppingListDocument.add(new Paragraph(shoppingListIngredients.get(i)));
+					shoppingListDocument.add(new Paragraph("- " + shoppingListIngredients.get(j)));
 					currentIngredientIndex++;
 				}
 			}
