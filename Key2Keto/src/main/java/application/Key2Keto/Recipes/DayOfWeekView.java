@@ -558,7 +558,7 @@ public class DayOfWeekView extends Pane {
 		switch(num) {
 		case 0:
 			for(int i=0; i< this.daysRecipes.size();i++) {
-				if(this.breakfastRecipeName.getText().contentEquals(this.user.getChosenRecipes().get(day).get(i).getName())) {
+				if(this.breakfastRecipeName.getText().contentEquals(this.daysRecipes.get(i).getName())) {
 					this.daysRecipes.remove(i);
 				}
 			}

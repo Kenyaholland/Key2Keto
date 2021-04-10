@@ -15,9 +15,12 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import application.Key2Keto.Account.Account;
 import application.Key2Keto.Tracker.TrackerView;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
@@ -27,6 +30,7 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.chart.XYChart.Data;
 import javafx.scene.chart.XYChart.Series;
+import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 
@@ -195,6 +199,7 @@ public class DashboardView extends Pane {
 		}
 		adjustFontSize();
 	}
+	
 	private void adjustFontSize() {
 		if(this.dashboard.getUserAccount().getTrackers().get(this.dashboard.getCurrentDayInt()).getGoals().size()>4) {
 			for(int i = 0;i<this.goalList.size();i++) {
@@ -202,6 +207,7 @@ public class DashboardView extends Pane {
 			}
 		}
 	}
+	
 	private void stylizeVariables() {
 		this.view.setPrefSize(980, 500);
 		this.view.setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, null, null)));
@@ -251,5 +257,35 @@ public class DashboardView extends Pane {
 		this.upperHalf.setPrefSize(980, 155);
 		this.upperHalf.setBackground(new Background(new BackgroundFill(Color.LIGHTSKYBLUE, null, null)));
 		this.lowerHalf.setPrefSize(980, 315);
+	}
+	
+	protected Dashboard getDashboardForTest() {
+		return this.dashboard;
+	}
+	
+	protected DashboardView getDashboardViewForTest() {
+		return this;
+	}
+	
+	protected ArrayList<CheckBox> getCheckBoxToTest(){
+		ArrayList<CheckBox> chBxToTest = new ArrayList<CheckBox>();
+
+		for(int i = 0; i <this.goalList.size();i++) {
+			chBxToTest.addAll(new ArrayList<CheckBox>(Arrays.asList(this.goalList.get(i))));
+		}
+		return this.goalList;
+	}
+	
+	protected ArrayList<Label> getLabelsToTest(){
+		ArrayList<Label> labelsToTest = new ArrayList<Label>();
+		
+		labelsToTest.addAll(new ArrayList<Label>(Arrays.asList(this.breakfastRecipe, this.lunchRecipe, this.dinnerRecipe,
+				this.snackRecipe)));
+		
+		return labelsToTest;
+	}
+	
+	protected void addGoalTest(String goal, int day) {
+		
 	}
 }
