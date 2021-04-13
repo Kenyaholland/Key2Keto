@@ -359,7 +359,6 @@ public class DayOfWeekView extends Pane {
 				this.wholeView.getChildren().addAll(this.categorySelection, this.addRecipeDropdown,this.bottomRecipeInfo);
 		//add the view to the class
 				this.getChildren().add(wholeView);
-		
 	}
 
 	private void styleVariables() {
