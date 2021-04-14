@@ -7,6 +7,8 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
@@ -34,6 +36,8 @@ public class RecipeDetailView extends Pane {
 	private VBox upper;
 	private VBox lower;
 	private Button imageButton;
+	private Image image;
+	private ImageView imageView;
 	
 	public RecipeDetailView(Recipe recipe) {
 		this.recipe = recipe;
@@ -49,6 +53,8 @@ public class RecipeDetailView extends Pane {
 		this.upper = new VBox();
 		this.hbox = new HBox();
 		this.imageButton = new Button("IMAGE");
+		this.image = this.recipe.getImage();
+		this.imageView = new ImageView(image);
 		this.nameLabel = new Label(this.recipe.getName());
 		this.carbLabel = new Label(String.valueOf("Total Carbohydrates: " +this.recipe.getTotalCarb()));
 		this.proteinLabel = new Label("Total Protein: " + String.valueOf(this.recipe.getTotalProtein()));
@@ -100,6 +106,11 @@ public class RecipeDetailView extends Pane {
 		this.imageButton.setPrefSize(130,130);
 		this.imageButton.setAlignment(Pos.CENTER);
 		this.imageButton.setBackground(new Background(new BackgroundFill(Color.LIGHTBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
+		
+		this.imageView.setFitHeight(130);
+		this.imageView.setFitWidth(130);
+		
+		this.imageButton.setGraphic(this.imageView);
 		
 		this.upper.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
 		this.upper.setPrefWidth(350);

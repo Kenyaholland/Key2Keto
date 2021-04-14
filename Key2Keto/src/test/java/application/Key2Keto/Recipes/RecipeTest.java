@@ -2,6 +2,8 @@ package application.Key2Keto.Recipes;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.net.MalformedURLException;
+
 import org.junit.jupiter.api.Test;
 
 class RecipeTest {	
@@ -9,8 +11,8 @@ class RecipeTest {
 	Ingredient ingredient;
 
 	@Test
-	void test() {
-		recipe = new Recipe("Breakfast", "Chocolate Chip Cookies", 200, 20.5, 15.5, 10.5, 4);
+	void test() throws MalformedURLException {
+		recipe = new Recipe("Breakfast", "Chocolate Chip Cookies", 200, 20.5, 15.5, 10.5, 4, "C", 11);
 		ingredient = new Ingredient("Chocolate Chips", "1/4 cup");
 		recipe.addIngredient(ingredient);
 		recipe.addInstruction("Eat the cookie");

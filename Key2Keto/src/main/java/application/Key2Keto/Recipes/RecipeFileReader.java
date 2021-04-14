@@ -15,6 +15,8 @@ public class RecipeFileReader {
 		try {
 			File file = new File(fileName);
 			sc = new Scanner(file);
+			String dietType = fileName.substring(45,46);
+			System.out.println(dietType);
 			String recName = "";
 			String carb = "";
 			String fat = "";
@@ -25,8 +27,10 @@ public class RecipeFileReader {
 			String ratio = "";
 			String type = "";
 			String meas = "";
+			int counter = 0;
 			String token = "";
 			while(sc.hasNextLine()) {
+				counter++;
 				strScan = new Scanner(sc.nextLine());
 				strScan.useDelimiter(",");
 				type = strScan.next();
@@ -37,7 +41,7 @@ public class RecipeFileReader {
 				pro= strScan.next();
 				carb= strScan.next();
 				Recipe recipe = new Recipe(type,recName, Integer.parseInt(cal), Double.parseDouble(carb), 
-						Double.parseDouble(pro), Double.parseDouble(fat), Double.parseDouble(ratio));	
+						Double.parseDouble(pro), Double.parseDouble(fat), Double.parseDouble(ratio), dietType, counter);	
 				while(!(token=strScan.next()).equals("Directions")) {
 					ing = strScan.next();
 					Ingredient ingredient = new Ingredient(ing, token);

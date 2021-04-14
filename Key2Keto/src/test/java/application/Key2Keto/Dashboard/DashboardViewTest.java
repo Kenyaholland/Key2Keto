@@ -2,6 +2,8 @@ package application.Key2Keto.Dashboard;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.net.MalformedURLException;
+
 import org.junit.jupiter.api.Test;
 
 import org.testfx.framework.junit5.ApplicationTest;
@@ -17,11 +19,11 @@ class DashboardViewTest extends ApplicationTest {
 	Account account;
 	
 	@Override
-	public void start(Stage stage) {
+	public void start(Stage stage) throws MalformedURLException {
 		account = new Account("username123", "password123", "John", "McLastname", "Male", "5'9\"", 190, 24, "Modified");
 		dashView = new DashboardView(account);
 		this.dashView.getDashboardForTest().getUserAccount().getChosenRecipes().get(this.dashView.getDashboardForTest()
-				.getCurrentDayInt()).add(new Recipe("Breakfast", "Chocolate Chip Cookies", 200, 20.5, 15.5, 10.5, 4));
+				.getCurrentDayInt()).add(new Recipe("Breakfast", "Chocolate Chip Cookies", 200, 20.5, 15.5, 10.5, 4, "C", 11));
 		this.dashView.getDashboardForTest().getUserAccount().getChosenRecipes().get(this.dashView.getDashboardForTest()
 				.getCurrentDayInt()).add(null);
 		this.dashView.getDashboardForTest().getUserAccount().getChosenRecipes().get(this.dashView.getDashboardForTest()
