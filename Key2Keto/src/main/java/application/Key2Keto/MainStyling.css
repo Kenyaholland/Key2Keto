@@ -1,0 +1,82 @@
+#title {
+	-fx-text-fill: #A7B5B9;
+	-fx-font-size: 75px;
+}
+
+#WholeMainPane {
+	-fx-background-color: #2A2F33;
+}
+
+#MainTabsBox {
+	-fx-background-color: #2A2F33;
+}
+
+#UsernameField {
+	-fx-background-color: #93A7AA;
+	-fx-text-fill: #2A2F33;
+	-fx-font-family: Verdana;
+	-fx-font-weight: bold;
+	-fx-font-size: 18px;
+	-fx-border-style: solid;
+	-fx-border-width: 3px;
+	-fx-border-color: #A7B5B9;
+}
+
+#DashboardLabels {
+	-fx-text-fill: #2A2F33;
+	-fx-font-weight: bold;
+	-fx-font-family: Verdana;
+	-fx-font-size: 16px;
+}
+
+#DashboardInfoLabels {
+	-fx-text-fill: #2A2F33;
+	-fx-font-family: Verdana;
+	-fx-font-size: 14px;
+}
+
+#DashUpper {
+	-fx-background-color: #93A7AA;
+}
+
+.chart {
+	-fx-background-color: #93A7AA;
+}
+
+.chart-title {
+	-fx-text-fill: #2A2F33;
+    	-fx-font-size: 14px;
+}
+
+.axis-label {
+    	-fx-text-fill: #2A2F33;
+}
+
+.chart-vertical-grid-lines {
+   	-fx-stroke: #2A2F33;
+}
+
+.chart-horizontal-grid-lines {
+    	-fx-stroke: #2A2F33;
+}
+
+.default-color0.chart-series-line { 
+	-fx-stroke: #2A2F33; 
+}
+
+.default-color0.chart-line-symbol {
+    -fx-background-color: #93A7AA;
+}
+
+#MainTabs {
+	-fx-background-color: #93A7AA;
+	-fx-display: inline-block;
+	-fx-cursor: pointer;
+	-fx-text-fill: #DBD3D8;
+	-fx-font-family: Verdana;
+	-fx-font-size: 14px;
+	-fx-font-weight: bold;
+}
+#MainTabs:hover {
+	-fx-background-color: #A7B5B9;
+}

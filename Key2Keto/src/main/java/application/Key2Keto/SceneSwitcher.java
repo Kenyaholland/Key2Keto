@@ -45,6 +45,8 @@ public class SceneSwitcher extends Pane{
         Scene mainViewScene = new Scene(view);
         stage.setTitle("Key2Keto");
         
+        mainViewScene.getStylesheets().addAll(this.getClass().getResource("MainStyling.css").toExternalForm());
+        
         return mainViewScene;
 	}
 }
