@@ -6,7 +6,6 @@ import java.util.Arrays;
 import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -21,7 +20,6 @@ import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -29,9 +27,7 @@ import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
 public class AccountView extends Pane
-{
-	private Account currentAccount;
-	
+{	
 	private Label myAccountLabel;
 	private HBox viewTitleRow;
 	
@@ -82,7 +78,7 @@ public class AccountView extends Pane
 	private Scene changerScene;
 	private Label newVariableLabel;
 	private TextField newVariableTextField;
-	private ComboBox newVariableComboBox;
+	private ComboBox<String> newVariableComboBox;
 	private Button cancelVariableChangeButton;
 	private Button confirmVariableChangeButton;
 	private HBox newVariableRow;
@@ -90,12 +86,10 @@ public class AccountView extends Pane
 	private VBox changerRows;
 	
 	private HBox errorRow;
-	private String errorMessage;
 	private Label errorLabel;
 	
 	public AccountView(Account currentAccount)
 	{
-		this.currentAccount = currentAccount;
 		AccountViewLogic.setAccount(currentAccount);
 		
 		instantiateVariables();
@@ -111,42 +105,42 @@ public class AccountView extends Pane
 		viewTitleRow = new HBox();
 		
 		usernameDisplayLabel = new Label("Username:");
-		currentUsernameLabel = new Label(currentAccount.getUsername());
+		currentUsernameLabel = new Label(AccountViewLogic.getAccount().getUsername());
 		changeUsernameButton = new Button("EDIT");
 		usernameRow = new HBox();
 		
 		passwordDisplayLabel = new Label("Password:");
-		currentPasswordLabel = new Label(currentAccount.getPassword());
+		currentPasswordLabel = new Label(AccountViewLogic.getAccount().getPassword());
 		changePasswordButton = new Button("EDIT");
 		passwordRow = new HBox();
 		
 		nameDisplayLabel = new Label("Name:");
-		currentNameLabel = new Label(currentAccount.getFirstName() + " " + currentAccount.getLastName());
+		currentNameLabel = new Label(AccountViewLogic.getAccount().getFirstName() + " " + AccountViewLogic.getAccount().getLastName());
 		changeNameButton = new Button("EDIT");
 		nameRow = new HBox();
 		
 		sexDisplayLabel = new Label("Sex:");
-		currentSexLabel = new Label(currentAccount.getSex());
+		currentSexLabel = new Label(AccountViewLogic.getAccount().getSex());
 		changeSexButton = new Button("EDIT");
 		sexRow = new HBox();
 		
 		heightDisplayLabel = new Label("Height:");
-		currentHeightLabel = new Label(currentAccount.getHeight());
+		currentHeightLabel = new Label(AccountViewLogic.getAccount().getHeight());
 		changeHeightButton = new Button("EDIT");
 		heightRow = new HBox();
 		
 		weightDisplayLabel = new Label("Weight:");
-		currentWeightLabel = new Label(String.valueOf(currentAccount.getWeight()) + " lbs");
+		currentWeightLabel = new Label(String.valueOf(AccountViewLogic.getAccount().getWeight()) + " lbs");
 		changeWeightButton = new Button("EDIT");
 		weightRow = new HBox();
 		
 		ageDisplayLabel = new Label("Age:");
-		currentAgeLabel = new Label(String.valueOf(currentAccount.getAge()));
+		currentAgeLabel = new Label(String.valueOf(AccountViewLogic.getAccount().getAge()));
 		changeAgeButton = new Button("EDIT");
 		ageRow = new HBox();
 		
 		dietTypeDisplayLabel = new Label("Diet Type:");
-		currentDietTypeLabel = new Label(currentAccount.getDietType());
+		currentDietTypeLabel = new Label(AccountViewLogic.getAccount().getDietType());
 		changeDietTypeButton = new Button("EDIT");
 		dietTypeRow = new HBox();
 		
@@ -157,7 +151,7 @@ public class AccountView extends Pane
 		changerScene = new Scene(changerPane);
 		newVariableLabel = new Label(); //the text of this will be set by each individual edit button
 		newVariableTextField = new TextField();
-		newVariableComboBox = new ComboBox();
+		newVariableComboBox = new ComboBox<String>();
 		cancelVariableChangeButton = new Button("Cancel");
 		confirmVariableChangeButton = new Button("Confirm");
 		newVariableRow = new HBox();
@@ -168,120 +162,121 @@ public class AccountView extends Pane
 		errorLabel = new Label();
 	}
 	
+	//@SuppressWarnings("static-access")
 	private void stylizeElements()
 	{	
 		myAccountLabel.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 18));
 		
 		viewTitleRow.setAlignment(Pos.CENTER);
 		viewTitleRow.setMinWidth(980);
-		viewTitleRow.setMargin(myAccountLabel, new Insets(40, 0, 40, 0));
+		HBox.setMargin(myAccountLabel, new Insets(40, 0, 40, 0));
 		
 		viewTitleRow.setBorder(new Border(new BorderStroke(Color.BLACK, Color.BLACK, Color.BLACK, Color.BLACK,
 				   										   BorderStrokeStyle.NONE, BorderStrokeStyle.NONE, BorderStrokeStyle.SOLID, BorderStrokeStyle.NONE, 
 				   										   CornerRadii.EMPTY, new BorderWidths(2), Insets.EMPTY)));
 		viewTitleRow.setBackground(new Background(new BackgroundFill(Color.LIGHTSLATEGRAY, CornerRadii.EMPTY, Insets.EMPTY)));
 		
-		usernameRow.setMargin(usernameDisplayLabel, new Insets(20, 10, 10, 10));
+		HBox.setMargin(usernameDisplayLabel, new Insets(20, 10, 10, 10));
 		usernameDisplayLabel.setMinWidth(100);
 		usernameDisplayLabel.setFont(Font.font("Verdana", 14));
-		usernameRow.setMargin(currentUsernameLabel, new Insets(20, 10, 10, 10));
+		HBox.setMargin(currentUsernameLabel, new Insets(20, 10, 10, 10));
 		currentUsernameLabel.setMinWidth(127);
 		currentUsernameLabel.setFont(Font.font("Verdana", 14));
-		usernameRow.setMargin(changeUsernameButton, new Insets(20, 10, 10, 10));
+		HBox.setMargin(changeUsernameButton, new Insets(20, 10, 10, 10));
 		changeUsernameButton.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 12));
 		usernameRow.setAlignment(Pos.CENTER);
 		usernameRow.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
 		
-		passwordRow.setMargin(passwordDisplayLabel, new Insets(20, 10, 10, 10));
+		HBox.setMargin(passwordDisplayLabel, new Insets(20, 10, 10, 10));
 		passwordDisplayLabel.setMinWidth(100);
 		passwordDisplayLabel.setFont(Font.font("Verdana", 14));
-		passwordRow.setMargin(currentPasswordLabel, new Insets(20, 10, 10, 10));
+		HBox.setMargin(currentPasswordLabel, new Insets(20, 10, 10, 10));
 		currentPasswordLabel.setMinWidth(127);
 		currentPasswordLabel.setFont(Font.font("Verdana", 14));
-		passwordRow.setMargin(changePasswordButton, new Insets(20, 10, 10, 10));
+		HBox.setMargin(changePasswordButton, new Insets(20, 10, 10, 10));
 		changePasswordButton.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 12));
 		passwordRow.setAlignment(Pos.CENTER);
 		passwordRow.setBackground(new Background(new BackgroundFill(Color.LIGHTSKYBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
 		
-		nameRow.setMargin(nameDisplayLabel, new Insets(20, 10, 10, 10));
+		HBox.setMargin(nameDisplayLabel, new Insets(20, 10, 10, 10));
 		nameDisplayLabel.setMinWidth(100);
 		nameDisplayLabel.setFont(Font.font("Verdana", 14));
-		nameRow.setMargin(currentNameLabel, new Insets(20, 10, 10, 10));
+		HBox.setMargin(currentNameLabel, new Insets(20, 10, 10, 10));
 		currentNameLabel.setMinWidth(127);
 		currentNameLabel.setFont(Font.font("Verdana", 14));
-		nameRow.setMargin(changeNameButton, new Insets(20, 10, 10, 10));
+		HBox.setMargin(changeNameButton, new Insets(20, 10, 10, 10));
 		changeNameButton.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 12));
 		nameRow.setAlignment(Pos.CENTER);
 		nameRow.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
 		
-		sexRow.setMargin(sexDisplayLabel, new Insets(20, 10, 10, 10));
+		HBox.setMargin(sexDisplayLabel, new Insets(20, 10, 10, 10));
 		sexDisplayLabel.setMinWidth(100);
 		sexDisplayLabel.setFont(Font.font("Verdana", 14));
-		sexRow.setMargin(currentSexLabel, new Insets(20, 10, 10, 10));
+		HBox.setMargin(currentSexLabel, new Insets(20, 10, 10, 10));
 		currentSexLabel.setMinWidth(127);
 		currentSexLabel.setFont(Font.font("Verdana", 14));
-		sexRow.setMargin(changeSexButton, new Insets(20, 10, 10, 10));
+		HBox.setMargin(changeSexButton, new Insets(20, 10, 10, 10));
 		changeSexButton.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 12));
 		sexRow.setAlignment(Pos.CENTER);
 		sexRow.setBackground(new Background(new BackgroundFill(Color.LIGHTSKYBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
 		
-		heightRow.setMargin(heightDisplayLabel, new Insets(20, 10, 10, 10));
+		HBox.setMargin(heightDisplayLabel, new Insets(20, 10, 10, 10));
 		heightDisplayLabel.setMinWidth(100);
 		heightDisplayLabel.setFont(Font.font("Verdana", 14));
-		heightRow.setMargin(currentHeightLabel, new Insets(20, 10, 10, 10));
+		HBox.setMargin(currentHeightLabel, new Insets(20, 10, 10, 10));
 		currentHeightLabel.setMinWidth(127);
 		currentHeightLabel.setFont(Font.font("Verdana", 14));
-		heightRow.setMargin(changeHeightButton, new Insets(20, 10, 10, 10));
+		HBox.setMargin(changeHeightButton, new Insets(20, 10, 10, 10));
 		changeHeightButton.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 12));
 		heightRow.setAlignment(Pos.CENTER);
 		heightRow.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
 		
-		weightRow.setMargin(weightDisplayLabel, new Insets(20, 10, 10, 10));
+		HBox.setMargin(weightDisplayLabel, new Insets(20, 10, 10, 10));
 		weightDisplayLabel.setMinWidth(100);
 		weightDisplayLabel.setFont(Font.font("Verdana", 14));
-		weightRow.setMargin(currentWeightLabel, new Insets(20, 10, 10, 10));
+		HBox.setMargin(currentWeightLabel, new Insets(20, 10, 10, 10));
 		currentWeightLabel.setMinWidth(127);
 		currentWeightLabel.setFont(Font.font("Verdana", 14));
-		weightRow.setMargin(changeWeightButton, new Insets(20, 10, 10, 10));
+		HBox.setMargin(changeWeightButton, new Insets(20, 10, 10, 10));
 		changeWeightButton.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 12));
 		weightRow.setAlignment(Pos.CENTER);
 		weightRow.setBackground(new Background(new BackgroundFill(Color.LIGHTSKYBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
 		
-		ageRow.setMargin(ageDisplayLabel, new Insets(20, 10, 10, 10));
+		HBox.setMargin(ageDisplayLabel, new Insets(20, 10, 10, 10));
 		ageDisplayLabel.setMinWidth(100);
 		ageDisplayLabel.setFont(Font.font("Verdana", 14));
-		ageRow.setMargin(currentAgeLabel, new Insets(20, 10, 10, 10));
+		HBox.setMargin(currentAgeLabel, new Insets(20, 10, 10, 10));
 		currentAgeLabel.setMinWidth(127);
 		currentAgeLabel.setFont(Font.font("Verdana", 14));
-		ageRow.setMargin(changeAgeButton, new Insets(20, 10, 10, 10));
+		HBox.setMargin(changeAgeButton, new Insets(20, 10, 10, 10));
 		changeAgeButton.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 12));
 		ageRow.setAlignment(Pos.CENTER);
 		ageRow.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
 		
-		dietTypeRow.setMargin(dietTypeDisplayLabel, new Insets(20, 10, 20, 10));
+		HBox.setMargin(dietTypeDisplayLabel, new Insets(20, 10, 20, 10));
 		dietTypeDisplayLabel.setMinWidth(100);
 		dietTypeDisplayLabel.setFont(Font.font("Verdana", 14));
-		dietTypeRow.setMargin(currentDietTypeLabel, new Insets(20, 10, 20, 10));
+		HBox.setMargin(currentDietTypeLabel, new Insets(20, 10, 20, 10));
 		currentDietTypeLabel.setMinWidth(127);
 		currentDietTypeLabel.setFont(Font.font("Verdana", 14));
-		dietTypeRow.setMargin(changeDietTypeButton, new Insets(20, 10, 20, 10));
+		HBox.setMargin(changeDietTypeButton, new Insets(20, 10, 20, 10));
 		changeDietTypeButton.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 12));
 		dietTypeRow.setAlignment(Pos.CENTER);
 		dietTypeRow.setBackground(new Background(new BackgroundFill(Color.LIGHTSKYBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
 		
-		myAccountRows.setMargin(myAccountRows, new Insets(0, 0, 0, 250));
+		VBox.setMargin(myAccountRows, new Insets(0, 0, 0, 250));
 		
 		//now to stylize the popup window for changing variables
 		newVariableLabel.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 12));
 		newVariableLabel.setMinWidth(125);
 		newVariableTextField.setFont(Font.font("Verdana", 12));
-		newVariableRow.setMargin(newVariableLabel, new Insets(20, 10, 10, 10));
-		newVariableRow.setMargin(newVariableTextField, new Insets(20, 10, 10, 10));
-		newVariableRow.setMargin(newVariableComboBox, new Insets(20, 10, 10, 10));
+		HBox.setMargin(newVariableLabel, new Insets(20, 10, 10, 10));
+		HBox.setMargin(newVariableTextField, new Insets(20, 10, 10, 10));
+		HBox.setMargin(newVariableComboBox, new Insets(20, 10, 10, 10));
 		newVariableRow.setAlignment(Pos.CENTER);
 		
 		errorLabel.setTextFill(Color.RED);
-		errorRow.setMargin(errorLabel, new Insets(0, 10, 0, 10));
+		HBox.setMargin(errorLabel, new Insets(0, 10, 0, 10));
 		errorLabel.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 12));
 		errorRow.setMinWidth(360);
 		errorLabel.setVisible(false);
@@ -290,8 +285,8 @@ public class AccountView extends Pane
 		newVariableTextField.setMinWidth(150);
 		newVariableComboBox.setMinWidth(150);
 		
-		confirmButtonRow.setMargin(confirmVariableChangeButton, new Insets(10, 5, 20, 5));
-		confirmButtonRow.setMargin(cancelVariableChangeButton, new Insets(10, 5, 20, 5));
+		HBox.setMargin(confirmVariableChangeButton, new Insets(10, 5, 20, 5));
+		HBox.setMargin(cancelVariableChangeButton, new Insets(10, 5, 20, 5));
 		cancelVariableChangeButton.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 12));
 		confirmVariableChangeButton.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 12));
 		confirmButtonRow.setAlignment(Pos.CENTER);
@@ -671,135 +666,6 @@ public class AccountView extends Pane
 		}
 	}
 	
-	private boolean checkNewVariableIsValid(String variableToBeChanged)
-	{	
-		switch(variableToBeChanged)
-		{
-			case "Username":
-				if(newVariableTextField.getText().equals(""))
-				{
-					errorMessage = "Username field must not be empty";
-					return false;
-				}
-				
-				else
-				{
-					return true;
-				}
-				
-			case "Password":
-				if(newVariableTextField.getText().equals(""))
-				{
-					errorMessage = "Password field must not be empty";
-					return false;
-				}
-				
-				else
-				{
-					return true;
-				}
-
-			case "Name":
-				if(newVariableTextField.getText().equals(""))
-				{
-					errorMessage = "Name field must not be empty";
-					return false;
-				}
-				
-				else if(!newVariableTextField.getText().matches("^[A-Za-z]+\\s[A-Za-z]+$"))
-				{
-					errorMessage = "Name must be two words containing only letters";
-					return false;
-				}
-				
-				else
-				{
-					return true;
-				}
-
-			case "Sex":
-				if(newVariableComboBox.getSelectionModel().isEmpty())
-				{
-					errorMessage = "A sex must be chosen";
-					return false;
-				}
-				
-				else
-				{
-					return true;
-				}
-
-			case "Height":
-				if(newVariableTextField.getText().equals(""))
-				{
-					errorMessage = "Height field must not be empty";
-					return false;
-				}
-				
-				else if(!newVariableTextField.getText().matches("^([0-9]*'([0-9]\"|(1[0-1])\"))|([0-9]*')$"))
-				{
-					errorMessage = "Height must be expressed in the form ft'in\" or ft'";
-					return false;
-				}
-				
-				else
-				{
-					return true;
-				}
-				
-			case "Weight":
-				if(newVariableTextField.getText().equals(""))
-				{
-					errorMessage = "Weight field must not be empty";
-					return false;
-				}
-				
-				else if(!newVariableTextField.getText().matches("^[0-9]*$"))
-				{
-					errorMessage = "Weight must only contain digits";
-					return false;
-				}
-				
-				else
-				{
-					return true;
-				}
-
-			case "Age":
-				if(newVariableTextField.getText().equals(""))
-				{
-					errorMessage = "Age field must not be empty";
-					return false;
-				}
-				
-				else if(!newVariableTextField.getText().matches("^[0-9]*$"))
-				{
-					errorMessage = "Age must only contain digits";
-					return false;
-				}
-				
-				else
-				{
-					return true;
-				}
-
-			case "DietType":
-				if(newVariableComboBox.getSelectionModel().getSelectedItem().equals(""))
-				{
-					errorMessage = "A diet type must be chosen";
-					return false;
-				}
-				
-				else
-				{
-					return true;
-				}
-
-			default:
-				return false;
-		}
-	}
-	
 	//methods after this point are only for unit tests
 	protected ArrayList<Button> getButtonsForTests()
 	{
@@ -819,7 +685,7 @@ public class AccountView extends Pane
 		return newVariableTextField;
 	}
 	
-	protected ComboBox getNewVariableComboBoxForTests()
+	protected ComboBox<String> getNewVariableComboBoxForTests()
 	{
 		return newVariableComboBox;
 	}
