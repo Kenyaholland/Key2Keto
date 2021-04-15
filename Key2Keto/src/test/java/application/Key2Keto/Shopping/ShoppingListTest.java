@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
@@ -19,13 +20,13 @@ import application.Key2Keto.Recipes.*;
 public class ShoppingListTest
 {	
 	@Test
-	public void shoppingListBuildsCorrectlyTest()
+	public void shoppingListBuildsCorrectlyTest() throws MalformedURLException
 	{	
 		ShoppingListForTests sut = new ShoppingListForTests(new ArrayList<Recipe>()
 		{{
-			add(new Recipe("recipetype1", "recipename1", 55, 20.0, 15.7, 12.3, 4.0));
-			add(new Recipe("recipetype2", "recipename2", 56, 18.3, 22.2, 33.2, 3.5));
-			add(new Recipe("recipetype3", "recipename3", 58, 12.4, 9.5, 10.2, 2.3));
+			add(new Recipe("recipetype1", "recipename1", 55, 20.0, 15.7, 12.3, 4.0, "C", 1));
+			add(new Recipe("recipetype2", "recipename2", 56, 18.3, 22.2, 33.2, 3.5, "M", 1));
+			add(new Recipe("recipetype3", "recipename3", 58, 12.4, 9.5, 10.2, 2.3, "M", 2));
 		}});
 		
 		for(Recipe recipe : sut.getRecipes())
@@ -45,13 +46,13 @@ public class ShoppingListTest
 	}
 	
 	@Test
-	public void shoppingListFileIsCreatedTest()
+	public void shoppingListFileIsCreatedTest() throws MalformedURLException
 	{
 		ShoppingListForTests sut = new ShoppingListForTests(new ArrayList<Recipe>()
 		{{
-			add(new Recipe("recipetype1", "recipename1", 55, 20.0, 15.7, 12.3, 4.0));
-			add(new Recipe("recipetype2", "recipename2", 56, 18.3, 22.2, 33.2, 3.5));
-			add(new Recipe("recipetype3", "recipename3", 58, 12.4, 9.5, 10.2, 2.3));
+			add(new Recipe("recipetype1", "recipename1", 55, 20.0, 15.7, 12.3, 4.0, "C", 1));
+			add(new Recipe("recipetype2", "recipename2", 56, 18.3, 22.2, 33.2, 3.5, "M", 1));
+			add(new Recipe("recipetype3", "recipename3", 58, 12.4, 9.5, 10.2, 2.3, "M", 1));
 		}});
 		
 		File shoppingList = new File("ShoppingList.pdf");
@@ -59,13 +60,13 @@ public class ShoppingListTest
 	}
 	
 	@Test
-	public void writingToPdfWorksTest()
+	public void writingToPdfWorksTest() throws MalformedURLException
 	{
 		PdfReader reader = null;
 		PdfDocument pdfDocument = null;
 		ShoppingListForTests sut = new ShoppingListForTests(new ArrayList<Recipe>()
 		{{
-			add(new Recipe("typetotest", "nametotest", 23, 53.2, 55.3, 17.8, 1.5));
+			add(new Recipe("typetotest", "nametotest", 23, 53.2, 55.3, 17.8, 1.5, "L", 1));
 		}});
 		
 		try

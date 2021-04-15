@@ -1,6 +1,10 @@
 package application.Key2Keto.Recipes;
 
+import java.io.File;
+import java.net.MalformedURLException;
 import java.util.ArrayList;
+
+import javafx.scene.image.Image;
 
 public class Recipe {
 	private String name = "";
@@ -12,8 +16,10 @@ public class Recipe {
 	private ArrayList<String> instructions;
 	private int totalCalories = 0;
 	private String type = "";
+	private String dietType;
+	private Image image;
 
-	public Recipe(String type, String name, int calories, double carb, double protein, double fat, double ratio) {
+	public Recipe(String type, String name, int calories, double carb, double protein, double fat, double ratio, String dietType, int imageNum) throws MalformedURLException {
 		this.ingredients = new ArrayList<Ingredient>();
 		this.instructions = new ArrayList<String>();
 		this.name = name;
@@ -23,6 +29,18 @@ public class Recipe {
 		this.totalProtein = protein;
 		this.totalCalories = calories;
 		this.type = type;
+		this.dietType = dietType;
+		setImage(imageNum);
+	}
+	
+	public void setImage(int imageNum) throws MalformedURLException {
+		File file = new File("./src/main/java/application/Key2Keto/RecipeImages/" + this.dietType + imageNum + ".png");
+		String imagePath = file.toURI().toURL().toExternalForm();
+		this.image = new Image(imagePath, 130, 130, false, false);
+	}
+	
+	public Image getImage() {
+		return this.image;
 	}
 
 	public String getName() {

@@ -2,6 +2,7 @@ package application.Key2Keto.Account;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
@@ -33,7 +34,7 @@ class AccountTest
 	}
 	
 	@Test
-	public void mutatorTest()
+	public void mutatorTest() throws MalformedURLException
 	{
 		Account sut = new Account("", "", "", "", "", "", 0, 0, "");
 		
@@ -63,7 +64,7 @@ class AccountTest
 		
 		assertEquals("Modified", sut.getDietType());
 		
-		sut.addRecipe(new Recipe("", "", 0, 0.0, 0.0, 0.0, 0.0), 0);
+		sut.addRecipe(new Recipe("", "", 0, 0.0, 0.0, 0.0, 0.0, "C", 1), 0);
 		assertEquals("", sut.getChosenRecipes().get(0).get(0).getName());
 	}
 
