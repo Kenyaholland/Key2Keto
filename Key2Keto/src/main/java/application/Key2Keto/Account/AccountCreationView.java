@@ -208,96 +208,77 @@ public class AccountCreationView extends Pane
 		titleRow.setAlignment(Pos.CENTER);
 		titleRow.setMinWidth(500);
 		titleRow.setMargin(createAccountLabel, new Insets(40, 0, 40, 0));
-		createAccountLabel.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 18));
+		createAccountLabel.setId("Title");
 		
 		accountDetailsDividerRow.setBorder(new Border(new BorderStroke(Color.BLACK, Color.BLACK, Color.BLACK, Color.BLACK,
 													   				   BorderStrokeStyle.NONE, BorderStrokeStyle.NONE, BorderStrokeStyle.SOLID, BorderStrokeStyle.NONE, 
 													   				   CornerRadii.EMPTY, new BorderWidths(2), Insets.EMPTY)));
 		accountDetailsDividerRow.setAlignment(Pos.CENTER);
 		accountDetailsDividerRow.setMargin(accountDetailsDivider, new Insets(10, 0, 10, 0));
-		accountDetailsDivider.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 14));
+		accountDetailsDivider.setId("DetailDividers");
 		
 		newUsernameRow.setMargin(newUsernameLabel, new Insets(20, 10, 10, 10));
 		newUsernameRow.setMargin(newUsernameTextField, new Insets(20, 10, 10, 10));
-		newUsernameLabel.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 12));
 		newUsernameLabel.setMinWidth(144);
-		newUsernameTextField.setFont(Font.font("Verdana", 12));
 		
 		newPasswordRow.setMargin(newPasswordLabel, new Insets(10, 10, 10, 10));
 		newPasswordRow.setMargin(newPasswordTextField, new Insets(10, 10, 10, 10));
-		newPasswordLabel.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 12));
 		newPasswordLabel.setMinWidth(144);
-		newPasswordTextField.setFont(Font.font("Verdana", 12));
 		
 		confirmPasswordRow.setMargin(confirmPasswordLabel, new Insets(10, 10, 20, 10));
 		confirmPasswordRow.setMargin(confirmPasswordTextField, new Insets(10, 10, 10, 10));
-		confirmPasswordLabel.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 12));
 		confirmPasswordLabel.setMinWidth(144);
-		confirmPasswordTextField.setFont(Font.font("Verdana", 12));
 		
 		createAccountButtonRow.setAlignment(Pos.CENTER);
 		createAccountButtonRow.setMargin(createAccountButton, new Insets(20, 5, 20, 5));
 		createAccountButtonRow.setMargin(cancelAccountCreationButton, new Insets(20, 5, 20, 5));
-		cancelAccountCreationButton.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 12));
-		createAccountButton.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 12));
 		
 		personalDetailsDividerRow.setBorder(new Border(new BorderStroke(Color.BLACK, Color.BLACK, Color.BLACK, Color.BLACK,
 				   														BorderStrokeStyle.NONE, BorderStrokeStyle.NONE, BorderStrokeStyle.SOLID, BorderStrokeStyle.NONE, 
 				   														CornerRadii.EMPTY, new BorderWidths(2), Insets.EMPTY)));
 		personalDetailsDividerRow.setAlignment(Pos.CENTER);
 		personalDetailsDividerRow.setMargin(personalDetailsDivider, new Insets(10, 0, 10, 0));
-		personalDetailsDivider.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 14));
+		personalDetailsDivider.setId("DetailDividers");
 		
 		firstNameRow.setMargin(firstNameLabel, new Insets(20, 10, 10, 10));
 		firstNameRow.setMargin(firstNameTextField, new Insets(20, 10, 10,10));
-		firstNameLabel.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 12));
 		firstNameLabel.setMinWidth(144);
-		firstNameTextField.setFont(Font.font("Verdana", 12));
 		
 		lastNameRow.setMargin(lastNameLabel, new Insets(10, 10, 10, 10));
 		lastNameRow.setMargin(lastNameTextField, new Insets(10, 10, 10, 10));
-		lastNameLabel.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 12));
 		lastNameLabel.setMinWidth(144);
-		lastNameTextField.setFont(Font.font("Verdana", 12));
 		
 		sexRow.setMargin(sexLabel, new Insets(10, 10, 10, 10));
 		sexRow.setMargin(sexChooser, new Insets(10, 10, 10, 10));
-		sexLabel.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 12));
 		sexLabel.setMinWidth(144);
 		sexChooser.setMinWidth(157);
 		
 		heightRow.setMargin(heightLabel, new Insets(10, 10, 10, 10));
 		heightRow.setMargin(heightTextField, new Insets(10, 10, 10, 10));
-		heightLabel.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 12));
 		heightLabel.setMinWidth(144);
-		heightTextField.setFont(Font.font("Verdana", 12));
 		
 		heightTextField.setPromptText("e.g. 5'11\"");
 		
 		weightRow.setMargin(weightLabel, new Insets(10, 10, 10, 10));
 		weightRow.setMargin(weightTextField, new Insets(10, 10, 10, 10));
-		weightLabel.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 12));
 		weightLabel.setMinWidth(144);
-		weightTextField.setFont(Font.font("Verdana", 12));
 		weightTextField.setPromptText("in pounds");
 		
 		ageRow.setMargin(ageLabel, new Insets(10, 10, 10, 10));
 		ageRow.setMargin(ageTextField, new Insets(10, 10, 10, 10));
-		ageLabel.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 12));
 		ageLabel.setMinWidth(144);
-		ageTextField.setFont(Font.font("Verdana", 12));
 		ageTextField.setPromptText("in years");
 		
 		dietTypeRow.setMargin(dietTypeLabel, new Insets(10, 10, 10, 10));
 		dietTypeRow.setMargin(dietTypeChooser, new Insets(10, 10, 10, 10));
-		dietTypeLabel.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 12));
 		dietTypeLabel.setMinWidth(144);
 		dietTypeChooser.setMinWidth(157);
 		
-		errorLabel.setTextFill(Color.RED);
-		errorLabel.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 12));
 		errorLabel.setVisible(false);
 		errorRow.setAlignment(Pos.CENTER);
+		errorRow.setId("ErrorLabel");
+		
+		accountCreationRows.setId("WholePane");
 	}
 	
 	private void addAllElementsToChildren()
