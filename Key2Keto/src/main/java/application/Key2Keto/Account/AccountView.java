@@ -30,72 +30,73 @@ import javafx.stage.Stage;
 
 public class AccountView extends Pane
 {
-	Account currentAccount;
+	private Account currentAccount;
 	
-	Label myAccountLabel;
-	HBox viewTitleRow;
+	private Label myAccountLabel;
+	private HBox viewTitleRow;
 	
-	Label usernameDisplayLabel;
-	Label currentUsernameLabel;
-	Button changeUsernameButton;
-	HBox usernameRow;
+	private Label usernameDisplayLabel;
+	private Label currentUsernameLabel;
+	private Button changeUsernameButton;
+	private HBox usernameRow;
 	
-	Label passwordDisplayLabel;
-	Label currentPasswordLabel;
-	Button changePasswordButton;
-	HBox passwordRow;
+	private Label passwordDisplayLabel;
+	private Label currentPasswordLabel;
+	private Button changePasswordButton;
+	private HBox passwordRow;
 	
-	Label nameDisplayLabel;
-	Label currentNameLabel;
-	Button changeNameButton;
-	HBox nameRow;
+	private Label nameDisplayLabel;
+	private Label currentNameLabel;
+	private Button changeNameButton;
+	private HBox nameRow;
 	
-	Label sexDisplayLabel;
-	Label currentSexLabel;
-	Button changeSexButton;
-	HBox sexRow;
+	private Label sexDisplayLabel;
+	private Label currentSexLabel;
+	private Button changeSexButton;
+	private HBox sexRow;
 	
-	Label heightDisplayLabel;
-	Label currentHeightLabel;
-	Button changeHeightButton;
-	HBox heightRow;
+	private Label heightDisplayLabel;
+	private Label currentHeightLabel;
+	private Button changeHeightButton;
+	private HBox heightRow;
 	
-	Label weightDisplayLabel;
-	Label currentWeightLabel;
-	Button changeWeightButton;
-	HBox weightRow;
+	private Label weightDisplayLabel;
+	private Label currentWeightLabel;
+	private Button changeWeightButton;
+	private HBox weightRow;
 	
-	Label ageDisplayLabel;
-	Label currentAgeLabel;
-	Button changeAgeButton;
-	HBox ageRow;
+	private Label ageDisplayLabel;
+	private Label currentAgeLabel;
+	private Button changeAgeButton;
+	private HBox ageRow;
 	
-	Label dietTypeDisplayLabel;
-	Label currentDietTypeLabel;
-	Button changeDietTypeButton;
-	HBox dietTypeRow;
+	private Label dietTypeDisplayLabel;
+	private Label currentDietTypeLabel;
+	private Button changeDietTypeButton;
+	private HBox dietTypeRow;
 	
-	VBox myAccountRows;
+	private VBox myAccountRows;
 	
-	Stage variableChangerWindow;
-	Pane changerPane;
-	Scene changerScene;
-	Label newVariableLabel;
-	TextField newVariableTextField;
-	ComboBox newVariableComboBox;
-	Button cancelVariableChangeButton;
-	Button confirmVariableChangeButton;
-	HBox newVariableRow;
-	HBox confirmButtonRow;
-	VBox changerRows;
+	private Stage variableChangerWindow;
+	private Pane changerPane;
+	private Scene changerScene;
+	private Label newVariableLabel;
+	private TextField newVariableTextField;
+	private ComboBox newVariableComboBox;
+	private Button cancelVariableChangeButton;
+	private Button confirmVariableChangeButton;
+	private HBox newVariableRow;
+	private HBox confirmButtonRow;
+	private VBox changerRows;
 	
-	HBox errorRow;
-	String errorMessage;
-	Label errorLabel;
+	private HBox errorRow;
+	private String errorMessage;
+	private Label errorLabel;
 	
 	public AccountView(Account currentAccount)
 	{
 		this.currentAccount = currentAccount;
+		AccountViewLogic.setAccount(currentAccount);
 		
 		instantiateVariables();
 		stylizeElements();
@@ -145,7 +146,7 @@ public class AccountView extends Pane
 		ageRow = new HBox();
 		
 		dietTypeDisplayLabel = new Label("Diet Type:");
-		currentDietTypeLabel = new Label(currentAccount.getDietType() + " Keto");
+		currentDietTypeLabel = new Label(currentAccount.getDietType());
 		changeDietTypeButton = new Button("EDIT");
 		dietTypeRow = new HBox();
 		
@@ -513,9 +514,9 @@ public class AccountView extends Pane
 			case "Username":
 				confirmVariableChangeButton.setOnAction(e ->
 				{
-					if(checkNewVariableIsValid(variableToBeChanged))
+					if(AccountViewLogic.checkNewVariableIsValid(variableToBeChanged, newVariableTextField.getText()))
 					{
-						currentAccount.setUsername(newVariableTextField.getText());
+						AccountViewLogic.getAccount().setUsername(newVariableTextField.getText());
 						currentUsernameLabel.setText(newVariableTextField.getText());
 						errorLabel.setVisible(false);
 						variableChangerWindow.close();
@@ -523,7 +524,7 @@ public class AccountView extends Pane
 					
 					else
 					{
-						errorLabel.setText(errorMessage);
+						errorLabel.setText(AccountViewLogic.getErrorMessage());
 						errorLabel.setVisible(true);
 					}
 				});
@@ -532,9 +533,9 @@ public class AccountView extends Pane
 			case "Password":
 				confirmVariableChangeButton.setOnAction(e ->
 				{
-					if(checkNewVariableIsValid(variableToBeChanged))
+					if(AccountViewLogic.checkNewVariableIsValid(variableToBeChanged, newVariableTextField.getText()))
 					{
-						currentAccount.setPassword(newVariableTextField.getText());
+						AccountViewLogic.getAccount().setPassword(newVariableTextField.getText());
 						currentPasswordLabel.setText(newVariableTextField.getText());
 						errorLabel.setVisible(false);
 						variableChangerWindow.close();
@@ -542,7 +543,7 @@ public class AccountView extends Pane
 					
 					else
 					{
-						errorLabel.setText(errorMessage);
+						errorLabel.setText(AccountViewLogic.getErrorMessage());
 						errorLabel.setVisible(true);
 					}
 				});
@@ -551,12 +552,12 @@ public class AccountView extends Pane
 			case "Name":
 				confirmVariableChangeButton.setOnAction(e ->
 				{
-					if(checkNewVariableIsValid(variableToBeChanged))
+					if(AccountViewLogic.checkNewVariableIsValid(variableToBeChanged, newVariableTextField.getText()))
 					{
 						String[] nameSplit = newVariableTextField.getText().split("\\s+");
 						
-						currentAccount.setFirstName(nameSplit[0]);
-						currentAccount.setLastName(nameSplit[1]);
+						AccountViewLogic.getAccount().setFirstName(nameSplit[0]);
+						AccountViewLogic.getAccount().setLastName(nameSplit[1]);
 						currentNameLabel.setText(nameSplit[0] + " " + nameSplit[1]);
 						errorLabel.setVisible(false);
 						variableChangerWindow.close();
@@ -564,7 +565,7 @@ public class AccountView extends Pane
 					
 					else
 					{
-						errorLabel.setText(errorMessage);
+						errorLabel.setText(AccountViewLogic.getErrorMessage());
 						errorLabel.setVisible(true);
 					}
 				});
@@ -573,9 +574,9 @@ public class AccountView extends Pane
 			case "Sex":
 				confirmVariableChangeButton.setOnAction(e ->
 				{
-					if(checkNewVariableIsValid(variableToBeChanged))
+					if(AccountViewLogic.checkNewVariableIsValid(variableToBeChanged, (String)newVariableComboBox.getSelectionModel().getSelectedItem()))
 					{
-						currentAccount.setSex(newVariableComboBox.getSelectionModel().getSelectedItem().toString());
+						AccountViewLogic.getAccount().setSex(newVariableComboBox.getSelectionModel().getSelectedItem().toString());
 						currentSexLabel.setText(newVariableComboBox.getSelectionModel().getSelectedItem().toString());
 						errorLabel.setVisible(false);
 						variableChangerWindow.close();
@@ -583,7 +584,7 @@ public class AccountView extends Pane
 					
 					else
 					{
-						errorLabel.setText(errorMessage);
+						errorLabel.setText(AccountViewLogic.getErrorMessage());
 						errorLabel.setVisible(true);
 					}
 				});
@@ -592,9 +593,9 @@ public class AccountView extends Pane
 			case "Height":
 				confirmVariableChangeButton.setOnAction(e ->
 				{
-					if(checkNewVariableIsValid(variableToBeChanged))
+					if(AccountViewLogic.checkNewVariableIsValid(variableToBeChanged, newVariableTextField.getText()))
 					{
-						currentAccount.setHeight(newVariableTextField.getText());
+						AccountViewLogic.getAccount().setHeight(newVariableTextField.getText());
 						currentHeightLabel.setText(newVariableTextField.getText());
 						errorLabel.setVisible(false);
 						variableChangerWindow.close();
@@ -602,7 +603,7 @@ public class AccountView extends Pane
 					
 					else
 					{
-						errorLabel.setText(errorMessage);
+						errorLabel.setText(AccountViewLogic.getErrorMessage());
 						errorLabel.setVisible(true);
 					}
 				});
@@ -611,9 +612,9 @@ public class AccountView extends Pane
 			case "Weight":
 				confirmVariableChangeButton.setOnAction(e ->
 				{
-					if(checkNewVariableIsValid(variableToBeChanged))
+					if(AccountViewLogic.checkNewVariableIsValid(variableToBeChanged, newVariableTextField.getText()))
 					{
-						currentAccount.setWeight(Integer.parseInt(newVariableTextField.getText()));
+						AccountViewLogic.getAccount().setWeight(Integer.parseInt(newVariableTextField.getText()));
 						currentWeightLabel.setText(newVariableTextField.getText() + " lbs");
 						errorLabel.setVisible(false);
 						variableChangerWindow.close();
@@ -621,7 +622,7 @@ public class AccountView extends Pane
 					
 					else
 					{
-						errorLabel.setText(errorMessage);
+						errorLabel.setText(AccountViewLogic.getErrorMessage());
 						errorLabel.setVisible(true);
 					}
 				});
@@ -630,9 +631,9 @@ public class AccountView extends Pane
 			case "Age":
 				confirmVariableChangeButton.setOnAction(e ->
 				{
-					if(checkNewVariableIsValid(variableToBeChanged))
+					if(AccountViewLogic.checkNewVariableIsValid(variableToBeChanged, newVariableTextField.getText()))
 					{
-						currentAccount.setAge(Integer.parseInt(newVariableTextField.getText()));
+						AccountViewLogic.getAccount().setAge(Integer.parseInt(newVariableTextField.getText()));
 						currentAgeLabel.setText(newVariableTextField.getText());
 						errorLabel.setVisible(false);
 						variableChangerWindow.close();
@@ -640,7 +641,7 @@ public class AccountView extends Pane
 					
 					else
 					{
-						errorLabel.setText(errorMessage);
+						errorLabel.setText(AccountViewLogic.getErrorMessage());
 						errorLabel.setVisible(true);
 					}
 				});
@@ -649,9 +650,9 @@ public class AccountView extends Pane
 			case "DietType":
 				confirmVariableChangeButton.setOnAction(e ->
 				{
-					if(checkNewVariableIsValid(variableToBeChanged))
+					if(AccountViewLogic.checkNewVariableIsValid(variableToBeChanged, (String)newVariableComboBox.getSelectionModel().getSelectedItem()))
 					{
-						currentAccount.setSex(newVariableComboBox.getSelectionModel().getSelectedItem().toString());
+						AccountViewLogic.getAccount().setSex(newVariableComboBox.getSelectionModel().getSelectedItem().toString());
 						currentDietTypeLabel.setText(newVariableComboBox.getSelectionModel().getSelectedItem().toString());
 						errorLabel.setVisible(false);
 						variableChangerWindow.close();
@@ -659,7 +660,7 @@ public class AccountView extends Pane
 					
 					else
 					{
-						errorLabel.setText(errorMessage);
+						errorLabel.setText(AccountViewLogic.getErrorMessage());
 						errorLabel.setVisible(true);
 					}
 				});
@@ -671,7 +672,7 @@ public class AccountView extends Pane
 	}
 	
 	private boolean checkNewVariableIsValid(String variableToBeChanged)
-	{
+	{	
 		switch(variableToBeChanged)
 		{
 			case "Username":
@@ -783,7 +784,7 @@ public class AccountView extends Pane
 				}
 
 			case "DietType":
-				if(newVariableComboBox.getSelectionModel().isEmpty())
+				if(newVariableComboBox.getSelectionModel().getSelectedItem().equals(""))
 				{
 					errorMessage = "A diet type must be chosen";
 					return false;
