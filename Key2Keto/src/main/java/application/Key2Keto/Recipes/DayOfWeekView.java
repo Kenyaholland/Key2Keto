@@ -353,7 +353,6 @@ public class DayOfWeekView extends Pane {
 
 	private void styleVariables() {
 		//wholeView styling
-		//this.wholeView.setBackground(new Background(new BackgroundFill(Color.LIGHTSLATEGRAY, CornerRadii.EMPTY, Insets.EMPTY)));
 		this.wholeView.setPrefSize(980, 500);
 		//this.wholeView.setMargin(categorySelection, new Insets(0, 0, 0, 0));
 		//this.wholeView.setMargin(addRecipeDropdown, new Insets(0, 0, 0, 0));
@@ -362,7 +361,6 @@ public class DayOfWeekView extends Pane {
 		//this.categorySelection
 		this.categorySelection.setPrefSize(980, 75);
 		this.categorySelection.setAlignment(Pos.CENTER);
-		//this.categorySelection.setBackground(new Background(new BackgroundFill(Color.LIGHTSKYBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
 		this.categorySelection.setId("RecipeCategoryBox");
 		HBox.setMargin(overViewButton, new Insets(10, 5, 10, 0));
 		HBox.setMargin(breakfastButton, new Insets(10, 5, 10, 5));
@@ -378,10 +376,8 @@ public class DayOfWeekView extends Pane {
 		this.selectedRecipes.setAlignment(Pos.CENTER);
 		
 		this.daysRecipesLabel.setPrefSize(500, 75);
-		//this.daysRecipesLabel.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
 		this.daysRecipesLabel.setId("RecipeCategoryBox");
 		this.daysRecipesLabel.setAlignment(Pos.CENTER);
-		//this.daysRecipesLabel.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 14));
 		
 		this.breakfastInfo.setPrefSize(500, 75);
 		HBox.setMargin(this.breakfastRecipeName, new Insets(10, 5, 10, 5));
