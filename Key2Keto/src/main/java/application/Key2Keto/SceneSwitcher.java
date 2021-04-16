@@ -34,7 +34,7 @@ public class SceneSwitcher extends Pane{
     	
     	creationPane.getChildren().add(creationView);
         Scene creationScene = new Scene(creationPane);
-        creationScene.getStylesheets().addAll(this.getClass().getResource("AccountCreationStyling.css").toExternalForm());
+        creationScene.getStylesheets().addAll(this.getClass().getResource("LoginStyling.css").toExternalForm());
         
         return creationScene;
 	}

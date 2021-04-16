@@ -1,5 +1,5 @@
 #WholePane {
- -fx-background-color: #C4D4D9;
+ -fx-background-color: #93A7AA;
 }
 
 #Title {
@@ -32,7 +32,7 @@
 }
 
 .button:hover {
-	-fx-background-color: #7D9CA1;
+	-fx-background-color: #415052;
 }
 
 .textfield {

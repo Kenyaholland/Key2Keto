@@ -4,15 +4,41 @@
 }
 
 #WholeMainPane {
-	-fx-background-color: #C4D4D9;
+	-fx-background-color: #93A7AA;
 }
 
 #MainTabsBox {
-	-fx-background-color: #C4D4D9;
+	-fx-background-color: #93A7AA;
 }
 
+.label {
+	-fx-text-fill: #2A2F33;
+	-fx-font-family: Verdana;
+	-fx-font-size: 14px;
+}
+
+.button {
+	-fx-background-color: #2A2F33;
+	-fx-display: inline-block;
+	-fx-cursor: pointer;
+	-fx-text-fill: #FFFFFF;
+	-fx-font-family: Verdana;
+	-fx-font-size: 14px;
+	-fx-font-weight: bold;
+}
+
+.button:hover {
+	-fx-background-color: #415052;
+}
+
+.combobox {
+	-fx-font-family: Verdana;
+	-fx-font-size: 14px;
+}
+
+
 #UsernameField {
-	-fx-background-color: #93A7AA;
+	-fx-background-color: #C4D4D9;
 	-fx-text-fill: #2A2F33;
 	-fx-font-family: Verdana;
 	-fx-font-weight: bold;
@@ -29,18 +55,12 @@
 	-fx-font-size: 16px;
 }
 
-#DashboardInfoLabels {
-	-fx-text-fill: #2A2F33;
-	-fx-font-family: Verdana;
-	-fx-font-size: 14px;
-}
-
 #DashUpper {
-	-fx-background-color: #93A7AA;
+	-fx-background-color: #C4D4D9;
 }
 
 .chart {
-	-fx-background-color: #93A7AA;
+	-fx-background-color: #C4D4D9;
 }
 
 .chart-title {
@@ -68,15 +88,57 @@
     -fx-background-color: #93A7AA;
 }
 
-#MainTabs {
+
+
+#AccountTitleLabel {
+	-fx-text-fill: #2A2F33;
+	-fx-font-weight: bold;
+	-fx-font-family: Verdana;
+	-fx-font-size: 18px;
+}
+
+#AccountTitleBox {
+	-fx-background-color: #C4D4D9;
+}
+
+#DarkRows {
+	-fx-background-color: #A7B5B9;
+}
+
+#LightRows {
+	-fx-background-color: #C4D4D9;
+}
+
+
+
+#DayOfWeekClicked {
+	-fx-background-color: #415052;
+}
+
+#DayOfWeekNotClicked {
+	-fx-background-color: #2A2F33;
+}
+
+#DayOfWeekNotClicked:hover {
+	-fx-background-color: #415052;
+}
+
+
+
+#RecipeCategoryBox {
+	-fx-background-color: #C4D4D9;
+}
+
+#DeleteButtons {
 	-fx-background-color: #2A2F33;
 	-fx-display: inline-block;
 	-fx-cursor: pointer;
 	-fx-text-fill: #FFFFFF;
 	-fx-font-family: Verdana;
-	-fx-font-size: 14px;
+	-fx-font-size: 12px;
 	-fx-font-weight: bold;
 }
-#MainTabs:hover {
-	-fx-background-color: #7D9CA1;
+
+#DeleteButtons:hover {
+	-fx-background-color: #415052;
 }
