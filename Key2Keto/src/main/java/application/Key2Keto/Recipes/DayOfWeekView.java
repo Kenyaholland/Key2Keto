@@ -103,6 +103,7 @@ public class DayOfWeekView extends Pane {
 		    	DayOfWeekView.this.recipeDetails.setViewOrder(-1);
 		    	DayOfWeekView.this.confirmationBox.setViewOrder(0);
 		    	DayOfWeekView.this.confirmationBox.setVisible(false);
+		    	DayOfWeekView.this.recipeDetails.setVisible(true);
 		    	setButtonCLickedColor(1);
 		    }
 		});
@@ -113,6 +114,7 @@ public class DayOfWeekView extends Pane {
 		    	DayOfWeekView.this.recipeDetails.setViewOrder(-1);
 		    	DayOfWeekView.this.confirmationBox.setViewOrder(0);
 		    	DayOfWeekView.this.confirmationBox.setVisible(false);
+		    	DayOfWeekView.this.recipeDetails.setVisible(true);
 		    	setButtonCLickedColor(2);
 		    }
 		});
@@ -123,6 +125,7 @@ public class DayOfWeekView extends Pane {
 		    	DayOfWeekView.this.recipeDetails.setViewOrder(-1);
 		    	DayOfWeekView.this.confirmationBox.setViewOrder(0);
 		    	DayOfWeekView.this.confirmationBox.setVisible(false);
+		    	DayOfWeekView.this.recipeDetails.setVisible(true);
 		    	setButtonCLickedColor(3);
 		    }
 		});
