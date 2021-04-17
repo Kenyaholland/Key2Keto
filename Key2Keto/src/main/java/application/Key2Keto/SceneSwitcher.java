@@ -23,6 +23,7 @@ public class SceneSwitcher extends Pane{
     	
     	loginPane.getChildren().add(loginView);
         Scene loginScene = new Scene(loginPane);
+        loginScene.getStylesheets().addAll(this.getClass().getResource("LoginStyling.css").toExternalForm());
 
         return loginScene;
 	}
@@ -33,6 +34,7 @@ public class SceneSwitcher extends Pane{
     	
     	creationPane.getChildren().add(creationView);
         Scene creationScene = new Scene(creationPane);
+        creationScene.getStylesheets().addAll(this.getClass().getResource("LoginStyling.css").toExternalForm());
         
         return creationScene;
 	}
@@ -44,6 +46,8 @@ public class SceneSwitcher extends Pane{
     	VBox view = mainView.getView();
         Scene mainViewScene = new Scene(view);
         stage.setTitle("Key2Keto");
+        
+        mainViewScene.getStylesheets().addAll(this.getClass().getResource("MainStyling.css").toExternalForm());
         
         return mainViewScene;
 	}

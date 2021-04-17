@@ -16,7 +16,6 @@ public class RecipeFileReader {
 			File file = new File(fileName);
 			sc = new Scanner(file);
 			String dietType = fileName.substring(45,46);
-			System.out.println(dietType);
 			String recName = "";
 			String carb = "";
 			String fat = "";

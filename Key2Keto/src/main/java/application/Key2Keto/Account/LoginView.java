@@ -119,33 +119,27 @@ public class LoginView extends Pane
 		titleOrLogoRow.setAlignment(Pos.CENTER);
 		titleOrLogoRow.setMinWidth(500);
 		titleOrLogoRow.setMargin(titleOrLogo, new Insets(40, 0, 40, 0));
-		titleOrLogo.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 18));
+		titleOrLogo.setId("Title");
 		
 		usernameRow.setMargin(usernameLabel, new Insets(10, 20, 10, 20));
 		usernameRow.setMargin(usernameTextField, new Insets(10, 20, 10, 20));
 		usernameLabel.setMinWidth(113);
-		usernameLabel.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 12));
-		usernameTextField.setFont(Font.font("Verdana", 12));
 		
 		passwordRow.setMargin(passwordLabel, new Insets(10, 20, 10, 20));
 		passwordRow.setMargin(passwordTextField, new Insets(10, 20, 10, 20));
 		passwordLabel.setMinWidth(113);
-		passwordLabel.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 12));
-		passwordTextField.setFont(Font.font("Verdana", 12));
 		
 		signInButtonRow.setAlignment(Pos.CENTER);
 		signInButtonRow.setMargin(signInButton, new Insets(10, 0, 10, 0));
-		signInButton.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 12));
 		
-		errorLabel.setTextFill(Color.RED);
-		errorLabel.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 12));
 		errorLabel.setVisible(false);
 		errorRow.setAlignment(Pos.CENTER);
+		errorRow.setId("ErrorLabel");
 		
 		createAccountRow.setAlignment(Pos.CENTER);
 		createAccountRow.setMargin(createAccountButton, new Insets(30, 20, 30, 20));
-		noAccountLabel.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 12));
-		createAccountButton.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 12));
+		
+		loginRows.setId("WholePane");
 	}
 	
 	private void addAllElementsToChildren() //helper function for readability
