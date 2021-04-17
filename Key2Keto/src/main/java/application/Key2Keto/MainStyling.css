@@ -142,3 +142,20 @@
 #DeleteButtons:hover {
 	-fx-background-color: #415052;
 }
+
+#DetailBackground {
+	-fx-background-color: #FFFFFF;
+}
+
+#DetailLabels {
+	-fx-text-fill: #2A2F33;
+	-fx-font-family: Verdana;
+	-fx-font-size: 12px;
+}
+
+#DetailLargeLabels {
+	-fx-text-fill: #2A2F33;
+	-fx-font-weight: bold;
+	-fx-font-family: Verdana;
+	-fx-font-size: 14px;
+}
