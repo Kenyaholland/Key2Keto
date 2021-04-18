@@ -165,7 +165,7 @@ public class AccountView extends Pane
 	//@SuppressWarnings("static-access")
 	private void stylizeElements()
 	{	
-		myAccountLabel.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 18));
+		myAccountLabel.setId("AccountTitleLabel");
 		
 		viewTitleRow.setAlignment(Pos.CENTER);
 		viewTitleRow.setMinWidth(980);
@@ -174,95 +174,71 @@ public class AccountView extends Pane
 		viewTitleRow.setBorder(new Border(new BorderStroke(Color.BLACK, Color.BLACK, Color.BLACK, Color.BLACK,
 				   										   BorderStrokeStyle.NONE, BorderStrokeStyle.NONE, BorderStrokeStyle.SOLID, BorderStrokeStyle.NONE, 
 				   										   CornerRadii.EMPTY, new BorderWidths(2), Insets.EMPTY)));
-		viewTitleRow.setBackground(new Background(new BackgroundFill(Color.LIGHTSLATEGRAY, CornerRadii.EMPTY, Insets.EMPTY)));
+		viewTitleRow.setId("AccountTitleBox");
 		
 		HBox.setMargin(usernameDisplayLabel, new Insets(20, 10, 10, 10));
 		usernameDisplayLabel.setMinWidth(100);
-		usernameDisplayLabel.setFont(Font.font("Verdana", 14));
 		HBox.setMargin(currentUsernameLabel, new Insets(20, 10, 10, 10));
 		currentUsernameLabel.setMinWidth(127);
-		currentUsernameLabel.setFont(Font.font("Verdana", 14));
-		HBox.setMargin(changeUsernameButton, new Insets(20, 10, 10, 10));
-		changeUsernameButton.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 12));
+	  HBox.setMargin(changeUsernameButton, new Insets(20, 10, 10, 10));
 		usernameRow.setAlignment(Pos.CENTER);
-		usernameRow.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
+		usernameRow.setId("DarkRows");
 		
 		HBox.setMargin(passwordDisplayLabel, new Insets(20, 10, 10, 10));
 		passwordDisplayLabel.setMinWidth(100);
-		passwordDisplayLabel.setFont(Font.font("Verdana", 14));
 		HBox.setMargin(currentPasswordLabel, new Insets(20, 10, 10, 10));
 		currentPasswordLabel.setMinWidth(127);
-		currentPasswordLabel.setFont(Font.font("Verdana", 14));
 		HBox.setMargin(changePasswordButton, new Insets(20, 10, 10, 10));
-		changePasswordButton.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 12));
 		passwordRow.setAlignment(Pos.CENTER);
-		passwordRow.setBackground(new Background(new BackgroundFill(Color.LIGHTSKYBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
+		passwordRow.setId("LightRows");
 		
 		HBox.setMargin(nameDisplayLabel, new Insets(20, 10, 10, 10));
 		nameDisplayLabel.setMinWidth(100);
-		nameDisplayLabel.setFont(Font.font("Verdana", 14));
 		HBox.setMargin(currentNameLabel, new Insets(20, 10, 10, 10));
 		currentNameLabel.setMinWidth(127);
-		currentNameLabel.setFont(Font.font("Verdana", 14));
 		HBox.setMargin(changeNameButton, new Insets(20, 10, 10, 10));
-		changeNameButton.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 12));
 		nameRow.setAlignment(Pos.CENTER);
-		nameRow.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
+		nameRow.setId("DarkRows");
 		
 		HBox.setMargin(sexDisplayLabel, new Insets(20, 10, 10, 10));
 		sexDisplayLabel.setMinWidth(100);
-		sexDisplayLabel.setFont(Font.font("Verdana", 14));
 		HBox.setMargin(currentSexLabel, new Insets(20, 10, 10, 10));
 		currentSexLabel.setMinWidth(127);
-		currentSexLabel.setFont(Font.font("Verdana", 14));
 		HBox.setMargin(changeSexButton, new Insets(20, 10, 10, 10));
-		changeSexButton.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 12));
 		sexRow.setAlignment(Pos.CENTER);
-		sexRow.setBackground(new Background(new BackgroundFill(Color.LIGHTSKYBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
+		sexRow.setId("LightRows");
 		
 		HBox.setMargin(heightDisplayLabel, new Insets(20, 10, 10, 10));
 		heightDisplayLabel.setMinWidth(100);
-		heightDisplayLabel.setFont(Font.font("Verdana", 14));
 		HBox.setMargin(currentHeightLabel, new Insets(20, 10, 10, 10));
 		currentHeightLabel.setMinWidth(127);
-		currentHeightLabel.setFont(Font.font("Verdana", 14));
 		HBox.setMargin(changeHeightButton, new Insets(20, 10, 10, 10));
-		changeHeightButton.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 12));
 		heightRow.setAlignment(Pos.CENTER);
-		heightRow.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
+		heightRow.setId("DarkRows");
 		
 		HBox.setMargin(weightDisplayLabel, new Insets(20, 10, 10, 10));
 		weightDisplayLabel.setMinWidth(100);
-		weightDisplayLabel.setFont(Font.font("Verdana", 14));
 		HBox.setMargin(currentWeightLabel, new Insets(20, 10, 10, 10));
 		currentWeightLabel.setMinWidth(127);
-		currentWeightLabel.setFont(Font.font("Verdana", 14));
 		HBox.setMargin(changeWeightButton, new Insets(20, 10, 10, 10));
-		changeWeightButton.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 12));
 		weightRow.setAlignment(Pos.CENTER);
-		weightRow.setBackground(new Background(new BackgroundFill(Color.LIGHTSKYBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
+		weightRow.setId("LightRows");
 		
 		HBox.setMargin(ageDisplayLabel, new Insets(20, 10, 10, 10));
 		ageDisplayLabel.setMinWidth(100);
-		ageDisplayLabel.setFont(Font.font("Verdana", 14));
 		HBox.setMargin(currentAgeLabel, new Insets(20, 10, 10, 10));
 		currentAgeLabel.setMinWidth(127);
-		currentAgeLabel.setFont(Font.font("Verdana", 14));
 		HBox.setMargin(changeAgeButton, new Insets(20, 10, 10, 10));
-		changeAgeButton.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 12));
 		ageRow.setAlignment(Pos.CENTER);
-		ageRow.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
+		ageRow.setId("DarkRows");
 		
 		HBox.setMargin(dietTypeDisplayLabel, new Insets(20, 10, 20, 10));
 		dietTypeDisplayLabel.setMinWidth(100);
-		dietTypeDisplayLabel.setFont(Font.font("Verdana", 14));
 		HBox.setMargin(currentDietTypeLabel, new Insets(20, 10, 20, 10));
 		currentDietTypeLabel.setMinWidth(127);
-		currentDietTypeLabel.setFont(Font.font("Verdana", 14));
 		HBox.setMargin(changeDietTypeButton, new Insets(20, 10, 20, 10));
-		changeDietTypeButton.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 12));
 		dietTypeRow.setAlignment(Pos.CENTER);
-		dietTypeRow.setBackground(new Background(new BackgroundFill(Color.LIGHTSKYBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
+		dietTypeRow.setId("LightRows");
 		
 		VBox.setMargin(myAccountRows, new Insets(0, 0, 0, 250));
 		

@@ -124,34 +124,37 @@ public class MainView extends Pane{
 	}
 
 	private void StylizeElements(){
-		title.setFont(new Font(75));
+		title.setId("title");
+		
 		view.setPrefSize(1000, 750);
 		VBox.setMargin(labels, new Insets(0, 10, 0, 10));
 		VBox.setMargin(this.mainContent, new Insets(5, 10, 5, 10));
 		VBox.setMargin(title, new Insets(5, 10, 5, 10));
-		view.setBackground(new Background(new BackgroundFill(Color.LIGHTSLATEGRAY, CornerRadii.EMPTY, Insets.EMPTY)));
-		labels.setBackground(new Background(new BackgroundFill(Color.LIGHTSKYBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
+		view.setId("WholeMainPane");
+		
 		labels.setPrefSize(1000, 75);
 		labels.setSpacing(12);
 		labels.setAlignment(Pos.CENTER);
+		labels.setId("MainTabsBox");
+		
 		dash.setPrefSize(129, 45);
-		dash.setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, CornerRadii.EMPTY, Insets.EMPTY)));
-		dash.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 14));
+		dash.setId("MainTabs");
+		
 		account.setPrefSize(129, 45);
-		account.setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, CornerRadii.EMPTY, Insets.EMPTY)));
-		account.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 14));
+		account.setId("MainTabs");
+		
 		tracker.setPrefSize(129, 45);
-		tracker.setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, CornerRadii.EMPTY, Insets.EMPTY)));
-		tracker.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 14));
+		tracker.setId("MainTabs");
+		
 		shopping.setPrefSize(129, 45);
-		shopping.setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, CornerRadii.EMPTY, Insets.EMPTY)));
-		shopping.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 14));
+		shopping.setId("MainTabs");
+		
 		recipes.setPrefSize(129, 45);
-		recipes.setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, CornerRadii.EMPTY, Insets.EMPTY)));
-		recipes.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 14));
+		recipes.setId("MainTabs");
+		
 		logout.setPrefSize(129, 45);
-		logout.setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, CornerRadii.EMPTY, Insets.EMPTY)));
-		logout.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 14));
+		logout.setId("MainTabs");
+		
 		view.setAlignment(Pos.CENTER);
 	}
 	
