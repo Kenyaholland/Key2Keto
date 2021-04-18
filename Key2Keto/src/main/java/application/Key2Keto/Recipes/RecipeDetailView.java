@@ -52,7 +52,7 @@ public class RecipeDetailView extends Pane {
 		this.lower = new VBox();
 		this.upper = new VBox();
 		this.hbox = new HBox();
-		this.imageButton = new Button("IMAGE");
+		this.imageButton = new Button();
 		this.image = this.recipe.getImage();
 		this.imageView = new ImageView(image);
 		this.nameLabel = new Label(this.recipe.getName());

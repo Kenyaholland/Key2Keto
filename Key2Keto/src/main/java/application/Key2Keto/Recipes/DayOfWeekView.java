@@ -26,15 +26,15 @@ import javafx.scene.text.FontWeight;
 
 public class DayOfWeekView extends Pane implements ViewInterface {
 	private String name;
-	private Account user;
-	private RecipeList recipeList;
-	private ArrayList<Recipe> daysRecipes;
+	//private Account user;
+	//private RecipeList recipeList;
+	//private ArrayList<Recipe> daysRecipes;
 	private RecipeDetailView recipeDetailView;
 	private int day = 0;
 	private boolean flag = false;
-	private boolean lunchFlag = false;
-	private boolean dinnerFlag = false;
-	private int numEntree = 0;
+	//private boolean lunchFlag = false;
+	//private boolean dinnerFlag = false;
+	//private int numEntree = 0;
 	private VBox wholeView;
 	private VBox selectedRecipes;
 	private VBox recipeDetails;
@@ -76,11 +76,12 @@ public class DayOfWeekView extends Pane implements ViewInterface {
 
 	public DayOfWeekView(RecipeList recipeList, String name, Account user) {
 		this.name = name;
-		//this.recipeList = recipeList;
-		DayOfWeekLogic.addRecipeListToClass(recipeList);
-		this.user = user;
 		this.day = getIntFormOfDay(this.name);
-		this.daysRecipes = new ArrayList<Recipe>();
+		DayOfWeekLogic.setUserAccount(user);
+		DayOfWeekLogic.addRecipeListToClass(recipeList);
+		//this.user = user;
+		//this.recipeList = recipeList;
+		//this.daysRecipes = new ArrayList<Recipe>();
 		initializeVariables();
 		stylizeElements();
 		populateChildren();
@@ -155,53 +156,68 @@ public class DayOfWeekView extends Pane implements ViewInterface {
 		}
 	}
 
+/* -------------------CAN TAKE OUT --------------------------*/
 	private void addRecipe(String selected) {
-		Recipe temp;
-		int recflag = 0;
-		for (int i = 0; i < this.recipeList.getRecipeList().size(); i++) {
-			if (selected.contentEquals(this.recipeList.getRecipeList().get(i).getName())) {
-				temp = this.recipeList.getRecipeList().get(i);
-				for (int j = 0; j < this.daysRecipes.size(); j++) {
-					if (this.daysRecipes.get(j).getType().contentEquals(temp.getType())
-							&& !temp.getType().contentEquals("Entrees")) {
-						recflag = 1;
-						break;
-					} else if (this.daysRecipes.get(j).getType().contentEquals(temp.getType())
-							&& temp.getType().contentEquals("Entrees")) {
-						if (numEntree > 1) {
-							recflag = 1;
-							break;
-						}
-					}
-				}
-				if (recflag == 0 && !temp.getType().contentEquals("Entrees")) {
-					this.daysRecipes.add(temp);
-				}
-				if (temp.getType().contentEquals("Entrees") && numEntree < 2) {
-					this.daysRecipes.add(temp);
-					numEntree++;
-				}
-			}
-		}
-		disPlayViewsRecipes();
+//		Recipe temp;
+//		int recflag = 0;
+//		for (int i = 0; i < DayOfWeekLogic.getRecipeList().getRecipeList().size(); i++) {
+//			if (selected.contentEquals(DayOfWeekLogic.getRecipeList().getRecipeList().get(i).getName())) {
+//				temp = DayOfWeekLogic.getRecipeList().getRecipeList().get(i);
+//				for (int j = 0; j < DayOfWeekLogic.getDaysRecipes().size(); j++) {
+//					if (DayOfWeekLogic.getDaysRecipes().get(j).getType().contentEquals(temp.getType())
+//							&& !temp.getType().contentEquals("Entrees")) {
+//						recflag = 1;
+//						break;
+//					} else if (DayOfWeekLogic.getDaysRecipes().get(j).getType().contentEquals(temp.getType())
+//							&& temp.getType().contentEquals("Entrees")) {
+//						if (numEntree > 1) {
+//							recflag = 1;
+//							break;
+//						}
+//					}
+//				}
+//				if (recflag == 0 && !temp.getType().contentEquals("Entrees")) {
+//					DayOfWeekLogic.getDaysRecipes().add(temp);
+//				}
+//				if (temp.getType().contentEquals("Entrees") && numEntree < 2) {
+//					DayOfWeekLogic.getDaysRecipes().add(temp);
+//					numEntree++;
+//				}
+//			}
+//		}
+//		disPlayViewsRecipes();
 	}
 
 	private void disPlayViewsRecipes() {
 		int count = 0;
-
-		for (int i = 0; i < this.daysRecipes.size(); i++) {
-			if (this.daysRecipes.get(i).getType().contentEquals("Breakfast")) {
-				this.breakfastRecipeName.setText(this.daysRecipes.get(i).getName());
-			} else if (this.daysRecipes.get(i).getType().contentEquals("Snacks")) {
-				this.snackRecipeName.setText(this.daysRecipes.get(i).getName());
-			} else if (this.daysRecipes.get(i).getType().contentEquals("Entrees") && count == 0) {
-				this.lunchRecipeName.setText(this.daysRecipes.get(i).getName());
+		
+		for (int i = 0; i < DayOfWeekLogic.getDaysRecipes().size(); i++) {
+			if (DayOfWeekLogic.getDaysRecipes().get(i).getType().contentEquals("Breakfast")) {
+				this.breakfastRecipeName.setText(DayOfWeekLogic.getDaysRecipes().get(i).getName());
+			} else if (DayOfWeekLogic.getDaysRecipes().get(i).getType().contentEquals("Snacks")) {
+				this.snackRecipeName.setText(DayOfWeekLogic.getDaysRecipes().get(i).getName());
+			} else if (DayOfWeekLogic.getDaysRecipes().get(i).getType().contentEquals("Entrees") && count == 0) {
+				this.lunchRecipeName.setText(DayOfWeekLogic.getDaysRecipes().get(i).getName());
 				count = 1;
-			} else if (this.daysRecipes.get(i).getType().contentEquals("Entrees")) {
-				this.dinnerRecipeName.setText(this.daysRecipes.get(i).getName());
+			} else if (DayOfWeekLogic.getDaysRecipes().get(i).getType().contentEquals("Entrees")) {
+				this.dinnerRecipeName.setText(DayOfWeekLogic.getDaysRecipes().get(i).getName());
 				count = 0;
 			}
 		}
+
+//		for (int i = 0; i < this.daysRecipes.size(); i++) {
+//			if (this.daysRecipes.get(i).getType().contentEquals("Breakfast")) {
+//				this.breakfastRecipeName.setText(this.daysRecipes.get(i).getName());
+//			} else if (this.daysRecipes.get(i).getType().contentEquals("Snacks")) {
+//				this.snackRecipeName.setText(this.daysRecipes.get(i).getName());
+//			} else if (this.daysRecipes.get(i).getType().contentEquals("Entrees") && count == 0) {
+//				this.lunchRecipeName.setText(this.daysRecipes.get(i).getName());
+//				count = 1;
+//			} else if (this.daysRecipes.get(i).getType().contentEquals("Entrees")) {
+//				this.dinnerRecipeName.setText(this.daysRecipes.get(i).getName());
+//				count = 0;
+//			}
+//		}
 		this.breakfastRecipeName.setVisible(true);
 		this.lunchRecipeName.setVisible(true);
 		this.dinnerRecipeName.setVisible(true);
@@ -242,8 +258,6 @@ public class DayOfWeekView extends Pane implements ViewInterface {
 		this.wholeView.setBackground(
 				new Background(new BackgroundFill(Color.LIGHTSLATEGRAY, CornerRadii.EMPTY, Insets.EMPTY)));
 		this.wholeView.setPrefSize(980, 500);
-		// this.wholeView.setMargin(categorySelection, new Insets(0, 0, 0, 0));
-		// this.wholeView.setMargin(addRecipeDropdown, new Insets(0, 0, 0, 0));
 		VBox.setMargin(selectedRecipes, new Insets(0, 10, 0, 10));
 
 		// this.categorySelection
@@ -334,7 +348,7 @@ public class DayOfWeekView extends Pane implements ViewInterface {
 
 		this.bottomRecipeInfo.setPrefSize(490, 400);
 		this.confirm.setPrefSize(490, 400);
-		this.confirm.setMargin(this.confirmationBox, new Insets(10, 10, 10, 10));
+		StackPane.setMargin(this.confirmationBox, new Insets(10, 10, 10, 10));
 		this.confirm.setAlignment(Pos.CENTER);
 		this.confirmLabel.setFont(Font.font("Verdana", FontWeight.NORMAL, 14));
 		this.confirmLabel.setPrefSize(480, 100);
@@ -348,7 +362,7 @@ public class DayOfWeekView extends Pane implements ViewInterface {
 	}
 
 	private void setDefaultVisibilities() {
-		if (this.daysRecipes.size() > 0) {
+		if (DayOfWeekLogic.getDaysRecipes().size() > 0) {
 			this.breakfastRecipeName.setVisible(true);
 			this.lunchRecipeName.setVisible(true);
 			this.dinnerRecipeName.setVisible(true);
@@ -422,67 +436,71 @@ public class DayOfWeekView extends Pane implements ViewInterface {
 			//}
 			break;
 		case 1:
-			for (int i = 0; i < this.recipeList.entreeRecipes().size(); i++) {
-				comboBox.getItems().add(this.recipeList.entreeRecipes().get(i).getName());
+			comboBox.getItems().addAll(DayOfWeekLogic.getEntreeRecipes());
+			//for (int i = 0; i < this.recipeList.entreeRecipes().size(); i++) {
+			//	comboBox.getItems().add(this.recipeList.entreeRecipes().get(i).getName());
 				comboBox.setVisible(true);
-			}
+			//}
 			break;
 		case 2:
-			for (int i = 0; i < this.recipeList.snackRecipes().size(); i++) {
-				comboBox.getItems().add(this.recipeList.snackRecipes().get(i).getName());
+			comboBox.getItems().addAll(DayOfWeekLogic.getSnackRecipes());
+		//	for (int i = 0; i < this.recipeList.snackRecipes().size(); i++) {
+			//	comboBox.getItems().add(this.recipeList.snackRecipes().get(i).getName());
 				comboBox.setVisible(true);
-			}
+			//}
 			break;
 		default:
 			System.out.println("Something is wrong here");
 		}
 	}
 
+	
+	/* -------------------CAN TAKE OUT --------------------------*/
 	private void clearRecipe(int num) {
-		switch (num) {
-		case 0:
-			for (int i = 0; i < this.daysRecipes.size(); i++) {
-				if (this.breakfastRecipeName.getText().contentEquals(this.daysRecipes.get(i).getName())) {
-					this.daysRecipes.remove(i);
-				}
-			}
-			this.breakfastRecipeName.setText("No Breakfast Chosen");
-			break;
-
-		case 1: {
-			for (int i = 0; i < this.daysRecipes.size(); i++) {
-				if (this.lunchRecipeName.getText().contentEquals(this.daysRecipes.get(i).getName())) {
-					this.daysRecipes.remove(i);
-					lunchFlag = false;
-				}
-			}
-			this.lunchRecipeName.setText("No Lunch Chosen");
-			break;
-		}
-		case 2:
-			for (int i = 0; i < this.daysRecipes.size(); i++) {
-				if (this.dinnerRecipeName.getText().contentEquals(this.daysRecipes.get(i).getName())) {
-					this.daysRecipes.remove(i);
-					dinnerFlag = false;
-				}
-			}
-			this.dinnerRecipeName.setText("No Dinner Chosen");
-			break;
-		case 3:
-			for (int i = 0; i < this.daysRecipes.size(); i++) {
-				if (this.snackRecipeName.getText().contentEquals(this.daysRecipes.get(i).getName())) {
-					this.daysRecipes.remove(i);
-				}
-			}
-			this.snackRecipeName.setText("No Snack Chosen");
-			break;
-		default:
-			System.out.println("Something is wrong here");
-		}
+//		switch (num) {
+//		case 0:
+//			for (int i = 0; i < this.daysRecipes.size(); i++) {
+//				if (this.breakfastRecipeName.getText().contentEquals(this.daysRecipes.get(i).getName())) {
+//					this.daysRecipes.remove(i);
+//				}
+//			}
+//			this.breakfastRecipeName.setText("No Breakfast Chosen");
+//			break;
+//
+//		case 1: {
+//			for (int i = 0; i < this.daysRecipes.size(); i++) {
+//				if (this.lunchRecipeName.getText().contentEquals(this.daysRecipes.get(i).getName())) {
+//					this.daysRecipes.remove(i);
+//					lunchFlag = false;
+//				}
+//			}
+//			this.lunchRecipeName.setText("No Lunch Chosen");
+//			break;
+//		}
+//		case 2:
+//			for (int i = 0; i < this.daysRecipes.size(); i++) {
+//				if (this.dinnerRecipeName.getText().contentEquals(this.daysRecipes.get(i).getName())) {
+//					this.daysRecipes.remove(i);
+//					dinnerFlag = false;
+//				}
+//			}
+//			this.dinnerRecipeName.setText("No Dinner Chosen");
+//			break;
+//		case 3:
+//			for (int i = 0; i < this.daysRecipes.size(); i++) {
+//				if (this.snackRecipeName.getText().contentEquals(this.daysRecipes.get(i).getName())) {
+//					this.daysRecipes.remove(i);
+//				}
+//			}
+//			this.snackRecipeName.setText("No Snack Chosen");
+//			break;
+//		default:
+//			System.out.println("Something is wrong here");
+//		}
 	}
 
 	public ArrayList<Recipe> getSelectedRecipes() {
-		return this.daysRecipes;
+		return DayOfWeekLogic.getDaysRecipes();
 	}
 
 	@Override
@@ -541,28 +559,45 @@ public class DayOfWeekView extends Pane implements ViewInterface {
 		deleteBreakfastButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {
-				clearRecipe(0);
+				String name = DayOfWeekLogic.clearRecipe(DayOfWeekView.this.breakfastRecipeName.getText(), 0);
+			//	clearRecipe(0);
+				if(!name.contentEquals("")) {
+					DayOfWeekView.this.breakfastRecipeName.setText(name);
+				}
 			}
 		});
 
 		deleteLunchButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {
-				clearRecipe(1);
+				String name = DayOfWeekLogic.clearRecipe(DayOfWeekView.this.lunchRecipeName.getText(), 1);
+				//clearRecipe(1);
+				if(!name.contentEquals("")) {
+					DayOfWeekView.this.lunchRecipeName.setText(name);
+				}
+				
 			}
 		});
 
 		deleteDinnerButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {
-				clearRecipe(2);
+			//	clearRecipe(2);
+				String name = DayOfWeekLogic.clearRecipe(DayOfWeekView.this.dinnerRecipeName.getText(), 2);
+				if(!name.contentEquals("")) {
+					DayOfWeekView.this.dinnerRecipeName.setText(name);
+				}
 			}
 		});
 
 		deleteSnackButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {
-				clearRecipe(3);
+			//	clearRecipe(3);
+				String name = DayOfWeekLogic.clearRecipe(DayOfWeekView.this.snackRecipeName.getText(), 3);
+				if(!name.contentEquals("")) {
+					DayOfWeekView.this.snackRecipeName.setText(name);
+				}
 			}
 		});
 
@@ -575,42 +610,54 @@ public class DayOfWeekView extends Pane implements ViewInterface {
 				} else {
 					selected = DayOfWeekView.this.comboBox.getValue().toString();
 				}
-				addRecipe(selected);
+				DayOfWeekLogic.addRecipe(selected);
+//				addRecipe(selected);
+				disPlayViewsRecipes();
 			}
+			
 		});
 
 		confirmRecipeSelection.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {
-				ArrayList<Recipe> temp = new ArrayList<Recipe>();
-				for (int i = 0; i < 4; i++) {
-					temp.add(i, null);
-				}
+//				ArrayList<Recipe> temp = new ArrayList<Recipe>();
+//				for (int i = 0; i < 4; i++) {
+//					temp.add(i, null);
+//				}
 
-				DayOfWeekView.this.user.getChosenRecipes().get(day).clear();
-
-				for (int i = 0; i < DayOfWeekView.this.daysRecipes.size(); i++) {
-					if (DayOfWeekView.this.daysRecipes.get(i).getName()
-							.contentEquals(DayOfWeekView.this.breakfastRecipeName.getText())) {
-						temp.add(0, DayOfWeekView.this.daysRecipes.get(i));
-					}
-					if (DayOfWeekView.this.daysRecipes.get(i).getName()
-							.contentEquals(DayOfWeekView.this.lunchRecipeName.getText())) {
-						temp.add(1, DayOfWeekView.this.daysRecipes.get(i));
-					}
-					if (DayOfWeekView.this.daysRecipes.get(i).getName()
-							.contentEquals(DayOfWeekView.this.dinnerRecipeName.getText())) {
-						temp.add(2, DayOfWeekView.this.daysRecipes.get(i));
-					}
-					if (DayOfWeekView.this.daysRecipes.get(i).getName()
-							.contentEquals(DayOfWeekView.this.snackRecipeName.getText())) {
-						temp.add(3, DayOfWeekView.this.daysRecipes.get(i));
-					}
-				}
-				DayOfWeekView.this.user.getChosenRecipes().get(day).add(temp.get(0));
-				DayOfWeekView.this.user.getChosenRecipes().get(day).add(temp.get(1));
-				DayOfWeekView.this.user.getChosenRecipes().get(day).add(temp.get(2));
-				DayOfWeekView.this.user.getChosenRecipes().get(day).add(temp.get(3));
+//				DayOfWeekView.this.user.getChosenRecipes().get(day).clear();
+				
+				ArrayList<String> chosen = new ArrayList<String>();
+				DayOfWeekLogic.getUserAccount().getChosenRecipes().get(day).clear();
+				
+				chosen.add(DayOfWeekView.this.breakfastRecipeName.getText());
+				chosen.add(DayOfWeekView.this.lunchRecipeName.getText());
+				chosen.add(DayOfWeekView.this.dinnerRecipeName.getText());
+				chosen.add(DayOfWeekView.this.snackRecipeName.getText());
+				DayOfWeekLogic.addToUsersChosenRecipes(chosen, day);
+				
+//				for (int i = 0; i < DayOfWeekView.this.daysRecipes.size(); i++) {
+//					if (DayOfWeekView.this.daysRecipes.get(i).getName()
+//							.contentEquals(DayOfWeekView.this.breakfastRecipeName.getText())) {
+//						temp.add(0, DayOfWeekView.this.daysRecipes.get(i));
+//					}
+//					if (DayOfWeekView.this.daysRecipes.get(i).getName()
+//							.contentEquals(DayOfWeekView.this.lunchRecipeName.getText())) {
+//						temp.add(1, DayOfWeekView.this.daysRecipes.get(i));
+//					}
+//					if (DayOfWeekView.this.daysRecipes.get(i).getName()
+//							.contentEquals(DayOfWeekView.this.dinnerRecipeName.getText())) {
+//						temp.add(2, DayOfWeekView.this.daysRecipes.get(i));
+//					}
+//					if (DayOfWeekView.this.daysRecipes.get(i).getName()
+//							.contentEquals(DayOfWeekView.this.snackRecipeName.getText())) {
+//						temp.add(3, DayOfWeekView.this.daysRecipes.get(i));
+//					}
+//				}
+//				DayOfWeekView.this.user.getChosenRecipes().get(day).add(temp.get(0));
+//				DayOfWeekView.this.user.getChosenRecipes().get(day).add(temp.get(1));
+//				DayOfWeekView.this.user.getChosenRecipes().get(day).add(temp.get(2));
+//				DayOfWeekView.this.user.getChosenRecipes().get(day).add(temp.get(3));
 			}
 		});
 
@@ -619,13 +666,13 @@ public class DayOfWeekView extends Pane implements ViewInterface {
 			String recipe = "";
 			if (this.comboBox.getValue() != null) {
 				recipe = this.comboBox.getValue().toString();
-				for (int i = 0; i < DayOfWeekView.this.recipeList.getRecipeList().size(); i++) {
-					if (recipe.contentEquals(DayOfWeekView.this.recipeList.getRecipeList().get(i).getName())) {
+				for (int i = 0; i < DayOfWeekLogic.getRecipeList().getRecipeList().size(); i++) {
+					if (recipe.contentEquals(DayOfWeekLogic.getRecipeList().getRecipeList().get(i).getName())) {
 						ScrollPane scrollPane = new ScrollPane();
 						scrollPane.setPrefWidth(500);
 						scrollPane.setMaxHeight(375);
 						DayOfWeekView.this.recipeDetailView = new RecipeDetailView(
-								DayOfWeekView.this.recipeList.getRecipeList().get(i));
+								DayOfWeekLogic.getRecipeList().getRecipeList().get(i));
 						scrollPane.setContent(DayOfWeekView.this.recipeDetailView);
 						DayOfWeekView.this.recipeDetails.getChildren().add(scrollPane);
 						DayOfWeekView.this.recipeDetails.setViewOrder(-1);
@@ -637,26 +684,26 @@ public class DayOfWeekView extends Pane implements ViewInterface {
 			}
 		});
 	}
-	
+
 	// Methods needed for testing purposes
-		protected ComboBox<String> getComboBoxForTest() {
-			return this.comboBox;
-		}
+	protected ComboBox<String> getComboBoxForTest() {
+		return this.comboBox;
+	}
 
-		protected ArrayList<Button> getButtonsToTest() {
-			ArrayList<Button> buttonsToTest = new ArrayList<Button>();
-			buttonsToTest.addAll(new ArrayList<Button>(Arrays.asList(this.breakfastButton, this.entreesButton,
-					this.snacksButton, this.deleteBreakfastButton, this.deleteLunchButton, this.deleteDinnerButton,
-					this.deleteSnackButton, this.addRecipeButton)));
+	protected ArrayList<Button> getButtonsToTest() {
+		ArrayList<Button> buttonsToTest = new ArrayList<Button>();
+		buttonsToTest.addAll(new ArrayList<Button>(Arrays.asList(this.breakfastButton, this.entreesButton,
+				this.snacksButton, this.deleteBreakfastButton, this.deleteLunchButton, this.deleteDinnerButton,
+				this.deleteSnackButton, this.addRecipeButton)));
 
-			return buttonsToTest;
-		}
+		return buttonsToTest;
+	}
 
-		protected ArrayList<Label> getLabels() {
-			ArrayList<Label> labelsToTest = new ArrayList<Label>();
-			labelsToTest.addAll(new ArrayList<Label>(Arrays.asList(this.breakfastRecipeName, this.lunchRecipeName,
-					this.dinnerRecipeName, this.snackRecipeName)));
+	protected ArrayList<Label> getLabels() {
+		ArrayList<Label> labelsToTest = new ArrayList<Label>();
+		labelsToTest.addAll(new ArrayList<Label>(Arrays.asList(this.breakfastRecipeName, this.lunchRecipeName,
+				this.dinnerRecipeName, this.snackRecipeName)));
 
-			return labelsToTest;
-		}
+		return labelsToTest;
+	}
 }

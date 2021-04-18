@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import application.Key2Keto.Account.Account;
+import application.Key2Keto.Interfaces.ViewInterface;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -19,94 +20,53 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
-public class RecipeView extends Pane {
-	private RecipeFileReader recipeFileReader;
-	private Account userAccount;
-	private VBox view = new VBox();
-	private HBox categoryTabs = new HBox();
-	private Button sundayButton = new Button("SUNDAY");
-	private Button mondayButton = new Button("MONDAY");
-	private Button tuesdayButton = new Button("TUESDAY");
-	private Button wednesdayButton = new Button("WEDNESDAY");
-	private Button thursdayButton = new Button("THURSDAY");
-	private Button fridayButton = new Button("FRIDAY");
-	private Button saturdayButton = new Button("SATURDAY");
-	private StackPane daysOfWeek = new StackPane();
-	private DayOfWeekView days[] = new DayOfWeekView[7];
+public class RecipeView extends Pane implements ViewInterface {
+	//private RecipeFileReader recipeFileReader;
+	//private Account userAccount;
+	private VBox view;
+	private HBox categoryTabs;
+	private Button sundayButton;
+	private Button mondayButton;
+	private Button tuesdayButton;
+	private Button wednesdayButton;
+	private Button thursdayButton;
+	private Button fridayButton;
+	private Button saturdayButton;
+	private StackPane daysOfWeek;
+	private DayOfWeekView days[];
 	private DayOfWeekView testDay;
-	
-	public RecipeView(Account userAccount){
-		this.userAccount = userAccount;
-		String file = "./src/main/java/application/Key2Keto/Recipes/"+getDietTypeString(this.userAccount.getDietType())+"Keto.txt";
-		this.recipeFileReader = new RecipeFileReader(file);
+
+	public RecipeView(Account userAccount) {
+		RecipeViewLogic.setUserAccount(userAccount);
+		String file = "./src/main/java/application/Key2Keto/Recipes/"
+				+ getDietTypeString(RecipeViewLogic.getUserAccount().getDietType()) + "Keto.txt";
+		RecipeViewLogic.setFileReader(file);
+		//this.userAccount = userAccount;
+		//this.recipeFileReader = new RecipeFileReader(file);
+		initializeVariables();
 		populateDaysOfWeek();
 		populateChildren();
-		setStyles();
+		stylizeElements();
+		assignSetOnActions();
 
 		this.getChildren().add(view);
-		sundayButton.setOnAction(new EventHandler<ActionEvent>() {
-		    @Override public void handle(ActionEvent e) {
-		    	setButtonCLickedColor(0);
-		    	daysOfWeek.setVisible(true);
-		    	setDayStack(0);
-		    }
-		});
-		mondayButton.setOnAction(new EventHandler<ActionEvent>() {
-		    @Override public void handle(ActionEvent e) {
-		    	setButtonCLickedColor(1);
-		    	daysOfWeek.setVisible(true);
-		    	setDayStack(1);
-		    }
-		});
-		tuesdayButton.setOnAction(new EventHandler<ActionEvent>() {
-		    @Override public void handle(ActionEvent e) {
-		    	setButtonCLickedColor(2);
-		    	daysOfWeek.setVisible(true);
-		    	setDayStack(2);
-		    }
-		});
-		wednesdayButton.setOnAction(new EventHandler<ActionEvent>() {
-		    @Override public void handle(ActionEvent e) {
-		    	setButtonCLickedColor(3);
-		    	daysOfWeek.setVisible(true);
-		    	setDayStack(3);
-		    }
-		});
-		thursdayButton.setOnAction(new EventHandler<ActionEvent>() {
-		    @Override public void handle(ActionEvent e) {
-		    	setButtonCLickedColor(4);
-		    	daysOfWeek.setVisible(true);
-		    	setDayStack(4);
-		    }
-		});
-		fridayButton.setOnAction(new EventHandler<ActionEvent>() {
-		    @Override public void handle(ActionEvent e) {
-		    	setButtonCLickedColor(5);
-		    	daysOfWeek.setVisible(true);
-		    	setDayStack(5);
-		    }
-		});
-		saturdayButton.setOnAction(new EventHandler<ActionEvent>() {
-		    @Override public void handle(ActionEvent e) {
-		    	setButtonCLickedColor(6);
-		    	daysOfWeek.setVisible(true);
-		    	setDayStack(6);
-		    }
-		});
 	}
-	
+
 	private String getDietTypeString(String str) {
 		String[] type = str.split(" ");
 		return type[0];
 	}
-	
-	private void populateChildren() {
-		categoryTabs.getChildren().addAll(sundayButton, mondayButton, tuesdayButton, wednesdayButton, thursdayButton, fridayButton, saturdayButton);
-		daysOfWeek.getChildren().addAll(days[0],days[1],days[2],days[3],days[4],days[5],days[6]);
-		view.getChildren().addAll(categoryTabs,daysOfWeek);
+
+	@Override
+	public void populateChildren() {
+		categoryTabs.getChildren().addAll(sundayButton, mondayButton, tuesdayButton, wednesdayButton, thursdayButton,
+				fridayButton, saturdayButton);
+		daysOfWeek.getChildren().addAll(days[0], days[1], days[2], days[3], days[4], days[5], days[6]);
+		view.getChildren().addAll(categoryTabs, daysOfWeek);
 	}
-	
-	private void setStyles() {
+
+	@Override
+	public void stylizeElements() {
 		this.setWidth(980);
 		this.setHeight(500);
 		this.setBackground(new Background(new BackgroundFill(Color.LIGHTSLATEGREY, CornerRadii.EMPTY, Insets.EMPTY)));
@@ -132,7 +92,7 @@ public class RecipeView extends Pane {
 		setButtonColor();
 		daysOfWeek.setVisible(false);
 	}
-	
+
 	private void setButtonCLickedColor(int num) {
 		Button temp[] = new Button[7];
 		temp[0] = this.sundayButton;
@@ -142,16 +102,17 @@ public class RecipeView extends Pane {
 		temp[4] = this.thursdayButton;
 		temp[5] = this.fridayButton;
 		temp[6] = this.saturdayButton;
-		
-		for(int i = 0; i < 7; i++) {
-			if(num == i) {
+
+		for (int i = 0; i < 7; i++) {
+			if (num == i) {
 				temp[i].setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
-			}else {
-				temp[i].setBackground(new Background(new BackgroundFill(Color.LIGHTBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
+			} else {
+				temp[i].setBackground(
+						new Background(new BackgroundFill(Color.LIGHTBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
 			}
 		}
 	}
-	
+
 	private void setButtonColor() {
 		Button temp[] = new Button[7];
 		temp[0] = this.sundayButton;
@@ -161,54 +122,139 @@ public class RecipeView extends Pane {
 		temp[4] = this.thursdayButton;
 		temp[5] = this.fridayButton;
 		temp[6] = this.saturdayButton;
-		
-		for(int i = 0; i < 7; i++) {
+
+		for (int i = 0; i < 7; i++) {
 			temp[i].setBackground(new Background(new BackgroundFill(Color.LIGHTBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
 		}
 	}
-	
+
 	private void populateDaysOfWeek() {
-		days[0] = new DayOfWeekView(this.recipeFileReader.getRecipeList(),"Sunday",this.userAccount);
-		days[1] = new DayOfWeekView(this.recipeFileReader.getRecipeList(),"Monday",this.userAccount);
-		days[2] = new DayOfWeekView(this.recipeFileReader.getRecipeList(),"Tuesday",this.userAccount);
-		days[3] = new DayOfWeekView(this.recipeFileReader.getRecipeList(),"Wednesday",this.userAccount);
-		days[4] = new DayOfWeekView(this.recipeFileReader.getRecipeList(),"Thursday",this.userAccount);
-		days[5] = new DayOfWeekView(this.recipeFileReader.getRecipeList(),"Friday",this.userAccount);
-		days[6] = new DayOfWeekView(this.recipeFileReader.getRecipeList(),"Saturday",this.userAccount);
+//		days[0] = new DayOfWeekView(this.recipeFileReader.getRecipeList(), "Sunday", this.userAccount);
+//		days[1] = new DayOfWeekView(this.recipeFileReader.getRecipeList(), "Monday", this.userAccount);
+//		days[2] = new DayOfWeekView(this.recipeFileReader.getRecipeList(), "Tuesday", this.userAccount);
+//		days[3] = new DayOfWeekView(this.recipeFileReader.getRecipeList(), "Wednesday", this.userAccount);
+//		days[4] = new DayOfWeekView(this.recipeFileReader.getRecipeList(), "Thursday", this.userAccount);
+//		days[5] = new DayOfWeekView(this.recipeFileReader.getRecipeList(), "Friday", this.userAccount);
+//		days[6] = new DayOfWeekView(this.recipeFileReader.getRecipeList(), "Saturday", this.userAccount);
+		
+		days[0] = new DayOfWeekView(RecipeViewLogic.getFileReader().getRecipeList(), "Sunday", RecipeViewLogic.getUserAccount());
+		days[1] = new DayOfWeekView(RecipeViewLogic.getFileReader().getRecipeList(), "Monday", RecipeViewLogic.getUserAccount());
+		days[2] = new DayOfWeekView(RecipeViewLogic.getFileReader().getRecipeList(), "Tuesday", RecipeViewLogic.getUserAccount());
+		days[3] = new DayOfWeekView(RecipeViewLogic.getFileReader().getRecipeList(), "Wednesday", RecipeViewLogic.getUserAccount());
+		days[4] = new DayOfWeekView(RecipeViewLogic.getFileReader().getRecipeList(), "Thursday", RecipeViewLogic.getUserAccount());
+		days[5] = new DayOfWeekView(RecipeViewLogic.getFileReader().getRecipeList(), "Friday", RecipeViewLogic.getUserAccount());
+		days[6] = new DayOfWeekView(RecipeViewLogic.getFileReader().getRecipeList(), "Saturday", RecipeViewLogic.getUserAccount());
 	}
-	
+
 	protected void setDayStack(int num) {
-		for(int i = 0; i < 7; i++) {
-			if(num == i) {
+		for (int i = 0; i < 7; i++) {
+			if (num == i) {
 				days[i].setViewOrder(-1);
 				setViewForTest(days[i]);
-			}else {
+			} else {
 				days[i].setViewOrder(0);
 			}
 		}
 	}
-	
+
+	@Override
+	public void initializeVariables() {
+		this.view = new VBox();
+		this.categoryTabs = new HBox();
+		this.sundayButton = new Button("SUNDAY");
+		this.mondayButton = new Button("MONDAY");
+		this.tuesdayButton = new Button("TUESDAY");
+		this.wednesdayButton = new Button("WEDNESDAY");
+		this.thursdayButton = new Button("THURSDAY");
+		this.fridayButton = new Button("FRIDAY");
+		this.saturdayButton = new Button("SATURDAY");
+		this.daysOfWeek = new StackPane();
+		this.days = new DayOfWeekView[7];
+
+	}
+
+	@Override
+	public void assignSetOnActions() {
+		sundayButton.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent e) {
+				setButtonCLickedColor(0);
+				daysOfWeek.setVisible(true);
+				setDayStack(0);
+			}
+		});
+		mondayButton.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent e) {
+				setButtonCLickedColor(1);
+				daysOfWeek.setVisible(true);
+				setDayStack(1);
+			}
+		});
+		tuesdayButton.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent e) {
+				setButtonCLickedColor(2);
+				daysOfWeek.setVisible(true);
+				setDayStack(2);
+			}
+		});
+		wednesdayButton.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent e) {
+				setButtonCLickedColor(3);
+				daysOfWeek.setVisible(true);
+				setDayStack(3);
+			}
+		});
+		thursdayButton.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent e) {
+				setButtonCLickedColor(4);
+				daysOfWeek.setVisible(true);
+				setDayStack(4);
+			}
+		});
+		fridayButton.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent e) {
+				setButtonCLickedColor(5);
+				daysOfWeek.setVisible(true);
+				setDayStack(5);
+			}
+		});
+		saturdayButton.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent e) {
+				setButtonCLickedColor(6);
+				daysOfWeek.setVisible(true);
+				setDayStack(6);
+			}
+		});
+
+	}
+
+	/* --------- METHODS BELOW FOR TESTING ---------- */
 	public DayOfWeekView[] getdays() {
 		return this.days;
 	}
 
-	
-	protected ArrayList<Button> getButtonsToTest(){
+	protected ArrayList<Button> getButtonsToTest() {
 		ArrayList<Button> buttonsToTest = new ArrayList<Button>();
-		
-		buttonsToTest.addAll(new ArrayList<Button>(Arrays.asList(this.sundayButton, this.mondayButton, this.tuesdayButton,
-				this.wednesdayButton, this.thursdayButton, this.fridayButton, this.saturdayButton)));
-		
+
+		buttonsToTest
+				.addAll(new ArrayList<Button>(Arrays.asList(this.sundayButton, this.mondayButton, this.tuesdayButton,
+						this.wednesdayButton, this.thursdayButton, this.fridayButton, this.saturdayButton)));
+
 		return buttonsToTest;
 	}
-	
-	protected DayOfWeekView getViewForTest(){		
+
+	protected DayOfWeekView getViewForTest() {
 		return this.testDay;
 	}
-	
+
 	protected void setViewForTest(DayOfWeekView day) {
 		this.testDay = day;
 	}
-	
-	
+
 }
