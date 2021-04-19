@@ -165,6 +165,7 @@ public class DashboardView extends Pane implements ViewInterface {
 	}
 
 	private void populateWaterChart() {
+
 		CategoryAxis xaxis = new CategoryAxis();
 		NumberAxis yaxis = new NumberAxis(0, 128, 8);
 		
@@ -229,25 +230,19 @@ public class DashboardView extends Pane implements ViewInterface {
 	@Override
 	public void stylizeElements() {
 		this.view.setPrefSize(980, 500);
-		this.view.setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, null, null)));
-
+		
 		this.userName.setPrefWidth(980);
 		this.setPrefHeight(40);
 		this.userName.setAlignment(Pos.CENTER);
-		this.userName.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 18));
-		this.userName.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
-		this.userName.setBorder(new Border(new BorderStroke(Color.BLACK, null, null, null, BorderStrokeStyle.NONE,
-				BorderStrokeStyle.NONE, BorderStrokeStyle.SOLID, BorderStrokeStyle.NONE, CornerRadii.EMPTY,
-				new BorderWidths(3), null)));
-
-		this.dietType.setFont(Font.font("Verdana", FontWeight.NORMAL, 14));
-
+		this.userName.setId("UsernameField");
+		this.dietType.setId("DashboardInfoLabels");
+		
 		this.todaysRecipeTitle.setPrefWidth(490);
-		this.todaysRecipeTitle.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 16));
+		this.todaysRecipeTitle.setId("DashboardLabels");
 		this.todaysRecipeTitle.setAlignment(Pos.CENTER);
 
 		this.weeklyGoalsLabel.setPrefWidth(490);
-		this.weeklyGoalsLabel.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 16));
+		this.weeklyGoalsLabel.setId("DashboardLabels");
 		this.weeklyGoalsLabel.setAlignment(Pos.CENTER);
 
 		this.waterChart.setPrefHeight(315);
@@ -262,19 +257,21 @@ public class DashboardView extends Pane implements ViewInterface {
 		VBox.setMargin(this.dinnerRecipe, new Insets(0, 0, 0, 5));
 		VBox.setMargin(this.snackRecipe, new Insets(0, 0, 0, 5));
 		VBox.setMargin(this.dietType, new Insets(0, 0, 0, 5));
-
-		this.breakfastRecipe.setFont(Font.font("Verdana", FontWeight.NORMAL, 14));
-		this.lunchRecipe.setFont(Font.font("Verdana", FontWeight.NORMAL, 14));
-		this.dinnerRecipe.setFont(Font.font("Verdana", FontWeight.NORMAL, 14));
-		this.snackRecipe.setFont(Font.font("Verdana", FontWeight.NORMAL, 14));
-
+		
+		this.breakfastRecipe.setId("DashboardInfoLabels");
+		this.lunchRecipe.setId("DashboardInfoLabels");
+		this.dinnerRecipe.setId("DashboardInfoLabels");
+		this.snackRecipe.setId("DashboardInfoLabels");
+		
 		this.goalInformationBox.setPrefWidth(490);
 		VBox.setMargin(this.weeklyGoalsLabel, new Insets(5, 0, 5, 0));
 		this.goalLabel.setPrefWidth(490);
 		this.goalLabel.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 14));
 		this.goalLabel.setAlignment(Pos.CENTER);
+		this.goalLabel.setId("DashboardInfoLabels");
+		
 		this.upperHalf.setPrefSize(980, 155);
-		this.upperHalf.setBackground(new Background(new BackgroundFill(Color.LIGHTSKYBLUE, null, null)));
+		this.upperHalf.setId("DashUpper");
 		this.lowerHalf.setPrefSize(980, 315);
 	}
 

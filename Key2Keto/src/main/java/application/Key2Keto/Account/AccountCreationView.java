@@ -1,104 +1,98 @@
 package application.Key2Keto.Account;
 
-import javafx.scene.layout.Pane;
+import java.util.ArrayList;
+import java.util.Arrays;
+
+import application.Key2Keto.SceneSwitcher;
+import javafx.collections.FXCollections;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderStroke;
 import javafx.scene.layout.BorderStrokeStyle;
 import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-
-import application.Key2Keto.SceneSwitcher;
-import javafx.collections.FXCollections;
 
 public class AccountCreationView extends Pane
 {
 	//For switching scenes
-	Stage stage;
-	SceneSwitcher switcher;
-  
-	Account newlyCreatedAccount;
+	private Stage stage;
+	private SceneSwitcher switcher;
 	
-	Label createAccountLabel;
+	private Label createAccountLabel;
 	
 	//a label sectioning off the "Create New Account" text from the text fields
-	Label accountDetailsDivider;
+	private Label accountDetailsDivider;
 	
-	Label newUsernameLabel;
-	TextField newUsernameTextField;
+	private Label newUsernameLabel;
+	private TextField newUsernameTextField;
 	
-	Label newPasswordLabel;
-	PasswordField newPasswordTextField;
+	private Label newPasswordLabel;
+	private PasswordField newPasswordTextField;
 	
 	//typically on many account creation forms
-	Label confirmPasswordLabel;
-	PasswordField confirmPasswordTextField;
+	private Label confirmPasswordLabel;
+	private PasswordField confirmPasswordTextField;
 	
 	//now for personal details
-	Label personalDetailsDivider;
+	private Label personalDetailsDivider;
 
-	Label firstNameLabel;
-	TextField firstNameTextField;
+	private Label firstNameLabel;
+	private TextField firstNameTextField;
 	
-	Label lastNameLabel;
-	TextField lastNameTextField;
+	private Label lastNameLabel;
+	private TextField lastNameTextField;
 	
 	//haha
-	Label sexLabel;
-	ComboBox sexChooser;
+	private Label sexLabel;
+	private ComboBox<String> sexChooser;
 	
-	Label heightLabel;
-	TextField heightTextField;
+	private Label heightLabel;
+	private TextField heightTextField;
 	
-	Label weightLabel;
-	TextField weightTextField;
+	private Label weightLabel;
+	private TextField weightTextField;
 	
-	Label ageLabel;
-	TextField ageTextField;
+	private Label ageLabel;
+	private TextField ageTextField;
 	
-	Label dietTypeLabel;
-	ComboBox dietTypeChooser;
+	private Label dietTypeLabel;
+	private ComboBox<String> dietTypeChooser;
 	
-	Button cancelAccountCreationButton;
-	Button createAccountButton;
+	private Button cancelAccountCreationButton;
+	private Button createAccountButton;
 	
-	HBox titleRow;
-	HBox accountDetailsDividerRow;
-	HBox newUsernameRow;
-	HBox newPasswordRow;
-	HBox confirmPasswordRow;
-	HBox personalDetailsDividerRow;
+	private HBox titleRow;
+	private HBox accountDetailsDividerRow;
+	private HBox newUsernameRow;
+	private HBox newPasswordRow;
+	private HBox confirmPasswordRow;
+	private HBox personalDetailsDividerRow;
 
-	HBox firstNameRow;
-	HBox lastNameRow;
+	private HBox firstNameRow;
+	private HBox lastNameRow;
 
-	HBox sexRow;
-	HBox heightRow;
-	HBox weightRow;
-	HBox ageRow;
-	HBox dietTypeRow;
-	HBox createAccountButtonRow;
+	private HBox sexRow;
+	private HBox heightRow;
+	private HBox weightRow;
+	private HBox ageRow;
+	private HBox dietTypeRow;
+	private HBox createAccountButtonRow;
 	
-	HBox errorRow;
-	String errorMessage;
-	Label errorLabel;
+	private HBox errorRow;
+	private Label errorLabel;
 	
-	VBox accountCreationRows;
+	private VBox accountCreationRows;
 	
 	public AccountCreationView(Stage stage)
 	{
@@ -136,7 +130,7 @@ public class AccountCreationView extends Pane
 		
 		sexLabel = new Label("Sex:");
 		String sexes[] = {"Male", "Female"};
-		sexChooser = new ComboBox(FXCollections.observableArrayList(sexes));
+		sexChooser = new ComboBox<String>(FXCollections.observableArrayList(sexes));
 		
 		heightLabel = new Label("Height:");
 		heightTextField = new TextField();
@@ -149,7 +143,7 @@ public class AccountCreationView extends Pane
 		
 		dietTypeLabel = new Label("Diet Type:");
 		String diets[] = {"Classic Keto", "Light Keto", "Modified Keto"};
-		dietTypeChooser = new ComboBox(FXCollections.observableArrayList(diets));
+		dietTypeChooser = new ComboBox<String>(FXCollections.observableArrayList(diets));
 		
 		cancelAccountCreationButton = new Button("Cancel");
 		createAccountButton = new Button("Create Account");
@@ -161,20 +155,18 @@ public class AccountCreationView extends Pane
 		
 		createAccountButton.setOnAction(e -> 
 		{
-			if(checkFormProperlyFilled())
-			{
-				newlyCreatedAccount = new Account(newUsernameTextField.getText(), newPasswordTextField.getText(), firstNameTextField.getText(),
-												  lastNameTextField.getText(), sexChooser.getValue().toString(), heightTextField.getText(),
-												  Integer.parseInt(weightTextField.getText()), Integer.parseInt(ageTextField.getText()), 
-												  dietTypeChooser.getValue().toString());
-				
-				stage.setScene(switcher.MainViewScene(newlyCreatedAccount));
-				System.out.println("Recipe Type: "+ newlyCreatedAccount.getDietType());
+			if(AccountCreationViewLogic.checkFormProperlyFilled(newUsernameTextField.getText(), newPasswordTextField.getText(), confirmPasswordTextField.getText(),
+																firstNameTextField.getText(), lastNameTextField.getText(), sexChooser.getSelectionModel().getSelectedItem(), 
+																heightTextField.getText(), weightTextField.getText(), ageTextField.getText(), 
+																dietTypeChooser.getSelectionModel().getSelectedItem()))
+			{	
+				stage.setScene(switcher.MainViewScene(AccountCreationViewLogic.getNewlyCreatedAccount()));
+				System.out.println("Recipe Type: "+ AccountCreationViewLogic.getNewlyCreatedAccount().getDietType());
 			}
 			
 			else
 			{
-				errorLabel.setText(errorMessage);
+				errorLabel.setText(AccountCreationViewLogic.getErrorMessage());
 				errorLabel.setVisible(true);
 			}
 		});
@@ -207,97 +199,78 @@ public class AccountCreationView extends Pane
 		
 		titleRow.setAlignment(Pos.CENTER);
 		titleRow.setMinWidth(500);
-		titleRow.setMargin(createAccountLabel, new Insets(40, 0, 40, 0));
-		createAccountLabel.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 18));
+		HBox.setMargin(createAccountLabel, new Insets(40, 0, 40, 0));
+		createAccountLabel.setId("Title");
 		
 		accountDetailsDividerRow.setBorder(new Border(new BorderStroke(Color.BLACK, Color.BLACK, Color.BLACK, Color.BLACK,
 													   				   BorderStrokeStyle.NONE, BorderStrokeStyle.NONE, BorderStrokeStyle.SOLID, BorderStrokeStyle.NONE, 
 													   				   CornerRadii.EMPTY, new BorderWidths(2), Insets.EMPTY)));
 		accountDetailsDividerRow.setAlignment(Pos.CENTER);
-		accountDetailsDividerRow.setMargin(accountDetailsDivider, new Insets(10, 0, 10, 0));
-		accountDetailsDivider.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 14));
+		HBox.setMargin(accountDetailsDivider, new Insets(10, 0, 10, 0));
+		accountDetailsDivider.setId("DetailDividers");
 		
-		newUsernameRow.setMargin(newUsernameLabel, new Insets(20, 10, 10, 10));
-		newUsernameRow.setMargin(newUsernameTextField, new Insets(20, 10, 10, 10));
-		newUsernameLabel.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 12));
+		HBox.setMargin(newUsernameLabel, new Insets(20, 10, 10, 10));
+		HBox.setMargin(newUsernameTextField, new Insets(20, 10, 10, 10));
 		newUsernameLabel.setMinWidth(144);
-		newUsernameTextField.setFont(Font.font("Verdana", 12));
 		
-		newPasswordRow.setMargin(newPasswordLabel, new Insets(10, 10, 10, 10));
-		newPasswordRow.setMargin(newPasswordTextField, new Insets(10, 10, 10, 10));
-		newPasswordLabel.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 12));
+		HBox.setMargin(newPasswordLabel, new Insets(10, 10, 10, 10));
+		HBox.setMargin(newPasswordTextField, new Insets(10, 10, 10, 10));
 		newPasswordLabel.setMinWidth(144);
-		newPasswordTextField.setFont(Font.font("Verdana", 12));
 		
-		confirmPasswordRow.setMargin(confirmPasswordLabel, new Insets(10, 10, 20, 10));
-		confirmPasswordRow.setMargin(confirmPasswordTextField, new Insets(10, 10, 10, 10));
-		confirmPasswordLabel.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 12));
+		HBox.setMargin(confirmPasswordLabel, new Insets(10, 10, 20, 10));
+		HBox.setMargin(confirmPasswordTextField, new Insets(10, 10, 10, 10));
 		confirmPasswordLabel.setMinWidth(144);
-		confirmPasswordTextField.setFont(Font.font("Verdana", 12));
 		
 		createAccountButtonRow.setAlignment(Pos.CENTER);
-		createAccountButtonRow.setMargin(createAccountButton, new Insets(20, 5, 20, 5));
-		createAccountButtonRow.setMargin(cancelAccountCreationButton, new Insets(20, 5, 20, 5));
-		cancelAccountCreationButton.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 12));
-		createAccountButton.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 12));
+		HBox.setMargin(createAccountButton, new Insets(20, 5, 20, 5));
+		HBox.setMargin(cancelAccountCreationButton, new Insets(20, 5, 20, 5));
 		
 		personalDetailsDividerRow.setBorder(new Border(new BorderStroke(Color.BLACK, Color.BLACK, Color.BLACK, Color.BLACK,
 				   														BorderStrokeStyle.NONE, BorderStrokeStyle.NONE, BorderStrokeStyle.SOLID, BorderStrokeStyle.NONE, 
 				   														CornerRadii.EMPTY, new BorderWidths(2), Insets.EMPTY)));
 		personalDetailsDividerRow.setAlignment(Pos.CENTER);
-		personalDetailsDividerRow.setMargin(personalDetailsDivider, new Insets(10, 0, 10, 0));
-		personalDetailsDivider.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 14));
+		HBox.setMargin(personalDetailsDivider, new Insets(10, 0, 10, 0));
+		personalDetailsDivider.setId("DetailDividers");
 		
-		firstNameRow.setMargin(firstNameLabel, new Insets(20, 10, 10, 10));
-		firstNameRow.setMargin(firstNameTextField, new Insets(20, 10, 10,10));
-		firstNameLabel.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 12));
+		HBox.setMargin(firstNameLabel, new Insets(20, 10, 10, 10));
+		HBox.setMargin(firstNameTextField, new Insets(20, 10, 10,10));
 		firstNameLabel.setMinWidth(144);
-		firstNameTextField.setFont(Font.font("Verdana", 12));
 		
-		lastNameRow.setMargin(lastNameLabel, new Insets(10, 10, 10, 10));
-		lastNameRow.setMargin(lastNameTextField, new Insets(10, 10, 10, 10));
-		lastNameLabel.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 12));
+		HBox.setMargin(lastNameLabel, new Insets(10, 10, 10, 10));
+		HBox.setMargin(lastNameTextField, new Insets(10, 10, 10, 10));
 		lastNameLabel.setMinWidth(144);
-		lastNameTextField.setFont(Font.font("Verdana", 12));
 		
-		sexRow.setMargin(sexLabel, new Insets(10, 10, 10, 10));
-		sexRow.setMargin(sexChooser, new Insets(10, 10, 10, 10));
-		sexLabel.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 12));
+		HBox.setMargin(sexLabel, new Insets(10, 10, 10, 10));
+		HBox.setMargin(sexChooser, new Insets(10, 10, 10, 10));
 		sexLabel.setMinWidth(144);
 		sexChooser.setMinWidth(157);
 		
-		heightRow.setMargin(heightLabel, new Insets(10, 10, 10, 10));
-		heightRow.setMargin(heightTextField, new Insets(10, 10, 10, 10));
-		heightLabel.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 12));
+		HBox.setMargin(heightLabel, new Insets(10, 10, 10, 10));
+		HBox.setMargin(heightTextField, new Insets(10, 10, 10, 10));
 		heightLabel.setMinWidth(144);
-		heightTextField.setFont(Font.font("Verdana", 12));
 		
 		heightTextField.setPromptText("e.g. 5'11\"");
 		
-		weightRow.setMargin(weightLabel, new Insets(10, 10, 10, 10));
-		weightRow.setMargin(weightTextField, new Insets(10, 10, 10, 10));
-		weightLabel.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 12));
+		HBox.setMargin(weightLabel, new Insets(10, 10, 10, 10));
+		HBox.setMargin(weightTextField, new Insets(10, 10, 10, 10));
 		weightLabel.setMinWidth(144);
-		weightTextField.setFont(Font.font("Verdana", 12));
 		weightTextField.setPromptText("in pounds");
 		
-		ageRow.setMargin(ageLabel, new Insets(10, 10, 10, 10));
-		ageRow.setMargin(ageTextField, new Insets(10, 10, 10, 10));
-		ageLabel.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 12));
+		HBox.setMargin(ageLabel, new Insets(10, 10, 10, 10));
+		HBox.setMargin(ageTextField, new Insets(10, 10, 10, 10));
 		ageLabel.setMinWidth(144);
-		ageTextField.setFont(Font.font("Verdana", 12));
 		ageTextField.setPromptText("in years");
 		
-		dietTypeRow.setMargin(dietTypeLabel, new Insets(10, 10, 10, 10));
-		dietTypeRow.setMargin(dietTypeChooser, new Insets(10, 10, 10, 10));
-		dietTypeLabel.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 12));
+		HBox.setMargin(dietTypeLabel, new Insets(10, 10, 10, 10));
+		HBox.setMargin(dietTypeChooser, new Insets(10, 10, 10, 10));
 		dietTypeLabel.setMinWidth(144);
 		dietTypeChooser.setMinWidth(157);
 		
-		errorLabel.setTextFill(Color.RED);
-		errorLabel.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 12));
 		errorLabel.setVisible(false);
 		errorRow.setAlignment(Pos.CENTER);
+		errorRow.setId("ErrorLabel");
+		
+		accountCreationRows.setId("WholePane");
 	}
 	
 	private void addAllElementsToChildren()
@@ -333,111 +306,10 @@ public class AccountCreationView extends Pane
 		this.getChildren().add(accountCreationRows);
 	}
 	
-	private boolean checkFormProperlyFilled()
-	{
-		//testing if text fields are empty
-		if(newUsernameTextField.getText().equals(""))
-		{
-			errorMessage = "Username field must not be empty";
-			return false;
-		}
-		
-		else if(newPasswordTextField.getText().equals(""))
-		{
-			errorMessage = "Password field must not be empty";
-			return false;
-		}
-		
-		else if(confirmPasswordTextField.getText().equals(""))
-		{
-			errorMessage = "Confirm password field must not be empty";
-			return false;
-		}
-		
-		//then confirm password
-		else if(!confirmPasswordTextField.getText().equals(newPasswordTextField.getText())) //not equal to each other
-		{
-			errorMessage = "Confirm password does not match password";
-			return false;
-		}
-		
-		else if(firstNameTextField.getText().equals(""))
-		{
-			errorMessage = "First name field must not be empty";
-			return false;
-		}
-		
-		else if(lastNameTextField.getText().equals(""))
-		{
-			errorMessage = "Last name field must not be empty";
-			return false;
-		}
-		
-		//now personal details
-		else if(sexChooser.getSelectionModel().isEmpty())
-		{
-			errorMessage = "A sex must be chosen";
-			return false;
-		}
-		
-		else if(heightTextField.getText().equals(""))
-		{
-			errorMessage = "Height field must not be empty";
-			return false;
-		}
-		
-		else if(!heightTextField.getText().matches("^([0-9]*'([0-9]\"|(1[0-1])\"))|([0-9]*')$"))
-		{
-			errorMessage = "Height must be expressed in the form ft'in\" or ft'";
-			return false;
-		}
-		
-		else if(weightTextField.getText().equals(""))
-		{
-			errorMessage = "Weight field must not be empty";
-			return false;
-		}
-		
-		else if(!weightTextField.getText().matches("^[0-9]*$"))
-		{
-			errorMessage = "Weight must contain only digits";
-			return false;
-		}
-		
-		else if(ageTextField.getText().equals(""))
-		{
-			errorMessage = "Age field must not be empty";
-			return false;
-		}
-		
-		else if(!ageTextField.getText().matches("^[0-9]*$"))
-		{
-			errorMessage = "Age must contain only digits";
-			return false;
-		}
-		
-		else if(dietTypeChooser.getSelectionModel().isEmpty())
-		{
-			errorMessage = "A diet type must be chosen";
-			return false;
-		}
-		
-		//if none of the above are true, form is filled correctly
-		else
-		{
-			return true;
-		}
-	}
-	
 	//for setting on action in pane containing this pane
 	public Button getCreateAccountButton()
 	{
 		return createAccountButton;
-	}
-	
-	public Account getNewlyCreatedAccount()
-	{
-		return newlyCreatedAccount;
 	}
 	
 	//these two are for junit
@@ -452,9 +324,9 @@ public class AccountCreationView extends Pane
 		return textFieldsToReturn;
 	}
 	
-	protected ArrayList<ComboBox> getAccountDetailComboBoxes()
+	protected ArrayList<ComboBox<String>> getAccountDetailComboBoxes()
 	{
-		ArrayList<ComboBox> comboBoxesToReturn = new ArrayList<ComboBox>
+		ArrayList<ComboBox<String>> comboBoxesToReturn = new ArrayList<ComboBox<String>>
 		(
 			Arrays.asList(sexChooser, dietTypeChooser)
 		);

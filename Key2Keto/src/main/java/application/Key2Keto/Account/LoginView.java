@@ -1,63 +1,53 @@
 package application.Key2Keto.Account;
 
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
-import javafx.stage.Stage;
+import application.Key2Keto.SceneSwitcher;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Button;
-import application.Key2Keto.SceneSwitcher;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.control.Button;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
+import javafx.stage.Stage;
 
 public class LoginView extends Pane
 {
 	//For switching scenes
-	Stage stage;
-	SceneSwitcher switcher;
+	private Stage stage;
+	private SceneSwitcher switcher;
 
 	//Section for the app title/logo
-	Label titleOrLogo;
+	private Label titleOrLogo;
 	
 	//two text boxes and labels for username and password
-	Label usernameLabel;
-	Label passwordLabel;
+	private Label usernameLabel;
+	private Label passwordLabel;
 	
-	TextField usernameTextField;
-	PasswordField passwordTextField;
+	private TextField usernameTextField;
+	private PasswordField passwordTextField;
 	
 	//one button for signing in, one button for creating account
-	Button signInButton;
-	Button createAccountButton;
+	private Button signInButton;
+	private Button createAccountButton;
 	
 	//need a label for creating account button
-	Label noAccountLabel;
+	private Label noAccountLabel;
 	
 	//now some HBoxes
-	HBox titleOrLogoRow;
-	HBox usernameRow;
-	HBox passwordRow;
-	HBox signInButtonRow;
-	HBox createAccountRow;
+	private HBox titleOrLogoRow;
+	private HBox usernameRow;
+	private HBox passwordRow;
+	private HBox signInButtonRow;
+	private HBox createAccountRow;
 	
 	//for showing errors upon invalid input
-	HBox errorRow;
-	String errorMessage;
-	Label errorLabel;
+	private HBox errorRow;
+	private Label errorLabel;
 	
 	//and a VBox to contain them all
-	VBox loginRows;
+	private VBox loginRows;
 	
 	public LoginView(Stage stage)
 	{
@@ -83,14 +73,14 @@ public class LoginView extends Pane
 		signInButton = new Button("Sign in");
 		signInButton.setOnAction(e -> 
 		{
-			if(checkFormProperlyFilled())
+			if(LoginViewLogic.checkFormProperlyFilled(usernameTextField.getText(), passwordTextField.getText()))
 			{
 			//	stage.setScene(switcher.MainViewScene());
 			}
 			
 			else
 			{
-				errorLabel.setText(errorMessage);
+				errorLabel.setText(LoginViewLogic.getErrorMessage());
 				errorLabel.setVisible(true);
 			}
 		});
@@ -118,34 +108,28 @@ public class LoginView extends Pane
 		
 		titleOrLogoRow.setAlignment(Pos.CENTER);
 		titleOrLogoRow.setMinWidth(500);
-		titleOrLogoRow.setMargin(titleOrLogo, new Insets(40, 0, 40, 0));
-		titleOrLogo.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 18));
+		HBox.setMargin(titleOrLogo, new Insets(40, 0, 40, 0));
+		titleOrLogo.setId("Title");
 		
-		usernameRow.setMargin(usernameLabel, new Insets(10, 20, 10, 20));
-		usernameRow.setMargin(usernameTextField, new Insets(10, 20, 10, 20));
+		HBox.setMargin(usernameLabel, new Insets(10, 20, 10, 20));
+		HBox.setMargin(usernameTextField, new Insets(10, 20, 10, 20));
 		usernameLabel.setMinWidth(113);
-		usernameLabel.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 12));
-		usernameTextField.setFont(Font.font("Verdana", 12));
 		
-		passwordRow.setMargin(passwordLabel, new Insets(10, 20, 10, 20));
-		passwordRow.setMargin(passwordTextField, new Insets(10, 20, 10, 20));
+		HBox.setMargin(passwordLabel, new Insets(10, 20, 10, 20));
+		HBox.setMargin(passwordTextField, new Insets(10, 20, 10, 20));
 		passwordLabel.setMinWidth(113);
-		passwordLabel.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 12));
-		passwordTextField.setFont(Font.font("Verdana", 12));
 		
 		signInButtonRow.setAlignment(Pos.CENTER);
-		signInButtonRow.setMargin(signInButton, new Insets(10, 0, 10, 0));
-		signInButton.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 12));
+		HBox.setMargin(signInButton, new Insets(10, 0, 10, 0));
 		
-		errorLabel.setTextFill(Color.RED);
-		errorLabel.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 12));
 		errorLabel.setVisible(false);
 		errorRow.setAlignment(Pos.CENTER);
+		errorRow.setId("ErrorLabel");
 		
 		createAccountRow.setAlignment(Pos.CENTER);
-		createAccountRow.setMargin(createAccountButton, new Insets(30, 20, 30, 20));
-		noAccountLabel.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 12));
-		createAccountButton.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 12));
+		HBox.setMargin(createAccountButton, new Insets(30, 20, 30, 20));
+		
+		loginRows.setId("WholePane");
 	}
 	
 	private void addAllElementsToChildren() //helper function for readability
@@ -164,32 +148,13 @@ public class LoginView extends Pane
 		this.getChildren().add(loginRows);
 	}
 	
-	private boolean checkFormProperlyFilled()
-	{
-		if(usernameTextField.getText().equals(""))
-		{
-			errorMessage = "Username field must not be empty";
-			return false;
-		}
-		
-		else if(passwordTextField.getText().equals(""))
-		{
-			errorMessage = "Password field must not be empty";
-			return false;
-		}
-		
-		else
-		{
-			return true;
-		}
-	}
-	
-	public Button getSignInButton()
+	//for unit tests
+	protected Button getSignInButton()
 	{
 		return signInButton;
 	}
 	
-	public Button getCreateAccountButton()
+	protected Button getCreateAccountButton()
 	{
 		return createAccountButton;
 	}

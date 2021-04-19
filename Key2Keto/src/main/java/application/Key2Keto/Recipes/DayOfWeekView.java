@@ -127,18 +127,6 @@ public class DayOfWeekView extends Pane implements ViewInterface {
 		return this.recipeDetailView;
 	}
 
-	private void setButtonColor() {
-		Button temp[] = new Button[4];
-		temp[0] = this.overViewButton;
-		temp[1] = this.breakfastButton;
-		temp[2] = this.entreesButton;
-		temp[3] = this.snacksButton;
-
-		for (int i = 0; i < 4; i++) {
-			temp[i].setBackground(new Background(new BackgroundFill(Color.LIGHTBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
-		}
-	}
-
 	private void setButtonCLickedColor(int num) {
 		Button temp[] = new Button[4];
 		temp[0] = this.overViewButton;
@@ -146,12 +134,11 @@ public class DayOfWeekView extends Pane implements ViewInterface {
 		temp[2] = this.entreesButton;
 		temp[3] = this.snacksButton;
 
-		for (int i = 0; i < 4; i++) {
-			if (num == i) {
-				temp[i].setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
-			} else {
-				temp[i].setBackground(
-						new Background(new BackgroundFill(Color.LIGHTBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
+		for(int i = 0; i < 4; i++) {
+			if(num == i) {
+				temp[i].setId("DayOfWeekClicked");
+			}else {
+				temp[i].setId("DayOfWeekNotClicked");
 			}
 		}
 	}
@@ -254,111 +241,94 @@ public class DayOfWeekView extends Pane implements ViewInterface {
 
 	@Override
 	public void stylizeElements() {
-		// wholeView styling
-		this.wholeView.setBackground(
-				new Background(new BackgroundFill(Color.LIGHTSLATEGRAY, CornerRadii.EMPTY, Insets.EMPTY)));
+		//wholeView styling
 		this.wholeView.setPrefSize(980, 500);
+		//this.wholeView.setMargin(categorySelection, new Insets(0, 0, 0, 0));
+		//this.wholeView.setMargin(addRecipeDropdown, new Insets(0, 0, 0, 0));
 		VBox.setMargin(selectedRecipes, new Insets(0, 10, 0, 10));
-
-		// this.categorySelection
+		
+		//this.categorySelection
 		this.categorySelection.setPrefSize(980, 75);
 		this.categorySelection.setAlignment(Pos.CENTER);
-		this.categorySelection
-				.setBackground(new Background(new BackgroundFill(Color.LIGHTSKYBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
+		this.categorySelection.setId("RecipeCategoryBox");
 		HBox.setMargin(overViewButton, new Insets(10, 5, 10, 0));
 		HBox.setMargin(breakfastButton, new Insets(10, 5, 10, 5));
 		HBox.setMargin(entreesButton, new Insets(10, 5, 10, 5));
 		HBox.setMargin(snacksButton, new Insets(10, 5, 10, 5));
-
+		
 		this.overViewButton.setPrefSize(125, 50);
-		this.overViewButton.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 14));
 		this.breakfastButton.setPrefSize(125, 50);
-		this.breakfastButton.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 14));
 		this.entreesButton.setPrefSize(125, 50);
-		this.entreesButton.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 14));
 		this.snacksButton.setPrefSize(125, 50);
-		this.snacksButton.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 14));
-
+		
 		this.selectedRecipes.setPrefSize(480, 385);
-		this.selectedRecipes.setBackground(
-				new Background(new BackgroundFill(Color.LIGHTSLATEGREY, CornerRadii.EMPTY, Insets.EMPTY)));
 		this.selectedRecipes.setAlignment(Pos.CENTER);
-
+		
 		this.daysRecipesLabel.setPrefSize(500, 75);
-		this.daysRecipesLabel
-				.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
+		this.daysRecipesLabel.setId("RecipeCategoryBox");
 		this.daysRecipesLabel.setAlignment(Pos.CENTER);
-		this.daysRecipesLabel.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 14));
-
+		
 		this.breakfastInfo.setPrefSize(500, 75);
 		HBox.setMargin(this.breakfastRecipeName, new Insets(10, 5, 10, 5));
 		HBox.setMargin(this.deleteBreakfastButton, new Insets(15, 5, 10, 5));
-		this.breakfastInfo
-				.setBackground(new Background(new BackgroundFill(Color.LIGHTSKYBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
-
+		this.breakfastInfo.setId("DarkRows");
+		
 		this.lunchInfo.setPrefSize(500, 75);
-		this.lunchInfo.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
+		this.lunchInfo.setId("LightRows");
 		HBox.setMargin(this.lunchRecipeName, new Insets(10, 5, 10, 5));
 		HBox.setMargin(this.deleteLunchButton, new Insets(15, 5, 10, 5));
-
+		
 		this.dinnerInfo.setPrefSize(500, 75);
-		this.dinnerInfo
-				.setBackground(new Background(new BackgroundFill(Color.LIGHTSKYBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
+		this.dinnerInfo.setId("DarkRows");
 		HBox.setMargin(this.dinnerRecipeName, new Insets(10, 5, 10, 5));
 		HBox.setMargin(this.deleteDinnerButton, new Insets(15, 5, 10, 5));
-
+		
 		this.snackInfo.setPrefSize(500, 75);
-		this.snackInfo.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
+		this.snackInfo.setId("LightRows");
 		HBox.setMargin(this.snackRecipeName, new Insets(10, 5, 10, 5));
 		HBox.setMargin(this.deleteSnackButton, new Insets(15, 5, 10, 5));
-
+		
 		this.breakfastRecipeName.setPrefSize(350, 65);
 		this.breakfastRecipeName.setFont(Font.font(16));
 		this.deleteBreakfastButton.setPrefSize(75, 40);
-		this.deleteBreakfastButton.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 12));
-
+		this.deleteBreakfastButton.setId("DeleteButtons");
+		
 		this.lunchRecipeName.setPrefSize(350, 65);
 		this.lunchRecipeName.setFont(Font.font(16));
 		this.deleteLunchButton.setPrefSize(75, 40);
-		this.deleteLunchButton.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 12));
-
+		this.deleteLunchButton.setId("DeleteButtons");
+		
 		this.dinnerRecipeName.setPrefSize(350, 65);
 		this.dinnerRecipeName.setFont(Font.font(16));
 		this.deleteDinnerButton.setPrefSize(75, 40);
-		this.deleteDinnerButton.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 12));
-
+		this.deleteDinnerButton.setId("DeleteButtons");
+		
 		this.snackRecipeName.setPrefSize(350, 65);
 		this.snackRecipeName.setFont(Font.font(16));
 		this.deleteSnackButton.setPrefSize(75, 40);
-		this.deleteSnackButton.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 12));
-
-		this.addRecipeDropdown
-				.setBackground(new Background(new BackgroundFill(Color.LIGHTSKYBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
+		this.deleteSnackButton.setId("DeleteButtons");
+		
 		this.addRecipeDropdown.setPrefSize(980, 35);
 		this.addRecipeDropdown.setAlignment(Pos.CENTER);
+		this.addRecipeDropdown.setId("RecipeCategoryBox");
 		HBox.setMargin(this.comboBox, new Insets(5, 5, 5, 5));
 		HBox.setMargin(this.addRecipeButton, new Insets(5, 5, 5, 5));
-
+		
 		this.comboBox.setPrefSize(420, 35);
 		this.comboBox.setPromptText("--- Select a Recipe ---");
 		this.comboBox.setEditable(true);
-		this.comboBox.getEditor().setFont(Font.font("Verdana", FontWeight.NORMAL, 12));
 		this.addRecipeButton.setPrefSize(75, 35);
-		this.addRecipeButton.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 12));
-
+		
 		this.bottomRecipeInfo.setPrefSize(490, 400);
 		this.confirm.setPrefSize(490, 400);
-		StackPane.setMargin(this.confirmationBox, new Insets(10, 10, 10, 10));
+		this.confirm.setMargin(this.confirmationBox, new Insets(10, 10, 10, 10));
 		this.confirm.setAlignment(Pos.CENTER);
-		this.confirmLabel.setFont(Font.font("Verdana", FontWeight.NORMAL, 14));
 		this.confirmLabel.setPrefSize(480, 100);
 		this.confirmLabel.setWrapText(true);
 		this.confirmLabel.setAlignment(Pos.CENTER);
 		this.confirmationBox.setAlignment(Pos.CENTER);
 		this.confirmRecipeSelection.setPrefSize(100, 50);
-		this.confirmRecipeSelection.setFont(Font.font("Verdana", FontWeight.NORMAL, 14));
 		this.confirmRecipeSelection.setAlignment(Pos.CENTER);
-
 	}
 
 	private void setDefaultVisibilities() {
@@ -413,8 +383,6 @@ public class DayOfWeekView extends Pane implements ViewInterface {
 		this.deleteLunchButton = new Button("DELETE");
 		this.deleteDinnerButton = new Button("DELETE");
 		this.deleteSnackButton = new Button("DELETE");
-		setButtonColor();
-		
 	}
 
 	protected void populateComboBox(int num) {
