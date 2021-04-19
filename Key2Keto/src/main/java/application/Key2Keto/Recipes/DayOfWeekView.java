@@ -414,6 +414,7 @@ public class DayOfWeekView extends Pane implements ViewInterface {
 		this.deleteDinnerButton = new Button("DELETE");
 		this.deleteSnackButton = new Button("DELETE");
 		setButtonColor();
+		
 	}
 
 	protected void populateComboBox(int num) {
