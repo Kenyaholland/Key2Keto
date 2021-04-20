@@ -18,10 +18,11 @@ public class DashboardViewLogic {
 
 	public static String populateDaysRecipe(int loc) {
 		String recipeText = "";
-		if (dashboard.getUserAccount().getChosenRecipes().get(dashboard.getCurrentDayInt()).size() > 0) {
+		
 			switch (loc) {
 			case 0:
-				if (dashboard.getUserAccount().getChosenRecipes().get(dashboard.getCurrentDayInt()).get(0) != null) {
+				if (dashboard.getUserAccount().getChosenRecipes().get(dashboard.getCurrentDayInt()).size() > 0 
+						&& dashboard.getUserAccount().getChosenRecipes().get(dashboard.getCurrentDayInt()).get(0) != null) {
 					recipeText = "Chosen Breakfast: " + dashboard.getUserAccount().getChosenRecipes()
 							.get(dashboard.getCurrentDayInt()).get(0).getName();
 				} else {
@@ -29,7 +30,8 @@ public class DashboardViewLogic {
 				}
 				break;
 			case 1:
-				if (dashboard.getUserAccount().getChosenRecipes().get(dashboard.getCurrentDayInt()).get(1) != null) {
+				if (dashboard.getUserAccount().getChosenRecipes().get(dashboard.getCurrentDayInt()).size() > 0 
+						&& dashboard.getUserAccount().getChosenRecipes().get(dashboard.getCurrentDayInt()).get(1) != null) {
 					recipeText = "Chosen Lunch: " + dashboard.getUserAccount().getChosenRecipes()
 							.get(dashboard.getCurrentDayInt()).get(1).getName();
 				} else {
@@ -37,7 +39,8 @@ public class DashboardViewLogic {
 				}
 				break;
 			case 2:
-				if (dashboard.getUserAccount().getChosenRecipes().get(dashboard.getCurrentDayInt()).get(2) != null) {
+				if (dashboard.getUserAccount().getChosenRecipes().get(dashboard.getCurrentDayInt()).size() > 0 
+						&& dashboard.getUserAccount().getChosenRecipes().get(dashboard.getCurrentDayInt()).get(2) != null) {
 					recipeText = "Chosen Dinner: " + dashboard.getUserAccount().getChosenRecipes()
 							.get(dashboard.getCurrentDayInt()).get(2).getName();
 				} else {
@@ -45,7 +48,8 @@ public class DashboardViewLogic {
 				}
 				break;
 			case 3:
-				if (dashboard.getUserAccount().getChosenRecipes().get(dashboard.getCurrentDayInt()).get(3) != null) {
+				if (dashboard.getUserAccount().getChosenRecipes().get(dashboard.getCurrentDayInt()).size() > 0 
+						&& dashboard.getUserAccount().getChosenRecipes().get(dashboard.getCurrentDayInt()).get(3) != null) {
 					recipeText = "Chosen Snack: " + dashboard.getUserAccount().getChosenRecipes()
 							.get(dashboard.getCurrentDayInt()).get(3).getName();
 				} else {
@@ -55,7 +59,6 @@ public class DashboardViewLogic {
 			default:
 				System.out.println("Should not get here");
 			}
-		}
 		return recipeText;
 	}
 	

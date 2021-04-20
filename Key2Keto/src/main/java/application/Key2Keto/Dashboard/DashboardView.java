@@ -19,6 +19,7 @@ import java.util.Arrays;
 
 import application.Key2Keto.Account.Account;
 import application.Key2Keto.Interfaces.ViewInterface;
+import application.Key2Keto.Recipes.DayOfWeekLogic;
 import application.Key2Keto.Recipes.DayOfWeekView;
 //import application.Key2Keto.Tracker.TrackerView;
 import javafx.event.ActionEvent;
@@ -107,6 +108,7 @@ public class DashboardView extends Pane implements ViewInterface {
 	}
 
 	private void populateDaysRecipes() {
+
 		this.breakfastRecipe.setText(DashboardViewLogic.populateDaysRecipe(0));
 		this.lunchRecipe.setText(DashboardViewLogic.populateDaysRecipe(1));
 		this.dinnerRecipe.setText(DashboardViewLogic.populateDaysRecipe(2));
@@ -141,6 +143,7 @@ public class DashboardView extends Pane implements ViewInterface {
 	}
 
 	private void populateSleepChart() {
+		this.sleepChart = null;
 		CategoryAxis xaxis = new CategoryAxis();
 		NumberAxis yaxis = new NumberAxis(0, 14, 2);
 		
@@ -165,7 +168,7 @@ public class DashboardView extends Pane implements ViewInterface {
 	}
 
 	private void populateWaterChart() {
-
+		this.waterChart = null;
 		CategoryAxis xaxis = new CategoryAxis();
 		NumberAxis yaxis = new NumberAxis(0, 128, 8);
 		
@@ -190,8 +193,12 @@ public class DashboardView extends Pane implements ViewInterface {
 	}
 
 	private void populateWeeksGoals() {
+		this.goalList.clear();
+		this.goalInformationBox.getChildren().clear();
+		this.goalInformationBox.getChildren().addAll(this.weeklyGoalsLabel, this.goalLabel);
 		if (DashboardViewLogic.getDashboard().getUserAccount().getTrackers()
 				.get(DashboardViewLogic.getDashboard().getCurrentDayInt()).getGoals().size() > 0) {
+			
 			this.goalLabel.setVisible(false);
 
 			for (int i = 0; i < this.goalList.size(); i++) {
@@ -218,6 +225,22 @@ public class DashboardView extends Pane implements ViewInterface {
 		assignSetOnActions();
 	}
 
+	public void updateUI() {
+		
+		this.upperHalf.getChildren().clear();
+		this.lowerHalf.getChildren().clear();
+		this.recipeInformationBox.getChildren().clear();
+		
+		populateDaysRecipes();
+		populateSleepChart();
+		populateWaterChart();
+		populateWeeksGoals();
+		this.recipeInformationBox.getChildren().addAll(this.todaysRecipeTitle, this.dietType, this.breakfastRecipe,
+				this.lunchRecipe, this.dinnerRecipe, this.snackRecipe);
+		this.upperHalf.getChildren().addAll(this.recipeInformationBox, this.goalInformationBox);
+		this.lowerHalf.getChildren().addAll(this.waterChart, this.sleepChart);
+
+	}
 	private void adjustFontSize() {
 		if (DashboardViewLogic.getDashboard().getUserAccount().getTrackers()
 				.get(DashboardViewLogic.getDashboard().getCurrentDayInt()).getGoals().size() > 4) {
@@ -262,7 +285,7 @@ public class DashboardView extends Pane implements ViewInterface {
 		this.lunchRecipe.setId("DashboardInfoLabels");
 		this.dinnerRecipe.setId("DashboardInfoLabels");
 		this.snackRecipe.setId("DashboardInfoLabels");
-		
+
 		this.goalInformationBox.setPrefWidth(490);
 		VBox.setMargin(this.weeklyGoalsLabel, new Insets(5, 0, 5, 0));
 		this.goalLabel.setPrefWidth(490);

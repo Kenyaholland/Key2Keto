@@ -175,21 +175,24 @@ public class DayOfWeekView extends Pane implements ViewInterface {
 //		disPlayViewsRecipes();
 	}
 
-	private void disPlayViewsRecipes() {
+	private void disPlayViewsRecipes(int day) {
 		int count = 0;
-		
-		for (int i = 0; i < DayOfWeekLogic.getDaysRecipes().size(); i++) {
-			if (DayOfWeekLogic.getDaysRecipes().get(i).getType().contentEquals("Breakfast")) {
-				this.breakfastRecipeName.setText(DayOfWeekLogic.getDaysRecipes().get(i).getName());
-			} else if (DayOfWeekLogic.getDaysRecipes().get(i).getType().contentEquals("Snacks")) {
-				this.snackRecipeName.setText(DayOfWeekLogic.getDaysRecipes().get(i).getName());
-			} else if (DayOfWeekLogic.getDaysRecipes().get(i).getType().contentEquals("Entrees") && count == 0) {
-				this.lunchRecipeName.setText(DayOfWeekLogic.getDaysRecipes().get(i).getName());
-				count = 1;
-			} else if (DayOfWeekLogic.getDaysRecipes().get(i).getType().contentEquals("Entrees")) {
-				this.dinnerRecipeName.setText(DayOfWeekLogic.getDaysRecipes().get(i).getName());
-				count = 0;
+
+		for (int i = 0; i < DayOfWeekLogic.getDaysRecipes(day).size(); i++) {
+			if (DayOfWeekLogic.getDaysRecipes(day).get(i) != null) {
+				if (DayOfWeekLogic.getDaysRecipes(day).get(i).getType().contentEquals("Breakfast")) {
+					this.breakfastRecipeName.setText(DayOfWeekLogic.getDaysRecipes(day).get(i).getName());
+				} else if (DayOfWeekLogic.getDaysRecipes(day).get(i).getType().contentEquals("Snacks")) {
+					this.snackRecipeName.setText(DayOfWeekLogic.getDaysRecipes(day).get(i).getName());
+				} else if (DayOfWeekLogic.getDaysRecipes(day).get(i).getType().contentEquals("Entrees") && count == 0) {
+					this.lunchRecipeName.setText(DayOfWeekLogic.getDaysRecipes(day).get(i).getName());
+					count = 1;
+				} else if (DayOfWeekLogic.getDaysRecipes(day).get(i).getType().contentEquals("Entrees")) {
+					this.dinnerRecipeName.setText(DayOfWeekLogic.getDaysRecipes(day).get(i).getName());
+					count = 0;
+				}
 			}
+
 		}
 
 //		for (int i = 0; i < this.daysRecipes.size(); i++) {
@@ -327,12 +330,13 @@ public class DayOfWeekView extends Pane implements ViewInterface {
 		this.confirmLabel.setWrapText(true);
 		this.confirmLabel.setAlignment(Pos.CENTER);
 		this.confirmationBox.setAlignment(Pos.CENTER);
+		this.confirmationBox.setId("WholeMainPane");
 		this.confirmRecipeSelection.setPrefSize(100, 50);
 		this.confirmRecipeSelection.setAlignment(Pos.CENTER);
 	}
 
 	private void setDefaultVisibilities() {
-		if (DayOfWeekLogic.getDaysRecipes().size() > 0) {
+		if (DayOfWeekLogic.getDaysRecipes(this.day).size() > 0) {
 			this.breakfastRecipeName.setVisible(true);
 			this.lunchRecipeName.setVisible(true);
 			this.dinnerRecipeName.setVisible(true);
@@ -469,7 +473,7 @@ public class DayOfWeekView extends Pane implements ViewInterface {
 	}
 
 	public ArrayList<Recipe> getSelectedRecipes() {
-		return DayOfWeekLogic.getDaysRecipes();
+		return DayOfWeekLogic.getDaysRecipes(day);
 	}
 
 	@Override
@@ -477,7 +481,7 @@ public class DayOfWeekView extends Pane implements ViewInterface {
 		overViewButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {
-				disPlayViewsRecipes();
+				disPlayViewsRecipes(DayOfWeekView.this.day);
 				DayOfWeekView.this.comboBox.setVisible(false);
 				DayOfWeekView.this.addRecipeButton.setVisible(false);
 				DayOfWeekView.this.recipeDetails.setViewOrder(0);
@@ -579,9 +583,9 @@ public class DayOfWeekView extends Pane implements ViewInterface {
 				} else {
 					selected = DayOfWeekView.this.comboBox.getValue().toString();
 				}
-				DayOfWeekLogic.addRecipe(selected);
+				DayOfWeekLogic.addRecipe(selected, DayOfWeekView.this.day);
 //				addRecipe(selected);
-				disPlayViewsRecipes();
+				disPlayViewsRecipes(DayOfWeekView.this.day);
 			}
 			
 		});
@@ -603,6 +607,7 @@ public class DayOfWeekView extends Pane implements ViewInterface {
 				chosen.add(DayOfWeekView.this.lunchRecipeName.getText());
 				chosen.add(DayOfWeekView.this.dinnerRecipeName.getText());
 				chosen.add(DayOfWeekView.this.snackRecipeName.getText());
+				
 				DayOfWeekLogic.addToUsersChosenRecipes(chosen, day);
 				
 //				for (int i = 0; i < DayOfWeekView.this.daysRecipes.size(); i++) {
