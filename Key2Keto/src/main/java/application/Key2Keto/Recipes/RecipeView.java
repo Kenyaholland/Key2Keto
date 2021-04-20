@@ -7,22 +7,13 @@ import application.Key2Keto.Account.Account;
 import application.Key2Keto.Interfaces.ViewInterface;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Insets;
 import javafx.scene.control.Button;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 
 public class RecipeView extends Pane implements ViewInterface {
-	//private RecipeFileReader recipeFileReader;
-	//private Account userAccount;
 	private VBox view;
 	private HBox categoryTabs;
 	private Button sundayButton;
@@ -41,8 +32,6 @@ public class RecipeView extends Pane implements ViewInterface {
 		String file = "./src/main/java/application/Key2Keto/Recipes/"
 				+ getDietTypeString(RecipeViewLogic.getUserAccount().getDietType()) + "Keto.txt";
 		RecipeViewLogic.setFileReader(file);
-		//this.userAccount = userAccount;
-		//this.recipeFileReader = new RecipeFileReader(file);
 		initializeVariables();
 		populateDaysOfWeek();
 		populateChildren();
@@ -103,15 +92,7 @@ public class RecipeView extends Pane implements ViewInterface {
 		}
 	}
 
-	private void populateDaysOfWeek() {
-//		days[0] = new DayOfWeekView(this.recipeFileReader.getRecipeList(), "Sunday", this.userAccount);
-//		days[1] = new DayOfWeekView(this.recipeFileReader.getRecipeList(), "Monday", this.userAccount);
-//		days[2] = new DayOfWeekView(this.recipeFileReader.getRecipeList(), "Tuesday", this.userAccount);
-//		days[3] = new DayOfWeekView(this.recipeFileReader.getRecipeList(), "Wednesday", this.userAccount);
-//		days[4] = new DayOfWeekView(this.recipeFileReader.getRecipeList(), "Thursday", this.userAccount);
-//		days[5] = new DayOfWeekView(this.recipeFileReader.getRecipeList(), "Friday", this.userAccount);
-//		days[6] = new DayOfWeekView(this.recipeFileReader.getRecipeList(), "Saturday", this.userAccount);
-		
+	private void populateDaysOfWeek() {		
 		days[0] = new DayOfWeekView(RecipeViewLogic.getFileReader().getRecipeList(), "Sunday", RecipeViewLogic.getUserAccount());
 		days[1] = new DayOfWeekView(RecipeViewLogic.getFileReader().getRecipeList(), "Monday", RecipeViewLogic.getUserAccount());
 		days[2] = new DayOfWeekView(RecipeViewLogic.getFileReader().getRecipeList(), "Tuesday", RecipeViewLogic.getUserAccount());
