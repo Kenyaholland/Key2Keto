@@ -94,7 +94,7 @@ public class MainView extends Pane{
 		
 		this.logout.setOnAction(new EventHandler<ActionEvent>() {
 		    @Override public void handle(ActionEvent e) {
-		    	//stackOrder(5);
+		    	stackOrder(5);
 		    	currentTab = "Logout";
 		    }
 		});
@@ -225,6 +225,13 @@ public class MainView extends Pane{
 				
 			case 4:
 				/*TODO add panes as they are developed*/
+				break;
+				
+			case 5:
+				//save account, then close window
+				AccountSaver.saveAccount(this.user);
+		    	System.exit(0);
+				break;
 			default:
 				System.out.println("You should not get here");
 		}	
