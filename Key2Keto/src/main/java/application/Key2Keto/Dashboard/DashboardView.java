@@ -30,7 +30,6 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 
 public class DashboardView extends Pane implements ViewInterface {
-	private Dashboard dashboard;
 	private VBox view;
 	private VBox recipeInformationBox;
 	private VBox goalInformationBox;
@@ -215,7 +214,6 @@ public class DashboardView extends Pane implements ViewInterface {
 		this.view.setPrefSize(980, 500);
 		
 		this.userName.setPrefWidth(980);
-		this.setPrefHeight(40);
 		this.userName.setAlignment(Pos.CENTER);
 		this.userName.setId("UsernameField");
 		this.dietType.setId("DashboardInfoLabels");
@@ -288,11 +286,7 @@ public class DashboardView extends Pane implements ViewInterface {
 
 	/*-------------------  METHODS USED FOR TESTING -------------------------*/
 	protected Dashboard getDashboardForTest() {
-		return this.dashboard;
-	}
-
-	protected DashboardView getDashboardViewForTest() {
-		return this;
+		return DashboardViewLogic.getDashboard();
 	}
 
 	protected ArrayList<CheckBox> getCheckBoxToTest() {

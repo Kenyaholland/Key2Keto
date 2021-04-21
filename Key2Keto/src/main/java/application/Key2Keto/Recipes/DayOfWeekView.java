@@ -132,22 +132,22 @@ public class DayOfWeekView extends Pane implements ViewInterface {
 	private void disPlayViewsRecipes(int day) {
 		int count = 0;
 
-		for (int i = 0; i < DayOfWeekLogic.getDaysRecipes(day).size(); i++) {
-			if (DayOfWeekLogic.getDaysRecipes(day).get(i) != null) {
-				if (DayOfWeekLogic.getDaysRecipes(day).get(i).getType().contentEquals("Breakfast")) {
-					this.breakfastRecipeName.setText(DayOfWeekLogic.getDaysRecipes(day).get(i).getName());
-				} else if (DayOfWeekLogic.getDaysRecipes(day).get(i).getType().contentEquals("Snacks")) {
-					this.snackRecipeName.setText(DayOfWeekLogic.getDaysRecipes(day).get(i).getName());
-				} else if (DayOfWeekLogic.getDaysRecipes(day).get(i).getType().contentEquals("Entrees") && count == 0) {
-					this.lunchRecipeName.setText(DayOfWeekLogic.getDaysRecipes(day).get(i).getName());
-					count = 1;
-				} else if (DayOfWeekLogic.getDaysRecipes(day).get(i).getType().contentEquals("Entrees")) {
-					this.dinnerRecipeName.setText(DayOfWeekLogic.getDaysRecipes(day).get(i).getName());
-					count = 0;
+			for (int i = 0; i < DayOfWeekLogic.getDaysRecipes(day).size(); i++) {
+				if (DayOfWeekLogic.getDaysRecipes(day).get(i) != null) {
+					if (DayOfWeekLogic.getDaysRecipes(day).get(i).getType().contentEquals("Breakfast")) {
+						this.breakfastRecipeName.setText(DayOfWeekLogic.getDaysRecipes(day).get(i).getName());
+					} else if (DayOfWeekLogic.getDaysRecipes(day).get(i).getType().contentEquals("Snacks")) {
+						this.snackRecipeName.setText(DayOfWeekLogic.getDaysRecipes(day).get(i).getName());
+					} else if (DayOfWeekLogic.getDaysRecipes(day).get(i).getType().contentEquals("Entrees")
+							&& count == 0) {
+						this.lunchRecipeName.setText(DayOfWeekLogic.getDaysRecipes(day).get(i).getName());
+						count = 1;
+					} else if (DayOfWeekLogic.getDaysRecipes(day).get(i).getType().contentEquals("Entrees")) {
+						this.dinnerRecipeName.setText(DayOfWeekLogic.getDaysRecipes(day).get(i).getName());
+						count = 0;
+					}
 				}
 			}
-
-		}
 
 		this.breakfastRecipeName.setVisible(true);
 		this.lunchRecipeName.setVisible(true);
@@ -365,13 +365,14 @@ public class DayOfWeekView extends Pane implements ViewInterface {
 		overViewButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {
-				disPlayViewsRecipes(DayOfWeekView.this.day);
+				
 				DayOfWeekView.this.comboBox.setVisible(false);
 				DayOfWeekView.this.addRecipeButton.setVisible(false);
 				DayOfWeekView.this.recipeDetails.setViewOrder(0);
 				DayOfWeekView.this.confirmationBox.setViewOrder(-1);
 				DayOfWeekView.this.confirmationBox.setVisible(true);
 				DayOfWeekView.this.recipeDetails.setVisible(false);
+				disPlayViewsRecipes(DayOfWeekView.this.day);
 				setButtonCLickedColor(0);
 			}
 		});
