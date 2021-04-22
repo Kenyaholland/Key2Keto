@@ -223,12 +223,9 @@ public class MainView extends Pane{
 				
 			case 4:
 				/*TODO add panes as they are developed*/
-				break;
-				
 			case 5:
-				//save account, then close window
-				AccountSaver.saveAccount(this.user);
-		    	System.exit(0);
+				AccountSaver.saveAccount(user);
+				System.exit(1);
 				break;
 			default:
 				System.out.println("You should not get here");

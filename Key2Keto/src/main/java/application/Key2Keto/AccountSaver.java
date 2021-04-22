@@ -12,7 +12,10 @@ public class AccountSaver
 {
 	public static void saveAccount(Account account)
 	{
+		System.out.println("saving...");
+		
 		FileWriter saver = null;
+		int currentDay = 0;
 		
 		try
 		{
@@ -37,11 +40,14 @@ public class AccountSaver
 			
 			for(ArrayList<Recipe> chosenRecipesForDay : account.getChosenRecipes())
 			{
-				saver.write(account.getChosenRecipes().indexOf(chosenRecipesForDay) + "\n");
+				saver.write(intDayToString(currentDay++) + "\n");
 				
 				for(Recipe chosenRecipe : chosenRecipesForDay)
 				{
-					saver.write(chosenRecipe.getName() + "\n");
+					if(chosenRecipe != null)
+					{
+						saver.write(chosenRecipe.getName() + "\n");
+					}
 				}
 			}
 			
@@ -51,6 +57,31 @@ public class AccountSaver
 		catch(IOException io)
 		{
 			io.printStackTrace();
+		}
+		
+		System.out.println("done");
+	}
+	
+	private static String intDayToString(int day)
+	{
+		switch(day)
+		{
+			case 0:
+				return "Sunday";
+			case 1:
+				return "Monday";
+			case 2:
+				return "Tuesday";
+			case 3:
+				return "Wednesday";
+			case 4:
+				return "Thursday";
+			case 5:
+				return "Friday";
+			case 6:
+				return "Saturday";
+			default:
+				return "";
 		}
 	}
 }
