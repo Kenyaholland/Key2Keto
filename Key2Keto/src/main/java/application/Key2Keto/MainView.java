@@ -188,9 +188,7 @@ public class MainView extends Pane{
 				this.recipeView.setVisible(false);
 				this.trackerView.setVisible(false);
 				this.dashboardView.updateUI();
-				//this.mainContent.getChildren().remove(2);
-				//this.dashboardView = new DashboardView(this.user);
-				//this.mainContent.getChildren().add(2,dashboardView);
+
 				this.recipeView.setViewOrder(0);
 				this.dashboardView.setViewOrder(-1);
 				this.accountView.setViewOrder(0);

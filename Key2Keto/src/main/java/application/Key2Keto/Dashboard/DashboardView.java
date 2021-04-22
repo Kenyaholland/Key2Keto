@@ -2,11 +2,6 @@ package application.Key2Keto.Dashboard;
 
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.Border;
-import javafx.scene.layout.BorderStroke;
-import javafx.scene.layout.BorderStrokeStyle;
-import javafx.scene.layout.BorderWidths;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -19,14 +14,10 @@ import java.util.Arrays;
 
 import application.Key2Keto.Account.Account;
 import application.Key2Keto.Interfaces.ViewInterface;
-import application.Key2Keto.Recipes.DayOfWeekLogic;
-import application.Key2Keto.Recipes.DayOfWeekView;
-//import application.Key2Keto.Tracker.TrackerView;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-//import javafx.scene.Group;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
@@ -35,13 +26,10 @@ import javafx.scene.chart.XYChart.Data;
 import javafx.scene.chart.XYChart.Series;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-//import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 
 public class DashboardView extends Pane implements ViewInterface {
-	private Dashboard dashboard;
-//	private TrackerView trackerView;
 	private VBox view;
 	private VBox recipeInformationBox;
 	private VBox goalInformationBox;
@@ -63,8 +51,6 @@ public class DashboardView extends Pane implements ViewInterface {
 
 	public DashboardView(Account user) {
 		DashboardViewLogic.setDashboard(user);
-		// this.dashboard = new Dashboard(user);
-		// this.trackerView = new TrackerView(user);
 		populateSleepChart();
 		populateWaterChart();
 		initializeVariables();
@@ -113,33 +99,6 @@ public class DashboardView extends Pane implements ViewInterface {
 		this.lunchRecipe.setText(DashboardViewLogic.populateDaysRecipe(1));
 		this.dinnerRecipe.setText(DashboardViewLogic.populateDaysRecipe(2));
 		this.snackRecipe.setText(DashboardViewLogic.populateDaysRecipe(3));
-
-//		if(this.dashboard.getUserAccount().getChosenRecipes().get(this.dashboard.getCurrentDayInt()).size()>0) {
-//			if(this.dashboard.getUserAccount().getChosenRecipes().get(this.dashboard.getCurrentDayInt()).get(0) != null) {
-//				this.breakfastRecipe.setText("Chosen Breakfast: "+ this.dashboard.getUserAccount().getChosenRecipes()
-//						.get(this.dashboard.getCurrentDayInt()).get(0).getName());
-//			}else {
-//				this.breakfastRecipe.setText("Chosen Breakfast: Nothing Chosen");
-//			}
-//			if(this.dashboard.getUserAccount().getChosenRecipes().get(this.dashboard.getCurrentDayInt()).get(1) != null) {
-//				this.lunchRecipe.setText("Chosen Lunch: "+this.dashboard.getUserAccount().getChosenRecipes()
-//						.get(this.dashboard.getCurrentDayInt()).get(1).getName());
-//			}else {
-//				this.lunchRecipe.setText("Chosen Lunch: Nothing Chosen");
-//			}
-//			if(this.dashboard.getUserAccount().getChosenRecipes().get(this.dashboard.getCurrentDayInt()).get(2) != null) {
-//				this.dinnerRecipe.setText("Chosen Dinner: "+this.dashboard.getUserAccount().getChosenRecipes()
-//						.get(this.dashboard.getCurrentDayInt()).get(2).getName());
-//			}else {
-//				this.dinnerRecipe.setText("Chosen Dinner: Nothing Chosen");
-//			}
-//			if(this.dashboard.getUserAccount().getChosenRecipes().get(this.dashboard.getCurrentDayInt()).get(3) != null) {
-//				this.snackRecipe.setText("Chosen Snack: "+this.dashboard.getUserAccount().getChosenRecipes()
-//				.get(this.dashboard.getCurrentDayInt()).get(3).getName());
-//			}else {
-//				this.snackRecipe.setText("Chosen Snack: Nothing Chosen");
-//			}
-//		}
 	}
 
 	private void populateSleepChart() {
@@ -255,7 +214,6 @@ public class DashboardView extends Pane implements ViewInterface {
 		this.view.setPrefSize(980, 500);
 		
 		this.userName.setPrefWidth(980);
-		this.setPrefHeight(40);
 		this.userName.setAlignment(Pos.CENTER);
 		this.userName.setId("UsernameField");
 		this.dietType.setId("DashboardInfoLabels");
@@ -328,11 +286,7 @@ public class DashboardView extends Pane implements ViewInterface {
 
 	/*-------------------  METHODS USED FOR TESTING -------------------------*/
 	protected Dashboard getDashboardForTest() {
-		return this.dashboard;
-	}
-
-	protected DashboardView getDashboardViewForTest() {
-		return this;
+		return DashboardViewLogic.getDashboard();
 	}
 
 	protected ArrayList<CheckBox> getCheckBoxToTest() {

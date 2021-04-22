@@ -4,14 +4,26 @@ import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import application.Key2Keto.Interfaces.FileReaderInterface;
+
 import java.io.FileNotFoundException;
 
-public class RecipeFileReader {	
+public class RecipeFileReader implements FileReaderInterface {	
 	private RecipeList recipeList;
 	Scanner sc;
 	Scanner strScan;
 	public RecipeFileReader(String fileName) {
 		this.recipeList = new RecipeList();
+		readFile(fileName);
+	}
+	
+	public RecipeList getRecipeList() {
+		return this.recipeList;
+	}
+	
+	@Override
+	public void readFile(String fileName) {
 		try {
 			File file = new File(fileName);
 			sc = new Scanner(file);
@@ -58,9 +70,5 @@ public class RecipeFileReader {
 			strScan.close();
 			sc.close();
 		}
-	}
-	
-	public RecipeList getRecipeList() {
-		return this.recipeList;
 	}
 }

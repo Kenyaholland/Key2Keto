@@ -7,7 +7,7 @@ import javafx.scene.control.CheckBox;
 
 public class DashboardViewLogic {
 	private static Dashboard dashboard;
-
+	
 	public static void setDashboard(Account acct) {
 		DashboardViewLogic.dashboard = new Dashboard(acct);
 	}
