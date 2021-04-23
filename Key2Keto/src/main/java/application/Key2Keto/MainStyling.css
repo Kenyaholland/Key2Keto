@@ -159,3 +159,14 @@
 	-fx-font-family: Verdana;
 	-fx-font-size: 14px;
 }
+
+#ShoppingViewButton {
+	-fx-background-color: #253028;
+	-fx-font-family: Verdana;
+	-fx-font-weight: bold;
+	-fx-font-size: 12px;
+	-fx-text-fill: #FFFFFF;
+}
+#ShoppingView {
+	-fx-background-color: #93A7AA;
+}
