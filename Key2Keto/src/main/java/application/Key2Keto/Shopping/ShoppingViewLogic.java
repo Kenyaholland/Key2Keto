@@ -40,16 +40,44 @@ public class ShoppingViewLogic {
 		return ShoppingViewLogic.usersChosenRecipes;
 	}
 	
+	public static void setRestaurantMeals(ArrayList<RestaurantMeals> meals) {
+		ShoppingViewLogic.restaurantMeals = meals;
+	}
 	public static ArrayList<RestaurantMeals> getRestMeals(){
 		return ShoppingViewLogic.restaurantMeals;
 	}
+	
+	public static String findRestaurantMeal(String restaurantName) {
+		String mealName = "";
+		for (int i = 0; i < ShoppingViewLogic.getRestMeals().size(); i++) {
+			if (restaurantName.contentEquals(ShoppingViewLogic.getFileReader().getMeals().get(i).getRestaurantName())) {
+				mealName = ShoppingViewLogic.getFileReader().getMeals().get(i).getMealName();
+				break;
+			}
+		}
+		if(mealName.contentEquals("")) {
+			mealName = "Meal Not Found";
+		}
+		return mealName;
+	}
 
-	public static ArrayList<String> getRestMealsNames(ArrayList<RestaurantMeals> meals, String diet){
+	public static ArrayList<String> getRestaurantNames(ArrayList<RestaurantMeals> meals, String diet){
 		ArrayList<String> temp = new ArrayList<String>();
 		
 		for(int i = 0;i<meals.size(); i++) {
 			if(meals.get(i).getDietType().contentEquals(diet)) {
 				temp.add(meals.get(i).getRestaurantName());
+			}
+		}
+		return temp;
+	}
+	
+	public static ArrayList<String> populateIngredientsForDay(ArrayList<Recipe> recipes) {
+		ArrayList<String> temp = new ArrayList<String>();
+		
+		for(int i = 0; i<recipes.size();i++) {
+			for(int j =0; j<recipes.get(i).getIngredient().size();j++) {
+				temp.add(recipes.get(i).getIngredient().get(j).toString());
 			}
 		}
 		return temp;

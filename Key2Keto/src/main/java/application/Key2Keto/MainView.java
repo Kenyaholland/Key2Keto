@@ -227,13 +227,14 @@ public class MainView extends Pane{
 				this.trackerView.setVisible(true);
 				break;
 				
-			case 4:
+			case 4: //Switch to ShoppingView
 				this.mainContent.setVisible(true);
 				this.recipeView.setViewOrder(0);
 				this.dashboardView.setViewOrder(0);
 				this.accountView.setViewOrder(0);
 				this.trackerView.setViewOrder(0);
 				this.shoppingView.setViewOrder(-1);
+				this.shoppingView.updateUI();
 				
 				this.dashboardView.setVisible(false);
 				this.accountView.setVisible(false);
