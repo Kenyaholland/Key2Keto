@@ -26,6 +26,7 @@ import application.Key2Keto.Account.Account;
 import application.Key2Keto.Account.AccountView;
 import application.Key2Keto.Dashboard.*;
 import application.Key2Keto.Recipes.RecipeView;
+import application.Key2Keto.Shopping.ShoppingView;
 import application.Key2Keto.Tracker.TrackerView;
 
 public class MainView extends Pane{
@@ -47,8 +48,7 @@ public class MainView extends Pane{
 	private AccountView accountView;
 	private TrackerView trackerView;
 	private DashboardView dashboardView;
-	private Pane other;
-	private Label label;
+	private ShoppingView shoppingView;
 	Label title;
 	String currentTab;
 	
@@ -95,7 +95,7 @@ public class MainView extends Pane{
 		
 		this.shopping.setOnAction(new EventHandler<ActionEvent>() {
 		    @Override public void handle(ActionEvent e) {
-		    	//stackOrder(4);
+		    	stackOrder(4);
 		    	currentTab = "Shopping";
 		    }
 		});
@@ -125,8 +125,7 @@ public class MainView extends Pane{
 		accountView = new AccountView(this.user);
 		trackerView = new TrackerView(this.user);
 		dashboardView = new DashboardView(this.user);
-		other = new Pane();
-		label = new Label("IM IN FRONT");
+		shoppingView = new ShoppingView(this.user);
 		title = new Label("KEY2KETO");
 		currentTab = "";
 	}
@@ -169,8 +168,7 @@ public class MainView extends Pane{
 	private void AddAllElementsToChildren(){
 		labels.getChildren().addAll(dash,account,tracker,shopping,recipes,logout);
 		view.getChildren().addAll(title,labels, mainContent);
-		other.getChildren().add(label);
-		this.mainContent.getChildren().addAll(recipeView,accountView, dashboardView, trackerView);
+		this.mainContent.getChildren().addAll(recipeView,accountView, dashboardView, trackerView,shoppingView);
 		this.mainContent.setVisible(false);
 	}
 
@@ -182,25 +180,29 @@ public class MainView extends Pane{
 				this.accountView.setVisible(false);
 				this.recipeView.setVisible(true);
 				this.trackerView.setVisible(false);
-				this.mainContent.setVisible(true);
+				this.shoppingView.setVisible(false);
 				
 				this.recipeView.setViewOrder(-1);
 				this.dashboardView.setViewOrder(0);
 				this.accountView.setViewOrder(0);
 				this.trackerView.setViewOrder(0);
+				this.shoppingView.setViewOrder(0);
 				break;
+				
 			case 1: //Switch to Dashboard tab
 				this.mainContent.setVisible(true);
 				this.dashboardView.setVisible(true);
 				this.accountView.setVisible(false);
 				this.recipeView.setVisible(false);
 				this.trackerView.setVisible(false);
+				this.shoppingView.setVisible(false);
 				this.dashboardView.updateUI();
 
 				this.recipeView.setViewOrder(0);
 				this.dashboardView.setViewOrder(-1);
 				this.accountView.setViewOrder(0);
 				this.trackerView.setViewOrder(0);
+				this.shoppingView.setViewOrder(0);
 			
 				break;
 			case 2: //Switch to Account tab
@@ -209,10 +211,12 @@ public class MainView extends Pane{
 				this.dashboardView.setViewOrder(0);
 				this.accountView.setViewOrder(-1);
 				this.trackerView.setViewOrder(0);
+				this.shoppingView.setViewOrder(0);
 			
 				this.dashboardView.setVisible(false);
 				this.accountView.setVisible(true);
 				this.recipeView.setVisible(false);
+				this.shoppingView.setVisible(false);
 				this.trackerView.setVisible(false);
 				break;
 				
@@ -221,16 +225,32 @@ public class MainView extends Pane{
 				this.recipeView.setViewOrder(0);
 				this.dashboardView.setViewOrder(0);
 				this.accountView.setViewOrder(0);
+				this.shoppingView.setViewOrder(0);
 				this.trackerView.setViewOrder(-1);
 			
 				this.dashboardView.setVisible(false);
 				this.accountView.setVisible(false);
 				this.recipeView.setVisible(false);
+				this.shoppingView.setVisible(false);
 				this.trackerView.setVisible(true);
 				break;
 				
-			case 4:
-				/*TODO add panes as they are developed*/
+			case 4: //Switch to ShoppingView
+				this.mainContent.setVisible(true);
+				this.recipeView.setViewOrder(0);
+				this.dashboardView.setViewOrder(0);
+				this.accountView.setViewOrder(0);
+				this.trackerView.setViewOrder(0);
+				this.shoppingView.setViewOrder(-1);
+				this.shoppingView.updateUI();
+				
+				this.dashboardView.setVisible(false);
+				this.accountView.setVisible(false);
+				this.recipeView.setVisible(false);
+				this.trackerView.setVisible(false);
+				this.shoppingView.setVisible(true);
+				break;
+				
 			case 5:
 				Stage logoutConfirmation = new Stage();
 				
