@@ -76,12 +76,14 @@ public class ShoppingViewLogic {
 		ArrayList<String> temp = new ArrayList<String>();
 		if(recipes != null) {
 			for(int i = 0; i<recipes.size();i++) {
-				for(int j =0; j<recipes.get(i).getIngredient().size();j++) {
-					temp.add(recipes.get(i).getIngredient().get(j).toString());
+				if(recipes.get(i) != null)
+				{
+					for(int j =0; j<recipes.get(i).getIngredient().size();j++) {
+						temp.add(recipes.get(i).getIngredient().get(j).toString());
+					}
 				}
 			}
 		}
-
 		return temp;
 	}
 	

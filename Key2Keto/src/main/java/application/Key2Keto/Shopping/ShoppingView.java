@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import application.Key2Keto.Account.Account;
 import application.Key2Keto.Interfaces.ViewInterface;
+import application.Key2Keto.Recipes.Ingredient;
+import application.Key2Keto.Recipes.Recipe;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -202,7 +204,6 @@ public class ShoppingView extends Pane implements ViewInterface {
 			@Override
 			public void handle(ActionEvent e) {				
 				ShoppingList shopList = new ShoppingList(ShoppingViewLogic.getChosenRecipes());
-				shopList.generateShoppingList();
 			}
 		});
 		

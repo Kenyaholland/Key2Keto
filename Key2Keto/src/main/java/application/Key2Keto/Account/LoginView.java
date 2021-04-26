@@ -1,6 +1,5 @@
 package application.Key2Keto.Account;
 
-import application.Key2Keto.AccountFileReader;
 import application.Key2Keto.SceneSwitcher;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;

@@ -2,8 +2,6 @@ package application.Key2Keto.Account;
 
 import java.io.File;
 
-import application.Key2Keto.AccountFileReader;
-
 public class LoginViewLogic
 {
 	private static String errorMessage;

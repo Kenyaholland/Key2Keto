@@ -53,20 +53,23 @@ public class ShoppingList implements ShoppingListInterface
 		{
 			for(Recipe recipe : recipeList)
 			{
-				currentRecipeInfo = "Recipe: " + recipe.getName() + " | " + recipe.getTotalCalories()
-								  + " Calories | " + recipe.getTotalCarb() + "g Carbs | " + recipe.getTotalProtein()
-								  + "g Protein | " + recipe.getTotalFat() + "g Fat";
-				
-				shoppingListRecipes.add(currentRecipeInfo);
-				
-				for(Ingredient ingredient : recipe.getIngredient())
+				if(recipe != null)
 				{
-					currentIngredientInfo = ingredient.toString();
+					currentRecipeInfo = "Recipe: " + recipe.getName() + " | " + recipe.getTotalCalories()
+									  + " Calories | " + recipe.getTotalCarb() + "g Carbs | " + recipe.getTotalProtein()
+									  + "g Protein | " + recipe.getTotalFat() + "g Fat";
 					
-					shoppingListIngredients.add(currentIngredientInfo);
+					shoppingListRecipes.add(currentRecipeInfo);
+					
+					for(Ingredient ingredient : recipe.getIngredient())
+					{
+						currentIngredientInfo = ingredient.toString();
+						
+						shoppingListIngredients.add(currentIngredientInfo);
+					}
+					
+					shoppingListIngredients.add(","); //delimiter
 				}
-				
-				shoppingListIngredients.add(","); //delimiter
 			}
 		}
 		

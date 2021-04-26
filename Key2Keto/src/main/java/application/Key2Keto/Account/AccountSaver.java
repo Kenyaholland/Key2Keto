@@ -1,10 +1,9 @@
-package application.Key2Keto;
+package application.Key2Keto.Account;
 
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import application.Key2Keto.Account.Account;
 import application.Key2Keto.Recipes.Recipe;
 import application.Key2Keto.Tracker.Tracker;
 
