@@ -180,3 +180,8 @@
 	-fx-padding: 5 5 5 5;
 	-fx-alignment: center;
 }
+#IngredientList {
+		-fx-font-family: Verdana;
+	-fx-font-weight: normal;
+	-fx-font-size: 8px;
+}

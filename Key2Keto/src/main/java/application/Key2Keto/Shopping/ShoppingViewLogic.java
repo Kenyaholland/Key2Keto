@@ -74,12 +74,38 @@ public class ShoppingViewLogic {
 	
 	public static ArrayList<String> populateIngredientsForDay(ArrayList<Recipe> recipes) {
 		ArrayList<String> temp = new ArrayList<String>();
-		
-		for(int i = 0; i<recipes.size();i++) {
-			for(int j =0; j<recipes.get(i).getIngredient().size();j++) {
-				temp.add(recipes.get(i).getIngredient().get(j).toString());
+		if(recipes != null) {
+			for(int i = 0; i<recipes.size();i++) {
+				for(int j =0; j<recipes.get(i).getIngredient().size();j++) {
+					temp.add(recipes.get(i).getIngredient().get(j).toString());
+				}
 			}
 		}
+
 		return temp;
+	}
+	
+	public static double totalFat(ArrayList<Recipe> recipes) {
+		double total = 0;
+		for(int i = 0; i <recipes.size(); i++) {
+			total = recipes.get(i).getTotalFat();
+		}
+		return total;
+	}
+	
+	public static double totalCarb(ArrayList<Recipe> recipes) {
+		double total = 0;
+		for(int i = 0; i <recipes.size(); i++) {
+			total = recipes.get(i).getTotalCarb();
+		}
+		return total;
+	}
+	
+	public static double totalProtein(ArrayList<Recipe> recipes) {
+		double total = 0;
+		for(int i = 0; i <recipes.size(); i++) {
+			total = recipes.get(i).getTotalProtein();
+		}
+		return total;
 	}
 }

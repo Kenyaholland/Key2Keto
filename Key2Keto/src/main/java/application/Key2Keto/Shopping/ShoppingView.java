@@ -11,13 +11,17 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 
 public class ShoppingView extends Pane implements ViewInterface {
 	private HBox view;
-	
+	private ScrollPane scrollpane;
 	private VBox sundayRecipes;
 	private VBox mondayRecipes;
 	private VBox tuesdayRecipes;
@@ -103,7 +107,8 @@ public class ShoppingView extends Pane implements ViewInterface {
 		
 		this.rightside.getChildren().add(this.rightInner);
 		this.leftside.getChildren().add(this.leftInner);
-		this.view.getChildren().addAll(this.leftside, this.rightside);
+		this.scrollpane.setContent(this.leftside);
+		this.view.getChildren().addAll(this.scrollpane, this.rightside);
 		this.getChildren().add(view);
 	}
 
@@ -119,7 +124,7 @@ public class ShoppingView extends Pane implements ViewInterface {
 		this.thursdayRecipes = new VBox();
 		this.fridayRecipes = new VBox();
 		this.saturdayRecipes = new VBox();
-		
+		this.scrollpane = new ScrollPane();
 		this.print = new Button("Print Shopping List");
 		
 		this.totalMacrosTitle= new Label("TOTAL MACROS FOR THE WEEK");
@@ -138,7 +143,7 @@ public class ShoppingView extends Pane implements ViewInterface {
 		this.wednesdayRecTitle = new Label("WEDNESDAY");
 		this.thursdayRecTitle = new Label("THURSDAY");
 		this.fridayRecTitle = new Label("FRIDAY");
-		this.saturdayRecTitle = new Label("SATURDDAY");
+		this.saturdayRecTitle = new Label("SATURDAY");
 		
 		this.rightside = new VBox();
 		this.rightInner = new VBox();
@@ -146,7 +151,7 @@ public class ShoppingView extends Pane implements ViewInterface {
 		this.macroInfoBox = new VBox();
 		
 		this.restOption = new Label("Need a restaurant meal option?\nClick the dropdown to select "
-				+ "a restaruant with a meal based off your selected diet type");
+				+ "a restaurant with a meal based off your selected diet type");
 		this.restMeal = new Label("Restaurant Meal Label");
 		this.restaurantBox = new ComboBox<String>();
 	}
@@ -177,7 +182,7 @@ public class ShoppingView extends Pane implements ViewInterface {
 		this.restOption.setWrapText(true);
 		this.restMeal.setWrapText(true);
 		this.print.setId("ShoppingViewButton");
-		this.leftInner.setMargin(this.print, new Insets(15,5,5,5));		
+		VBox.setMargin(this.print, new Insets(15,5,5,5));		
 		//this.view.setId(value);
 		
 		
@@ -196,7 +201,7 @@ public class ShoppingView extends Pane implements ViewInterface {
 		this.print.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {				
-				ShoppingList shopList = new ShoppingList(ShoppingViewLogic.getChosenRecipes().get(5));
+				ShoppingList shopList = new ShoppingList(ShoppingViewLogic.getChosenRecipes());
 				shopList.generateShoppingList();
 			}
 		});
@@ -211,7 +216,9 @@ public class ShoppingView extends Pane implements ViewInterface {
 	}
 	
 	public void updateUI() {
-		this.sundayMac.setText("Sunday: Fat: XXg  Carbs: Xg  Protein: Xg");
+		this.sundayMac.setText("Sunday: Fat: "+ShoppingViewLogic.totalFat(ShoppingViewLogic.getUserAccount().getChosenRecipes().get(0))+
+				"g   Carbs: "+ ShoppingViewLogic.totalCarb(ShoppingViewLogic.getUserAccount().getChosenRecipes().get(0))+
+				"g  Protein: "+ShoppingViewLogic.totalProtein(ShoppingViewLogic.getUserAccount().getChosenRecipes().get(0))+"g");
 		this.mondayMac.setText("Monday Fat: XXg  Carbs: Xg  Protein: Xg");
 		this.tuesdayMac.setText("Tuesday Fat: XXg  Carbs: Xg  Protein: Xg");
 		this.wednesdayMac.setText("Wednesday Fat: XXg  Carbs: Xg  Protein: Xg");
@@ -228,18 +235,49 @@ public class ShoppingView extends Pane implements ViewInterface {
 	}
 	
 	private void populateRecipeIngredients(VBox vbox, int num){
+		int lower = 0;
+		int upper = 0;
 		Label day = (Label) vbox.getChildren().get(0);
+		HBox h1 = new HBox();
+		VBox v1 = new VBox();
+		VBox v2 = new VBox();
+		VBox v3 = new VBox();
+		VBox v4 = new VBox();
 		ArrayList<String> temp;
 		vbox.getChildren().clear();
-		vbox.getChildren().addAll(this.weekLabel, day);
+		vbox.getChildren().addAll(day);
 		temp = ShoppingViewLogic.populateIngredientsForDay(ShoppingViewLogic.getUserAccount().getChosenRecipes().get(num));
-		if(temp.size()<1) {
+		lower = temp.size()/2;
+		upper = temp.size();
+		System.out.println("Size of temp: "+ temp.size());
+		if(temp.size() < 1) {
 			temp.add("No Recipes Chosen");
 		}
 		for(int i = 0; i<temp.size(); i ++) {
 			Label label = new Label(temp.get(i));
-			vbox.getChildren().add(label);
+			label.setId("IngredientList");
+			label.setWrapText(true);
+			label.setPrefWidth(110);
+			if(i < (lower/2)) {
+				v1.getChildren().add(label);
+			}else if(i > ((lower/2) + 1) && (i < lower)) {
+				v2.getChildren().add(label);
+			}else if(i > (lower + 1) && i < (upper - (lower/2))) {
+				v3.getChildren().add(label);
+			}else if(i> ((upper/2)+1) && i < upper){
+				v4.getChildren().add(label);
+			}
+			if(temp.size() == 1 && temp.get(0).contentEquals("No Recipes Chosen")) {
+				v1.getChildren().add(label);
+			}
 		}
+
+		h1.getChildren().addAll(v1, v2, v3, v4);
+		HBox.setMargin(v1, new Insets(5,5,5,5));
+		HBox.setMargin(v2, new Insets(5,5,5,5));
+		HBox.setMargin(v3, new Insets(5,5,5,5));
+		HBox.setMargin(v4, new Insets(5,5,5,5));
+		vbox.getChildren().add(h1);
 	}
 
 }
