@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Background;
@@ -16,6 +17,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.stage.Stage;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,6 +32,9 @@ import application.Key2Keto.Tracker.TrackerView;
 public class MainView extends Pane{
 	Account user;
   
+	private Stage stage;
+	private SceneSwitcher switcher;
+	
   VBox view;
 	HBox labels;
 	private Button dash;
@@ -48,9 +53,12 @@ public class MainView extends Pane{
 	String currentTab;
 	
 
-	public MainView(Account user) {
+	public MainView(Account user, Stage stage) {
 
 		this.user = user;
+		
+		this.stage = stage;
+		switcher = new SceneSwitcher(stage);
 		
 		InitializeVariables();
 		StylizeElements();
@@ -94,7 +102,7 @@ public class MainView extends Pane{
 		
 		this.logout.setOnAction(new EventHandler<ActionEvent>() {
 		    @Override public void handle(ActionEvent e) {
-		    	//stackOrder(5);
+		    	stackOrder(5);
 		    	currentTab = "Logout";
 		    }
 		});
@@ -241,6 +249,43 @@ public class MainView extends Pane{
 				this.recipeView.setVisible(false);
 				this.trackerView.setVisible(false);
 				this.shoppingView.setVisible(true);
+				break;
+				
+			case 5:
+				Stage logoutConfirmation = new Stage();
+				
+				VBox confirmationRows = new VBox();
+				HBox confirmationLabelRow = new HBox();
+				Label confirmationLabel = new Label("Are you sure you want to log out?");
+				confirmationLabelRow.setAlignment(Pos.CENTER);
+				HBox.setMargin(confirmationLabel, new Insets(50, 20, 50, 20));
+				confirmationLabel.setFont(Font.font("Verdana", 14));
+				HBox confirmationButtonsRow = new HBox();
+				confirmationButtonsRow.setAlignment(Pos.CENTER);
+				Button yesButton = new Button("Yes");
+				Button noButton = new Button("No");
+				HBox.setMargin(yesButton, new Insets(0, 20, 20, 20));
+				HBox.setMargin(noButton, new Insets(0, 20, 20, 20));
+				yesButton.setFont(Font.font("Verdana", 14));
+				noButton.setFont(Font.font("Verdana", 14));
+				confirmationLabelRow.getChildren().add(confirmationLabel);
+				confirmationButtonsRow.getChildren().addAll(yesButton, noButton);
+				confirmationRows.getChildren().addAll(confirmationLabelRow, confirmationButtonsRow);
+				
+				yesButton.setOnAction(e ->
+				{
+					AccountSaver.saveAccount(user);
+					logoutConfirmation.close();
+					this.stage.setScene(this.switcher.LoginScene());
+				});
+				
+				noButton.setOnAction(e ->
+				{
+					logoutConfirmation.close();
+				});
+				
+				logoutConfirmation.setScene(new Scene(confirmationRows));
+				logoutConfirmation.show();
 				break;
 			default:
 				System.out.println("You should not get here");

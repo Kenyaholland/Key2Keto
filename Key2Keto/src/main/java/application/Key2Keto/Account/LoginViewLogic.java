@@ -1,5 +1,9 @@
 package application.Key2Keto.Account;
 
+import java.io.File;
+
+import application.Key2Keto.AccountFileReader;
+
 public class LoginViewLogic
 {
 	private static String errorMessage;
@@ -20,7 +24,28 @@ public class LoginViewLogic
 		
 		else
 		{
-			return true;
+			File fileExists = new File(usernameString + ".txt");
+			if(!fileExists.exists())
+			{
+				errorMessage = usernameString + " does not exist";
+				return false;
+			}
+			
+			else
+			{
+				AccountFileReader accountLoader = new AccountFileReader(usernameString + ".txt");
+				
+				if(!passwordString.equals(accountLoader.getLoadedAccount().getPassword()))
+				{
+					errorMessage = "incorrect password";
+					return false;
+				}
+				
+				else
+				{
+					return true;
+				}
+			}
 		}
 	}
 	

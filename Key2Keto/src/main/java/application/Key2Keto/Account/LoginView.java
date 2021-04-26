@@ -1,5 +1,6 @@
 package application.Key2Keto.Account;
 
+import application.Key2Keto.AccountFileReader;
 import application.Key2Keto.SceneSwitcher;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -75,7 +76,8 @@ public class LoginView extends Pane
 		{
 			if(LoginViewLogic.checkFormProperlyFilled(usernameTextField.getText(), passwordTextField.getText()))
 			{
-			//	stage.setScene(switcher.MainViewScene());
+				AccountFileReader accountLoader = new AccountFileReader(usernameTextField.getText() + ".txt");
+				stage.setScene(switcher.MainViewScene(accountLoader.getLoadedAccount()));
 			}
 			
 			else
