@@ -6,6 +6,9 @@ import java.util.Scanner;
 
 import application.Key2Keto.Account.Account;
 import application.Key2Keto.Interfaces.FileReaderInterface;
+import application.Key2Keto.Recipes.Recipe;
+import application.Key2Keto.Recipes.RecipeFileReader;
+import application.Key2Keto.Recipes.RecipeViewLogic;
 import application.Key2Keto.Tracker.Tracker;
 
 public class AccountFileReader implements FileReaderInterface
@@ -29,73 +32,103 @@ public class AccountFileReader implements FileReaderInterface
 			fileScanner.useDelimiter(",|\n");
 			
 			loadedAccount.setUsername(fileScanner.next());
+			System.out.println("username: " + loadedAccount.getUsername());
 			loadedAccount.setPassword(fileScanner.next());
+			System.out.println("password: " + loadedAccount.getPassword());
 			
 			loadedAccount.setFirstName(fileScanner.next());
+			System.out.println("first name: " + loadedAccount.getFirstName());
 			loadedAccount.setLastName(fileScanner.next());
+			System.out.println("last name: " + loadedAccount.getLastName());
 			
 			loadedAccount.setSex(fileScanner.next());
+			System.out.println("sex: " + loadedAccount.getSex());
 			loadedAccount.setHeight(fileScanner.next());
+			System.out.println("height: " + loadedAccount.getHeight());
 			loadedAccount.setWeight(Integer.parseInt(fileScanner.next()));
+			System.out.println("weight: " + loadedAccount.getWeight());
 			loadedAccount.setAge(Integer.parseInt(fileScanner.next()));
+			System.out.println("age: " + loadedAccount.getAge());
 			
-			loadedAccount.setDietType(fileScanner.nextLine());
+			loadedAccount.setDietType(fileScanner.next());
+			System.out.println("diet type: " + loadedAccount.getDietType());
 			
 			if(fileScanner.next().equals("Trackers"))
 			{
-				while(fileScanner.hasNext())
+				for(int i = 0; i < 7; i++)
 				{
-					if(fileScanner.next().equals("Recipes"))
+					fileScanner.next();
+					fileScanner.nextLine();
+					String goalsLine = fileScanner.nextLine();
+					System.out.println("goalsLine: " + goalsLine);
+					
+					if(goalsLine.equals("no goals"))
 					{
-						break;
+						//do nothing
 					}
 					
-					//reading day
-					for(int i = 0; i < 7; i++)
+					else
 					{
-						while(fileScanner.hasNext())
+						String[] splitGoals = goalsLine.split(",");
+						
+						for(String goal : splitGoals)
 						{
-							fileScanner.next(); //don't need day string; exists in file for readability
-							String nextString = fileScanner.nextLine();
-							
-							if(nextString.matches("[+-]?([0-9]*[.])?[0-9]+,[+-]?([0-9]*[.])?[0-9]+")) //if the next string is a double, then the goals are done
+							System.out.println("goal: " + goal);
+							loadedAccount.getTrackers().get(i).addGoal(goal);
+						}
+					}
+					
+					loadedAccount.getTrackers().get(i).setHoursOfSleep(Double.parseDouble(fileScanner.next()));
+					System.out.println("hours of sleep: " + loadedAccount.getTrackers().get(i).getHoursOfSleep());
+					loadedAccount.getTrackers().get(i).setWaterIntake(Double.parseDouble(fileScanner.next()));
+					System.out.println("water intake: " + loadedAccount.getTrackers().get(i).getWaterIntake());
+				}
+			}
+			
+			String[] dietString = loadedAccount.getDietType().split(" ");
+			String recipeFileName = "./src/main/java/application/Key2Keto/Recipes/" + dietString[0] + "Keto.txt";
+			RecipeFileReader fileReader = new RecipeFileReader(recipeFileName);
+			
+			if(fileScanner.next().equals("Recipes"))
+			{
+				for(int i = 0; i < 7; i++)
+				{
+					fileScanner.next();
+					fileScanner.nextLine();
+					String recipesLine = fileScanner.nextLine();
+					
+					if(recipesLine.equals("no recipes"))
+					{
+						loadedAccount.addRecipe(null, i);
+						loadedAccount.addRecipe(null, i);
+						loadedAccount.addRecipe(null, i);
+						loadedAccount.addRecipe(null, i);
+					}
+					
+					else
+					{
+						String[] splitRecipes = recipesLine.split(",");
+						
+						for(String recipeString : splitRecipes)
+						{
+							if(recipeString.equals("nothing chosen"))
 							{
-								String[] splitString = nextString.split(",");
-								
-								loadedAccount.getTrackers().get(i).setHoursOfSleep(Double.parseDouble(splitString[0]));
-								loadedAccount.getTrackers().get(i).setWaterIntake(Double.parseDouble(splitString[1]));
-								break;
+								loadedAccount.addRecipe(null, i);
 							}
 							
 							else
 							{
-								loadedAccount.getTrackers().get(i).addGoal(nextString);
+								for(Recipe recipe : fileReader.getRecipeList().getRecipeList())
+								{
+									if(recipeString.equals(recipe.getName()))
+									{
+										loadedAccount.addRecipe(recipe, i);
+										break;
+									}
+								}
 							}
 						}
 					}
-					
-					/*
-					Tracker newTracker = new Tracker(fileScanner.next());
-					
-					while(fileScanner.hasNext())
-					{
-						String nextString = fileScanner.next();
-						
-						if(nextString.matches("[+-]?([0-9]*[.])?[0-9]+")) //if the next string is a double, then the goals are done
-						{
-							newTracker.setHoursOfSleep(Double.parseDouble(nextString));
-							newTracker.setWaterIntake(Double.parseDouble(fileScanner.next()));
-							break;
-						}
-						
-						else
-						{
-							newTracker.addGoal(nextString);
-						}
-					}
-					
-					loadedAccount.
-					*/
 				}
 			}
 		}

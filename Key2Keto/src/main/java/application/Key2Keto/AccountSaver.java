@@ -66,13 +66,15 @@ public class AccountSaver
 					saver.write("no recipes" + "\n");
 				}
 				
+				int recipeNum = 0;
+				
 				for(Recipe chosenRecipe : chosenRecipesForDay)
 				{
 					if(chosenRecipe != null)
 					{
 						//saver.write(chosenRecipe.getName() + ",");
 						
-						if(chosenRecipesForDay.indexOf(chosenRecipe) == chosenRecipesForDay.size() - 1) //if this is the last recipe
+						if(recipeNum == chosenRecipesForDay.size() - 1) //if this is the last recipe
 						{
 							saver.write(chosenRecipe.getName() + "\n"); //don't write a comma
 						}
@@ -85,7 +87,7 @@ public class AccountSaver
 					
 					else
 					{
-						if(chosenRecipesForDay.indexOf(chosenRecipe) == chosenRecipesForDay.size() - 1) //if this is the last recipe
+						if(recipeNum == chosenRecipesForDay.size() - 1) //if this is the last recipe
 						{
 							saver.write("nothing chosen" + "\n"); //don't write a comma
 						}
@@ -95,6 +97,8 @@ public class AccountSaver
 							saver.write("nothing chosen" + ",");
 						}
 					}
+					
+					recipeNum++;
 				}
 			}
 			

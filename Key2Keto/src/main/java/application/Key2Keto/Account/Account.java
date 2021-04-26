@@ -38,6 +38,17 @@ public class Account
 		age = 0;
 		
 		dietType = "";
+		
+		dayTrackers = new ArrayList<Tracker>
+		(
+			Arrays.asList(new Tracker("Sunday"), new Tracker("Monday"), new Tracker("Tuesday"), new Tracker("Wednesday"),
+					      new Tracker("Thursday"), new Tracker("Friday"), new Tracker("Saturday"))
+		);
+		
+		chosenRecipes = new ArrayList<ArrayList<Recipe>>(
+			Arrays.asList(new ArrayList<Recipe>(), new ArrayList<Recipe>(), new ArrayList<Recipe>(), new ArrayList<Recipe>(),
+						  new ArrayList<Recipe>(), new ArrayList<Recipe>(), new ArrayList<Recipe>())
+		);
 	}
 	
 	public Account(String username, String password, String firstName, String lastName, String sex, String height, int weight, int age, String dietType)
