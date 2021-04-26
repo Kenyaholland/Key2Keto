@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 import application.Key2Keto.Recipes.Ingredient;
 import application.Key2Keto.Recipes.Recipe;
+import application.Key2Keto.Interfaces.ShoppingListInterface;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;

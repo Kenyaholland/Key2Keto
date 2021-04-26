@@ -8,13 +8,14 @@ import com.itextpdf.layout.element.Paragraph;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
+import application.Key2Keto.Interfaces.ShoppingListInterface;
 import application.Key2Keto.Recipes.Ingredient;
 import application.Key2Keto.Recipes.Recipe;
 import javafx.stage.Stage;
 
 public class ShoppingListForTests implements ShoppingListInterface
 {
-	private ArrayList<Recipe> recipes;
+	private ArrayList<ArrayList<Recipe>> recipes;
 	
 	private String currentRecipeInfo;
 	private String currentIngredientInfo;
@@ -22,9 +23,9 @@ public class ShoppingListForTests implements ShoppingListInterface
 	private ArrayList<String> shoppingListRecipes;
 	private ArrayList<String> shoppingListIngredients;
 	
-	public ShoppingListForTests(ArrayList<Recipe> recipes)
+	public ShoppingListForTests(ArrayList<ArrayList<Recipe>> recipes)
 	{
-		this.recipes = new ArrayList<Recipe>(recipes);
+		this.recipes = new ArrayList<ArrayList<Recipe>>(recipes);
 		currentRecipeInfo = "";
 		currentIngredientInfo = "";
 		
@@ -34,29 +35,32 @@ public class ShoppingListForTests implements ShoppingListInterface
 		generateStrings();
 	}
 	
-	public ArrayList<Recipe> getRecipes()
+	public ArrayList<ArrayList<Recipe>> getRecipes()
 	{
 		return recipes;
 	}
 	
 	public void generateStrings() //helper function to "toString()" recipes and ingredients in a format that looks good
 	{
-		for(Recipe recipe : recipes)
+		for(ArrayList<Recipe> recipeList : recipes)
 		{
-			currentRecipeInfo = "Recipe: " + recipe.getName() + " | " + recipe.getTotalCalories()
-							  + " Calories | " + recipe.getTotalCarb() + "g Carbs | " + recipe.getTotalProtein()
-							  + "g Protein | " + recipe.getTotalFat() + "g Fat";
-			
-			shoppingListRecipes.add(currentRecipeInfo);
-			
-			for(Ingredient ingredient : recipe.getIngredient())
+			for(Recipe recipe : recipeList)
 			{
-				currentIngredientInfo = ingredient.toString();
+				currentRecipeInfo = "Recipe: " + recipe.getName() + " | " + recipe.getTotalCalories()
+								  + " Calories | " + recipe.getTotalCarb() + "g Carbs | " + recipe.getTotalProtein()
+								  + "g Protein | " + recipe.getTotalFat() + "g Fat";
 				
-				shoppingListIngredients.add(currentIngredientInfo);
+				shoppingListRecipes.add(currentRecipeInfo);
+				
+				for(Ingredient ingredient : recipe.getIngredient())
+				{
+					currentIngredientInfo = ingredient.toString();
+					
+					shoppingListIngredients.add(currentIngredientInfo);
+				}
+				
+				shoppingListIngredients.add(","); //delimiter
 			}
-			
-			shoppingListIngredients.add(","); //delimiter
 		}
 		
 		generateShoppingList();

@@ -1,4 +1,4 @@
-package application.Key2Keto.Shopping;
+package application.Key2Keto.Interfaces;
 
 import java.util.ArrayList;
 
