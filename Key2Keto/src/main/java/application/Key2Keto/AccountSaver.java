@@ -11,9 +11,7 @@ import application.Key2Keto.Tracker.Tracker;
 public class AccountSaver
 {
 	public static void saveAccount(Account account)
-	{
-		System.out.println("saving...");
-		
+	{		
 		FileWriter saver = null;
 		int currentDay = 0;
 		
@@ -109,8 +107,6 @@ public class AccountSaver
 		{
 			io.printStackTrace();
 		}
-		
-		System.out.println("done");
 	}
 	
 	private static String intDayToString(int day)

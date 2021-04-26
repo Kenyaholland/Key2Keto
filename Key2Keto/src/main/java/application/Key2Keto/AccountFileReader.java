@@ -32,26 +32,17 @@ public class AccountFileReader implements FileReaderInterface
 			fileScanner.useDelimiter(",|\n");
 			
 			loadedAccount.setUsername(fileScanner.next());
-			System.out.println("username: " + loadedAccount.getUsername());
 			loadedAccount.setPassword(fileScanner.next());
-			System.out.println("password: " + loadedAccount.getPassword());
 			
 			loadedAccount.setFirstName(fileScanner.next());
-			System.out.println("first name: " + loadedAccount.getFirstName());
 			loadedAccount.setLastName(fileScanner.next());
-			System.out.println("last name: " + loadedAccount.getLastName());
 			
 			loadedAccount.setSex(fileScanner.next());
-			System.out.println("sex: " + loadedAccount.getSex());
 			loadedAccount.setHeight(fileScanner.next());
-			System.out.println("height: " + loadedAccount.getHeight());
 			loadedAccount.setWeight(Integer.parseInt(fileScanner.next()));
-			System.out.println("weight: " + loadedAccount.getWeight());
 			loadedAccount.setAge(Integer.parseInt(fileScanner.next()));
-			System.out.println("age: " + loadedAccount.getAge());
 			
 			loadedAccount.setDietType(fileScanner.next());
-			System.out.println("diet type: " + loadedAccount.getDietType());
 			
 			if(fileScanner.next().equals("Trackers"))
 			{
@@ -60,7 +51,6 @@ public class AccountFileReader implements FileReaderInterface
 					fileScanner.next();
 					fileScanner.nextLine();
 					String goalsLine = fileScanner.nextLine();
-					System.out.println("goalsLine: " + goalsLine);
 					
 					if(goalsLine.equals("no goals"))
 					{
@@ -73,15 +63,12 @@ public class AccountFileReader implements FileReaderInterface
 						
 						for(String goal : splitGoals)
 						{
-							System.out.println("goal: " + goal);
 							loadedAccount.getTrackers().get(i).addGoal(goal);
 						}
 					}
 					
 					loadedAccount.getTrackers().get(i).setHoursOfSleep(Double.parseDouble(fileScanner.next()));
-					System.out.println("hours of sleep: " + loadedAccount.getTrackers().get(i).getHoursOfSleep());
 					loadedAccount.getTrackers().get(i).setWaterIntake(Double.parseDouble(fileScanner.next()));
-					System.out.println("water intake: " + loadedAccount.getTrackers().get(i).getWaterIntake());
 				}
 			}
 			
