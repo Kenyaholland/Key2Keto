@@ -17,7 +17,7 @@ import javafx.stage.Stage;
 
 public class ShoppingList implements ShoppingListInterface
 {
-	private ArrayList<Recipe> recipes;
+	private ArrayList<ArrayList<Recipe>> recipes;
 	
 	private String currentRecipeInfo;
 	private String currentIngredientInfo;
@@ -27,9 +27,9 @@ public class ShoppingList implements ShoppingListInterface
 	
 	private Stage saveWindow;
 	
-	public ShoppingList(ArrayList<Recipe> recipes)
+	public ShoppingList(ArrayList<ArrayList<Recipe>> recipes)
 	{
-		this.recipes = new ArrayList<Recipe>(recipes);
+		this.recipes = new ArrayList<ArrayList<Recipe>>(recipes);
 		currentRecipeInfo = "";
 		currentIngredientInfo = "";
 		
@@ -41,29 +41,32 @@ public class ShoppingList implements ShoppingListInterface
 		generateStrings();
 	}
 	
-	public ArrayList<Recipe> getRecipes()
+	public ArrayList<ArrayList<Recipe>> getRecipes()
 	{
 		return recipes;
 	}
 	
 	public void generateStrings() //helper function to "toString()" recipes and ingredients in a format that looks good
 	{
-		for(Recipe recipe : recipes)
+		for(ArrayList<Recipe> recipeList : recipes)
 		{
-			currentRecipeInfo = "Recipe: " + recipe.getName() + " | " + recipe.getTotalCalories()
-							  + " Calories | " + recipe.getTotalCarb() + "g Carbs | " + recipe.getTotalProtein()
-							  + "g Protein | " + recipe.getTotalFat() + "g Fat";
-			
-			shoppingListRecipes.add(currentRecipeInfo);
-			
-			for(Ingredient ingredient : recipe.getIngredient())
+			for(Recipe recipe : recipeList)
 			{
-				currentIngredientInfo = ingredient.toString();
+				currentRecipeInfo = "Recipe: " + recipe.getName() + " | " + recipe.getTotalCalories()
+								  + " Calories | " + recipe.getTotalCarb() + "g Carbs | " + recipe.getTotalProtein()
+								  + "g Protein | " + recipe.getTotalFat() + "g Fat";
 				
-				shoppingListIngredients.add(currentIngredientInfo);
+				shoppingListRecipes.add(currentRecipeInfo);
+				
+				for(Ingredient ingredient : recipe.getIngredient())
+				{
+					currentIngredientInfo = ingredient.toString();
+					
+					shoppingListIngredients.add(currentIngredientInfo);
+				}
+				
+				shoppingListIngredients.add(","); //delimiter
 			}
-			
-			shoppingListIngredients.add(","); //delimiter
 		}
 		
 		generateShoppingList();
