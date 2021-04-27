@@ -89,8 +89,12 @@ public class ShoppingViewLogic {
 	
 	public static double totalFat(ArrayList<Recipe> recipes) {
 		double total = 0;
+		
 		for(int i = 0; i <recipes.size(); i++) {
-			total = recipes.get(i).getTotalFat();
+			if(recipes.get(i)!= null) {
+				total = recipes.get(i).getTotalFat();
+			}
+			
 		}
 		return total;
 	}
@@ -98,7 +102,9 @@ public class ShoppingViewLogic {
 	public static double totalCarb(ArrayList<Recipe> recipes) {
 		double total = 0;
 		for(int i = 0; i <recipes.size(); i++) {
-			total = recipes.get(i).getTotalCarb();
+			if(recipes.get(i)!= null) {
+				total = recipes.get(i).getTotalCarb();
+			}
 		}
 		return total;
 	}
@@ -106,7 +112,9 @@ public class ShoppingViewLogic {
 	public static double totalProtein(ArrayList<Recipe> recipes) {
 		double total = 0;
 		for(int i = 0; i <recipes.size(); i++) {
-			total = recipes.get(i).getTotalProtein();
+			if(recipes.get(i)!= null) {
+				total = recipes.get(i).getTotalProtein();
+			}
 		}
 		return total;
 	}

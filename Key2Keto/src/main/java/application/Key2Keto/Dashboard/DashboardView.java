@@ -185,6 +185,8 @@ public class DashboardView extends Pane implements ViewInterface {
 	}
 
 	public void updateUI() {
+		this.userName.setText(DashboardViewLogic.getDashboard().getUserAccount().getFirstName() + " "
+				+ DashboardViewLogic.getDashboard().getUserAccount().getLastName() + "'s Key2Keto Overview");
 		
 		this.upperHalf.getChildren().clear();
 		this.lowerHalf.getChildren().clear();

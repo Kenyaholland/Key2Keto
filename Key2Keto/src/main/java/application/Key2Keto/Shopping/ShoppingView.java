@@ -220,12 +220,24 @@ public class ShoppingView extends Pane implements ViewInterface {
 		this.sundayMac.setText("Sunday: Fat: "+ShoppingViewLogic.totalFat(ShoppingViewLogic.getUserAccount().getChosenRecipes().get(0))+
 				"g   Carbs: "+ ShoppingViewLogic.totalCarb(ShoppingViewLogic.getUserAccount().getChosenRecipes().get(0))+
 				"g  Protein: "+ShoppingViewLogic.totalProtein(ShoppingViewLogic.getUserAccount().getChosenRecipes().get(0))+"g");
-		this.mondayMac.setText("Monday Fat: XXg  Carbs: Xg  Protein: Xg");
-		this.tuesdayMac.setText("Tuesday Fat: XXg  Carbs: Xg  Protein: Xg");
-		this.wednesdayMac.setText("Wednesday Fat: XXg  Carbs: Xg  Protein: Xg");
-		this.thursdayMac.setText("Thursday Fat: XXg  Carbs: Xg  Protein: Xg");
-		this.fridayMac.setText("Friday Fat: XXg  Carbs: Xg  Protein: Xg");
-		this.saturdayMac.setText("Saturday Fat: Xg  Carbs: Xg  Protein: Xg");
+		this.mondayMac.setText("Sunday: Fat: "+ShoppingViewLogic.totalFat(ShoppingViewLogic.getUserAccount().getChosenRecipes().get(1))+
+				"g   Carbs: "+ ShoppingViewLogic.totalCarb(ShoppingViewLogic.getUserAccount().getChosenRecipes().get(1))+
+				"g  Protein: "+ShoppingViewLogic.totalProtein(ShoppingViewLogic.getUserAccount().getChosenRecipes().get(1))+"g");
+		this.tuesdayMac.setText("Sunday: Fat: "+ShoppingViewLogic.totalFat(ShoppingViewLogic.getUserAccount().getChosenRecipes().get(2))+
+				"g   Carbs: "+ ShoppingViewLogic.totalCarb(ShoppingViewLogic.getUserAccount().getChosenRecipes().get(2))+
+				"g  Protein: "+ShoppingViewLogic.totalProtein(ShoppingViewLogic.getUserAccount().getChosenRecipes().get(2))+"g");
+		this.wednesdayMac.setText("Sunday: Fat: "+ShoppingViewLogic.totalFat(ShoppingViewLogic.getUserAccount().getChosenRecipes().get(3))+
+				"g   Carbs: "+ ShoppingViewLogic.totalCarb(ShoppingViewLogic.getUserAccount().getChosenRecipes().get(3))+
+				"g  Protein: "+ShoppingViewLogic.totalProtein(ShoppingViewLogic.getUserAccount().getChosenRecipes().get(3))+"g");
+		this.thursdayMac.setText("Sunday: Fat: "+ShoppingViewLogic.totalFat(ShoppingViewLogic.getUserAccount().getChosenRecipes().get(4))+
+				"g   Carbs: "+ ShoppingViewLogic.totalCarb(ShoppingViewLogic.getUserAccount().getChosenRecipes().get(4))+
+				"g  Protein: "+ShoppingViewLogic.totalProtein(ShoppingViewLogic.getUserAccount().getChosenRecipes().get(4))+"g");
+		this.fridayMac.setText("Sunday: Fat: "+ShoppingViewLogic.totalFat(ShoppingViewLogic.getUserAccount().getChosenRecipes().get(5))+
+				"g   Carbs: "+ ShoppingViewLogic.totalCarb(ShoppingViewLogic.getUserAccount().getChosenRecipes().get(5))+
+				"g  Protein: "+ShoppingViewLogic.totalProtein(ShoppingViewLogic.getUserAccount().getChosenRecipes().get(5))+"g");
+		this.saturdayMac.setText("Sunday: Fat: "+ShoppingViewLogic.totalFat(ShoppingViewLogic.getUserAccount().getChosenRecipes().get(6))+
+				"g   Carbs: "+ ShoppingViewLogic.totalCarb(ShoppingViewLogic.getUserAccount().getChosenRecipes().get(6))+
+				"g  Protein: "+ShoppingViewLogic.totalProtein(ShoppingViewLogic.getUserAccount().getChosenRecipes().get(6))+"g");
 		populateRecipeIngredients(this.sundayRecipes, 0);
 		populateRecipeIngredients(this.mondayRecipes, 1);
 		populateRecipeIngredients(this.tuesdayRecipes, 2);
@@ -250,7 +262,7 @@ public class ShoppingView extends Pane implements ViewInterface {
 		temp = ShoppingViewLogic.populateIngredientsForDay(ShoppingViewLogic.getUserAccount().getChosenRecipes().get(num));
 		lower = temp.size()/2;
 		upper = temp.size();
-		System.out.println("Size of temp: "+ temp.size());
+	
 		if(temp.size() < 1) {
 			temp.add("No Recipes Chosen");
 		}
