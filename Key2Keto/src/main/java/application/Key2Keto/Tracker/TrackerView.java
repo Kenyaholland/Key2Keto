@@ -6,18 +6,11 @@ import java.util.Arrays;
 import application.Key2Keto.Account.Account;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Insets;
 import javafx.scene.control.Button;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 
 public class TrackerView extends Pane {
 	private VBox view = new VBox();
@@ -32,10 +25,9 @@ public class TrackerView extends Pane {
 	private StackPane daysOfWeek = new StackPane();
 	private DayView days[] = new DayView[7];
 	private DayView testDay;
-	private Account user;
 	
 	public TrackerView(Account user){
-		this.user = user;
+		TrackerViewLogic.setUserAccount(user);
 		populateDaysOfWeek();
 		populateChildren();
 		setStyles();
@@ -137,13 +129,13 @@ public class TrackerView extends Pane {
 	
 	
 	private void populateDaysOfWeek() {
-		days[0] = new DayView("Sunday", this.user);
-		days[1] = new DayView("Monday", this.user);
-		days[2] = new DayView("Tuesday", this.user);
-		days[3] = new DayView("Wednesday", this.user);
-		days[4] = new DayView("Thursday", this.user);
-		days[5] = new DayView("Friday", this.user);
-		days[6] = new DayView("Saturday", this.user);
+		days[0] = new DayView("Sunday", TrackerViewLogic.getUserAccount());
+		days[1] = new DayView("Monday", TrackerViewLogic.getUserAccount());
+		days[2] = new DayView("Tuesday", TrackerViewLogic.getUserAccount());
+		days[3] = new DayView("Wednesday", TrackerViewLogic.getUserAccount());
+		days[4] = new DayView("Thursday", TrackerViewLogic.getUserAccount());
+		days[5] = new DayView("Friday", TrackerViewLogic.getUserAccount());
+		days[6] = new DayView("Saturday", TrackerViewLogic.getUserAccount());
 	}
 	
 	protected void setDayStack(int num) {
