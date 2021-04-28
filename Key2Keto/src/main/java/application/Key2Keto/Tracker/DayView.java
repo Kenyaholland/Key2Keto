@@ -21,6 +21,7 @@ public class DayView extends Pane{
 	
 	Tracker tracker;
 	ConfirmPopUp popUp;
+	int day;
 	
 	Spinner<Double> sleepField;
 	Button sleepButton;
@@ -39,8 +40,9 @@ public class DayView extends Pane{
 	VBox goalsContent;
 	VBox wholeView;
 	
-	public DayView(String day, Account user){
-		DayViewLogic.setDay(day);
+	public DayView(String dayString, Account user){
+		DayViewLogic.setDay(dayString);
+		this.day = getIntFormOfDay(dayString);
 		DayViewLogic.setUserAccount(user);
 		
 		initializeVariables();
@@ -73,7 +75,7 @@ public class DayView extends Pane{
 		    @Override public void handle(ActionEvent e) {
 		    	if(sleepField.getValue() != null) {
 		    		tracker.setHoursOfSleep(Double.valueOf(sleepField.getValue()));
-		    		DayViewLogic.getUserAccount().getTrackers().get(DayViewLogic.getDayInt()).setHoursOfSleep(Double.valueOf(sleepField.getValue()));
+		    		DayViewLogic.getUserAccount().getTrackers().get(day).setHoursOfSleep(Double.valueOf(sleepField.getValue()));
 		    		popUp.display();
 		    	}
 		    }
@@ -87,7 +89,7 @@ public class DayView extends Pane{
 		    @Override public void handle(ActionEvent e) {
 		    	if(waterField.getValue() != null) {
 		    		tracker.setWaterIntake(Double.valueOf(waterField.getValue()));	
-		    		DayViewLogic.getUserAccount().getTrackers().get(DayViewLogic.getDayInt()).setWaterIntake(Double.valueOf(waterField.getValue()));
+		    		DayViewLogic.getUserAccount().getTrackers().get(day).setWaterIntake(Double.valueOf(waterField.getValue()));
 		    		popUp.display();
 		    	}
 		    }
@@ -100,7 +102,7 @@ public class DayView extends Pane{
 		    @Override public void handle(ActionEvent e) {
 		    	if(!goalsTextField.getText().isEmpty()) {
 		    		tracker.addGoal(goalsTextField.getText());
-		    		DayViewLogic.getUserAccount().getTrackers().get(DayViewLogic.getDayInt()).addGoal(goalsTextField.getText());
+		    		DayViewLogic.getUserAccount().getTrackers().get(day).addGoal(goalsTextField.getText());
 		    		goalsTextField.clear();
 		    		popUp.display();
 		    	}
@@ -133,6 +135,36 @@ public class DayView extends Pane{
 		
 		this.addGoalsButton.setPrefSize(125, 30);
 		this.addGoalsButton.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 12));
+	}
+	
+	public int getIntFormOfDay(String dayName) {
+		int day = 0;
+		switch(dayName) {
+			case "Sunday":
+				day = 0;
+				break;
+			case "Monday":
+				day = 1;
+				break;
+			case "Tuesday":
+				day = 2;
+				break;
+			case "Wednesday":
+				day = 3;
+				break;
+			case "Thursday":
+				day = 4;
+				break;
+			case "Friday":
+				day = 5;
+				break;
+			case "Saturday":
+				day = 5;
+				break;
+			default:
+				System.out.println("This does not exist.");
+		}
+		return day;
 	}
 	
 	/********* For testing purposes ***********/
