@@ -7,8 +7,6 @@ import java.util.Scanner;
 import application.Key2Keto.Interfaces.FileReaderInterface;
 import application.Key2Keto.Recipes.Recipe;
 import application.Key2Keto.Recipes.RecipeFileReader;
-import application.Key2Keto.Recipes.RecipeViewLogic;
-import application.Key2Keto.Tracker.Tracker;
 
 public class AccountFileReader implements FileReaderInterface
 {

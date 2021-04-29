@@ -8,6 +8,7 @@ import java.net.MalformedURLException;
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
+import org.testfx.framework.junit5.ApplicationTest;
 
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfReader;
@@ -17,18 +18,18 @@ import com.itextpdf.kernel.pdf.canvas.parser.listener.SimpleTextExtractionStrate
 
 import application.Key2Keto.Recipes.*;
 
-public class ShoppingListTest
+public class ShoppingListTest extends ApplicationTest
 {	
 	@Test
 	public void shoppingListBuildsCorrectlyTest() throws MalformedURLException
 	{	
 		ArrayList<ArrayList<Recipe>> testRecipeList = new ArrayList<ArrayList<Recipe>>();
 		ArrayList<Recipe> firstRecipes = new ArrayList<Recipe>();
-		firstRecipes.add(new Recipe("recipetype1", "recipename1", 55, 20.0, 15.7, 12.3, 4.0, "C"));
+		firstRecipes.add(new Recipe("recipetype1", "recipename1", 55, 20.0, 15.7, 12.3, 4.0, "Classic", 0));
 		ArrayList<Recipe> secondRecipes = new ArrayList<Recipe>();
-		secondRecipes.add(new Recipe("recipetype2", "recipename2", 56, 18.3, 22.2, 33.2, 3.5, "M"));
+		secondRecipes.add(new Recipe("recipetype2", "recipename2", 56, 18.3, 22.2, 33.2, 3.5, "Modified", 0));
 		ArrayList<Recipe> thirdRecipes = new ArrayList<Recipe>();
-		thirdRecipes.add(new Recipe("recipetype3", "recipename3", 58, 12.4, 9.5, 10.2, 2.3, "M"));
+		thirdRecipes.add(new Recipe("recipetype3", "recipename3", 58, 12.4, 9.5, 10.2, 2.3, "Modified", 0));
 		testRecipeList.add(firstRecipes);
 		testRecipeList.add(secondRecipes);
 		testRecipeList.add(thirdRecipes);
@@ -59,11 +60,11 @@ public class ShoppingListTest
 	{
 		ArrayList<ArrayList<Recipe>> testRecipeList = new ArrayList<ArrayList<Recipe>>();
 		ArrayList<Recipe> firstRecipes = new ArrayList<Recipe>();
-		firstRecipes.add(new Recipe("recipetype1", "recipename1", 55, 20.0, 15.7, 12.3, 4.0, "C"));
+		firstRecipes.add(new Recipe("recipetype1", "recipename1", 55, 20.0, 15.7, 12.3, 4.0, "Classic", 0));
 		ArrayList<Recipe> secondRecipes = new ArrayList<Recipe>();
-		secondRecipes.add(new Recipe("recipetype2", "recipename2", 56, 18.3, 22.2, 33.2, 3.5, "M"));
+		secondRecipes.add(new Recipe("recipetype2", "recipename2", 56, 18.3, 22.2, 33.2, 3.5, "Modified", 0));
 		ArrayList<Recipe> thirdRecipes = new ArrayList<Recipe>();
-		thirdRecipes.add(new Recipe("recipetype3", "recipename3", 58, 12.4, 9.5, 10.2, 2.3, "M"));
+		thirdRecipes.add(new Recipe("recipetype3", "recipename3", 58, 12.4, 9.5, 10.2, 2.3, "Modified", 0));
 		testRecipeList.add(firstRecipes);
 		testRecipeList.add(secondRecipes);
 		testRecipeList.add(thirdRecipes);
@@ -81,7 +82,7 @@ public class ShoppingListTest
 		PdfDocument pdfDocument = null;
 		ArrayList<ArrayList<Recipe>> testRecipeList = new ArrayList<ArrayList<Recipe>>();
 		ArrayList<Recipe> firstRecipes = new ArrayList<Recipe>();
-		firstRecipes.add(new Recipe("recipetype1", "nametotest", 23, 53.2, 55.3, 17.8, 4.0, "C"));
+		firstRecipes.add(new Recipe("recipetype1", "nametotest", 23, 53.2, 55.3, 17.8, 4.0, "Classic", 0));
 		testRecipeList.add(firstRecipes);
 		
 		ShoppingListForTests sut = new ShoppingListForTests(testRecipeList);
