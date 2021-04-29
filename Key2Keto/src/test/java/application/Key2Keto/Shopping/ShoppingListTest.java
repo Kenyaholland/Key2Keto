@@ -22,38 +22,53 @@ public class ShoppingListTest
 	@Test
 	public void shoppingListBuildsCorrectlyTest() throws MalformedURLException
 	{	
-		ShoppingListForTests sut = new ShoppingListForTests(new ArrayList<Recipe>()
-		{{
-			add(new Recipe("recipetype1", "recipename1", 55, 20.0, 15.7, 12.3, 4.0, "C", 1));
-			add(new Recipe("recipetype2", "recipename2", 56, 18.3, 22.2, 33.2, 3.5, "M", 1));
-			add(new Recipe("recipetype3", "recipename3", 58, 12.4, 9.5, 10.2, 2.3, "M", 2));
-		}});
+		ArrayList<ArrayList<Recipe>> testRecipeList = new ArrayList<ArrayList<Recipe>>();
+		ArrayList<Recipe> firstRecipes = new ArrayList<Recipe>();
+		firstRecipes.add(new Recipe("recipetype1", "recipename1", 55, 20.0, 15.7, 12.3, 4.0, "C"));
+		ArrayList<Recipe> secondRecipes = new ArrayList<Recipe>();
+		secondRecipes.add(new Recipe("recipetype2", "recipename2", 56, 18.3, 22.2, 33.2, 3.5, "M"));
+		ArrayList<Recipe> thirdRecipes = new ArrayList<Recipe>();
+		thirdRecipes.add(new Recipe("recipetype3", "recipename3", 58, 12.4, 9.5, 10.2, 2.3, "M"));
+		testRecipeList.add(firstRecipes);
+		testRecipeList.add(secondRecipes);
+		testRecipeList.add(thirdRecipes);
 		
-		for(Recipe recipe : sut.getRecipes())
+		ShoppingListForTests sut = new ShoppingListForTests(testRecipeList);
+		
+		for(ArrayList<Recipe> recipeList : sut.getRecipes())
 		{
-			recipe.addIngredient(new Ingredient("ingredient", "servesize"));
+			for(Recipe recipe : recipeList)
+			{
+				recipe.addIngredient(new Ingredient("ingredient", "servesize"));
+			}
 		}
 		
-		assertEquals("recipetype1", sut.getRecipes().get(0).getType());
-		assertEquals("recipename1", sut.getRecipes().get(0).getName());
-		assertEquals(56, sut.getRecipes().get(1).getTotalCalories());
-		assertEquals(18.3, sut.getRecipes().get(1).getTotalCarb());
-		assertEquals(9.5, sut.getRecipes().get(2).getTotalProtein());
-		assertEquals(10.2, sut.getRecipes().get(2).getTotalFat());
-		assertEquals(2.3, sut.getRecipes().get(2).getDietRatio());
-		assertEquals("ingredient", sut.getRecipes().get(2).getIngredient().get(0).getName());
-		assertEquals("servesize", sut.getRecipes().get(0).getIngredient().get(0).getServingSize());
+		assertEquals("recipetype1", sut.getRecipes().get(0).get(0).getType());
+		assertEquals("recipename1", sut.getRecipes().get(0).get(0).getName());
+		assertEquals(56, sut.getRecipes().get(1).get(0).getTotalCalories());
+		assertEquals(18.3, sut.getRecipes().get(1).get(0).getTotalCarb());
+		assertEquals(9.5, sut.getRecipes().get(2).get(0).getTotalProtein());
+		assertEquals(10.2, sut.getRecipes().get(2).get(0).getTotalFat());
+		assertEquals(2.3, sut.getRecipes().get(2).get(0).getDietRatio());
+		assertEquals("ingredient", sut.getRecipes().get(2).get(0).getIngredient().get(0).getName());
+		assertEquals("servesize", sut.getRecipes().get(0).get(0).getIngredient().get(0).getServingSize());
 	}
 	
 	@Test
 	public void shoppingListFileIsCreatedTest() throws MalformedURLException
 	{
-		ShoppingListForTests sut = new ShoppingListForTests(new ArrayList<Recipe>()
-		{{
-			add(new Recipe("recipetype1", "recipename1", 55, 20.0, 15.7, 12.3, 4.0, "C", 1));
-			add(new Recipe("recipetype2", "recipename2", 56, 18.3, 22.2, 33.2, 3.5, "M", 1));
-			add(new Recipe("recipetype3", "recipename3", 58, 12.4, 9.5, 10.2, 2.3, "M", 1));
-		}});
+		ArrayList<ArrayList<Recipe>> testRecipeList = new ArrayList<ArrayList<Recipe>>();
+		ArrayList<Recipe> firstRecipes = new ArrayList<Recipe>();
+		firstRecipes.add(new Recipe("recipetype1", "recipename1", 55, 20.0, 15.7, 12.3, 4.0, "C"));
+		ArrayList<Recipe> secondRecipes = new ArrayList<Recipe>();
+		secondRecipes.add(new Recipe("recipetype2", "recipename2", 56, 18.3, 22.2, 33.2, 3.5, "M"));
+		ArrayList<Recipe> thirdRecipes = new ArrayList<Recipe>();
+		thirdRecipes.add(new Recipe("recipetype3", "recipename3", 58, 12.4, 9.5, 10.2, 2.3, "M"));
+		testRecipeList.add(firstRecipes);
+		testRecipeList.add(secondRecipes);
+		testRecipeList.add(thirdRecipes);
+		
+		ShoppingListForTests sut = new ShoppingListForTests(testRecipeList);
 		
 		File shoppingList = new File("ShoppingList.pdf");
 		assertTrue(shoppingList.exists());
@@ -64,10 +79,12 @@ public class ShoppingListTest
 	{
 		PdfReader reader = null;
 		PdfDocument pdfDocument = null;
-		ShoppingListForTests sut = new ShoppingListForTests(new ArrayList<Recipe>()
-		{{
-			add(new Recipe("typetotest", "nametotest", 23, 53.2, 55.3, 17.8, 1.5, "L", 1));
-		}});
+		ArrayList<ArrayList<Recipe>> testRecipeList = new ArrayList<ArrayList<Recipe>>();
+		ArrayList<Recipe> firstRecipes = new ArrayList<Recipe>();
+		firstRecipes.add(new Recipe("recipetype1", "nametotest", 23, 53.2, 55.3, 17.8, 4.0, "C"));
+		testRecipeList.add(firstRecipes);
+		
+		ShoppingListForTests sut = new ShoppingListForTests(testRecipeList);
 		
 		try
 		{
