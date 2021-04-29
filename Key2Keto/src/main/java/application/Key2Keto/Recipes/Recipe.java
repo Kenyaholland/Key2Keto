@@ -19,6 +19,20 @@ public class Recipe {
 	private String dietType;
 	private Image image;
 
+	public Recipe(String type, String name, int calories, double carb, double protein, double fat, double ratio, String dietType)
+	{
+		this.ingredients = new ArrayList<Ingredient>();
+		this.instructions = new ArrayList<String>();
+		this.name = name;
+		this.dietRatio = ratio;
+		this.totalCarb = carb;
+		this.totalFat = fat;
+		this.totalProtein = protein;
+		this.totalCalories = calories;
+		this.type = type;
+		this.dietType = dietType;
+	}
+	
 	public Recipe(String type, String name, int calories, double carb, double protein, double fat, double ratio, String dietType, int imageNum) throws MalformedURLException {
 		this.ingredients = new ArrayList<Ingredient>();
 		this.instructions = new ArrayList<String>();

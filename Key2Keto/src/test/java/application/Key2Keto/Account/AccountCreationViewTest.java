@@ -30,7 +30,7 @@ public class AccountCreationViewTest extends ApplicationTest
 	public void properlyFilledFormSwitchesSceneTest()
 	{
 		ArrayList<TextField> textFields = accountCreationView.getAccountDetailTextFields();
-		ArrayList<ComboBox> comboBoxes = accountCreationView.getAccountDetailComboBoxes();
+		ArrayList<ComboBox<String>> comboBoxes = accountCreationView.getAccountDetailComboBoxes();
 		
 		clickOn(textFields.get(0)); //username
 		write("newusername123");
@@ -71,7 +71,7 @@ public class AccountCreationViewTest extends ApplicationTest
 	public void improperlyFilledFormDoesNotSwitchSceneTest()
 	{
 		ArrayList<TextField> textFields = accountCreationView.getAccountDetailTextFields();
-		ArrayList<ComboBox> comboBoxes = accountCreationView.getAccountDetailComboBoxes();
+		ArrayList<ComboBox<String>> comboBoxes = accountCreationView.getAccountDetailComboBoxes();
 		
 		clickOn(textFields.get(0)); //username
 		write("newusername123");
@@ -106,7 +106,7 @@ public class AccountCreationViewTest extends ApplicationTest
 	public void validFormCreatesAccountObjectTest()
 	{
 		ArrayList<TextField> textFields = accountCreationView.getAccountDetailTextFields();
-		ArrayList<ComboBox> comboBoxes = accountCreationView.getAccountDetailComboBoxes();
+		ArrayList<ComboBox<String>> comboBoxes = accountCreationView.getAccountDetailComboBoxes();
 		
 		clickOn(textFields.get(0)); //username
 		write("newusername123");
@@ -140,7 +140,7 @@ public class AccountCreationViewTest extends ApplicationTest
 		
 		clickOn(accountCreationView.getCreateAccountButton());
 		
-		Account sut = accountCreationView.getNewlyCreatedAccount();
+		Account sut = AccountCreationViewLogic.getNewlyCreatedAccount();
 		
 		assertEquals("newusername123", sut.getUsername());
 		assertEquals("newpassword123", sut.getPassword());

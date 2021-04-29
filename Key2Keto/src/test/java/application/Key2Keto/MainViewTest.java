@@ -16,7 +16,7 @@ public class MainViewTest extends ApplicationTest{
 	@Override
 	public void start(Stage stage) {
 		
-		sut = new MainView(new Account("dummyUsername", "dummyPassword", "Dummy", "Name", "Male", "5'11\"", 0, 0, "Classic"));
+		sut = new MainView(new Account("dummyUsername", "dummyPassword", "Dummy", "Name", "Male", "5'11\"", 0, 0, "Classic"), stage);
 		
 		Scene mainScene = new Scene(sut.getView());
 		stage.setScene(mainScene);
