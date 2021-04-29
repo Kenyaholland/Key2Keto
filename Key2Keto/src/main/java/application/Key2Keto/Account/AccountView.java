@@ -3,6 +3,7 @@ package application.Key2Keto.Account;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import application.Key2Keto.Interfaces.ViewInterface;
 import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -26,7 +27,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
-public class AccountView extends Pane
+public class AccountView extends Pane implements ViewInterface
 {	
 	private Label myAccountLabel;
 	private HBox viewTitleRow;
@@ -92,14 +93,14 @@ public class AccountView extends Pane
 	{
 		AccountViewLogic.setAccount(currentAccount);
 		
-		instantiateVariables();
+		initializeVariables();
 		stylizeElements();
 		
-		addAllElementsToChildren();
-		setOnActionForAllButtons();
+		populateChildren();
+		assignSetOnActions();
 	}
 	
-	private void instantiateVariables()
+	public void initializeVariables()
 	{	
 		myAccountLabel = new Label("ACCOUNT DETAILS");
 		viewTitleRow = new HBox();
@@ -163,7 +164,7 @@ public class AccountView extends Pane
 	}
 	
 	//@SuppressWarnings("static-access")
-	private void stylizeElements()
+	public void stylizeElements()
 	{	
 		myAccountLabel.setId("AccountTitleLabel");
 		
@@ -270,7 +271,7 @@ public class AccountView extends Pane
 		changerRows.setAlignment(Pos.CENTER);
 	}
 	
-	private void addAllElementsToChildren()
+	public void populateChildren()
 	{
 		viewTitleRow.getChildren().add(myAccountLabel);
 		
@@ -299,7 +300,7 @@ public class AccountView extends Pane
 		changerPane.getChildren().add(changerRows);
 	}
 	
-	private void setOnActionForAllButtons()
+	public void assignSetOnActions()
 	{
 		changeUsernameButton.setOnAction(e -> 
 		{

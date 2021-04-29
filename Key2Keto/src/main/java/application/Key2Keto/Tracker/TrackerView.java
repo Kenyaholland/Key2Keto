@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import application.Key2Keto.Account.Account;
+import application.Key2Keto.Interfaces.ViewInterface;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -12,27 +13,54 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
-public class TrackerView extends Pane {
-	private VBox view = new VBox();
-	private HBox categoryTabs = new HBox();
-	private Button sundayButton = new Button("SUNDAY");
-	private Button mondayButton = new Button("MONDAY");
-	private Button tuesdayButton = new Button("TUESDAY");
-	private Button wednesdayButton = new Button("WEDNESDAY");
-	private Button thursdayButton = new Button("THURSDAY");
-	private Button fridayButton = new Button("FRIDAY");
-	private Button saturdayButton = new Button("SATURDAY");
-	private StackPane daysOfWeek = new StackPane();
-	private DayView days[] = new DayView[7];
+public class TrackerView extends Pane implements ViewInterface{
+	private VBox view;
+	private HBox categoryTabs;
+	private Button sundayButton;
+	private Button mondayButton;
+	private Button tuesdayButton;
+	private Button wednesdayButton;
+	private Button thursdayButton;
+	private Button fridayButton;
+	private Button saturdayButton;
+	private StackPane daysOfWeek;
+	private DayView days[];
 	private DayView testDay;
 	
 	public TrackerView(Account user){
 		TrackerViewLogic.setUserAccount(user);
+		initializeVariables();
 		populateDaysOfWeek();
+		assignSetOnActions();
 		populateChildren();
-		setStyles();
-
+		stylizeElements();
+	}
+	
+	public void initializeVariables()
+	{
+		view = new VBox();
+		categoryTabs = new HBox();
+		sundayButton = new Button("SUNDAY");
+		mondayButton = new Button("MONDAY");
+		tuesdayButton = new Button("TUESDAY");
+		wednesdayButton = new Button("WEDNESDAY");
+		thursdayButton = new Button("THURSDAY");
+		fridayButton = new Button("FRIDAY");
+		saturdayButton = new Button("SATURDAY");
+		daysOfWeek = new StackPane();
+		days = new DayView[7];
+	}
+	
+	public void populateChildren() {
+		categoryTabs.getChildren().addAll(sundayButton, mondayButton, tuesdayButton, wednesdayButton, thursdayButton, fridayButton, saturdayButton);
+		daysOfWeek.getChildren().addAll(days[0],days[1],days[2],days[3],days[4],days[5],days[6]);
+		view.getChildren().addAll(categoryTabs,daysOfWeek);
+		
 		this.getChildren().add(view);
+	}
+	
+	public void assignSetOnActions()
+	{
 		sundayButton.setOnAction(new EventHandler<ActionEvent>() {
 		    @Override public void handle(ActionEvent e) {
 		    	setButtonCLickedColor(0);
@@ -84,13 +112,7 @@ public class TrackerView extends Pane {
 		});
 	}
 	
-	private void populateChildren() {
-		categoryTabs.getChildren().addAll(sundayButton, mondayButton, tuesdayButton, wednesdayButton, thursdayButton, fridayButton, saturdayButton);
-		daysOfWeek.getChildren().addAll(days[0],days[1],days[2],days[3],days[4],days[5],days[6]);
-		view.getChildren().addAll(categoryTabs,daysOfWeek);
-	}
-	
-	private void setStyles() {
+	public void stylizeElements() {
 		this.setWidth(980);
 		this.setHeight(500);
 		view.setPrefHeight(500);

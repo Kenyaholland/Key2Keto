@@ -1,6 +1,7 @@
 package application.Key2Keto.Account;
 
 import application.Key2Keto.SceneSwitcher;
+import application.Key2Keto.Interfaces.ViewInterface;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -12,7 +13,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class LoginView extends Pane
+public class LoginView extends Pane implements ViewInterface
 {
 	//For switching scenes
 	private Stage stage;
@@ -54,13 +55,14 @@ public class LoginView extends Pane
 		this.stage = stage;
 		this.switcher = new SceneSwitcher(stage);
 
-		instantiateVariables();
+		initializeVariables();
 		stylizeElements();
 		
-		addAllElementsToChildren();
+		assignSetOnActions();
+		populateChildren();
 	}
 	
-	private void instantiateVariables()
+	public void initializeVariables()
 	{
 		titleOrLogo = new Label("Key2Keto");
 		
@@ -71,20 +73,6 @@ public class LoginView extends Pane
 		passwordTextField = new PasswordField();
 		
 		signInButton = new Button("Sign in");
-		signInButton.setOnAction(e -> 
-		{
-			if(LoginViewLogic.checkFormProperlyFilled(usernameTextField.getText(), passwordTextField.getText()))
-			{
-				AccountFileReader accountLoader = new AccountFileReader(usernameTextField.getText() + ".txt");
-				stage.setScene(switcher.MainViewScene(accountLoader.getLoadedAccount()));
-			}
-			
-			else
-			{
-				errorLabel.setText(LoginViewLogic.getErrorMessage());
-				errorLabel.setVisible(true);
-			}
-		});
 		
 		createAccountButton = new Button("Create Account");
 		createAccountButton.setOnAction(e -> stage.setScene(switcher.AccountCreationScene()));
@@ -103,7 +91,7 @@ public class LoginView extends Pane
 		loginRows = new VBox();
 	}
 	
-	private void stylizeElements()
+	public void stylizeElements()
 	{
 		stage.setTitle("Key2Keto - Sign In");
 		
@@ -133,7 +121,7 @@ public class LoginView extends Pane
 		loginRows.setId("WholePane");
 	}
 	
-	private void addAllElementsToChildren() //helper function for readability
+	public void populateChildren() //helper function for readability
 	{
 		titleOrLogoRow.getChildren().add(titleOrLogo);
 		usernameRow.getChildren().addAll(usernameLabel, usernameTextField);
@@ -147,6 +135,24 @@ public class LoginView extends Pane
 		loginRows.getChildren().addAll(titleOrLogoRow, usernameRow, passwordRow, errorRow, signInButtonRow, createAccountRow);
 		
 		this.getChildren().add(loginRows);
+	}
+	
+	public void assignSetOnActions()
+	{
+		signInButton.setOnAction(e -> 
+		{
+			if(LoginViewLogic.checkFormProperlyFilled(usernameTextField.getText(), passwordTextField.getText()))
+			{
+				AccountFileReader accountLoader = new AccountFileReader(usernameTextField.getText() + ".txt");
+				stage.setScene(switcher.MainViewScene(accountLoader.getLoadedAccount()));
+			}
+			
+			else
+			{
+				errorLabel.setText(LoginViewLogic.getErrorMessage());
+				errorLabel.setVisible(true);
+			}
+		});
 	}
 	
 	//for unit tests
