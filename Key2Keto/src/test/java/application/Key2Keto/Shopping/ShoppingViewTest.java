@@ -8,6 +8,7 @@ import org.testfx.framework.junit5.ApplicationTest;
 
 import application.Key2Keto.Account.Account;
 import application.Key2Keto.Recipes.Recipe;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -40,8 +41,17 @@ class ShoppingViewTest extends ApplicationTest {
 	
 	@Test
 	public void getMondayMacroForTest() {
-		shoppingView.getAccountForTest().addRecipe(new Recipe("Breakfast","Dairy Free Baked Custard",246,2.71,24,6,3,"Modified"), 1);
-		//assertEquals("Sunday: Fat: 6.0g   Carbs: 2.71g  Protein: 24g", shoppingView.updatedMacroLabelsForTest().get(1).getText());
+		Platform.runLater(new Runnable() {
+		    @Override
+		    public void run() {
+		    	shoppingView.getAccountForTest().addRecipe(new Recipe("Breakfast","Dairy Free Baked Custard",246,
+		    			2.71,24,6,3,"Modified"), 1);
+				shoppingView.updateUI();
+		    	assertEquals("Monday: Fat: 6.0g   Carbs: 2.71g  Protein: 24.0g",
+		    			shoppingView.getMacroLabelsForTest().get(1).getText());
+		    }
+		});
+		
 	}
 
 }
