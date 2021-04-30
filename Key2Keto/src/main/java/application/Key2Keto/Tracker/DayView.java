@@ -5,6 +5,7 @@ import java.util.Arrays;
 
 
 import application.Key2Keto.Account.Account;
+import application.Key2Keto.Interfaces.ViewInterface;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -17,7 +18,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
-public class DayView extends Pane{
+public class DayView extends Pane implements ViewInterface{
 	
 	Tracker tracker;
 	ConfirmPopUp popUp;
@@ -46,19 +47,17 @@ public class DayView extends Pane{
 		DayViewLogic.setUserAccount(user);
 		
 		initializeVariables();
-		StylizeComponents();
+		stylizeElements();
+		assignSetOnActions();
 		
 		this.sleepField.getStyleClass().add(Spinner.STYLE_CLASS_SPLIT_ARROWS_HORIZONTAL);
 		this.waterField.getStyleClass().add(Spinner.STYLE_CLASS_SPLIT_ARROWS_HORIZONTAL);
 		
-		this.sleepContent.getChildren().addAll(this.sleepLabel, this.sleepField, this.sleepButton);
-		this.waterContent.getChildren().addAll(this.waterLabel, this.waterField, this.waterButton);
-		this.goalsContent.getChildren().addAll(this.goalsLabel, this.goalsTextField, this.addGoalsButton);
-		this.wholeView.getChildren().addAll(this.sleepContent, this.waterContent, this.goalsContent);
-		this.getChildren().add(wholeView);
+		populateChildren();
 	}
 	
-	private void initializeVariables() {
+	@Override
+	public void initializeVariables() {
 		this.tracker = new Tracker(DayViewLogic.getDayString());
 		this.popUp = new ConfirmPopUp();
 		
@@ -71,46 +70,19 @@ public class DayView extends Pane{
 		this.sleepField = new Spinner<Double>(0, 24, 0, 0.5);
 		this.sleepField.setEditable(true);
 		this.sleepButton = new Button("Save");
-		this.sleepButton.setOnAction(new EventHandler<ActionEvent>() {
-		    @Override public void handle(ActionEvent e) {
-		    	if(sleepField.getValue() != null) {
-		    		tracker.setHoursOfSleep(Double.valueOf(sleepField.getValue()));
-		    		DayViewLogic.getUserAccount().getTrackers().get(day).setHoursOfSleep(Double.valueOf(sleepField.getValue()));
-		    		popUp.display();
-		    	}
-		    }
-		});
 		
 		this.waterLabel = new Label("How many ounces of water did you drink today?");
 		this.waterField = new Spinner<Double>(0, 128, 0, 1.0);
 		this.waterField.setEditable(true);
 		this.waterButton = new Button("Save");
-		this.waterButton.setOnAction(new EventHandler<ActionEvent>() {
-		    @Override public void handle(ActionEvent e) {
-		    	if(waterField.getValue() != null) {
-		    		tracker.setWaterIntake(Double.valueOf(waterField.getValue()));	
-		    		DayViewLogic.getUserAccount().getTrackers().get(day).setWaterIntake(Double.valueOf(waterField.getValue()));
-		    		popUp.display();
-		    	}
-		    }
-		});
 		
 		this.goalsTextField = new TextField();
 		this.goalsLabel = new Label("Add your own personalized goals here:");
 		this.addGoalsButton = new Button("Add");
-		this.addGoalsButton.setOnAction(new EventHandler<ActionEvent>() {
-		    @Override public void handle(ActionEvent e) {
-		    	if(!goalsTextField.getText().isEmpty()) {
-		    		tracker.addGoal(goalsTextField.getText());
-		    		DayViewLogic.getUserAccount().getTrackers().get(day).addGoal(goalsTextField.getText());
-		    		goalsTextField.clear();
-		    		popUp.display();
-		    	}
-		    }
-		});
 	}
 	
-	private void StylizeComponents() {
+	@Override
+	public void stylizeElements() {
 		
 		this.sleepContent.setSpacing(10);
 		this.waterContent.setSpacing(10);
@@ -135,6 +107,49 @@ public class DayView extends Pane{
 		
 		this.addGoalsButton.setPrefSize(125, 30);
 		this.addGoalsButton.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 12));
+	}
+	
+	@Override
+	public void assignSetOnActions() {
+		this.sleepButton.setOnAction(new EventHandler<ActionEvent>() {
+		    @Override public void handle(ActionEvent e) {
+		    	if(sleepField.getValue() != null) {
+		    		tracker.setHoursOfSleep(Double.valueOf(sleepField.getValue()));
+		    		DayViewLogic.getUserAccount().getTrackers().get(day).setHoursOfSleep(Double.valueOf(sleepField.getValue()));
+		    		popUp.display();
+		    	}
+		    }
+		});
+		
+		this.waterButton.setOnAction(new EventHandler<ActionEvent>() {
+			@Override public void handle(ActionEvent e) {
+			    if(waterField.getValue() != null) {
+			    	tracker.setWaterIntake(Double.valueOf(waterField.getValue()));	
+			    	DayViewLogic.getUserAccount().getTrackers().get(day).setWaterIntake(Double.valueOf(waterField.getValue()));
+			    	popUp.display();
+			    }
+			   }
+		});
+			
+		this.addGoalsButton.setOnAction(new EventHandler<ActionEvent>() {
+		   @Override public void handle(ActionEvent e) {
+		    if(!goalsTextField.getText().isEmpty()) {
+		    	tracker.addGoal(goalsTextField.getText());
+		    	DayViewLogic.getUserAccount().getTrackers().get(day).addGoal(goalsTextField.getText());
+		    	goalsTextField.clear();
+		    	popUp.display();
+		    }
+		   }
+	    });
+	}
+	
+	@Override
+	public void populateChildren() {
+		this.sleepContent.getChildren().addAll(this.sleepLabel, this.sleepField, this.sleepButton);
+		this.waterContent.getChildren().addAll(this.waterLabel, this.waterField, this.waterButton);
+		this.goalsContent.getChildren().addAll(this.goalsLabel, this.goalsTextField, this.addGoalsButton);
+		this.wholeView.getChildren().addAll(this.sleepContent, this.waterContent, this.goalsContent);
+		this.getChildren().add(wholeView);
 	}
 	
 	public int getIntFormOfDay(String dayName) {

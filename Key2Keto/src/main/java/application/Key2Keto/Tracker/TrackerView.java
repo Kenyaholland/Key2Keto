@@ -36,6 +36,7 @@ public class TrackerView extends Pane implements ViewInterface{
 		stylizeElements();
 	}
 	
+	@Override
 	public void initializeVariables()
 	{
 		view = new VBox();
@@ -51,6 +52,7 @@ public class TrackerView extends Pane implements ViewInterface{
 		days = new DayView[7];
 	}
 	
+	@Override
 	public void populateChildren() {
 		categoryTabs.getChildren().addAll(sundayButton, mondayButton, tuesdayButton, wednesdayButton, thursdayButton, fridayButton, saturdayButton);
 		daysOfWeek.getChildren().addAll(days[0],days[1],days[2],days[3],days[4],days[5],days[6]);
@@ -59,6 +61,7 @@ public class TrackerView extends Pane implements ViewInterface{
 		this.getChildren().add(view);
 	}
 	
+	@Override
 	public void assignSetOnActions()
 	{
 		sundayButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -112,6 +115,7 @@ public class TrackerView extends Pane implements ViewInterface{
 		});
 	}
 	
+	@Override
 	public void stylizeElements() {
 		this.setWidth(980);
 		this.setHeight(500);
