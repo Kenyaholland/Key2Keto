@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
+import application.Key2Keto.Interfaces.ShoppingListInterface;
 import application.Key2Keto.Recipes.Ingredient;
 import application.Key2Keto.Recipes.Recipe;
 import javafx.stage.FileChooser;
