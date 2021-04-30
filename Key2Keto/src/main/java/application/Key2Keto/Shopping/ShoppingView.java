@@ -1,6 +1,7 @@
 package application.Key2Keto.Shopping;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import application.Key2Keto.Account.Account;
 import application.Key2Keto.Interfaces.ViewInterface;
@@ -296,5 +297,32 @@ public class ShoppingView extends Pane implements ViewInterface {
 		HBox.setMargin(v4, new Insets(5,5,5,5));
 		vbox.getChildren().add(h1);
 	}
+	
+	public ComboBox<String> getComboForTest(){
+		return this.restaurantBox;
+	}
+	
+	public Label getMealForTest() {
+		return this.restMeal;
+	}
+	
+	public ArrayList<Label> getMacroLabelsForTest(){
+		ArrayList<Label> temp = new ArrayList<Label>();
+		temp.addAll(new ArrayList<Label>(Arrays.asList(this.sundayMac,this.mondayMac,this.tuesdayMac,this.wednesdayMac,
+				this.thursdayMac,this.fridayMac,this.saturdayMac)));
+		return temp;
+	}
+	
+	public Account getAccountForTest() {
+		return ShoppingViewLogic.getUserAccount();
+	}
+	
+	public ArrayList<Label> updatedMacroLabelsForTest() {
+		ArrayList<Label> temp = getMacroLabelsForTest();
+		updateUI();
+		return temp;
+		
+	}
+
 
 }

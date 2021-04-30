@@ -5,8 +5,9 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.net.MalformedURLException;
 
 import org.junit.jupiter.api.Test;
+import org.testfx.framework.junit5.ApplicationTest;
 
-class RecipeTest {	
+class RecipeTest extends ApplicationTest {	
 	Recipe recipe;
 	Ingredient ingredient;
 
