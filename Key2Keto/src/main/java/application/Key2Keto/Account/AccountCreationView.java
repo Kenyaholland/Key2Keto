@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import application.Key2Keto.SceneSwitcher;
+import application.Key2Keto.Interfaces.ViewInterface;
 import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -23,7 +24,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
-public class AccountCreationView extends Pane
+public class AccountCreationView extends Pane implements ViewInterface
 {
 	//For switching scenes
 	private Stage stage;
@@ -99,13 +100,13 @@ public class AccountCreationView extends Pane
 		this.stage = stage;
 		this.switcher = new SceneSwitcher(stage);
 
-		instantiateVariables();
+		initializeVariables();
 		stylizeElements();
 		
-		addAllElementsToChildren();
+		populateChildren();
 	}
 	
-	private void instantiateVariables()
+	public void initializeVariables()
 	{
 		createAccountLabel = new Label("Create New Account");
 		
@@ -148,28 +149,7 @@ public class AccountCreationView extends Pane
 		cancelAccountCreationButton = new Button("Cancel");
 		createAccountButton = new Button("Create Account");
 		
-		cancelAccountCreationButton.setOnAction(e ->
-		{
-			stage.setScene(switcher.LoginScene());
-		});
-		
-		createAccountButton.setOnAction(e -> 
-		{
-			if(AccountCreationViewLogic.checkFormProperlyFilled(newUsernameTextField.getText(), newPasswordTextField.getText(), confirmPasswordTextField.getText(),
-																firstNameTextField.getText(), lastNameTextField.getText(), sexChooser.getSelectionModel().getSelectedItem(), 
-																heightTextField.getText(), weightTextField.getText(), ageTextField.getText(), 
-																dietTypeChooser.getSelectionModel().getSelectedItem()))
-			{	
-				stage.setScene(switcher.MainViewScene(AccountCreationViewLogic.getNewlyCreatedAccount()));
-				System.out.println("Recipe Type: "+ AccountCreationViewLogic.getNewlyCreatedAccount().getDietType());
-			}
-			
-			else
-			{
-				errorLabel.setText(AccountCreationViewLogic.getErrorMessage());
-				errorLabel.setVisible(true);
-			}
-		});
+		assignSetOnActions();
 		
 		titleRow = new HBox();
 		accountDetailsDividerRow = new HBox();
@@ -193,7 +173,7 @@ public class AccountCreationView extends Pane
 		errorRow = new HBox();
 	}
 	
-	private void stylizeElements()
+	public void stylizeElements()
 	{
 		stage.setTitle("Key2Keto - Create New Account");
 		
@@ -273,7 +253,33 @@ public class AccountCreationView extends Pane
 		accountCreationRows.setId("WholePane");
 	}
 	
-	private void addAllElementsToChildren()
+	public void assignSetOnActions()
+	{
+		cancelAccountCreationButton.setOnAction(e ->
+		{
+			stage.setScene(switcher.LoginScene());
+		});
+		
+		createAccountButton.setOnAction(e -> 
+		{
+			if(AccountCreationViewLogic.checkFormProperlyFilled(newUsernameTextField.getText(), newPasswordTextField.getText(), confirmPasswordTextField.getText(),
+																firstNameTextField.getText(), lastNameTextField.getText(), sexChooser.getSelectionModel().getSelectedItem(), 
+																heightTextField.getText(), weightTextField.getText(), ageTextField.getText(), 
+																dietTypeChooser.getSelectionModel().getSelectedItem()))
+			{	
+				stage.setScene(switcher.MainViewScene(AccountCreationViewLogic.getNewlyCreatedAccount()));
+				System.out.println("Recipe Type: "+ AccountCreationViewLogic.getNewlyCreatedAccount().getDietType());
+			}
+			
+			else
+			{
+				errorLabel.setText(AccountCreationViewLogic.getErrorMessage());
+				errorLabel.setVisible(true);
+			}
+		});
+	}
+	
+	public void populateChildren()
 	{
 		titleRow.getChildren().add(createAccountLabel);
 		
