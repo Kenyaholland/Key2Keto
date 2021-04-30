@@ -76,25 +76,23 @@ public class ShoppingViewLogic {
 		ArrayList<String> temp = new ArrayList<String>();
 		if(recipes != null) {
 			for(int i = 0; i<recipes.size();i++) {
-				if(recipes.get(i) != null)
-				{
+				if(recipes.get(i)!=null) {
 					for(int j =0; j<recipes.get(i).getIngredient().size();j++) {
 						temp.add(recipes.get(i).getIngredient().get(j).toString());
-					}
+					}	
 				}
 			}
 		}
+
 		return temp;
 	}
 	
 	public static double totalFat(ArrayList<Recipe> recipes) {
 		double total = 0;
-		
 		for(int i = 0; i <recipes.size(); i++) {
-			if(recipes.get(i)!= null) {
-				total = recipes.get(i).getTotalFat();
+			if(recipes.get(i)!=null) {
+				total += recipes.get(i).getTotalFat();
 			}
-			
 		}
 		return total;
 	}
@@ -102,8 +100,8 @@ public class ShoppingViewLogic {
 	public static double totalCarb(ArrayList<Recipe> recipes) {
 		double total = 0;
 		for(int i = 0; i <recipes.size(); i++) {
-			if(recipes.get(i)!= null) {
-				total = recipes.get(i).getTotalCarb();
+			if(recipes.get(i)!=null) {
+				total += recipes.get(i).getTotalCarb();
 			}
 		}
 		return total;
@@ -112,8 +110,8 @@ public class ShoppingViewLogic {
 	public static double totalProtein(ArrayList<Recipe> recipes) {
 		double total = 0;
 		for(int i = 0; i <recipes.size(); i++) {
-			if(recipes.get(i)!= null) {
-				total = recipes.get(i).getTotalProtein();
+			if(recipes.get(i)!=null) {
+				total += recipes.get(i).getTotalProtein();
 			}
 		}
 		return total;
