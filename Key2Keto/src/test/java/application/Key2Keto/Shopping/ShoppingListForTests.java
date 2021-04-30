@@ -107,4 +107,3 @@ public class ShoppingListForTests implements ShoppingListInterface
 		}
 	}
 }
-
