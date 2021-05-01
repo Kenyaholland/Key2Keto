@@ -93,13 +93,13 @@ public class RecipeView extends Pane implements ViewInterface {
 	}
 
 	private void populateDaysOfWeek() {		
-		days[0] = new DayOfWeekView(RecipeViewLogic.getFileReader().getRecipeList(), "Sunday", RecipeViewLogic.getUserAccount());
-		days[1] = new DayOfWeekView(RecipeViewLogic.getFileReader().getRecipeList(), "Monday", RecipeViewLogic.getUserAccount());
-		days[2] = new DayOfWeekView(RecipeViewLogic.getFileReader().getRecipeList(), "Tuesday", RecipeViewLogic.getUserAccount());
-		days[3] = new DayOfWeekView(RecipeViewLogic.getFileReader().getRecipeList(), "Wednesday", RecipeViewLogic.getUserAccount());
-		days[4] = new DayOfWeekView(RecipeViewLogic.getFileReader().getRecipeList(), "Thursday", RecipeViewLogic.getUserAccount());
-		days[5] = new DayOfWeekView(RecipeViewLogic.getFileReader().getRecipeList(), "Friday", RecipeViewLogic.getUserAccount());
-		days[6] = new DayOfWeekView(RecipeViewLogic.getFileReader().getRecipeList(), "Saturday", RecipeViewLogic.getUserAccount());
+		days[0] = new DayOfWeekView(RecipeViewLogic.getFileReader().getRecipeList(), "Sunday", RecipeViewLogic.getUserAccount(),0);
+		days[1] = new DayOfWeekView(RecipeViewLogic.getFileReader().getRecipeList(), "Monday", RecipeViewLogic.getUserAccount(),1);
+		days[2] = new DayOfWeekView(RecipeViewLogic.getFileReader().getRecipeList(), "Tuesday", RecipeViewLogic.getUserAccount(),2);
+		days[3] = new DayOfWeekView(RecipeViewLogic.getFileReader().getRecipeList(), "Wednesday", RecipeViewLogic.getUserAccount(),3);
+		days[4] = new DayOfWeekView(RecipeViewLogic.getFileReader().getRecipeList(), "Thursday", RecipeViewLogic.getUserAccount(),4);
+		days[5] = new DayOfWeekView(RecipeViewLogic.getFileReader().getRecipeList(), "Friday", RecipeViewLogic.getUserAccount(),5);
+		days[6] = new DayOfWeekView(RecipeViewLogic.getFileReader().getRecipeList(), "Saturday", RecipeViewLogic.getUserAccount(),6);
 	}
 
 	protected void setDayStack(int num) {

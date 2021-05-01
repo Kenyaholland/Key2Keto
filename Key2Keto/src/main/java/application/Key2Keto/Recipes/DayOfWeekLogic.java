@@ -1,15 +1,14 @@
 package application.Key2Keto.Recipes;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.TimeZone;
 
 import application.Key2Keto.Account.Account;
 
 public class DayOfWeekLogic {
 	private static RecipeList recipeList = new RecipeList();
-	private static ArrayList<Recipe> daysRecipes = new ArrayList<Recipe>();
-	private static int[] numEntree = new int[7];
-	private static boolean lunchFlag = false;
-	private static boolean dinnerFlag = false;
 	private static Account account;
 
 	// USER ACCOUNT ITEMS
@@ -22,29 +21,31 @@ public class DayOfWeekLogic {
 	}
 
 	public static void addToUsersChosenRecipes(ArrayList<String> recipes, int day) {
-		ArrayList<Recipe> temp = new ArrayList<Recipe>();
-		for (int i = 0; i < 4; i++) {
-			temp.add(i, null);
-		}
 
 		account.getChosenRecipes().get(day).clear();
+		
+			account.addRecipe(null, day);
+			account.addRecipe(null, day);
+			account.addRecipe(null, day);
+			account.addRecipe(null, day);
+		
 		for (int i = 0; i < recipeList.getRecipeList().size(); i++) {
-			if (recipeList.getRecipeList().get(i).getName().contentEquals(recipes.get(0))) {
-				temp.add(0, recipeList.getRecipeList().get(i));
-			}
-			if (recipeList.getRecipeList().get(i).getName().contentEquals(recipes.get(1))) {
-				temp.add(1, recipeList.getRecipeList().get(i));
-			}
-			if (recipeList.getRecipeList().get(i).getName().contentEquals(recipes.get(2))) {
-				temp.add(2, recipeList.getRecipeList().get(i));
-			}
-			if (recipeList.getRecipeList().get(i).getName().contentEquals(recipes.get(3))) {
-				temp.add(3, recipeList.getRecipeList().get(i));
-			}
-		}
 
-		for (int i = 0; i < 4; i++) {
-			account.getChosenRecipes().get(day).add(temp.get(i));
+			if (recipeList.getRecipeList().get(i).getName().contentEquals(recipes.get(0))) {
+				account.getChosenRecipes().get(day).set(0, recipeList.getRecipeList().get(i));
+			}
+
+			if (recipeList.getRecipeList().get(i).getName().contentEquals(recipes.get(1))) {
+				account.getChosenRecipes().get(day).set(1, recipeList.getRecipeList().get(i));
+			}
+
+			if (recipeList.getRecipeList().get(i).getName().contentEquals(recipes.get(2))) {
+				account.getChosenRecipes().get(day).set(2, recipeList.getRecipeList().get(i));
+			}
+
+			if (recipeList.getRecipeList().get(i).getName().contentEquals(recipes.get(3))) {
+				account.getChosenRecipes().get(day).set(3, recipeList.getRecipeList().get(i));
+			}
 		}
 	}
 
@@ -86,83 +87,14 @@ public class DayOfWeekLogic {
 
 		return temp;
 	}
+	
+	public static int getDayOfWeek() {
+		Calendar calendar = Calendar.getInstance();
+		Calendar LATime = new GregorianCalendar(TimeZone.getTimeZone("America/Chicago"));
+		LATime.setTimeInMillis(calendar.getTimeInMillis());
+		int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK) - 1;
 
-	public static void addRecipe(String recipe, int day) {
-		Recipe temp;
-		int recflag = 0;
-		for (int i = 0; i < DayOfWeekLogic.getRecipeList().getRecipeList().size(); i++) {
-			if (recipe.contentEquals(DayOfWeekLogic.getRecipeList().getRecipeList().get(i).getName())) {
-				temp = DayOfWeekLogic.getRecipeList().getRecipeList().get(i);
-				for (int j = 0; j < DayOfWeekLogic.getDaysRecipes(day).size(); j++) {
-					System.out.println("J: "+ j);
-					if(DayOfWeekLogic.getDaysRecipes(day).get(j) != null) {
-					if (DayOfWeekLogic.getDaysRecipes(day).get(j).getType().contentEquals(temp.getType())
-							&& !temp.getType().contentEquals("Entrees")) {
-						recflag = 1;
-						break;
-					} else if (DayOfWeekLogic.getDaysRecipes(day).get(j).getType().contentEquals(temp.getType())
-							&& temp.getType().contentEquals("Entrees")) {
-						if (numEntree[day] > 1) {
-							recflag = 1;
-							break;
-						}
-					}
-				}
-				}
-				if (recflag == 0 && !temp.getType().contentEquals("Entrees")) {
-					DayOfWeekLogic.getDaysRecipes(day).add(temp);
-				}
-				if (temp.getType().contentEquals("Entrees") && numEntree[day] < 2) {
-					DayOfWeekLogic.getDaysRecipes(day).add(temp);
-					numEntree[day]++;
-				}
-			}
-		}
+		return dayOfWeek;
 	}
 
-	public static String clearRecipe(String nameFromLabel, int num) {
-		String str = "";
-		switch (num) {
-		case 0:
-			for (int i = 0; i < account.getChosenRecipes().get(num).size(); i++) {
-				if (nameFromLabel.contentEquals(account.getChosenRecipes().get(num).get(i).getName())) {
-					account.getChosenRecipes().get(num).remove(i);
-				}
-			}
-			str = "No Breakfast Chosen";
-			break;
-
-		case 1: {
-			for (int i = 0; i < account.getChosenRecipes().get(num).size(); i++) {
-				if (nameFromLabel.contentEquals(account.getChosenRecipes().get(num).get(i).getName())) {
-					account.getChosenRecipes().get(num).remove(i);
-					lunchFlag = false;
-				}
-			}
-			str = "No Lunch Chosen";
-			break;
-		}
-		case 2:
-			for (int i = 0; i < account.getChosenRecipes().get(num).size(); i++) {
-				if (nameFromLabel.contentEquals(account.getChosenRecipes().get(num).get(i).getName())) {
-					account.getChosenRecipes().get(num).remove(i);
-					dinnerFlag = false;
-				}
-			}
-			str = "No Dinner Chosen";
-			break;
-		case 3:
-			for (int i = 0; i < account.getChosenRecipes().get(num).size(); i++) {
-				if (nameFromLabel.contentEquals(account.getChosenRecipes().get(num).get(i).getName())) {
-					account.getChosenRecipes().get(num).remove(i);
-				}
-			}
-			str = "No Snack Chosen";
-			break;
-		default:
-			System.out.println("Something is wrong here");
-		}
-
-		return str;
-	}
 }
