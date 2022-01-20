@@ -8,9 +8,10 @@
 4. Navigate to App.java
 
 ![image](https://user-images.githubusercontent.com/46533825/150423901-6d3df27b-173f-478b-a081-4a894fe7f747.png)
+
 5. Select the green "Run App" button on the toolbar
 
-## **Software Version Description for Key2Keto**
+# **Software Version Description for Key2Keto**
 
 #### Created by Mike Bauer, Christian Young, Kenya Holland
 
