@@ -4,12 +4,14 @@
 
 1. Clone the HTTPS link to a folder that holds your projects.
 2. Open Eclipse, set the workspace to the folder that holds your projects.
-3. Select File -> Open Projects from File System -> Directory -> Select "Key2Keto" folder -> Finish
-4. Navigate to App.java
+3. Select "Import Projects" in the package explorer.
+4. In the window that opens, select "General" drop down arrow, and click "Existing Projects into Workspace."
+5. Click "Browse" and select the "Key2Keto" Folder. Then click Finish.
+6. Navigate to App.java
 
 ![image](https://user-images.githubusercontent.com/46533825/150423901-6d3df27b-173f-478b-a081-4a894fe7f747.png)
 
-5. Select the green "Run App" button on the toolbar
+5. Select the green "Run App" button on the toolbar to start the application.
 
 # **Software Version Description for Key2Keto**
 
