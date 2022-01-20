@@ -18,6 +18,13 @@
 #### Created by Mike Bauer, Christian Young, Kenya Holland
 ##### Open "Required SVD Template.pdf" to view full development process
 
+## Project Description
+This software’s purpose is to allow the user to monitor and track various aspects of their health
+based on a few criteria and to promote an overall healthy well being. The software will help give the
+user options for recipes based on their chosen criteria as well as populate the various food items
+that would be needed to cook the recipes. Key2Keto’s sole purpose is not to be another health
+tracker but an application that gives the users ways to an overall healthier well being.
+
 ## **Features**
 
 ### **1. Creating a New Account**
