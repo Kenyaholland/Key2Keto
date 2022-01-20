@@ -18,7 +18,7 @@
 
 ## **Features**
 
-### **Creating a New Account**
+### **1. Creating a New Account**
 #### Description
 When the program starts up, a login screen is shown to the user. If the user has not created
 an account yet, they can click the Create Account button to be brought to the account
@@ -38,7 +38,7 @@ name, sex, height, weight, age, and diet type
 4. The user is finally able to click a button to create an account, and to be brought to
 the main application
 
-### **Viewing and Adding Recipes to Meal Planner**
+### **2. Viewing and Adding Recipes to Meal Planner**
 #### Description
 When the user clicks on the Recipe tab from the main set of tabs, they will be
 prompted to select a day of the week which will populate the lower half of the application.
@@ -60,7 +60,7 @@ of the recipe
 recipe to the recipes of the day by clicking the Add button
 7. The user can also delete a recipe from the day’s list of recipes and change them
 
-### **Edit Account Details**
+### **3. Edit Account Details**
 #### Description
 When the main view is showing in the application, the user is able to click a tab at the top of
 the window titled “My Account”. Upon clicking it, the user will see a list of their account
@@ -73,7 +73,7 @@ show the new value.
 2. The user is then able to see their account details
 3. Finally, the user can then edit any of their account details to a different valid value
 
-### **View Dashboard Details**
+### **4. View Dashboard Details**
 #### Description
 When the main view is showing in the application, the user is able to click a tab at the top of
 the window titled “Dashboard”. Upon clicking it, the user will see all of the details and
@@ -88,7 +88,7 @@ day from the Recipe tab.
 consumption and hours slept.
 2. The user will be able to check off the daily goal’s checkboxes as they complete them.
 
-### **Tracking sleep, water and adding goals**
+### **5. Tracking sleep, water and adding goals**
 #### Description
 After the user has logged in or made a new account, they will be brought to the main view.
 This view contains several tabs. Once the user selects the Tracker tab, they will be brought
@@ -114,7 +114,7 @@ they entered was saved.
 7. All of the information entered in this tab is saved in tracker and can be viewed in the
 dashboard tab
 
-### **Generating Shopping List**
+### **6. Generating Shopping List**
 #### Description
 Upon clicking the Shopping tab, the user will be presented with several options, one of them
 allowing the user to save their saved recipes into a shopping list. This will show a popup
@@ -123,7 +123,7 @@ window where the user may choose a name and a location for the pdf file.
 #### Completed Functionality
 A pdf file is generated at the specified name and location with an input recipe list
 
-### **View a restaurant meal option**
+### **7. View a restaurant meal option**
 #### Description
 The user might not have the time to cook every single day, so they can view what options
 they have for eating out at restaurants. These options can be viewed in the Shopping tab of
@@ -138,7 +138,7 @@ plan that they are following.
 choose from
 4. A user is able to click a restaurant name and view the meal
 
-### **View weekly macros and ingredients based off chosen recipes**
+### **8. View weekly macros and ingredients based off chosen recipes**
 #### Description
 Once a user has selected all of the recipes they want to have for the week, they will go to
 the shopping tab to view weekly macros and ingredients. The ingredients for every recipe
@@ -152,7 +152,7 @@ ensure they are on-track with their Keto diet plan.
 2. A user is able to view macros for each day
 3. A user is able to view ingredients needed for each recipe
 
-### **Logout and log back into the software with a stored user**
+### **9. Logout and log back into the software with a stored user**
 #### Description
 The user may log out of their account at any time. All of their saved recipes, tracking
 information, personal information, and etc. will be saved to a .txt file for logging back in.
