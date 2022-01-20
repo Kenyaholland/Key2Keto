@@ -14,6 +14,7 @@
 # **Software Version Description for Key2Keto**
 
 #### Created by Mike Bauer, Christian Young, Kenya Holland
+##### Open "Required SVD Template.pdf" to view full development process"
 
 ## **Features**
 
